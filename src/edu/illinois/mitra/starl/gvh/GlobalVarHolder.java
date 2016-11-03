@@ -22,7 +22,7 @@ public abstract class GlobalVarHolder {
 	public Id id;
 	public Logging log;
 	public Trace trace;
-	public AndroidPlatform plat;
+	public GeneralJavaPlatform plat;
 	
 	/**
 	 * @param name The unique identifier of this agent
