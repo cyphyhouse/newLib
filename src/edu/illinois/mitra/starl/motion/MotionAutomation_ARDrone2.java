@@ -1,8 +1,5 @@
 package edu.illinois.mitra.starl.motion;
 
-import android.graphics.Point;
-import android.util.Log;
-
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -16,6 +13,7 @@ import edu.illinois.mitra.starl.gvh.GlobalVarHolder;
 import edu.illinois.mitra.starl.models.ModelARDrone2;
 import edu.illinois.mitra.starl.objects.ItemPosition;
 import edu.illinois.mitra.starl.objects.ObstacleList;
+import edu.illinois.mitra.starl.objects.Point;
 
 /**
  * Created by SC on 6/7/16.
@@ -80,8 +78,8 @@ public class MotionAutomation_ARDrone2 extends RobotMotion {
     class ARDrone2_BatteryListn implements de.yadrone.base.navdata.BatteryListener{
         private String TAG = "Battery Info";
         public void batteryLevelChanged(int var1){
-            if(var1<20)
-                Log.e(TAG, "Low battery:"+var1+"%" + "         Low battery:"+var1+"%");
+//            if(var1<20)
+//                Log.e(TAG, "Low battery:"+var1+"%" + "         Low battery:"+var1+"%");
 //            else if(var1 % 10 == 0)
 //                Log.e(TAG, "Battery:"+var1+"%" + "        Battery:"+var1+"%");
         }
@@ -89,7 +87,7 @@ public class MotionAutomation_ARDrone2 extends RobotMotion {
     }
     private void HardwareInit(){
         if(droneInstance == null)
-            Log.e(TAG, "wrong order in init hardware. droneInstance=null.");
+//            Log.e(TAG, "wrong order in init hardware. droneInstance=null.");
         try{
             droneInstance.reset();
             //droneInstance.start();
@@ -115,7 +113,7 @@ public class MotionAutomation_ARDrone2 extends RobotMotion {
     public synchronized void start() {
         mypos = (ModelARDrone2) gvh.plat.getModel();
         droneInstance = new ARDrone(mypos.ipAddr, null);
-        Log.i(TAG, "drone instance created with IP "+mypos.ipAddr);
+//        Log.i(TAG, "drone instance created with IP "+mypos.ipAddr);
         HardwareInit();
         running = true;
         inMotion = true;
@@ -151,12 +149,12 @@ public class MotionAutomation_ARDrone2 extends RobotMotion {
     }
 
     public void goTo(ItemPosition dest) {
-        Log.i("Automation ARDrone2", "GoTo called!!!");
+//        Log.i("Automation ARDrone2", "GoTo called!!!");
         if( this.dest == null || (!inMotion && !this.dest.equals(dest))) {
             done = false;
             this.dest = new ItemPosition(dest.name,dest.x,dest.y,dest.z);
             motionStart();
-            Log.i("Automation ARDrone2", "GoTo Executed!!!, new dest("+dest.x+","+dest.y+","+dest.z+")");
+//            Log.i("Automation ARDrone2", "GoTo Executed!!!, new dest("+dest.x+","+dest.y+","+dest.z+")");
             running = true;
         }
     }
@@ -189,7 +187,7 @@ public class MotionAutomation_ARDrone2 extends RobotMotion {
     private void transBackUDPInit(){
         try {
             transBackAddr = InetAddress.getByName(SERVERIP);
-            Log.i(TAG, "Client: Start connecting\n");
+//            Log.i(TAG, "Client: Start connecting\n");
             transBackSocket = new DatagramSocket(SERVERPORT);
         } catch (Exception e) {
             e.printStackTrace();
@@ -216,11 +214,11 @@ public class MotionAutomation_ARDrone2 extends RobotMotion {
     //=======================private helpers=============================
     private double getDistance(){
         if(mypos==null) {
-            Log.e(TAG, "mypos is null");
+//            Log.e(TAG, "mypos is null");
             return Math.sqrt(Math.pow((0 - dest.x), 2) + Math.pow((0 - dest.y), 2));
         }
         if(dest==null) {
-            Log.e(TAG, "dest is null");
+//            Log.e(TAG, "dest is null");
             return Math.sqrt(Math.pow((mypos.x - 0), 2) + Math.pow((mypos.y - 0), 2));
         }
 //        timecount++;
@@ -306,13 +304,14 @@ public class MotionAutomation_ARDrone2 extends RobotMotion {
                 distance = getDistance();
             }
             if(mypos==null || dest==null)
-                Log.d(TAG, "["+StageToString(stage)+"]");
+                mypos = null;  //doing nothing, fixing the log error
+//                Log.d(TAG, "["+StageToString(stage)+"]");
             else if(!oldpos.equals(mypos.x, mypos.y)) {
                 oldpos.set(mypos.x, mypos.y);
-                Log.d(TAG, "["+StageToString(stage)+"] ("+mypos.x+","+mypos.y+","+mypos.z+")->("
-                        + dest.x + "," + dest.y + "," + dest.z + ")  " + (int)mypos.currYaw +"->" + (int)Math.toDegrees(yawOut)+"deg" + //);
-                        "\taccl=" + (float) desiredAccX + ", " + (float) desiredAccY +//);
-                        "  \tmove(" + (float)rollOut + ", " + (float)pitchOut+ ", " + (float)vertVOut+ ", " + (float)spinVOut +")");
+//                Log.d(TAG, "["+StageToString(stage)+"] ("+mypos.x+","+mypos.y+","+mypos.z+")->("
+//                        + dest.x + "," + dest.y + "," + dest.z + ")  " + (int)mypos.currYaw +"->" + (int)Math.toDegrees(yawOut)+"deg" + //);
+//                        "\taccl=" + (float) desiredAccX + ", " + (float) desiredAccY +//);
+//                        "  \tmove(" + (float)rollOut + ", " + (float)pitchOut+ ", " + (float)vertVOut+ ", " + (float)spinVOut +")");
                 transBackUDP();
             }
             switch (stage){

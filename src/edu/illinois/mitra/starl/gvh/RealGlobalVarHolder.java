@@ -5,10 +5,8 @@ import java.util.Vector;
 
 import edu.illinois.mitra.starl.comms.SmartUdpComThread;
 import edu.illinois.mitra.starl.comms.UdpGpsReceiver;
-import edu.illinois.mitra.starl.interfaces.DSM;
 import edu.illinois.mitra.starl.interfaces.TrackedRobot;
-import edu.illinois.mitra.starl.motion.BluetoothInterface;
-import edu.illinois.mitra.starl.motion.MotionAutomaton_iRobot;
+import edu.illinois.mitra.starl.motion.MotionAutomation_ARDrone2;
 import edu.illinois.mitra.starl.motion.ReachAvoid;
 import edu.illinois.mitra.starl.objects.ObstacleList;
 import edu.illinois.mitra.starl.objects.PositionList;
@@ -28,14 +26,14 @@ public class RealGlobalVarHolder extends GlobalVarHolder {
 	public RealGlobalVarHolder(String name, Map<String,String> participants, TrackedRobot initpos, String robotMac) {
 		super(name, participants);
 
-		super.log = new AndroidLogging();
+		super.log = new JavaLogging();
 		super.trace = new Trace(name, "/sdcard/trace/", this);
 		super.plat = new GeneralJavaPlatform();
 		super.comms = new Comms(this, new SmartUdpComThread(this));
 		super.gps = new Gps(this, new UdpGpsReceiver(this,"192.168.1.100",4000,new PositionList(),new PositionList(), new ObstacleList(), new Vector<ObstacleList>(3,2) ));
 		plat.model = initpos;
 		plat.reachAvoid = new ReachAvoid(this);
-		plat.moat = new MotionAutomaton_iRobot(this, new BluetoothInterface(this, robotMac.trim()));
+		plat.moat = new MotionAutomation_ARDrone2(this);
 		plat.moat.start();
 	}
 

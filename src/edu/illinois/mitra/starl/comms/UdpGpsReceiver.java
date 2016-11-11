@@ -92,7 +92,7 @@ public class UdpGpsReceiver extends Thread implements GpsReceiver {
     			String [] parts = line.split("\n");
     			if(received == false) {
     				gvh.log.i(TAG, "RECEIVED FIRST PACKET!");
-    				gvh.plat.sendMainMsg(HandlerMessage.MESSAGE_LOCATION, HandlerMessage.GPS_RECEIVING);
+//    				gvh.plat.sendMainMsg(HandlerMessage.MESSAGE_LOCATION, HandlerMessage.GPS_RECEIVING);
     				received = true;
     			}    			
     			for(int i = 0; i < parts.length; i++) {
@@ -136,11 +136,11 @@ public class UdpGpsReceiver extends Thread implements GpsReceiver {
 		    			case 'G':
 		    				gvh.trace.traceEvent(TAG, "Received launch command", gvh.time());
 		    				int[] args = Common.partsToInts(parts[i].substring(3).split(" "));
-		    				gvh.plat.sendMainMsg(HandlerMessage.MESSAGE_LAUNCH, args[0], args[1]);
+//		    				gvh.plat.sendMainMsg(HandlerMessage.MESSAGE_LAUNCH, args[0], args[1]);
 		    				break;
 		    			case 'A':
 		    				gvh.trace.traceEvent(TAG, "Received abort command", gvh.time());
-		    				gvh.plat.sendMainMsg(HandlerMessage.MESSAGE_ABORT, null);
+//		    				gvh.plat.sendMainMsg(HandlerMessage.MESSAGE_ABORT, null);
 		    				break;
 		    			default:
 		    				gvh.log.e(ERR, "Unknown GPS message received: " + line);
@@ -149,7 +149,7 @@ public class UdpGpsReceiver extends Thread implements GpsReceiver {
     				}
     			}
 			} catch (IOException e) {
-				gvh.plat.sendMainMsg(HandlerMessage.MESSAGE_LOCATION, HandlerMessage.GPS_OFFLINE);
+//				gvh.plat.sendMainMsg(HandlerMessage.MESSAGE_LOCATION, HandlerMessage.GPS_OFFLINE);
 			}
     	}
 	}
@@ -177,7 +177,7 @@ public class UdpGpsReceiver extends Thread implements GpsReceiver {
     @Override
     public void cancel() {
     	running = false;
-    	gvh.plat.sendMainMsg(HandlerMessage.MESSAGE_LOCATION, HandlerMessage.GPS_OFFLINE);
+//    	gvh.plat.sendMainMsg(HandlerMessage.MESSAGE_LOCATION, HandlerMessage.GPS_OFFLINE);
         try {
         	mSocket.disconnect();
             mSocket.close();

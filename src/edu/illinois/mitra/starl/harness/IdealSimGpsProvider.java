@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.Vector;
 
 import edu.illinois.mitra.starl.models.Model_iRobot;
+import edu.illinois.mitra.starl.models.Model_quadcopter;
 import edu.illinois.mitra.starl.objects.*;
 
 public class IdealSimGpsProvider extends Observable implements SimGpsProvider  {	
@@ -48,8 +49,12 @@ public class IdealSimGpsProvider extends Observable implements SimGpsProvider  {
 	public synchronized void registerReceiver(String name, SimGpsReceiver simGpsReceiver) {
 		receivers.put(name, simGpsReceiver);
 	}
-	
+
 	@Override
+	public void addRobot(edu.illinois.mitra.starl.interfaces.TrackedRobot bot) {
+
+	}
+
 	public synchronized void addRobot(Model_iRobot bot) {
 		robots.put(bot.name, new TrackedRobot(bot));
 		robot_positions.update(bot);
@@ -61,6 +66,11 @@ public class IdealSimGpsProvider extends Observable implements SimGpsProvider  {
 	}
 
 	@Override
+	public void setControlInput(String name, double v_yaw, double pitch, double roll, double gaz) {
+
+	}
+
+	@Override
 	public synchronized void halt(String name) {
 		robots.get(name).setDest(null, 1);
 	}
@@ -68,6 +78,16 @@ public class IdealSimGpsProvider extends Observable implements SimGpsProvider  {
 	@Override
 	public PositionList<Model_iRobot> getiRobotPositions() {
 		return robot_positions;
+	}
+
+	@Override
+	public PositionList<Model_quadcopter> getQuadcopterPositions() {
+		return null;
+	}
+
+	@Override
+	public PositionList<ItemPosition> getAllPositions() {
+		return null;
 	}
 
 	@Override

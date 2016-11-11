@@ -1,6 +1,5 @@
 package edu.illinois.mitra.starl.models;
 
-import android.util.Log;
 
 import edu.illinois.mitra.starl.exceptions.ItemFormattingException;
 import edu.illinois.mitra.starl.interfaces.TrackedRobot;
@@ -60,7 +59,7 @@ public class ModelARDrone2 extends ItemPosition implements TrackedRobot{
         this.currPitch = 0;
         this.currRoll = 0;
         initHelper();
-        Log.i("Model ARDrone2", this.name + "constructor called, this.ip="+this.ipAddr);
+//        Log.i("Model ARDrone2", this.name + "constructor called, this.ip="+this.ipAddr);
     }
 
     private void initHelper(){
