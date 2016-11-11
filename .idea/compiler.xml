@@ -22,11 +22,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="newLib" />
         <module name="StarLib" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="StarLib" target="1.8" />
+      <module name="newLib" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

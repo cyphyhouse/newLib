@@ -8,19 +8,35 @@
     <artifactId>newLib</artifactId>
     <version>0.1-BasicFunctionality</version>
 
-    <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>RELEASE</version>
-        <scope>test</scope>
-    </dependency>
-
-
-    <dependency>
-        <groupId>log4j</groupId>
-        <artifactId>log4j</artifactId>
-        <version>1.2.17</version>
-    </dependency>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Logging used in the project -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+        <!-- Following are external jars added to the project -->
+        <dependency>
+            <groupId>edu.illinois.mitra.cyphyhouse.newLib</groupId>
+            <artifactId>newLib</artifactId>
+            <version>0.1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/kd.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>edu.illinois.mitra.cyphyhouse.newLib</groupId>
+            <artifactId>newLib</artifactId>
+            <version>0.1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/yadrone_self.jar</systemPath>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>

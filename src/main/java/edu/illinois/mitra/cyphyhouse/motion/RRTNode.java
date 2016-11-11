@@ -59,7 +59,7 @@ public class RRTNode {
 	 * @param yLower
 	 * @param yUpper
 	 * @param RobotPos
-	 * @param Radius
+	 * @param radius
 	 * @return
 	 */
 
