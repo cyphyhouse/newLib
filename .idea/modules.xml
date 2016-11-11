@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/StarLib.iml" filepath="$PROJECT_DIR$/StarLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/newLib.iml" filepath="$PROJECT_DIR$/newLib.iml" />
     </modules>
   </component>
 </project>
