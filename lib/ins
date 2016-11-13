@@ -1,0 +1,4 @@
+mvn install:install-file -Dfile=kd.jar -DgroupId=edu.illinois.mitra.cyphyhouse.newLib \
+    -DartifactId=newLib -Dversion=0.1 -Dpackaging=jar
+#mvn install:install-file -Dfile=yadrone_self.jar -DgroupId=edu.illinois.mitra.cyphyhouse.newLib \
+#    -DartifactId=newLib -Dversion=0.1 -Dpackaging=jar
