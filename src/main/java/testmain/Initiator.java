@@ -88,8 +88,8 @@ public class Initiator implements MessageListener{
         gvh.plat.moat.cancel();
     }
 
-    public void createAppInstance(){
-        runThread = new FollowApp(gvh);
+    public void createAppInstance(LogicThread appToRun){
+        runThread = appToRun;
     }
 
     public void launch(int numWaypoints, int runNum) {
@@ -115,7 +115,7 @@ public class Initiator implements MessageListener{
         results.cancel(true);
         executor.shutdownNow();
         executor = Executors.newSingleThreadExecutor();
-        createAppInstance();
+        createAppInstance(runThread);//TODO, not sure if should use this internal variable again
     }
 
     @Override

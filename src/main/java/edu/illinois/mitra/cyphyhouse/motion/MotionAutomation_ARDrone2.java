@@ -87,7 +87,7 @@ public class MotionAutomation_ARDrone2 extends RobotMotion {
     }
     private void HardwareInit(){
         if(droneInstance == null)
-//            Log.e(TAG, "wrong order in init hardware. droneInstance=null.");
+            System.err.println(TAG + "wrong order in init hardware. droneInstance=null.");
         try{
             droneInstance.reset();
             //droneInstance.start();

@@ -2,6 +2,7 @@ package testmain;
 
 import com.sun.org.apache.xml.internal.security.Init;
 import edu.illinois.mitra.cyphyhouse.gvh.GlobalVarHolder;
+import edu.illinois.mitra.cyphyhouse.interfaces.LogicThread;
 import edu.illinois.mitra.cyphyhouse.objects.Common;
 
 /**
@@ -16,6 +17,7 @@ public class TestMain {
     private static BotInfoSelector[] botInfo;
     private static int selectedRobot = 0;
     private static GlobalVarHolder gvh = null;
+    private static LogicThread appToRun = null;
 
     public static void main(String args[]) {
         // Load the participants
@@ -42,7 +44,8 @@ public class TestMain {
         Initiator init = new Initiator(gvh, participants, botInfo, selectedRobot);
         init.create();
         init.connect();
-        init.createAppInstance();
+        appToRun = new FollowApp(gvh);
+        init.createAppInstance(appToRun);
         init.launch(4, 1);
 
     }
