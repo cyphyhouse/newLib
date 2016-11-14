@@ -15,7 +15,23 @@ import java.util.Enumeration;
 public final class Common {
 	private static final String TAG = "Common";
 	private static final String ERR = "Critical Error";
-	
+
+	// Specify the number of robots and number of groups
+
+	public static final Integer numOFbots = 5;
+	public static final Integer numOFgroups= 2;
+
+	// Bot types
+	public static final int IROBOT = 50;
+	public static final int MINIDRONE = 51;
+	public static final int ARDRONE2 = 52;
+
+	// Mobile device types
+	public static final int NEXUS7 = 60;
+	public static final int MOTOE = 61;
+	public static final int HTCONEM7 = 62;
+
+
 	// Message IDs
 	public static final int MSG_BARRIERSYNC 			= 1;
 	public static final int MSG_MUTEX_TOKEN_OWNER_BCAST = 2;
@@ -43,13 +59,13 @@ public final class Common {
 //	public static final int MESSAGE_ABORT = 4;
 //	public static final int MESSAGE_DEBUG = 5;
 //	public static final int MESSAGE_BATTERY = 6;
-//	
+//
 //	public static final int BLUETOOTH_CONNECTING = 2;
 //	public static final int BLUETOOTH_CONNECTED = 1;
 //	public static final int BLUETOOTH_DISCONNECTED = 1;
 //	public static final int GPS_RECEIVING = 1;
 //	public static final int GPS_OFFLINE = 0;
-	
+
 	// Motion types
 	public static final int MOT_TURNING		= 0;
 	public static final int MOT_ARCING		= 1;
@@ -61,10 +77,12 @@ public final class Common {
 	public static final int EVENT_GPS = 1;
 	public static final int EVENT_GPS_SELF = 2;
 	public static final int EVENT_WAYPOINT_RECEIVED = 3;
-	
+
+
+
 	private Common() {
 	}
-	
+
 	/**
 	 * Convert an array of strings to an array of integers. Returns null if any array element doesn't contain a number
 	 * @param parts an array integers in string form
@@ -82,7 +100,7 @@ public final class Common {
 		}
 		return retval;
 	}
-	
+
 	/**
 	 * @param a1
 	 * @param a2
@@ -95,7 +113,7 @@ public final class Common {
 			return a2;
 		}
 	}
-	
+
 	/**
 	 * Convert a series of integers to a string array
 	 * @param pieces
@@ -108,7 +126,7 @@ public final class Common {
 		}
 		return retval;
 	}
-	
+
 	/**
 	 * @param str The input string to process
 	 * @param delimiter The delimiting string used to split the input string
@@ -118,7 +136,7 @@ public final class Common {
 		String[] parts = str.split(delimiter);
 		return partsToInts(parts);
 	}
-	
+
 	// Common value manipulation and comparison functions
 	/**
 	 * @param val value to test 
@@ -130,7 +148,7 @@ public final class Common {
 		if(val.compareTo(min) >= 0 && val.compareTo(max) <= 0) return true;
 		return false;
 	}
-	
+
 	/**
 	 * @param val value to test
 	 * @param max maximum acceptable value
@@ -143,7 +161,7 @@ public final class Common {
 			return max;
 		}
 	}
-	
+
 	/**
 	 * @param val value to test
 	 * @param min minimum acceptable value
@@ -159,41 +177,41 @@ public final class Common {
 			return val;
 		}
 	}
-	
-    public static InetAddress getLocalAddress()throws IOException {
+
+	public static InetAddress getLocalAddress()throws IOException {
 		try {
-		    for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
-		        NetworkInterface intf = en.nextElement();
-		        for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
-		            InetAddress inetAddress = enumIpAddr.nextElement();
-		            if (!inetAddress.isLoopbackAddress()) {
-		            	return inetAddress;
-		            }
-		        }
-		    }
+			for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
+				NetworkInterface intf = en.nextElement();
+				for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
+					InetAddress inetAddress = enumIpAddr.nextElement();
+					if (!inetAddress.isLoopbackAddress()) {
+						return inetAddress;
+					}
+				}
+			}
 		} catch (SocketException ex) {
-		    //Log.e(TAG, ex.toString());
+			//Log.e(TAG, ex.toString());
 		}
 		return null;
-    }
-    
+	}
+
 	/**
 	 * Converts a two byte array to an integer
 	 * @param b a byte array of length 2
 	 * @return an int representing the unsigned short
 	 */
-	public static final int unsignedShortToInt(byte[] b) 
+	public static final int unsignedShortToInt(byte[] b)
 	{
 		if(b.length != 2){
 			return -99;
 		}
-	    int i = 0;
-	    i |= b[0] & 0xFF;
-	    i <<= 8;
-	    i |= b[1] & 0xFF;
-	    return i;
+		int i = 0;
+		i |= b[0] & 0xFF;
+		i <<= 8;
+		i |= b[1] & 0xFF;
+		return i;
 	}
-	
+
 	public static final int signedShortToInt(byte[] b)
 	{
 		if(b.length != 2) {
@@ -206,7 +224,7 @@ public final class Common {
 		return i;
 	}
 
-	
+
 	/**
 	 * Converts an input value to an angle between -90 and 270 degrees (360 degree range) 
 	 * @param angle the angle to be rectified
