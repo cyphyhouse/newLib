@@ -1,6 +1,5 @@
 package testmain;
 
-import com.sun.org.apache.xml.internal.security.Init;
 import edu.illinois.mitra.cyphyhouse.gvh.GlobalVarHolder;
 import edu.illinois.mitra.cyphyhouse.interfaces.LogicThread;
 import edu.illinois.mitra.cyphyhouse.objects.Common;

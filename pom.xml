@@ -23,16 +23,15 @@
         </dependency>
         <!-- Following are external jars added to the project -->
         <dependency>
-            <groupId>edu.illinois.mitra.cyphyhouse.newLib</groupId>
-            <artifactId>newLib</artifactId>
+            <groupId>lib_kd</groupId>
+            <artifactId>lib_kd</artifactId>
             <version>0.1</version>
-            <!--
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/kd.jar</systemPath> -->
+            <systemPath>${project.basedir}/lib/kd.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>edu.illinois.mitra.cyphyhouse.newLib</groupId>
-            <artifactId>newLib</artifactId>
+            <groupId>lib_yadrone_self</groupId>
+            <artifactId>lib_yadrone_self</artifactId>
             <version>0.1</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/yadrone_self.jar</systemPath>

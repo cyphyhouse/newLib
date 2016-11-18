@@ -4,6 +4,7 @@
 /Users/SC/Documents/StarL/newStarLib/src/main/java/edu/illinois/mitra/cyphyhouse/harness/DecoupledDelayQueue.java
 /Users/SC/Documents/StarL/newStarLib/src/main/java/edu/illinois/mitra/cyphyhouse/objects/DSMVariable.java
 /Users/SC/Documents/StarL/newStarLib/src/main/java/edu/illinois/mitra/cyphyhouse/harness/SimMsgInTransit.java
+/Users/SC/Documents/StarL/newStarLib/src/main/java/testmain/FollowApp.java
 /Users/SC/Documents/StarL/newStarLib/src/main/java/edu/illinois/mitra/cyphyhouse/gvh/Id.java
 /Users/SC/Documents/StarL/newStarLib/src/main/java/edu/illinois/mitra/cyphyhouse/functions/BullyLeaderElection.java
 /Users/SC/Documents/StarL/newStarLib/src/main/java/edu/illinois/mitra/cyphyhouse/motion/PIDController.java
@@ -56,7 +57,9 @@
 /Users/SC/Documents/StarL/newStarLib/src/main/java/edu/illinois/mitra/cyphyhouse/functions/GroupSetMutex.java
 /Users/SC/Documents/StarL/newStarLib/src/main/java/edu/illinois/mitra/cyphyhouse/motion/RobotMotion.java
 /Users/SC/Documents/StarL/newStarLib/src/main/java/edu/illinois/mitra/cyphyhouse/interfaces/AcceptsPointInput.java
+/Users/SC/Documents/StarL/newStarLib/src/main/java/testmain/BotInfoSelector.java
 /Users/SC/Documents/StarL/newStarLib/src/main/java/edu/illinois/mitra/cyphyhouse/models/Model_iRobot.java
+/Users/SC/Documents/StarL/newStarLib/src/main/java/testmain/TestMain.java
 /Users/SC/Documents/StarL/newStarLib/src/main/java/edu/illinois/mitra/cyphyhouse/objects/AttrValue.java
 /Users/SC/Documents/StarL/newStarLib/src/main/java/edu/illinois/mitra/cyphyhouse/harness/DelayedRunnable.java
 /Users/SC/Documents/StarL/newStarLib/src/main/java/edu/illinois/mitra/cyphyhouse/harness/SimSmartComThread.java
@@ -75,3 +78,4 @@
 /Users/SC/Documents/StarL/newStarLib/src/main/java/edu/illinois/mitra/cyphyhouse/objects/Obstacles.java
 /Users/SC/Documents/StarL/newStarLib/src/main/java/edu/illinois/mitra/cyphyhouse/functions/RandomLeaderElection.java
 /Users/SC/Documents/StarL/newStarLib/src/main/java/edu/illinois/mitra/cyphyhouse/objects/Point3d.java
+/Users/SC/Documents/StarL/newStarLib/src/main/java/testmain/Initiator.java
