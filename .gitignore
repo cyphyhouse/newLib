@@ -11,6 +11,7 @@ latex/**
 .idea/workspace.xml
 .idea/tasks.xml
 bin/**
+.settings/
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids
@@ -52,3 +53,4 @@ crashlytics-build.properties
 fabric.properties
 
 *.log
+*.back
