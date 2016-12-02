@@ -58,8 +58,8 @@ public class MotionAutomation_ARDrone2 extends RobotMotion {
 
     //=========================hardware related==========================
     public IARDrone droneInstance = null;
-    protected CommandManager cmd;//need? TODO, see ModelARDrone2.java
-    private NavDataManager nav;
+//    protected CommandManager cmd;//need? TODO, see ModelARDrone2.java
+//    private NavDataManager nav;
     private int maxSpeed = 2;
     private boolean outdoor = false;
     class ARDrone2_AttitudeListn implements de.yadrone.base.navdata.AttitudeListener{
@@ -78,43 +78,42 @@ public class MotionAutomation_ARDrone2 extends RobotMotion {
     class ARDrone2_BatteryListn implements de.yadrone.base.navdata.BatteryListener{
         private String TAG = "Battery Info";
         public void batteryLevelChanged(int var1){
-//            if(var1<20)
-//                Log.e(TAG, "Low battery:"+var1+"%" + "         Low battery:"+var1+"%");
-//            else if(var1 % 10 == 0)
-//                Log.e(TAG, "Battery:"+var1+"%" + "        Battery:"+var1+"%");
+            if(var1<20)
+                gvh.log.e(TAG, "Low battery:"+var1+"%" + "         Low battery:"+var1+"%");
+            else if(var1 % 10 == 0)
+                gvh.log.e(TAG, "Battery:"+var1+"%" + "        Battery:"+var1+"%");
         }
         public void voltageChanged(int var1){;}
     }
-    private void HardwareInit(){
-        if(droneInstance == null)
-            System.err.println(TAG + "wrong order in init hardware. droneInstance=null.");
-        try{
-            droneInstance.reset();
-            //droneInstance.start();
-            cmd = droneInstance.getCommandManager();
-            nav = droneInstance.getNavDataManager();
-//            for(int tt=0;tt<100;tt++)//clear the potential emergency signal
-                cmd.emergency();
-            cmd.setOutdoor(outdoor, outdoor);
-            nav.addAttitudeListener(new ARDrone2_AttitudeListn(mypos.name));
-            nav.addBatteryListener(new ARDrone2_BatteryListn());
-            droneInstance.setSpeed(maxSpeed);
-            cmd.setMaxAltitude(400);
-            cmd.setMinAltitude(70);
-            cmd.setLedsAnimation(LEDAnimation.BLINK_ORANGE, 3, 10);//some sig for us
-        }catch (Exception exc)
-        {
-            exc.printStackTrace();
-        }
-        transBackUDPInit();
-    }
+//    private void HardwareInit(){
+//        if(droneInstance == null)
+//            System.err.println(TAG + "wrong order in init hardware. droneInstance=null.");
+//        try{
+//            droneInstance.reset();
+//            //droneInstance.start();
+//            cmd = droneInstance.getCommandManager();
+//            nav = droneInstance.getNavDataManager();
+//            cmd.emergency();
+//            cmd.setOutdoor(outdoor, outdoor);
+//            nav.addAttitudeListener(new ARDrone2_AttitudeListn(mypos.name));
+//            nav.addBatteryListener(new ARDrone2_BatteryListn());
+//            droneInstance.setSpeed(maxSpeed);
+//            cmd.setMaxAltitude(400);
+//            cmd.setMinAltitude(70);
+//            cmd.setLedsAnimation(LEDAnimation.BLINK_ORANGE, 3, 10);//some sig for us
+//        }catch (Exception exc)
+//        {
+//            exc.printStackTrace();
+//        }
+//        transBackUDPInit();
+//    }
     //====================================================
     @Override
     public synchronized void start() {
         mypos = (ModelARDrone2) gvh.plat.getModel();
         droneInstance = new ARDrone(mypos.ipAddr, null);
 //        Log.i(TAG, "drone instance created with IP "+mypos.ipAddr);
-        HardwareInit();
+//        HardwareInit();
         running = true;
         inMotion = true;
         super.start();
@@ -154,7 +153,7 @@ public class MotionAutomation_ARDrone2 extends RobotMotion {
             done = false;
             this.dest = new ItemPosition(dest.name,dest.x,dest.y,dest.z);
             motionStart();
-//            Log.i("Automation ARDrone2", "GoTo Executed!!!, new dest("+dest.x+","+dest.y+","+dest.z+")");
+            gvh.log.i("Automation ARDrone2", "GoTo Executed!!!, new dest("+dest.x+","+dest.y+","+dest.z+")");
             running = true;
         }
     }
@@ -180,10 +179,10 @@ public class MotionAutomation_ARDrone2 extends RobotMotion {
     }
 
     //=======================Data Transfer Back to Host PC============================= notice:temporary put in here
-    public static final String SERVERIP = "192.168.1.104";
-    public static final int SERVERPORT = 9876;
-    DatagramSocket transBackSocket;
-    InetAddress transBackAddr;
+    private static final String SERVERIP = "192.168.1.104";
+    private static final int SERVERPORT = 9876;
+    private DatagramSocket transBackSocket;
+    private InetAddress transBackAddr;
     private void transBackUDPInit(){
         try {
             transBackAddr = InetAddress.getByName(SERVERIP);
@@ -283,7 +282,7 @@ public class MotionAutomation_ARDrone2 extends RobotMotion {
         }
         else
             spinVOut = 0;
-        cmd.move((float)rollOut, (float)pitchOut, (float)vertVOut, (float)spinVOut).doFor(1);
+//        cmd.move((float)rollOut, (float)pitchOut, (float)vertVOut, (float)spinVOut).doFor(1);
     }
 
 
@@ -312,7 +311,7 @@ public class MotionAutomation_ARDrone2 extends RobotMotion {
 //                        + dest.x + "," + dest.y + "," + dest.z + ")  " + (int)mypos.currYaw +"->" + (int)Math.toDegrees(yawOut)+"deg" + //);
 //                        "\taccl=" + (float) desiredAccX + ", " + (float) desiredAccY +//);
 //                        "  \tmove(" + (float)rollOut + ", " + (float)pitchOut+ ", " + (float)vertVOut+ ", " + (float)spinVOut +")");
-                transBackUDP();
+//                transBackUDP();
             }
             switch (stage){
                 case INIT:
@@ -320,7 +319,7 @@ public class MotionAutomation_ARDrone2 extends RobotMotion {
                     break;
                 case TAKEOFF:
                     if(!inAir) {
-                        cmd.takeOff();
+//                        cmd.takeOff();
                         inAir = true;
                         try {
                             sleep(5000 , 0);
@@ -332,8 +331,6 @@ public class MotionAutomation_ARDrone2 extends RobotMotion {
                     break;
                 case MOVE:
                     inMotion = true;
-//                    if(mypos.z < safeHeight)
-//                        cmd.move(0, 0, 1, 0).doFor(1);
                     if(distance <= param.GOAL_RADIUS){ //notice: only for current demos
                         next = STAGE.GOAL;
                     }
@@ -343,7 +340,7 @@ public class MotionAutomation_ARDrone2 extends RobotMotion {
                     }
                     break;
                 case HOVER:
-                    cmd.hover();
+//                    cmd.hover();
                     inMotion = false;
                     try {
                         sleep(5000 , 0);
@@ -363,7 +360,7 @@ public class MotionAutomation_ARDrone2 extends RobotMotion {
                     inMotion = false;
                     break;
                 case LAND:
-                    cmd.landing();
+//                    cmd.landing();
                     try {
                         sleep(300, 0);
                     } catch (Exception exc){

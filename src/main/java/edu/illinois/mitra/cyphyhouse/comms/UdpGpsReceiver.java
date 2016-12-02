@@ -156,7 +156,7 @@ public class UdpGpsReceiver extends Thread implements GpsReceiver {
 									ModelARDrone2 newpos;
 									newpos = new ModelARDrone2(parts[i]);
 									robotPositions.update(newpos, gvh.time());
-									//Log.i(TAG, "ARDrone at ("+newpos.x+","+newpos.y+","+newpos.z+")");
+//									gvh.log.i(TAG, "ARDrone at ("+newpos.x+","+newpos.y+","+newpos.z+")");
 									gvh.sendRobotEvent(Event.GPS);
 									if(newpos.name.equals(name)) {
 										gvh.trace.traceEvent(TAG, "Received Position", newpos, gvh.time());

@@ -39,6 +39,8 @@ public abstract class StarLCallable implements Callable<List<Object>> {
 	public StarLCallable(GlobalVarHolder gvh, String name) {
 		this.gvh = gvh;
 		this.threadname = name;
+		if(gvh==null)
+			System.err.println("++++++++++++++ gvh null");
 		this.name = gvh.id.getName();
 		results = new Object[0];
 	}
