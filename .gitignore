@@ -12,6 +12,10 @@ latex/**
 .idea/tasks.xml
 bin/**
 .settings/
+*.log
+*.back
+*.swp
+logs/**
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids
@@ -39,6 +43,7 @@ target/
 
 # IntelliJ
 /out/
+.idea/misc.xml
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
@@ -52,8 +57,4 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-*.log
-*.back
-.idea/misc.xml
 
-*.swp

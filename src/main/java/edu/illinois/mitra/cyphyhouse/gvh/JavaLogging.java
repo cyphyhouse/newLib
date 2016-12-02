@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
  * Created by SC on 11/11/16.
  */
 public class JavaLogging extends Logging{
-    static Logger logger = Logger.getLogger(JavaLogging.class);
+    static Logger logger = Logger.getLogger("JLog");
 
     @Override
     public void e(String tag, String msg) {
