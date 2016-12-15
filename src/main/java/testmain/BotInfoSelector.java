@@ -44,7 +44,7 @@ public class BotInfoSelector {
             }
             else if(type == Common.ARDRONE2) {
                 this.type = new ModelARDrone2(name, 0,0,0);
-                this.ip = "192.168.0.16";
+                this.ip = "192.168.1.16";
             }
 
         }
@@ -67,7 +67,7 @@ public class BotInfoSelector {
             }
             else if(type == Common.ARDRONE2) {
                 this.type = new ModelARDrone2(name, 0,0,0);
-                this.ip = "192.168.0.15";
+                this.ip = "192.168.1.15";
             }
         }
 
