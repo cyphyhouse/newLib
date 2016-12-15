@@ -335,7 +335,7 @@ public class MotionAutomation_ARDrone2 extends RobotMotion {
                         next = STAGE.GOAL;
                     }
                     else {
-                        this.CalculatedMove();
+//                        this.CalculatedMove();
                         next = STAGE.MOVE;
                     }
                     break;
