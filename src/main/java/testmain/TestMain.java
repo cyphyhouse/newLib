@@ -25,13 +25,13 @@ public class TestMain {
             // Load the participants
             //participants = IdentityLoader.loadIdentities(IDENTITY_FILE_URL);
             // Put number of robots being used here
-            numRobots = 2;
+            numRobots = 3;
             botInfo = new BotInfoSelector[numRobots];
             // add color, robot type, and device type for each robot here
             botInfo[0] = new BotInfoSelector("red", Common.ARDRONE2, Common.HTCONEM7);
             botInfo[1] = new BotInfoSelector("green", Common.ARDRONE2, Common.HTCONEM7);
             //botInfo[1] = new BotInfoSelector("green", Common.IROBOT, Common.MOTOE);
-            //botInfo[2] = new BotInfoSelector("blue", Common.IROBOT, Common.NEXUS7);
+            botInfo[2] = new BotInfoSelector("blue", Common.ARDRONE2, Common.NEXUS7);
             // botInfo[3] = new BotInfoSelector("white", Common.IROBOT, Common.NEXUS7);
 
             participants = new String[3][numRobots];
@@ -42,7 +42,6 @@ public class TestMain {
             }
             //Notice: the hardware related info is store in model when using the ARDrone2
 
-            selectedRobot = 0;
 
 //            init.create();
             if(participants == null) {

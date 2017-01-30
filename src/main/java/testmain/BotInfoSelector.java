@@ -82,6 +82,10 @@ public class BotInfoSelector {
                 bluetooth = "Mars_122317";
                 this.type = new Model_quadcopter(name, 0,0);
             }
+            else if(type == Common.ARDRONE2) {
+                this.type = new ModelARDrone2(name, 0,0,0);
+                this.ip = "10.195.182.197";
+            }
         }
 
         if(color.equals("white")) {
