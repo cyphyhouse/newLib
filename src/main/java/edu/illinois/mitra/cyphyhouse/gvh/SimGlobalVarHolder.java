@@ -2,12 +2,7 @@ package edu.illinois.mitra.cyphyhouse.gvh;
 
 import java.util.HashMap;
 
-import edu.illinois.mitra.cyphyhouse.harness.IdealSimGpsProvider;
-import edu.illinois.mitra.cyphyhouse.harness.IdealSimMotionAutomaton;
-import edu.illinois.mitra.cyphyhouse.harness.RealisticSimMotionAutomaton_iRobot;
-import edu.illinois.mitra.cyphyhouse.harness.SimGpsReceiver;
-import edu.illinois.mitra.cyphyhouse.harness.SimSmartComThread;
-import edu.illinois.mitra.cyphyhouse.harness.SimulationEngine;
+import edu.illinois.mitra.cyphyhouse.harness.*;
 import edu.illinois.mitra.cyphyhouse.interfaces.TrackedRobot;
 import edu.illinois.mitra.cyphyhouse.models.*;
 import edu.illinois.mitra.cyphyhouse.motion.ReachAvoid;
@@ -50,10 +45,10 @@ public class SimGlobalVarHolder extends GlobalVarHolder {
 				plat.moat.start();
 			}
 		}
-//		else if(initpos instanceof Model_quadcopter){
-//			plat.moat = new RealisticSimMotionAutomation_quadcopter(this, engine.getGps());
-//			plat.moat.start();
-//		}
+		else if(initpos instanceof Model_quadcopter){
+			plat.moat = new RealisticSimMotionAutomation_quadcopter(this, engine.getGps());
+			plat.moat.start();
+		}
 		else {
 			throw new RuntimeException("After adding a model, please add the motion controler for that model in SimGlobalVarHolder.java");
 		}

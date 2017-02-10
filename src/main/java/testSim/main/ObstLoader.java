@@ -20,7 +20,8 @@ public class ObstLoader {
             try {
                 in = new BufferedReader(new FileReader("waypoints/" + file));
             } catch (FileNotFoundException e) {
-                System.err.println("File " + file + " not found! No waypoints loaded.");
+            	String findpath = new File(".").getAbsolutePath();
+                System.err.println("File " + file + " not found in+" + findpath +"! No waypoints loaded.");
                 return new ObstacleList();
             }
         }
