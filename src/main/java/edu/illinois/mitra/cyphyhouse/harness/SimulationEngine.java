@@ -1,20 +1,20 @@
 package edu.illinois.mitra.cyphyhouse.harness;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 
+import edu.illinois.mitra.cyphyhouse.gvh.Logging;
 import edu.illinois.mitra.cyphyhouse.interfaces.ExplicitlyDrawable;
 import edu.illinois.mitra.cyphyhouse.interfaces.LogicThread;
 
 /**
  * The core of the simulation. You really don't need to mess with this code.
  * Please don't change anything in here.
+ *
+ * 2017-2-9: Rewrote logging related part to support general java env
  * 
- * @author Adam Zimmerman
- * @version One million
+ * @author Adam Zimmerman, Shuchen
+ * @version One million+1
  */
 public class SimulationEngine extends Thread {
 
@@ -23,6 +23,7 @@ public class SimulationEngine extends Thread {
 	private Map<Thread, Long> threadSleeps = new HashMap<Thread, Long>();
 	private Map<Thread, Long> lastUpdateTime = new HashMap<Thread, Long>();
 
+	private Vector<Logging> logs = new Vector<Logging>();
 	private SimGpsProvider gps;
 	private DecoupledSimComChannel comms;
 	private long startTime;
@@ -173,6 +174,9 @@ public class SimulationEngine extends Thread {
 	}
 
 	public void simulationDone() {
+		for(int i = 0; i< logs.size(); i++){
+			logs.get(i).saveLogFile();
+		}
 		done = true;
 	}
 
@@ -200,6 +204,10 @@ public class SimulationEngine extends Thread {
 
 	public void setGps(SimGpsProvider gps) {
 		this.gps = gps;
+	}
+
+	public void addLogging(Logging log){
+		this.logs.addElement(log);
 	}
 
 	public DecoupledSimComChannel getComChannel() {
