@@ -2,10 +2,15 @@ package edu.illinois.mitra.cyphyhouse.gvh;
 
 import java.util.HashMap;
 
+import edu.illinois.mitra.cyphyhouse.Handler.IPCHandler;
+import edu.illinois.mitra.cyphyhouse.Handler.IPCMessage;
+import edu.illinois.mitra.cyphyhouse.Handler.Looper;
 import edu.illinois.mitra.cyphyhouse.harness.*;
 import edu.illinois.mitra.cyphyhouse.interfaces.TrackedRobot;
 import edu.illinois.mitra.cyphyhouse.models.*;
+import edu.illinois.mitra.cyphyhouse.motion.MotionAutomation_Quadcopter;
 import edu.illinois.mitra.cyphyhouse.motion.ReachAvoid;
+import edu.illinois.mitra.cyphyhouse.motion.MotionHandlerConfig;
 
 /**
  * Extension of the GlobalVarHolder class for use in simulations of StarL applications 
@@ -16,7 +21,23 @@ import edu.illinois.mitra.cyphyhouse.motion.ReachAvoid;
 public class SimGlobalVarHolder extends GlobalVarHolder {
 	
 	private SimulationEngine engine;
-	
+	private IPCHandler simHandler;
+	private final String TAG = "SimGlobalVarHolder";
+
+	private void controlInCheck(double yaw_v, double pitch, double roll, double gaz) {
+		if (yaw_v > 1 || yaw_v < -1) {
+			throw new IllegalArgumentException("yaw speed must be between -1 to 1");
+		}
+		if (pitch > 1 || pitch < -1) {
+			throw new IllegalArgumentException("pitch must be between -1 to 1");
+		}
+		if (roll > 1 || roll < -1) {
+			throw new IllegalArgumentException("roll speed must be between -1 to 1");
+		}
+		if (gaz > 1 || gaz < -1) {
+			throw new IllegalArgumentException("gaz, vertical speed must be between -1 to 1");
+		}
+	}
 	/**
 	 * @param name the name of this agent
 	 * @param participants contains (name,IP) pairs for each participating agent 
@@ -46,7 +67,30 @@ public class SimGlobalVarHolder extends GlobalVarHolder {
 			}
 		}
 		else if(initpos instanceof Model_quadcopter){
-			plat.moat = new RealisticSimMotionAutomation_quadcopter(this, engine.getGps());
+			simHandler = new IPCHandler(Looper.getMyLooper()){
+				@Override
+				public void handleMessage(IPCMessage msg){
+					switch (msg.what){
+						case MotionHandlerConfig.CMD_DRONE_TAKEOFF:
+							log.i(TAG, "Drone taking off");
+							controlInCheck(0, 0, 0, 1);
+							engine.getGps().setControlInput((String)msg.obj,
+									0,0,0,
+									((Model_quadcopter)plat.model).max_gaz);
+							break;
+						case MotionHandlerConfig.CMD_DRONE_LAND:
+							log.i(TAG, "Drone landing");
+							engine.getGps().setControlInput((String)msg.obj,
+									0,0,0,0);
+							break;
+						case MotionHandlerConfig.CMD_DRONE_HOVER:
+							log.i(TAG, "Drone hovering");
+							controlInCheck(0, 0, 0, 0);
+							break;
+					}
+				}
+			};
+			plat.moat = new MotionAutomation_Quadcopter(this, simHandler);
 			plat.moat.start();
 		}
 		else {

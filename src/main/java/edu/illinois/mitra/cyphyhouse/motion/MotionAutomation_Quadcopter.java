@@ -2,6 +2,7 @@ package edu.illinois.mitra.cyphyhouse.motion;
 
 import java.util.*;
 
+import edu.illinois.mitra.cyphyhouse.Handler.IPCHandler;
 import edu.illinois.mitra.cyphyhouse.gvh.GlobalVarHolder;
 import edu.illinois.mitra.cyphyhouse.interfaces.RobotEventListener.Event;
 import edu.illinois.mitra.cyphyhouse.models.Model_quadcopter;
@@ -20,7 +21,7 @@ import edu.illinois.mitra.cyphyhouse.objects.*;
  * @author Yixiao Lin, Shuchen
  * @version 1.1
  */
-public class MotionAutomation_quadcopter_Base extends RobotMotion {
+public class MotionAutomation_Quadcopter extends RobotMotion {
 	protected static final String TAG = "MotionAutomaton";
 	protected static final String ERR = "Critical Error";
 	final int safeHeight = 500;
@@ -41,6 +42,7 @@ public class MotionAutomation_quadcopter_Base extends RobotMotion {
 	private STAGE prev = null;
 	protected boolean running = false;
 	boolean colliding = false;
+	IPCHandler outHandler = null;
 
 	private enum OPMODE {
 		GO_TO
@@ -56,10 +58,10 @@ public class MotionAutomation_quadcopter_Base extends RobotMotion {
 
 	//	private volatile MotionParameters param = settings.build();
 
-	public MotionAutomation_quadcopter_Base(GlobalVarHolder gvh) {
+	public MotionAutomation_Quadcopter(GlobalVarHolder gvh, IPCHandler handler) {
 		super(gvh.id.getName());
 		this.gvh = gvh;
-
+		this.outHandler = handler;
 	}
 
 	public void goTo(ItemPosition dest, ObstacleList obsList) {
@@ -303,6 +305,7 @@ public class MotionAutomation_quadcopter_Base extends RobotMotion {
 	protected void takeOff(){
 		//Bluetooth command to control the drone
 		gvh.log.i(TAG, "Drone taking off");
+        outHandler.obtaintMsg(MotionHandlerConfig.CMD_DRONE_TAKEOFF).sendToHandler();
 	}
 
 	/**
@@ -311,6 +314,7 @@ public class MotionAutomation_quadcopter_Base extends RobotMotion {
 	protected void land(){
 		//Bluetooth command to control the drone
 		gvh.log.i(TAG, "Drone landing");
+        outHandler.obtaintMsg(MotionHandlerConfig.CMD_DRONE_LAND).sendToHandler();
 	}
 
 	/**
@@ -319,6 +323,7 @@ public class MotionAutomation_quadcopter_Base extends RobotMotion {
 	protected void hover(){
 		//Bluetooth command to control the drone
 		gvh.log.i(TAG, "Drone hovering");
+		outHandler.obtaintMsg(MotionHandlerConfig.CMD_DRONE_HOVER).sendToHandler();
 	}
 
 	@Override
