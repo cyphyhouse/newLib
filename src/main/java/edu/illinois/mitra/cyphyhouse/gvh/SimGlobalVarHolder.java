@@ -5,6 +5,7 @@ import java.util.HashMap;
 import edu.illinois.mitra.cyphyhouse.Handler.IPCHandler;
 import edu.illinois.mitra.cyphyhouse.Handler.IPCMessage;
 import edu.illinois.mitra.cyphyhouse.Handler.Looper;
+import edu.illinois.mitra.cyphyhouse.Handler.LooperThread;
 import edu.illinois.mitra.cyphyhouse.harness.*;
 import edu.illinois.mitra.cyphyhouse.interfaces.TrackedRobot;
 import edu.illinois.mitra.cyphyhouse.models.*;
@@ -23,6 +24,7 @@ public class SimGlobalVarHolder extends GlobalVarHolder {
 	private SimulationEngine engine;
 	private IPCHandler simHandler;
 	private final String TAG = "SimGlobalVarHolder";
+	private static LooperThread looperTh = new LooperThread();
 
 	private void controlInCheck(double yaw_v, double pitch, double roll, double gaz) {
 		if (yaw_v > 1 || yaw_v < -1) {
@@ -57,6 +59,7 @@ public class SimGlobalVarHolder extends GlobalVarHolder {
 		super.plat = new GeneralJavaPlatform();
 		plat.model = initpos;
 		plat.reachAvoid = new ReachAvoid(this);
+		looperTh.initThread();
         // Yixiao says IdealSimGpsProvider shouldn't be used. Should probably remove the if else here.
 		if(initpos instanceof Model_iRobot){
 			if(engine.getGps() instanceof IdealSimGpsProvider) {
@@ -67,7 +70,7 @@ public class SimGlobalVarHolder extends GlobalVarHolder {
 			}
 		}
 		else if(initpos instanceof Model_quadcopter){
-			simHandler = new IPCHandler(Looper.getMyLooper()){
+			simHandler = new IPCHandler(looperTh.getLooperRef()){
 				@Override
 				public void handleMessage(IPCMessage msg){
 					switch (msg.what){

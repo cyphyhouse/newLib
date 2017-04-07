@@ -16,6 +16,11 @@ public class IPCHandler {
         myMsgQ = looper.myQueue;
     }
 
+    public IPCHandler(LooperThread looperTh){
+        myLooper = looperTh.getLooperRef();
+        myMsgQ = looperTh.getLooperRef().myQueue;
+    }
+
     private static void handleCallback(IPCMessage msg){
         Thread th = new Thread(msg.callback);
         th.start();
