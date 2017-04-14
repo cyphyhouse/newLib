@@ -11,4 +11,8 @@ public final class MotionHandlerConfig {
     public static final int CMD_DRONE_TAKEOFF=0;
     public static final int CMD_DRONE_LAND=1;
     public static final int CMD_DRONE_HOVER=2;
+    public static final int CMD_IROBOT_MOTION_STOP=10;
+    public static final int CMD_IROBOT_CURVE=11;
+    public static final int CMD_IROBOT_STRAIGHT=12;
+    public static final int CMD_IROBOT_TURN=13;
 }

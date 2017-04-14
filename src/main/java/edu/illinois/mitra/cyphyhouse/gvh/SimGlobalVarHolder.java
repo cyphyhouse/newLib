@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import edu.illinois.mitra.cyphyhouse.Handler.IPCHandler;
 import edu.illinois.mitra.cyphyhouse.Handler.IPCMessage;
-import edu.illinois.mitra.cyphyhouse.Handler.Looper;
 import edu.illinois.mitra.cyphyhouse.Handler.LooperThread;
 import edu.illinois.mitra.cyphyhouse.harness.*;
 import edu.illinois.mitra.cyphyhouse.interfaces.TrackedRobot;
@@ -22,7 +21,7 @@ import edu.illinois.mitra.cyphyhouse.motion.MotionHandlerConfig;
 public class SimGlobalVarHolder extends GlobalVarHolder {
 	
 	private SimulationEngine engine;
-	private IPCHandler simHandler;
+	private IPCHandler simHandlerQuad, simHandlerIRobot;
 	private final String TAG = "SimGlobalVarHolder";
 	private static LooperThread looperTh = new LooperThread();
 
@@ -65,12 +64,32 @@ public class SimGlobalVarHolder extends GlobalVarHolder {
 			if(engine.getGps() instanceof IdealSimGpsProvider) {
 				plat.moat = new IdealSimMotionAutomaton(this, (IdealSimGpsProvider)engine.getGps());
 			} else {
+				simHandlerIRobot = new IPCHandler(looperTh.getLooperRef()){
+					@Override
+					public void handleMessage(IPCMessage msg){
+						switch (msg.what) {
+							case MotionHandlerConfig.CMD_IROBOT_MOTION_STOP:
+								engine.getGps().setVelocity((String) msg.obj, 0, 0);
+								break;
+							case MotionHandlerConfig.CMD_IROBOT_CURVE:
+								engine.getGps().setVelocity((String) msg.obj, msg.arg1.intValue(),
+										(int) Math.round((msg.arg1.intValue()*360.0)/(2*Math.PI*msg.arg2.intValue())) );
+								break;
+							case MotionHandlerConfig.CMD_IROBOT_STRAIGHT:
+								engine.getGps().setVelocity((String)msg.obj, msg.arg1.intValue(), 0);
+								break;
+							case MotionHandlerConfig.CMD_IROBOT_TURN:
+								engine.getGps().setVelocity((String)msg.obj, 0, (int) Math.copySign(msg.arg1.intValue(), -msg.arg2.intValue()));
+								break;
+						}
+					}
+				};
 				plat.moat = new RealisticSimMotionAutomaton_iRobot(this, engine.getGps());
 				plat.moat.start();
 			}
 		}
 		else if(initpos instanceof Model_quadcopter){
-			simHandler = new IPCHandler(looperTh.getLooperRef()){
+			simHandlerQuad = new IPCHandler(looperTh.getLooperRef()){
 				@Override
 				public void handleMessage(IPCMessage msg){
 					switch (msg.what){
@@ -93,7 +112,7 @@ public class SimGlobalVarHolder extends GlobalVarHolder {
 					}
 				}
 			};
-			plat.moat = new MotionAutomation_Quadcopter(this, simHandler);
+			plat.moat = new MotionAutomation_Quadcopter(this, simHandlerQuad);
 			plat.moat.start();
 		}
 		else {
