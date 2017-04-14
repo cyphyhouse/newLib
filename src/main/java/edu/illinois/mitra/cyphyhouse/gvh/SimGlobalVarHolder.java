@@ -21,7 +21,6 @@ import edu.illinois.mitra.cyphyhouse.motion.MotionHandlerConfig;
 public class SimGlobalVarHolder extends GlobalVarHolder {
 	
 	private SimulationEngine engine;
-	private IPCHandler simHandlerQuad, simHandlerIRobot;
 	private final String TAG = "SimGlobalVarHolder";
 	private static LooperThread looperTh = new LooperThread();
 
@@ -64,48 +63,48 @@ public class SimGlobalVarHolder extends GlobalVarHolder {
 			if(engine.getGps() instanceof IdealSimGpsProvider) {
 				plat.moat = new IdealSimMotionAutomaton(this, (IdealSimGpsProvider)engine.getGps());
 			} else {
-				simHandlerIRobot = new IPCHandler(looperTh.getLooperRef()){
+				IPCHandler simHandlerIRobot = new IPCHandler(looperTh.getLooperRef()) {
 					@Override
-					public void handleMessage(IPCMessage msg){
+					public void handleMessage(IPCMessage msg) {
 						switch (msg.what) {
 							case MotionHandlerConfig.CMD_IROBOT_MOTION_STOP:
 								engine.getGps().setVelocity((String) msg.obj, 0, 0);
 								break;
 							case MotionHandlerConfig.CMD_IROBOT_CURVE:
 								engine.getGps().setVelocity((String) msg.obj, msg.arg1.intValue(),
-										msg.arg2.intValue() );
+										msg.arg2.intValue());
 								break;
 							case MotionHandlerConfig.CMD_IROBOT_STRAIGHT:
 								engine.getGps().setVelocity((String) msg.obj, msg.arg1.intValue(),
-										msg.arg2.intValue() );
+										msg.arg2.intValue());
 								break;
 							case MotionHandlerConfig.CMD_IROBOT_TURN:
 								engine.getGps().setVelocity((String) msg.obj, msg.arg1.intValue(),
-										msg.arg2.intValue() );
+										msg.arg2.intValue());
 								break;
 						}
 					}
 				};
-				plat.moat = new RealisticSimMotionAutomaton_iRobot(this, engine.getGps(), simHandlerIRobot);
+				plat.moat = new RealisticSimMotionAutomaton_iRobot(this, simHandlerIRobot);
 				plat.moat.start();
 			}
 		}
 		else if(initpos instanceof Model_quadcopter){
-			simHandlerQuad = new IPCHandler(looperTh.getLooperRef()){
+			IPCHandler simHandlerQuad = new IPCHandler(looperTh.getLooperRef()) {
 				@Override
-				public void handleMessage(IPCMessage msg){
-					switch (msg.what){
+				public void handleMessage(IPCMessage msg) {
+					switch (msg.what) {
 						case MotionHandlerConfig.CMD_DRONE_TAKEOFF:
 							log.i(TAG, "Drone taking off");
 							controlInCheck(0, 0, 0, 1);
-							engine.getGps().setControlInput((String)msg.obj,
-									0,0,0,
-									((Model_quadcopter)plat.model).max_gaz);
+							engine.getGps().setControlInput((String) msg.obj,
+									0, 0, 0,
+									((Model_quadcopter) plat.model).max_gaz);
 							break;
 						case MotionHandlerConfig.CMD_DRONE_LAND:
 							log.i(TAG, "Drone landing");
-							engine.getGps().setControlInput((String)msg.obj,
-									0,0,0,0);
+							engine.getGps().setControlInput((String) msg.obj,
+									0, 0, 0, 0);
 							break;
 						case MotionHandlerConfig.CMD_DRONE_HOVER:
 							log.i(TAG, "Drone hovering");

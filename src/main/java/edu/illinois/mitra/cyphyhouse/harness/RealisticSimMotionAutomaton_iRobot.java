@@ -9,14 +9,12 @@ import edu.illinois.mitra.cyphyhouse.objects.Common;
 import javax.management.monitor.Monitor;
 
 public class RealisticSimMotionAutomaton_iRobot extends MotionAutomaton_iRobot_Base {
-	private SimGpsProvider gpsp;
 	private String name;
 	IPCHandler myHandler = null;
 	
-	public RealisticSimMotionAutomaton_iRobot(GlobalVarHolder gvh, SimGpsProvider gpsp, IPCHandler handler) {
+	public RealisticSimMotionAutomaton_iRobot(GlobalVarHolder gvh, IPCHandler handler) {
 		super(gvh);
 		name = gvh.id.getName();
-		this.gpsp = gpsp;
 		myHandler = handler;
 	}
 
