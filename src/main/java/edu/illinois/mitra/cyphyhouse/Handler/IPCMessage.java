@@ -20,7 +20,7 @@ public class IPCMessage {
 
     private static IPCMessage memPool = null;
     private static final Object memPoolSync = new Object();
-    private final static short POOL_SIZE_LIMIT = 20;
+    private final static short POOL_SIZE_LIMIT = 100;
     private static short poolSize = 0;
     IPCMessage next = null;
 
@@ -73,6 +73,24 @@ public class IPCMessage {
         IPCMessage m = construct();
         m.target = h;
         m.what = what;
+        return m;
+    }
+
+    public static IPCMessage obtain(IPCHandler h, int what, Object obj) {
+        IPCMessage m = construct();
+        m.target = h;
+        m.what = what;
+        m.obj = obj;
+        return m;
+    }
+
+    public static IPCMessage obtain(IPCHandler h, int what, Object obj, double arg1, double arg2) {
+        IPCMessage m = construct();
+        m.target = h;
+        m.what = what;
+        m.obj = obj;
+        m.arg1 = arg1;
+        m.arg2 = arg2;
         return m;
     }
 

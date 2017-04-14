@@ -46,6 +46,16 @@ public class IPCHandler {
         return IPCMessage.obtain(this, what);
     }
 
+    public IPCMessage obtaintMsg(int what, Object obj){
+        IPCMessage ret = null;
+        return IPCMessage.obtain(this, what, obj);
+    }
+
+    public IPCMessage obtaintMsg(int what, Object obj, double arg1, double arg2){
+        IPCMessage ret = null;
+        return IPCMessage.obtain(this, what, obj, arg1, arg2);
+    }
+
     public boolean sendMsg(IPCMessage msg){
         return myMsgQ.enqueueMsg(msg, null);
     }

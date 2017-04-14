@@ -73,18 +73,20 @@ public class SimGlobalVarHolder extends GlobalVarHolder {
 								break;
 							case MotionHandlerConfig.CMD_IROBOT_CURVE:
 								engine.getGps().setVelocity((String) msg.obj, msg.arg1.intValue(),
-										(int) Math.round((msg.arg1.intValue()*360.0)/(2*Math.PI*msg.arg2.intValue())) );
+										msg.arg2.intValue() );
 								break;
 							case MotionHandlerConfig.CMD_IROBOT_STRAIGHT:
-								engine.getGps().setVelocity((String)msg.obj, msg.arg1.intValue(), 0);
+								engine.getGps().setVelocity((String) msg.obj, msg.arg1.intValue(),
+										msg.arg2.intValue() );
 								break;
 							case MotionHandlerConfig.CMD_IROBOT_TURN:
-								engine.getGps().setVelocity((String)msg.obj, 0, (int) Math.copySign(msg.arg1.intValue(), -msg.arg2.intValue()));
+								engine.getGps().setVelocity((String) msg.obj, msg.arg1.intValue(),
+										msg.arg2.intValue() );
 								break;
 						}
 					}
 				};
-				plat.moat = new RealisticSimMotionAutomaton_iRobot(this, engine.getGps());
+				plat.moat = new RealisticSimMotionAutomaton_iRobot(this, engine.getGps(), simHandlerIRobot);
 				plat.moat.start();
 			}
 		}

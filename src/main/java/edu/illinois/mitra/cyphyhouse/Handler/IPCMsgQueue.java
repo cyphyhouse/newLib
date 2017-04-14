@@ -59,13 +59,13 @@ public class IPCMsgQueue {
 
             IPCMessage curr = myMsgQ;
             if(curr==null){
-                msg.next = curr;
+                msg.next = null;
                 myMsgQ = msg;
             }
             else{
                 //TODO: change to utilize "when"
-                myMsgQ.next = msg;
-                msg.next = null;
+                msg.next = myMsgQ;
+                myMsgQ = msg;
             }
         }
         return true;

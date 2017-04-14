@@ -25,6 +25,7 @@ public class MotionAutomation_Quadcopter extends RobotMotion {
 	protected static final String TAG = "MotionAutomaton";
 	protected static final String ERR = "Critical Error";
 	final int safeHeight = 500;
+	private String name;
 
 	protected GlobalVarHolder gvh;
 
@@ -62,6 +63,7 @@ public class MotionAutomation_Quadcopter extends RobotMotion {
 		super(gvh.id.getName());
 		this.gvh = gvh;
 		this.outHandler = handler;
+		name = gvh.id.getName();
 	}
 
 	public void goTo(ItemPosition dest, ObstacleList obsList) {
@@ -305,7 +307,7 @@ public class MotionAutomation_Quadcopter extends RobotMotion {
 	protected void takeOff(){
 		//Bluetooth command to control the drone
 		gvh.log.i(TAG, "Drone taking off");
-        outHandler.obtaintMsg(MotionHandlerConfig.CMD_DRONE_TAKEOFF).sendToHandler();
+        outHandler.obtaintMsg(MotionHandlerConfig.CMD_DRONE_TAKEOFF, name).sendToHandler();
 	}
 
 	/**
@@ -314,7 +316,7 @@ public class MotionAutomation_Quadcopter extends RobotMotion {
 	protected void land(){
 		//Bluetooth command to control the drone
 		gvh.log.i(TAG, "Drone landing");
-        outHandler.obtaintMsg(MotionHandlerConfig.CMD_DRONE_LAND).sendToHandler();
+        outHandler.obtaintMsg(MotionHandlerConfig.CMD_DRONE_LAND, name).sendToHandler();
 	}
 
 	/**
@@ -323,7 +325,7 @@ public class MotionAutomation_Quadcopter extends RobotMotion {
 	protected void hover(){
 		//Bluetooth command to control the drone
 		gvh.log.i(TAG, "Drone hovering");
-		outHandler.obtaintMsg(MotionHandlerConfig.CMD_DRONE_HOVER).sendToHandler();
+		outHandler.obtaintMsg(MotionHandlerConfig.CMD_DRONE_HOVER, name).sendToHandler();
 	}
 
 	@Override
