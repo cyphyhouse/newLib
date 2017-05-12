@@ -9,6 +9,7 @@ import edu.illinois.mitra.cyphyhouse.harness.*;
 import edu.illinois.mitra.cyphyhouse.interfaces.TrackedRobot;
 import edu.illinois.mitra.cyphyhouse.models.*;
 import edu.illinois.mitra.cyphyhouse.motion.MotionAutomation_Quadcopter;
+import edu.illinois.mitra.cyphyhouse.motion.MotionAutomaton_iRobot;
 import edu.illinois.mitra.cyphyhouse.motion.ReachAvoid;
 import edu.illinois.mitra.cyphyhouse.motion.MotionHandlerConfig;
 
@@ -71,13 +72,7 @@ public class SimGlobalVarHolder extends GlobalVarHolder {
 								engine.getGps().setVelocity((String) msg.obj, 0, 0);
 								break;
 							case MotionHandlerConfig.CMD_IROBOT_CURVE:
-								engine.getGps().setVelocity((String) msg.obj, msg.arg1.intValue(),
-										msg.arg2.intValue());
-								break;
 							case MotionHandlerConfig.CMD_IROBOT_STRAIGHT:
-								engine.getGps().setVelocity((String) msg.obj, msg.arg1.intValue(),
-										msg.arg2.intValue());
-								break;
 							case MotionHandlerConfig.CMD_IROBOT_TURN:
 								engine.getGps().setVelocity((String) msg.obj, msg.arg1.intValue(),
 										msg.arg2.intValue());
@@ -85,7 +80,7 @@ public class SimGlobalVarHolder extends GlobalVarHolder {
 						}
 					}
 				};
-				plat.moat = new RealisticSimMotionAutomaton_iRobot(this, simHandlerIRobot);
+				plat.moat = new MotionAutomaton_iRobot(this, simHandlerIRobot);
 				plat.moat.start();
 			}
 		}

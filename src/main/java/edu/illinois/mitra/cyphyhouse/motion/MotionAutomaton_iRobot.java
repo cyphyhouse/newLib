@@ -1,5 +1,6 @@
 package edu.illinois.mitra.cyphyhouse.motion;
 
+import edu.illinois.mitra.cyphyhouse.Handler.IPCHandler;
 import edu.illinois.mitra.cyphyhouse.gvh.GlobalVarHolder;
 import edu.illinois.mitra.cyphyhouse.interfaces.RobotEventListener;
 import edu.illinois.mitra.cyphyhouse.models.Model_iRobot;
@@ -31,9 +32,11 @@ import java.util.*;
  * @author Adam Zimmerman, Yixiao Lin
  * @version 1.1
  */
-public class MotionAutomaton_iRobot_Base extends RobotMotion {
+public class MotionAutomaton_iRobot extends RobotMotion {
 	protected static final String TAG = "MotionAutomaton";
 	protected static final String ERR = "Critical Error";
+	private IPCHandler myHandler;
+	private String name;
 
 	// MOTION CONTROL CONSTANTS
 	//	public static int R_arc = 700;
@@ -124,11 +127,21 @@ public class MotionAutomaton_iRobot_Base extends RobotMotion {
 	private double turnspeed;
 
 
-	public MotionAutomaton_iRobot_Base(GlobalVarHolder gvh) {
+	public MotionAutomaton_iRobot(GlobalVarHolder gvh) {
 		super(gvh.id.getName());
+		name = gvh.id.getName();
 		this.gvh = gvh;
 		this.linspeed = (param.LINSPEED_MAX - param.LINSPEED_MIN) / (double) (param.SLOWFWD_RADIUS - param.GOAL_RADIUS);
 		this.turnspeed = (param.TURNSPEED_MAX - param.TURNSPEED_MIN) / (param.SLOWTURN_ANGLE - param.SMALLTURN_ANGLE);
+	}
+
+	public MotionAutomaton_iRobot(GlobalVarHolder gvh, IPCHandler handler){
+		super(gvh.id.getName());
+		name = gvh.id.getName();
+		this.gvh = gvh;
+		this.linspeed = (param.LINSPEED_MAX - param.LINSPEED_MIN) / (double) (param.SLOWFWD_RADIUS - param.GOAL_RADIUS);
+		this.turnspeed = (param.TURNSPEED_MAX - param.TURNSPEED_MIN) / (param.SLOWTURN_ANGLE - param.SMALLTURN_ANGLE);
+		myHandler = handler;
 	}
 
 	public void goTo(ItemPosition dest, ObstacleList obsList) {
@@ -593,6 +606,11 @@ public class MotionAutomaton_iRobot_Base extends RobotMotion {
 
 	@Override
 	public void motion_stop() {
+		myHandler.obtaintMsg(MotionHandlerConfig.CMD_IROBOT_MOTION_STOP, name).sendToHandler();
+		running = false;
+		stage = MotionAutomaton_iRobot.STAGE.INIT;
+		destination = null;
+		inMotion = false;
 
 	}
 
@@ -621,12 +639,36 @@ public class MotionAutomaton_iRobot_Base extends RobotMotion {
 	}
 
 	protected void curve(int velocity, int radius) {
+		if(running) {
+			sendMotionEvent(Common.MOT_ARCING, velocity, radius);
+			// TODO: Determine if angular velocity formula works!
+//			gpsp.setVelocity(name, velocity, (int) Math.round((velocity*360.0)/(2*Math.PI*radius)));
+			myHandler.obtaintMsg(MotionHandlerConfig.CMD_IROBOT_CURVE, name,
+					velocity, (int) Math.round((velocity*360.0)/(2*Math.PI*radius))).sendToHandler();
+		}
 	}
 
 	protected void straight(int velocity) {
+		gvh.log.i(TAG, "Straight at velocity " + velocity);
+		if(running) {
+			if(velocity != 0) {
+				sendMotionEvent(Common.MOT_STRAIGHT, velocity);
+			} else {
+				sendMotionEvent(Common.MOT_STOPPED, 0);
+			}
+//			gpsp.setVelocity(name, velocity, 0);
+			myHandler.obtaintMsg(MotionHandlerConfig.CMD_IROBOT_STRAIGHT, name,
+					velocity, 0).sendToHandler();
+		}
 	}
 
 	protected void turn(int velocity, int angle) {
+		if(running) {
+			sendMotionEvent(Common.MOT_TURNING, velocity, angle);
+//			gpsp.setVelocity(name, 0, (int) Math.copySign(velocity, -angle));
+			myHandler.obtaintMsg(MotionHandlerConfig.CMD_IROBOT_TURN, name,
+					0, (int)Math.copySign(velocity, -angle)).sendToHandler();
+		}
 	}
 
 	// Ramp linearly from min at param.SMALLTURN_ANGLE to max at param.SLOWTURN_ANGLE

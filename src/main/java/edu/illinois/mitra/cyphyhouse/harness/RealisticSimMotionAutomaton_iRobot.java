@@ -2,13 +2,12 @@ package edu.illinois.mitra.cyphyhouse.harness;
 
 import edu.illinois.mitra.cyphyhouse.Handler.IPCHandler;
 import edu.illinois.mitra.cyphyhouse.gvh.GlobalVarHolder;
-import edu.illinois.mitra.cyphyhouse.motion.MotionAutomaton_iRobot_Base;
+import edu.illinois.mitra.cyphyhouse.motion.MotionAutomaton_iRobot;
 import edu.illinois.mitra.cyphyhouse.motion.MotionHandlerConfig;
 import edu.illinois.mitra.cyphyhouse.objects.Common;
 
-import javax.management.monitor.Monitor;
-
-public class RealisticSimMotionAutomaton_iRobot extends MotionAutomaton_iRobot_Base {
+@Deprecated
+public class RealisticSimMotionAutomaton_iRobot extends MotionAutomaton_iRobot {
 	private String name;
 	IPCHandler myHandler = null;
 	
@@ -23,7 +22,7 @@ public class RealisticSimMotionAutomaton_iRobot extends MotionAutomaton_iRobot_B
 //		gpsp.setVelocity(name, 0, 0);
         myHandler.obtaintMsg(MotionHandlerConfig.CMD_IROBOT_MOTION_STOP, name).sendToHandler();
 		super.running = false;
-		super.stage = MotionAutomaton_iRobot_Base.STAGE.INIT;
+		super.stage = MotionAutomaton_iRobot.STAGE.INIT;
 		super.destination = null;
 		super.inMotion = false;
 	}
