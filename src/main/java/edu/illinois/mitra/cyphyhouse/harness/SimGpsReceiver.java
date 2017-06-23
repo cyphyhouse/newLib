@@ -50,6 +50,7 @@ public class SimGpsReceiver implements GpsReceiver {
 
 	@Override
 	public PositionList<ItemPosition> get_robots() {
+		//for real gps , read from position file of each robot . 
 		return provider.getAllPositions();
 	}
 
