@@ -199,6 +199,7 @@ public class Model_iRobot extends ItemPosition implements TrackedRobot{
 	
 	
 	private void initial_helper(){
+		/* read from config file, maybe stored on platform */
 		angle = 0;
 		radius = 325;
 		type = 0;
