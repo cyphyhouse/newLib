@@ -41,6 +41,13 @@
             <artifactId>gson</artifactId>
             <version>2.6.2</version>
         </dependency>
+	 <dependency>
+            <groupId>edu.brown.cs.burlap</groupId>
+            <artifactId>java_rosbridge</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+	
+	
     </dependencies>
 
     <build>
