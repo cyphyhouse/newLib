@@ -59,6 +59,7 @@ public class TestMain {
             appToRun = new FollowApp(gvh);
             init.createAppInstance(appToRun);
             init.launch(4, 1);
+			
         }
 
 }

@@ -11,6 +11,8 @@ import edu.illinois.mitra.cyphyhouse.motion.ReachAvoid;
 import edu.illinois.mitra.cyphyhouse.objects.ObstacleList;
 import edu.illinois.mitra.cyphyhouse.objects.PositionList;
 
+import ros.RosBridge;
+
 /**
  * Extension of the GlobalVarHolder class for use in physical implementations of StarL applications
  * @author Adam Zimmerman

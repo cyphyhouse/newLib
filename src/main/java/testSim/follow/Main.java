@@ -3,6 +3,15 @@ package testSim.follow;
 import testSim.main.SimSettings;
 import testSim.main.Simulation;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import ros.Publisher;
+import ros.RosBridge;
+import ros.RosListenDelegate;
+import ros.SubscriptionRequestMsg;
+import ros.msgs.std_msgs.PrimitiveMsg;
+import ros.msgs.sensor_msgs.LaserScan;
+import ros.tools.MessageUnpacker;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -15,6 +24,10 @@ public class Main {
 		settings.DRAW_WAYPOINTS(false);
 		settings.DRAW_WAYPOINT_NAMES(false);
 		settings.DRAWER(new FollowDrawer());
+
+		/* set up ros java bridge */
+		/*RosBridge bridge = new RosBridge();
+		bridge.connect("ws://localhost:9090", true);*/
 		
 		Simulation sim = new Simulation(FollowApp.class, settings.build());
 		sim.start();

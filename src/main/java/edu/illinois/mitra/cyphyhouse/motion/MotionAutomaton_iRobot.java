@@ -8,6 +8,18 @@ import edu.illinois.mitra.cyphyhouse.objects.Common;
 import edu.illinois.mitra.cyphyhouse.objects.ItemPosition;
 import edu.illinois.mitra.cyphyhouse.objects.ObstacleList;
 
+
+import com.fasterxml.jackson.databind.JsonNode;
+import ros.Publisher;
+import ros.RosBridge;
+import ros.RosListenDelegate;
+import ros.SubscriptionRequestMsg;
+import ros.msgs.std_msgs.PrimitiveMsg;
+import ros.msgs.sensor_msgs.LaserScan;
+import ros.msgs.std_msgs.Waypoint;
+import ros.msgs.std_msgs.Time;
+import ros.tools.MessageUnpacker;
+
 import java.util.Arrays;
 import java.util.*;
 
@@ -160,6 +172,20 @@ public class MotionAutomaton_iRobot extends RobotMotion {
 		int index = in.nextInt();
         Vector<ObstacleList> temp = gvh.gps.getViews();
         ObstacleList obsList;
+
+
+	/* send a test string message to ros */
+	Publisher pub = new Publisher("/java_to_ros", "std_msgs/String", gvh.bridge);
+	/*Waypoint way = new Waypoint(dest.name, dest.index, dest.receivedTime, dest.x, dest.y, dest.z);
+	*/
+
+	pub.publish(new PrimitiveMsg<String>(this.name + " " + dest.name + " " + dest.x + " " + dest.y + " " + dest.z));
+	
+
+		
+
+
+
         if(!temp.isEmpty()) {
             obsList = temp.elementAt(index);
         }
