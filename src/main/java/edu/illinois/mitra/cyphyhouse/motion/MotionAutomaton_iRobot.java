@@ -8,20 +8,13 @@ import edu.illinois.mitra.cyphyhouse.objects.Common;
 import edu.illinois.mitra.cyphyhouse.objects.ItemPosition;
 import edu.illinois.mitra.cyphyhouse.objects.ObstacleList;
 
-
-import com.fasterxml.jackson.databind.JsonNode;
-import ros.Publisher;
-import ros.RosBridge;
-import ros.RosListenDelegate;
-import ros.SubscriptionRequestMsg;
-import ros.msgs.std_msgs.PrimitiveMsg;
-import ros.msgs.sensor_msgs.LaserScan;
-import ros.msgs.std_msgs.Waypoint;
-import ros.msgs.std_msgs.Time;
-import ros.tools.MessageUnpacker;
+import edu.illinois.mitra.cyphyhouse.ros.JavaRosWrapper;
 
 import java.util.Arrays;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
+
+
 
 
 
@@ -49,6 +42,9 @@ public class MotionAutomaton_iRobot extends RobotMotion {
 	protected static final String ERR = "Critical Error";
 	private IPCHandler myHandler;
 	private String name;
+
+	private JavaRosWrapper wrapper;
+	
 
 	// MOTION CONTROL CONSTANTS
 	//	public static int R_arc = 700;
@@ -154,6 +150,10 @@ public class MotionAutomaton_iRobot extends RobotMotion {
 		this.linspeed = (param.LINSPEED_MAX - param.LINSPEED_MIN) / (double) (param.SLOWFWD_RADIUS - param.GOAL_RADIUS);
 		this.turnspeed = (param.TURNSPEED_MAX - param.TURNSPEED_MIN) / (param.SLOWTURN_ANGLE - param.SMALLTURN_ANGLE);
 		myHandler = handler;
+		
+		wrapper = new JavaRosWrapper("ws://localhost:9090", name);
+		wrapper.subscribe_to_ROS("string_msgs");
+		
 	}
 
 	public void goTo(ItemPosition dest, ObstacleList obsList) {
@@ -173,14 +173,11 @@ public class MotionAutomaton_iRobot extends RobotMotion {
         Vector<ObstacleList> temp = gvh.gps.getViews();
         ObstacleList obsList;
 
+	wrapper.createTopic("Waypoint");
+	wrapper.sendMsg(dest);
 
-	/* send a test string message to ros */
-	Publisher pub = new Publisher("/java_to_ros", "std_msgs/String", gvh.bridge);
-	/*Waypoint way = new Waypoint(dest.name, dest.index, dest.receivedTime, dest.x, dest.y, dest.z);
-	*/
 
-	pub.publish(new PrimitiveMsg<String>(this.name + " " + dest.name + " " + dest.x + " " + dest.y + " " + dest.z));
-	
+
 
 		
 

@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import ros.RosBridge;
 
 import edu.illinois.mitra.cyphyhouse.interfaces.RobotEventListener;
 import edu.illinois.mitra.cyphyhouse.interfaces.RobotEventListener.Event;
@@ -24,7 +23,6 @@ public abstract class GlobalVarHolder {
 	public Logging log;
 	public Trace trace;
 	public GeneralJavaPlatform plat;
-	public RosBridge bridge;
 	
 	/**
 	 * @param name The unique identifier of this agent
@@ -32,11 +30,6 @@ public abstract class GlobalVarHolder {
 	 */
 	public GlobalVarHolder(String name, Map<String,String> participants) {
 		id = new Id(name, participants);
-		System.out.print("\"CREATING ROS BRIDGE\"");
-		
-		RosBridge br = new RosBridge();
-		br.connect("ws://localhost:9090", true);
-		bridge = br;
 	}
 	
 	// Events
