@@ -43,6 +43,8 @@ public class Model_iRobot extends ItemPosition implements TrackedRobot{
 	public int x_p;
 	public int y_p;
 	public double angle_p;
+
+	public double TESTX;
 	
 	/**
 	 * Construct an Model_iRobot from a received GPS broadcast message

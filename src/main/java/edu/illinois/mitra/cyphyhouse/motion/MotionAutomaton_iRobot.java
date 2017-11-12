@@ -7,12 +7,14 @@ import edu.illinois.mitra.cyphyhouse.models.Model_iRobot;
 import edu.illinois.mitra.cyphyhouse.objects.Common;
 import edu.illinois.mitra.cyphyhouse.objects.ItemPosition;
 import edu.illinois.mitra.cyphyhouse.objects.ObstacleList;
+import edu.illinois.mitra.cyphyhouse.motion.ReachAvoid;
 
 import edu.illinois.mitra.cyphyhouse.ros.JavaRosWrapper;
 
 import java.util.Arrays;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.io.*;
 
 
 
@@ -63,13 +65,15 @@ public class MotionAutomaton_iRobot extends RobotMotion {
 	// COLLISION AVOIDANCE CONSTANTS
 //	public static final int COLLISION_STRAIGHTTIME = 1250;
 
-	protected GlobalVarHolder gvh;
+	public GlobalVarHolder gvh;
 
 	// Motion tracking
 	protected ItemPosition destination;
 	private Model_iRobot mypos;
 	private ItemPosition blocker;
 	private ObstacleList obsList;
+
+	//private ReachAvoid RA;
 	
 
 	protected enum STAGE {
@@ -151,8 +155,9 @@ public class MotionAutomaton_iRobot extends RobotMotion {
 		this.turnspeed = (param.TURNSPEED_MAX - param.TURNSPEED_MIN) / (param.SLOWTURN_ANGLE - param.SMALLTURN_ANGLE);
 		myHandler = handler;
 		
-		wrapper = new JavaRosWrapper("ws://localhost:9090", name);
-		wrapper.subscribe_to_ROS("string_msgs");
+		wrapper = new JavaRosWrapper("ws://localhost:9090", name, this.gvh, "iRobot");
+		wrapper.subscribe_to_ROS("point_msgs", "Waypoint");
+		//this.RA = new ReachAvoid(this.gvh);
 		
 	}
 
@@ -165,6 +170,9 @@ public class MotionAutomaton_iRobot extends RobotMotion {
 			this.obsList = obsList;
 			startMotion();
 		}
+
+
+		//RA.doReachAvoid(dest, dest, obsList);
 	}
 	
 	public void goTo(ItemPosition dest) {
@@ -175,8 +183,10 @@ public class MotionAutomaton_iRobot extends RobotMotion {
 
 	wrapper.createTopic("Waypoint");
 	wrapper.sendMsg(dest);
-
-
+	Model_iRobot model = (Model_iRobot)gvh.gps.getMyPosition();
+	if(name.matches("iRobot0")){
+		System.out.println("Retrieved value " + model.TESTX + " from gvh: " + name);
+	}
 
 
 		
@@ -219,6 +229,9 @@ public class MotionAutomaton_iRobot extends RobotMotion {
 				//Notice: interesting here....
                 // why is getModel being used? Think it should be get position.
 				//mypos = (Model_iRobot)gvh.plat.getModel();
+			
+			
+
                 mypos = (Model_iRobot)gvh.gps.getMyPosition();
 				int distance = mypos.distanceTo(destination);
 				int angle = mypos.angleTo(destination);
@@ -255,6 +268,10 @@ public class MotionAutomaton_iRobot extends RobotMotion {
 					}
 					switch(stage) {
 					case INIT:
+
+						//System.out.println("NOT REACH AVOID");
+			//System.out.println("\n");
+
 						done = false;
 						if(mode == OPMODE.GO_TO) {
 							if(param.ENABLE_ARCING && distance <= param.ARC_RADIUS && absangle <= param.ARCANGLE_MAX) {

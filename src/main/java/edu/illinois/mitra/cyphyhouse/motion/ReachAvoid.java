@@ -85,6 +85,11 @@ public class ReachAvoid extends Thread implements Cancellable {
 		super.run();
 		gvh.threadCreated(this);
 		while(running){
+
+			System.out.println("REACHAVOID");
+			System.out.println(stage);
+			System.out.println("\n");
+
 			switch(stage){
 			case IDLE:
 				//do nothing
