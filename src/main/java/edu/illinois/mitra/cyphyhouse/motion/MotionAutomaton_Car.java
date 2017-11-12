@@ -211,6 +211,21 @@ public class MotionAutomaton_Car extends RobotMotion {
 		this.param = param;
 		
 	}
+
+
+
+
+	//ADD IMPLEMENTATION OF ROBOT EVENTS///////////////////
+	// EVENTS: Event {MOTION, GPS, GPS_SELF, WAYPOINT_RECEIVED};
+
+
+
+
+
+
+
+
+
 }
 
 

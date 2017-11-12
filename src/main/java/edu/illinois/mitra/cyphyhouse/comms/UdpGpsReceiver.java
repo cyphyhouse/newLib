@@ -115,6 +115,10 @@ public class UdpGpsReceiver extends Thread implements GpsReceiver {
 				for(int i = 0; i < parts.length; i++) {
 					if(parts[i].length() >= 2) {
 						switch(parts[i].charAt(0)) {
+
+							///////////
+							/* Single case: new position (geo_3d msg) recieved */
+
 							case '@':
 								try {
 									ItemPosition newpos = new ItemPosition(parts[i]);
@@ -240,6 +244,11 @@ public class UdpGpsReceiver extends Thread implements GpsReceiver {
 	@Override
 	public PositionList<ItemPosition> getSensepoints() {
 		// TODO work in progress, sensepoints data should really come in as the robot's sensor data, this should be more general to accommodate any sensor data
+		/////////////////////////////////////
+		// ROS Sensor subscriptions here
+
+
+
 		return null;
 	}
 

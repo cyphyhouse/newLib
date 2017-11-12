@@ -46,6 +46,7 @@ public class BotInfoSelector {
                 this.type = new ModelARDrone2(name, 0,0,0);
                 this.ip = "10.195.252.163";
             }
+	// ADD CAR 
 
         }
 

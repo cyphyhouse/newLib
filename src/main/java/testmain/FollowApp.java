@@ -29,7 +29,7 @@ public class FollowApp extends LogicThread {
     private int numBots;
     private int numWaypoints;
     private boolean arrived = false;
-    private boolean goForever = true;
+    private boolean goForever = false;	//modified
     private int msgNum = 0;
     private HashSet<RobotMessage> receivedMsgs = new HashSet<RobotMessage>();
 
