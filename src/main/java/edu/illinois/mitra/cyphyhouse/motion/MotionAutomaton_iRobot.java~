@@ -157,10 +157,10 @@ public class MotionAutomaton_iRobot extends RobotMotion {
 		
 		wrapper = new JavaRosWrapper("ws://localhost:9090", name, this.gvh, "iRobot");
 		//wrapper.subscribe_to_ROS("point_msgs", "Waypoint");
-		
-		wrapper.subscribe_to_ROS("decaPos", "DecaWave");		
+		if(name.matches("iRobot0")){
+			wrapper.subscribe_to_ROS("decaPos", "DecaWave");		
 
-		
+		}
 
 		//ADD TEST FOR ROSDECAWAVE 
 		///////////////////////////////////////////////////

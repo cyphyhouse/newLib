@@ -20,6 +20,7 @@ import edu.illinois.mitra.cyphyhouse.objects.Common;
 import edu.illinois.mitra.cyphyhouse.objects.ItemPosition;
 import edu.illinois.mitra.cyphyhouse.objects.ObstacleList;
 import edu.illinois.mitra.cyphyhouse.objects.PositionList;
+import ros.msgs.geometry_msgs.Point;
 
 /**
  * Hardware specific. Opens a UDP socket for receiving GPS broadcasts. 
@@ -73,6 +74,43 @@ public class UdpGpsReceiver extends Thread implements GpsReceiver {
 	//	private final int[][] goalpos = {{-1300,-260,0},{116,-260,0},{1000,-1400,0},{1000,1400,0}};
 //	private final int[][] goalpos = {{-1152,-1082,0},{-1152,1200,0},{1800,1200,0},{1800,-1000,0}};
 	private final int[][] goalpos = {{-1679,-513,0},{1600,-513,0},{-1679,-513,0},{1600,-513,0}};
+
+
+	public void receive_position_msg(Point msg){
+		String parts = name + " " + msg.x + " " + msg.y + " " + msg.z;
+		System.out.println(parts);
+		System.out.println(" ");
+		
+		/*try{
+			Thread.sleep(1000);
+		}
+		catch(InterruptedException e){
+		
+		}*/
+
+		
+		try{
+			Model_iRobot newpos = new Model_iRobot(parts);
+			//robotPositions.update(newpos, gvh.time());
+			//gvh.sendRobotEvent(Event.GPS);
+			if(newpos.name.equals(name)) {
+				//gvh.trace.traceEvent(TAG, "Received Position", newpos, gvh.time());
+				//gvh.sendRobotEvent(Event.GPS_SELF);
+			}
+		}
+		catch(ItemFormattingException e){
+			gvh.log.e(TAG, "Invalid item formatting: " + e.getError());
+
+		}
+		// ADD DELAY
+		////////////////////////////////////////////////
+		////////////////////////////////////////////////*/
+		
+		
+
+	}
+
+
 
 	private void WaypointHelper(){
 		gvh.log.i("TAG", "using preset waypoints");

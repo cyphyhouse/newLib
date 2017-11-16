@@ -78,7 +78,6 @@ public class RosGpsReceiver extends Thread implements GpsReceiver {
 	public void receive_position_msg(Point msg){
 		String parts = name + " " + msg.x + " " + msg.y + " " + msg.z;
 		System.out.println(parts);
-		System.out.println(" ");
 		
 		try{
 			Model_Car newpos = new Model_Car(parts);

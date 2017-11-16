@@ -20,7 +20,7 @@ public class Gps {
 	private static final String ERR = "Critical Error";
 	
 	private GlobalVarHolder gvh;
-	public GpsReceiver mGpsReceiver;
+	private GpsReceiver mGpsReceiver;
 	protected PositionList<ItemPosition> robot_positions;
 	protected PositionList<ItemPosition> waypoint_positions;
 	protected PositionList<ItemPosition> sensepoint_positions;
