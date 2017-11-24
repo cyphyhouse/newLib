@@ -63,26 +63,42 @@ public class FollowApp extends LogicThread {
             //System.out.println("in FollowApp, stage:"+stage);
             switch(stage) {
                 case INIT:
+			System.out.println("DOING INIT\n");
                     for(ItemPosition i : gvh.gps.getWaypointPositions())
                         destinations.put(i.getName(), i);
                     numWaypoints = destinations.size();
                     stage = Stage.PICK;
                 case PICK:
+			System.out.println("DOING PICK\n");
                     arrived = false;
                     if(destinations.isEmpty()) {
                         stage = Stage.DONE;
+			System.out.println("EMPTY BAD\n");
                     } else {
+			System.out.println("GOOD\n");
                         currentDestination = getDestination(destinations, destIndex);
+			System.out.println(currentDestination);
                         //Log.d(TAG, currentDestination.toString());
                         destIndex++;
                         if(destIndex >= numWaypoints) {
                             destIndex = 0;
                         }
+			
+			System.out.println(gvh.plat.moat.getClass().getName());
                         gvh.plat.moat.goTo(currentDestination);
+						//System.out.println("RETURNEDS\n");
+					
+
+			//boolean b = gvh.plat.moat instanceof String
+
+			
                         stage = Stage.GO;
                     }
                     break;
                 case GO:
+			//System.out.println("DOING GO\n");
+					
+					//System.out.println(!gvh.plat.moat.inMotion);
                     if(!gvh.plat.moat.inMotion) {
                         if(!goForever) {
                             if (currentDestination != null)
@@ -97,12 +113,14 @@ public class FollowApp extends LogicThread {
                     }
                     break;
                 case WAIT:
+			System.out.println("DOING WAIT\n");
                     if((messageCount >= numBots - 1) && arrived) {
                         messageCount = 0;
                         stage = Stage.PICK;
                     }
                     break;
                 case DONE:
+			System.out.println("DOING DONE\n");
                     return null;
             }
             sleep(100);

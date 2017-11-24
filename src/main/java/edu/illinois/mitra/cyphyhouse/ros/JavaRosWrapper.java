@@ -20,6 +20,7 @@ import edu.illinois.mitra.cyphyhouse.gvh.GlobalVarHolder;
 import edu.illinois.mitra.cyphyhouse.models.Model_iRobot;
 import edu.illinois.mitra.cyphyhouse.models.Model_Car;
 import edu.illinois.mitra.cyphyhouse.comms.UdpGpsReceiver;
+import edu.illinois.mitra.cyphyhouse.motion.MotionAutomaton_Car;
 
 public class JavaRosWrapper {
 	public RosBridge bridge;
@@ -40,11 +41,11 @@ public class JavaRosWrapper {
 
 		switch(platform){
 			case "Car":
-				this.model_car = (Model_Car)gvh.gps.getMyPosition();
+				//this.model_car = (Model_Car)gvh.gps.getMyPosition();
 				break;
 			case "iRobot":
 				//this.model_irobot = (Model_iRobot).gvh.gps.getMyPosition();
-				this.model_irobot = (Model_iRobot)gvh.gps.getMyPosition();
+				//this.model_irobot = (Model_iRobot)gvh.gps.getMyPosition();
 				break;
 		}
 		
@@ -180,14 +181,19 @@ public class JavaRosWrapper {
 							case "TRUE":
 								switch(platform){
 									case "Car":
-										model_car.reached = true;
+										MotionAutomaton_Car motion;
+										motion = (MotionAutomaton_Car) gvh.plat.moat;
+										motion.reached = true;
 										break;
 								}
 								break;
 							case "FALSE":
 								switch(platform){
 									case "Car":
-										model_car.reached = false;
+										//(MotionAutomaton_Car) gvh.plat.moat.reached = false;
+										MotionAutomaton_Car motion;
+										motion = (MotionAutomaton_Car) gvh.plat.moat;
+										motion.reached = false;
 										break;
 								}
 								break;

@@ -13,6 +13,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import java.util.Arrays;
+
 /**
  * Created by SC on 11/14/16.
  */
@@ -98,13 +100,15 @@ public class Initiator implements MessageListener{
                 if(ENABLE_TRACING)
                     gvh.trace.traceStart(runNum);
                 launched = true;
-
                 gvh.trace.traceSync("APPLICATION LAUNCH", gvh.time());
 
                 //RobotMessage informLaunch = new RobotMessage("ALL", gvh.id.getName(), Common.MSG_ACTIVITYLAUNCH, new MessageContents(Common.intsToStrings(numWaypoints, runNum)));
                 //gvh.comms.addOutgoingMessage(informLaunch);
                 results = executor.submit(runThread);
             } else {
+		//System.out.println(Arrays.toString(gvh.gps.getWaypointPositions().getList()));
+		System.out.println(gvh.gps.getWaypointPositions().getList());
+
                 System.err.println("Should have " + numWaypoints + " waypoints, but I have " + gvh.gps.getWaypointPositions().getNumPositions());
             }
         }

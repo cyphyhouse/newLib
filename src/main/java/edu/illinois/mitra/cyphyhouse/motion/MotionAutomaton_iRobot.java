@@ -43,7 +43,7 @@ public class MotionAutomaton_iRobot extends RobotMotion {
 	protected static final String TAG = "MotionAutomaton";
 	protected static final String ERR = "Critical Error";
 	private IPCHandler myHandler;
-	private String name;
+	public String name;
 
 	private JavaRosWrapper wrapper;
 	
@@ -141,10 +141,15 @@ public class MotionAutomaton_iRobot extends RobotMotion {
 
 	public MotionAutomaton_iRobot(GlobalVarHolder gvh) {
 		super(gvh.id.getName());
-		name = gvh.id.getName();
+		//name = gvh.id.getName();
+		name = "IROBOT!!!!";
 		this.gvh = gvh;
 		this.linspeed = (param.LINSPEED_MAX - param.LINSPEED_MIN) / (double) (param.SLOWFWD_RADIUS - param.GOAL_RADIUS);
 		this.turnspeed = (param.TURNSPEED_MAX - param.TURNSPEED_MIN) / (param.SLOWTURN_ANGLE - param.SMALLTURN_ANGLE);
+		wrapper = new JavaRosWrapper("ws://localhost:9090", name, this.gvh, "iRobot");
+		//wrapper.subscribe_to_ROS("point_msgs", "Waypoint");
+		
+		wrapper.subscribe_to_ROS("decaPos", "DecaWave");	
 	}
 
 	public MotionAutomaton_iRobot(GlobalVarHolder gvh, IPCHandler handler){
@@ -185,11 +190,13 @@ public class MotionAutomaton_iRobot extends RobotMotion {
 	}
 	
 	public void goTo(ItemPosition dest) {
-		Scanner in = new Scanner(((Model_iRobot)gvh.gps.getMyPosition()).name).useDelimiter("[^0-9]+");
-		int index = in.nextInt();
-        Vector<ObstacleList> temp = gvh.gps.getViews();
-        ObstacleList obsList;
-
+	//System.out.println("DOING GOTO\n");
+		//Scanner in = new Scanner(((Model_iRobot)gvh.gps.getMyPosition()).name).useDelimiter("[^0-9]+");
+		//int index = in.nextInt();
+	//System.out.println("DOING GOTO1\n");
+        //Vector<ObstacleList> temp = gvh.gps.getViews();
+        ObstacleList obsList = new ObstacleList();
+	System.out.println("DOING GOTO2\n");
 	wrapper.createTopic("Waypoint");
 	wrapper.sendMsg(dest);
 	Model_iRobot model = (Model_iRobot)gvh.gps.getMyPosition();
@@ -197,12 +204,14 @@ public class MotionAutomaton_iRobot extends RobotMotion {
 		System.out.println("Retrieved value " + model.TESTX + " from gvh: " + name);
 	}
 
+	goTo(dest, obsList);
+
 
 		
 
 
 
-        if(!temp.isEmpty()) {
+        /*if(!temp.isEmpty()) {
             obsList = temp.elementAt(index);
         }
         else {
@@ -210,7 +219,7 @@ public class MotionAutomaton_iRobot extends RobotMotion {
         }
         //obsList = new ObstacleList();
 		// work in progress here
-		goTo(dest, obsList);
+		goTo(dest, obsList);*/
 	}
 
 	public void turnTo(ItemPosition dest) {
@@ -229,10 +238,12 @@ public class MotionAutomaton_iRobot extends RobotMotion {
 
 	@Override
 	public void run() {
+		System.out.println("starting run\n");
 		super.run();
 		gvh.threadCreated(this);
 	
 		while(true) {
+			//System.out.println("running\n");
 //			gvh.gps.getObspointPositions().updateObs();
 			if(running) {
 				//Notice: interesting here....

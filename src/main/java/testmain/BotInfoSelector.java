@@ -5,6 +5,7 @@ import edu.illinois.mitra.cyphyhouse.interfaces.TrackedRobot;
 import edu.illinois.mitra.cyphyhouse.models.ModelARDrone2;
 import edu.illinois.mitra.cyphyhouse.models.Model_iRobot;
 import edu.illinois.mitra.cyphyhouse.models.Model_quadcopter;
+import edu.illinois.mitra.cyphyhouse.models.Model_Car;
 import edu.illinois.mitra.cyphyhouse.objects.Common;
 
 /**
@@ -46,7 +47,9 @@ public class BotInfoSelector {
                 this.type = new ModelARDrone2(name, 0,0,0);
                 this.ip = "10.195.252.163";
             }
-	// ADD CAR 
+			else if(type == Common.CAR){
+				this.type = new Model_Car(name, 0,0);
+			}
 
         }
 

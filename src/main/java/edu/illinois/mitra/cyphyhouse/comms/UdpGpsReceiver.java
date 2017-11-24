@@ -73,7 +73,7 @@ public class UdpGpsReceiver extends Thread implements GpsReceiver {
 	private final int[] mypos = {0,0,0};//the pos of the robot
 	//	private final int[][] goalpos = {{-1300,-260,0},{116,-260,0},{1000,-1400,0},{1000,1400,0}};
 //	private final int[][] goalpos = {{-1152,-1082,0},{-1152,1200,0},{1800,1200,0},{1800,-1000,0}};
-	private final int[][] goalpos = {{-1679,-513,0},{1600,-513,0},{-1679,-513,0},{1600,-513,0}};
+	private final int[][] goalpos = {{10,20,0},{30,40,0},{50,60,0},{70,80,0}};
 
 
 	public void receive_position_msg(Point msg){

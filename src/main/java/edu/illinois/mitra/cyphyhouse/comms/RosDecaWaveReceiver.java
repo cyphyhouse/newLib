@@ -29,8 +29,8 @@ import ros.msgs.geometry_msgs.Point;
  * @author Adam Zimmerman
  * @version 1.0
  */
-public class RosGpsReceiver extends Thread implements GpsReceiver {
-	private static final String TAG = "RosGPSReceiver";
+public class RosDecaWaveReceiver extends Thread implements GpsReceiver {
+	private static final String TAG = "RosDecaWaveReceiver";
 	private static final String ERR = "Critical Error";
 
 	public PositionList robotPositions;
@@ -45,9 +45,11 @@ public class RosGpsReceiver extends Thread implements GpsReceiver {
 	private boolean running = true;
 	private String name = null;
 	private boolean received = false;
+
+	private final int[][] goalpos = {{10,20,0},{30,40,0},{50,60,0},{70,80,0}};
 	
 
-	public RosGpsReceiver(GlobalVarHolder gvh, String TopicName, PositionList robotPositions,
+	public RosDecaWaveReceiver(GlobalVarHolder gvh, String TopicName, PositionList robotPositions,
 						  PositionList<ItemPosition> waypointPositions, ObstacleList obs,
 						  Vector<ObstacleList> viewsOfWorld) {
 		super();
@@ -59,13 +61,27 @@ public class RosGpsReceiver extends Thread implements GpsReceiver {
 		this.obs = obs;
 		this.viewsOfWorld = viewsOfWorld;
 	
-		wrapper = new JavaRosWrapper("ws://localhost:9090", name, this.gvh, "Car");
-		wrapper.subscribe_to_ROS("position", "Waypoint");
+		wrapper = new JavaRosWrapper("ws://localhost:9090", "NA", this.gvh, "Car");
+		//wrapper.subscribe_to_ROS("position", "Waypoint");
 
 
 		gvh.log.i(TAG, "Subscribing to ROS TOPIC " + TopicName);
 		gvh.trace.traceEvent(TAG, "Created", gvh.time());
+
+		WaypointHelper();
 	}
+
+
+
+	private void WaypointHelper(){
+		gvh.log.i("TAG", "using preset waypoints");
+		for(int i=0; i<goalpos.length; i++){
+			ItemPosition temp = new ItemPosition("Goal"+Integer.toString(i),
+					goalpos[i][0], goalpos[i][1], goalpos[i][2]);
+			this.waypointPositions.update(temp);
+		}
+	}
+
 
 
 	@Override
