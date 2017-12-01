@@ -63,7 +63,6 @@ public class MotionAutomaton_Car extends RobotMotion {
 		this.gvh = gvh;
 		this.mymodel = (Model_Car)gvh.gps.getMyPosition();
 		wrapper = new JavaRosWrapper("ws://localhost:9090", name, this.gvh, "Car");
-		//wrapper.subscribe_to_ROS("point_msgs", "Waypoint");
 		wrapper.subscribe_to_ROS("Reached", "Reached Message");
 		reached = false;
 		
