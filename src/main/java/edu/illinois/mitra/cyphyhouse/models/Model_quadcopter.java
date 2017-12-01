@@ -14,7 +14,7 @@ import edu.illinois.mitra.cyphyhouse.objects.PositionList;
  * This class represents a simple model of the Quadcopter
  * 
  */
-public class Model_quadcopter extends ItemPosition implements TrackedRobot{
+public class Model_Quadcopter extends ItemPosition implements TrackedRobot{
 	// for default values, see initial_helper()
 
 	public double radius;
