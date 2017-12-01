@@ -98,10 +98,10 @@ public class MotionAutomaton_Car extends RobotMotion {
 	
 	public void goTo(ItemPosition dest) {
 
-	wrapper.createTopic("Waypoint");
-	wrapper.sendMsg(dest);	
-		
-	startMotion();
+		wrapper.createTopic("Waypoint");
+		wrapper.sendMsg(dest);	
+
+		startMotion();
 	
 	return;
 	//goTo(dest, obsList);
