@@ -5,7 +5,6 @@ import java.util.Vector;
 
 import edu.illinois.mitra.cyphyhouse.interfaces.TrackedRobot;
 import edu.illinois.mitra.cyphyhouse.models.Model_iRobot;
-import edu.illinois.mitra.cyphyhouse.models.Model_Quadcopter;
 import edu.illinois.mitra.cyphyhouse.objects.*;
 
 public interface SimGpsProvider {
@@ -26,8 +25,6 @@ public interface SimGpsProvider {
 	public abstract void halt(String name);
 
 	public abstract PositionList<Model_iRobot> getiRobotPositions();
-	
-	public abstract PositionList<Model_Quadcopter> getQuadcopterPositions();
 	
 	public abstract PositionList<ItemPosition> getAllPositions();
 
