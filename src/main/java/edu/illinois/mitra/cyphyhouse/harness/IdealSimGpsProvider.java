@@ -7,7 +7,6 @@ import java.util.Random;
 import java.util.Vector;
 
 import edu.illinois.mitra.cyphyhouse.models.Model_iRobot;
-import edu.illinois.mitra.cyphyhouse.models.Model_Quadcopter;
 import edu.illinois.mitra.cyphyhouse.objects.*;
 
 public class IdealSimGpsProvider extends Observable implements SimGpsProvider  {	
@@ -78,11 +77,6 @@ public class IdealSimGpsProvider extends Observable implements SimGpsProvider  {
 	@Override
 	public PositionList<Model_iRobot> getiRobotPositions() {
 		return robot_positions;
-	}
-
-	@Override
-	public PositionList<Model_Quadcopter> getQuadcopterPositions() {
-		return null;
 	}
 
 	@Override

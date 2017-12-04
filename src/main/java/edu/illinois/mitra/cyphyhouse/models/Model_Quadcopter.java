@@ -53,7 +53,7 @@ public class Model_Quadcopter extends ItemPosition implements TrackedRobot{
 	}
 	
 	
-	public Model_Quadcopter(String name, int x, int y, double radius) {
+	public Model_Quadcopter(String name, int x, int y, int radius) {
 		super(name, x, y);
 		initial_helper();
 		this.radius = radius;
