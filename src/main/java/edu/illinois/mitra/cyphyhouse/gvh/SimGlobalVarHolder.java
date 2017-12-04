@@ -84,7 +84,7 @@ public class SimGlobalVarHolder extends GlobalVarHolder {
 				plat.moat.start();
 			}
 		}
-		else if(initpos instanceof Model_quadcopter){
+		else if(initpos instanceof Model_Quadcopter){
 			IPCHandler simHandlerQuad = new IPCHandler(looperTh.getLooperRef()) {
 				@Override
 				public void handleMessage(IPCMessage msg) {
@@ -94,7 +94,7 @@ public class SimGlobalVarHolder extends GlobalVarHolder {
 							controlInCheck(0, 0, 0, 1);
 							engine.getGps().setControlInput((String) msg.obj,
 									0, 0, 0,
-									((Model_quadcopter) plat.model).max_gaz);
+									((Model_Quadcopter) plat.model).max_gaz);
 							break;
 						case MotionHandlerConfig.CMD_DRONE_LAND:
 							log.i(TAG, "Drone landing");

@@ -15,7 +15,7 @@ import edu.illinois.mitra.cyphyhouse.interfaces.GpsReceiver;
 import edu.illinois.mitra.cyphyhouse.interfaces.RobotEventListener.Event;
 import edu.illinois.mitra.cyphyhouse.models.ModelARDrone2;
 import edu.illinois.mitra.cyphyhouse.models.Model_iRobot;
-import edu.illinois.mitra.cyphyhouse.models.Model_quadcopter;
+import edu.illinois.mitra.cyphyhouse.models.Model_Quadcopter;
 import edu.illinois.mitra.cyphyhouse.objects.Common;
 import edu.illinois.mitra.cyphyhouse.objects.ItemPosition;
 import edu.illinois.mitra.cyphyhouse.objects.ObstacleList;
@@ -182,7 +182,7 @@ public class UdpGpsReceiver extends Thread implements GpsReceiver {
 								break;
 							case '$':
 								try {
-									Model_quadcopter newpos = new Model_quadcopter(parts[i]);
+									Model_Quadcopter newpos = new Model_Quadcopter(parts[i]);
 									robotPositions.update(newpos, gvh.time());
 									gvh.sendRobotEvent(Event.GPS);
 									if(newpos.name.equals(name)) {

@@ -23,7 +23,7 @@ public final class Common {
 
 	// Bot types
 	public static final int IROBOT = 50;
-	public static final int MINIDRONE = 51;
+	public static final int QUADCOPTER = 51;
 	public static final int ARDRONE2 = 52;
 	public static final int CAR = 53;
 

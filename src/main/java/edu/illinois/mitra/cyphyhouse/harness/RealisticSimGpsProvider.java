@@ -5,7 +5,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import edu.illinois.mitra.cyphyhouse.interfaces.TrackedRobot;
 import edu.illinois.mitra.cyphyhouse.models.Model_iRobot;
-import edu.illinois.mitra.cyphyhouse.models.Model_quadcopter;
+import edu.illinois.mitra.cyphyhouse.models.Model_Quadcopter;
 import edu.illinois.mitra.cyphyhouse.objects.ItemPosition;
 import edu.illinois.mitra.cyphyhouse.objects.ObstacleList;
 import edu.illinois.mitra.cyphyhouse.objects.Obstacles;
@@ -23,12 +23,12 @@ import edu.illinois.mitra.cyphyhouse.objects.PositionList;
 public class RealisticSimGpsProvider extends Observable implements SimGpsProvider {	
 	private Map<String, SimGpsReceiver> receivers;
 	private Map<String, TrackedModel<Model_iRobot>> iRobots;
-	private Map<String, TrackedModel<Model_quadcopter>> quadcopters;
+	private Map<String, TrackedModel<Model_Quadcopter>> quadcopters;
 	
 
 	// Waypoint positions and robot positions that are shared among all robots	
 	private PositionList<Model_iRobot> iRobot_positions;
-	private PositionList<Model_quadcopter> quadcopter_positions;
+	private PositionList<Model_Quadcopter> quadcopter_positions;
 	private PositionList<ItemPosition> allpos;
 
 	private PositionList<ItemPosition> waypoint_positions;
@@ -52,13 +52,13 @@ public class RealisticSimGpsProvider extends Observable implements SimGpsProvide
 		
 		receivers = new HashMap<String, SimGpsReceiver>();
 		iRobots = new ConcurrentHashMap<String, TrackedModel<Model_iRobot>>();
-		quadcopters = new ConcurrentHashMap<String, TrackedModel<Model_quadcopter>>();
+		quadcopters = new ConcurrentHashMap<String, TrackedModel<Model_Quadcopter>>();
 		
 		waypoint_positions = new PositionList<ItemPosition>();
 		sensepoint_positions = new PositionList<ItemPosition>();
 		iRobot_positions = new PositionList<Model_iRobot>();
 		allpos = new PositionList<ItemPosition>();
-		quadcopter_positions = new PositionList<Model_quadcopter>();
+		quadcopter_positions = new PositionList<Model_Quadcopter>();
 		
 	}
 	
@@ -77,11 +77,11 @@ public class RealisticSimGpsProvider extends Observable implements SimGpsProvide
 			iRobot_positions.update((Model_iRobot) bot);
 			
 		}
-		else if(bot instanceof Model_quadcopter){
+		else if(bot instanceof Model_Quadcopter){
 			synchronized(quadcopters) {
-				quadcopters.put(((Model_quadcopter)bot).name, new TrackedModel<Model_quadcopter>((Model_quadcopter) bot));
+				quadcopters.put(((Model_Quadcopter)bot).name, new TrackedModel<Model_Quadcopter>((Model_Quadcopter) bot));
 			}
-			quadcopter_positions.update((Model_quadcopter) bot);
+			quadcopter_positions.update((Model_Quadcopter) bot);
 		}
 		else{
 			throw new RuntimeException("after adding a new model, one need to add model handling in simulation under RealisticSimGpsProvider");
@@ -105,10 +105,10 @@ public class RealisticSimGpsProvider extends Observable implements SimGpsProvide
 	public void setControlInput(String name, double v_yaw, double pitch, double roll, double gaz) {
 		/** TODO: replace with PID model here
 		*/
-		((Model_quadcopter) quadcopters.get(name).cur).v_yawR = v_yaw;
-		((Model_quadcopter) quadcopters.get(name).cur).pitchR = pitch;
-		((Model_quadcopter) quadcopters.get(name).cur).rollR = roll;	
-		((Model_quadcopter) quadcopters.get(name).cur).gazR = gaz;	
+		((Model_Quadcopter) quadcopters.get(name).cur).v_yawR = v_yaw;
+		((Model_Quadcopter) quadcopters.get(name).cur).pitchR = pitch;
+		((Model_Quadcopter) quadcopters.get(name).cur).rollR = roll;	
+		((Model_Quadcopter) quadcopters.get(name).cur).gazR = gaz;	
 	}
 	
 	@Override
@@ -123,7 +123,7 @@ public class RealisticSimGpsProvider extends Observable implements SimGpsProvide
 	}
 	
 	@Override
-	public PositionList<Model_quadcopter> getQuadcopterPositions() {
+	public PositionList<Model_Quadcopter> getQuadcopterPositions() {
 		return quadcopter_positions;
 	}
 	
@@ -201,7 +201,7 @@ public class RealisticSimGpsProvider extends Observable implements SimGpsProvide
 						}	
 					}
 					synchronized(quadcopters) {
-						for(TrackedModel<Model_quadcopter> r : quadcopters.values()) {
+						for(TrackedModel<Model_Quadcopter> r : quadcopters.values()) {
 							//if(r.cur.inMotion()) {
 							r.updatePos();
 							receivers.get(r.getName()).receivePosition((r.cur.inMotion()));	
@@ -258,8 +258,8 @@ public class RealisticSimGpsProvider extends Observable implements SimGpsProvide
 			if(cur instanceof Model_iRobot){
 				myRadius = ((Model_iRobot) cur).radius;
 			}
-			else if(cur instanceof Model_quadcopter){
-				myRadius = ((Model_quadcopter) cur).radius;
+			else if(cur instanceof Model_Quadcopter){
+				myRadius = ((Model_Quadcopter) cur).radius;
 			}
 			else{
 				throw new RuntimeException("after adding a new model, one need to add collision handling under RealisticSimGpsProvider");
@@ -279,7 +279,7 @@ public class RealisticSimGpsProvider extends Observable implements SimGpsProvide
 				}
 			}
 			
-			for(Model_quadcopter current : quadcopter_positions.getList()) {
+			for(Model_Quadcopter current : quadcopter_positions.getList()) {
 				if(!current.name.equals(cur.name)) {
 					if(bot.distanceTo(current) <= myRadius + current.radius){
 						//update sensors for both robots

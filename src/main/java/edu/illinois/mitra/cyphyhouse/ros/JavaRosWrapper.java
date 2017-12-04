@@ -103,6 +103,21 @@ public class JavaRosWrapper {
 		while (i < publishers.size()){
 			if (publishers.get(i).getTopic().matches("Waypoint_" + robot_name)){
                 Point p = new Point(dest.x, dest.y, dest.z);
+                Time t;
+                Header h = new Header(0,t, type);
+                
+				publishers.get(i).publish(new PointStamped(h, p));
+				return;
+			}
+			i = i + 1;
+		}
+	}
+    
+    public void sendMsg(ItemPosition dest){
+		int i = 0;
+		while (i < publishers.size()){
+			if (publishers.get(i).getTopic().matches("Waypoint_" + robot_name)){
+                Point p = new Point(dest.x, dest.y, dest.z);
                 Header h = new Header(0,0, type);
                 
 				publishers.get(i).publish(new PointStamped(h, p));
@@ -111,6 +126,7 @@ public class JavaRosWrapper {
 			i = i + 1;
 		}
 	}
+
 
 
 	public void subscribe_to_ROS(String topic, String topicType){

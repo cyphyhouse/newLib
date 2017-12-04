@@ -27,7 +27,7 @@ import edu.illinois.mitra.cyphyhouse.harness.SimGpsProvider;
 import edu.illinois.mitra.cyphyhouse.harness.SimulationEngine;
 import edu.illinois.mitra.cyphyhouse.interfaces.LogicThread;
 import edu.illinois.mitra.cyphyhouse.models.Model_iRobot;
-import edu.illinois.mitra.cyphyhouse.models.Model_quadcopter;
+import edu.illinois.mitra.cyphyhouse.models.Model_Quadcopter;
 import edu.illinois.mitra.cyphyhouse.objects.ItemPosition;
 import edu.illinois.mitra.cyphyhouse.objects.ObstacleList;
 import edu.illinois.mitra.cyphyhouse.objects.PositionList;
@@ -185,11 +185,11 @@ public class Simulation {
 
 		}
 		for(int i = 0; i < settings.N_QUADCOPTERS; i++) {
-			Model_quadcopter initialPosition = null;
+			Model_Quadcopter initialPosition = null;
 			String botName = settings.QUADCOPTER_NAME + i;
 			ItemPosition initialPos = t_initialPositions.getPosition(botName);
 			if(initialPos != null){
-				initialPosition = new Model_quadcopter(initialPos);
+				initialPosition = new Model_Quadcopter(initialPos);
 			}
 			// If no initial position was supplied, randomly generate one
 			if(initialPosition == null) {	
@@ -198,7 +198,7 @@ public class Simulation {
 				boolean valid = false;
 				while(retries++ < 10000 && (!acceptableStart(initialPosition) || !valid))
 				{
-					initialPosition = new Model_quadcopter(botName, rand.nextInt(settings.GRID_XSIZE), rand.nextInt(settings.GRID_YSIZE), 0, rand.nextInt(360));
+					initialPosition = new Model_Quadcopter(botName, rand.nextInt(settings.GRID_XSIZE), rand.nextInt(settings.GRID_YSIZE), 0, rand.nextInt(360));
 					if(list != null){
 						valid = (list.validstarts(initialPosition, initialPosition.radius));
 					}	
@@ -246,7 +246,7 @@ public class Simulation {
 
 					Vector<ObstacleList> views = gps.getViews();
 					//				ArrayList<Model_iRobot> pos;
-					//				ArrayList<Model_quadcopter> pos2;
+					//				ArrayList<Model_Quadcopter> pos2;
 					ArrayList<RobotData> rd = new ArrayList<RobotData>();
 					ArrayList targetList = ((PositionList) arg).getList();
 					if(targetList.size() >0){
@@ -266,8 +266,8 @@ public class Simulation {
 									rd.add(nextBot);
 								}
 							}
-							else if(targetList.get(i) instanceof Model_quadcopter){
-								Model_quadcopter ip = (Model_quadcopter) targetList.get(i);
+							else if(targetList.get(i) instanceof Model_Quadcopter){
+								Model_Quadcopter ip = (Model_Quadcopter) targetList.get(i);
 								RobotData nextBot = new RobotData(ip.name, ip.x, ip.y, ip.z, ip.yaw, ip.pitch, ip.roll, ip.receivedTime);
 								nextBot.radius = settings.BOT_RADIUS;
 								rd.add(nextBot);
@@ -337,8 +337,8 @@ public class Simulation {
                         nextBot.radius = settings.BOT_RADIUS;
                         rd.add(nextBot);
                     }
-                    else if(ip instanceof Model_quadcopter) {
-                        Model_quadcopter m = (Model_quadcopter) ip;
+                    else if(ip instanceof Model_Quadcopter) {
+                        Model_Quadcopter m = (Model_Quadcopter) ip;
                         RobotData nextBot = new RobotData(ip.name, m.x, m.y, m.z, m.yaw, m.pitch, m.roll, m.receivedTime);
                         nextBot.radius = settings.BOT_RADIUS;
                         rd.add(nextBot);
@@ -356,10 +356,10 @@ public class Simulation {
 						rd.add(nextBot);
 					}
 				}
-				else if(((PositionList) arg).getList().get(0) instanceof Model_quadcopter){
-					ArrayList<Model_quadcopter> pos = ((PositionList<Model_quadcopter>) arg).getList();
+				else if(((PositionList) arg).getList().get(0) instanceof Model_Quadcopter){
+					ArrayList<Model_Quadcopter> pos = ((PositionList<Model_Quadcopter>) arg).getList();
 					// Add robots
-					for(Model_quadcopter ip : pos) {
+					for(Model_Quadcopter ip : pos) {
 						RobotData nextBot = new RobotData(ip.name, ip.x, ip.y, ip.z, ip.yaw, ip.pitch, ip.roll, ip.receivedTime);
 						nextBot.radius = settings.BOT_RADIUS;
 						rd.add(nextBot);

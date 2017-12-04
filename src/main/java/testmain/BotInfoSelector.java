@@ -66,7 +66,7 @@ public class BotInfoSelector {
             }
             else if(type == Common.MINIDRONE) {
                 bluetooth = "green1";
-                this.type = new Model_quadcopter(name, 0,0);
+                this.type = new Model_Quadcopter(name, 0,0);
             }
             else if(type == Common.ARDRONE2) {
                 this.type = new ModelARDrone2(name, 0,0,0);
@@ -83,7 +83,7 @@ public class BotInfoSelector {
             }
             else if(type == Common.MINIDRONE) {
                 bluetooth = "Mars_122317";
-                this.type = new Model_quadcopter(name, 0,0);
+                this.type = new Model_Quadcopter(name, 0,0);
             }
             else if(type == Common.ARDRONE2) {
                 this.type = new ModelARDrone2(name, 0,0,0);
