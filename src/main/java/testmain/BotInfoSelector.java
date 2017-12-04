@@ -4,7 +4,7 @@ package testmain;
 import edu.illinois.mitra.cyphyhouse.interfaces.TrackedRobot;
 import edu.illinois.mitra.cyphyhouse.models.ModelARDrone2;
 import edu.illinois.mitra.cyphyhouse.models.Model_iRobot;
-import edu.illinois.mitra.cyphyhouse.models.Model_quadcopter;
+import edu.illinois.mitra.cyphyhouse.models.Model_Quadcopter;
 import edu.illinois.mitra.cyphyhouse.models.Model_Car;
 import edu.illinois.mitra.cyphyhouse.objects.Common;
 
@@ -39,9 +39,8 @@ public class BotInfoSelector {
                 bluetooth = "5C:F3:70:75:BB:0E"; // bluetooth address of red raspberry pi on red irobot
                 this.type = new Model_iRobot(name, 0,0);
             }
-            else if(type == Common.MINIDRONE) {
-                bluetooth = "Mars_122139"; // bluetooth address of red minidrone (use free flight 3 app from play store to get this address)
-                this.type = new Model_quadcopter(name, 0,0);
+            else if(type == Common.QUADCOPTER) {
+                this.type = new Model_Quadcopter(name, 0,0);
             }
             else if(type == Common.ARDRONE2) {
                 this.type = new ModelARDrone2(name, 0,0,0);

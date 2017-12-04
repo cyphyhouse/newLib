@@ -10,6 +10,8 @@ import ros.RosListenDelegate;
 import ros.SubscriptionRequestMsg;
 import ros.msgs.sensor_msgs.LaserScan;
 import ros.msgs.geometry_msgs.Point;
+import ros.msgs.std_msgs.Header;
+import ros.msgs.geometry_msgs.PointStamped;
 import ros.msgs.std_msgs.PrimitiveMsg;
 import ros.tools.MessageUnpacker;
 import ros.RosBridge;
@@ -19,8 +21,10 @@ import edu.illinois.mitra.cyphyhouse.objects.ItemPosition;
 import edu.illinois.mitra.cyphyhouse.gvh.GlobalVarHolder;
 import edu.illinois.mitra.cyphyhouse.models.Model_iRobot;
 import edu.illinois.mitra.cyphyhouse.models.Model_Car;
+import edu.illinois.mitra.cyphyhouse.models.Model_Quadcopter;
 import edu.illinois.mitra.cyphyhouse.comms.UdpGpsReceiver;
 import edu.illinois.mitra.cyphyhouse.motion.MotionAutomaton_Car;
+import edu.illinois.mitra.cyphyhouse.motion.MotionAutomaton_Quadcopter;
 
 public class JavaRosWrapper {
 	public RosBridge bridge;
@@ -31,6 +35,7 @@ public class JavaRosWrapper {
 	public GlobalVarHolder gvh;
 	public Model_Car model_car;
 	public Model_iRobot model_irobot;
+    public Model_Quadcopter model_quadcopter;
 	public String platform;
 
 	public JavaRosWrapper(String port, String name, GlobalVarHolder gvh, String platform){
@@ -47,6 +52,8 @@ public class JavaRosWrapper {
 				//this.model_irobot = (Model_iRobot).gvh.gps.getMyPosition();
 				//this.model_irobot = (Model_iRobot)gvh.gps.getMyPosition();
 				break;
+            case "Quadcopter":
+                break;
 		}
 		
 		this.platform = platform;
@@ -65,7 +72,7 @@ public class JavaRosWrapper {
 					}
 					i = i + 1;
 				}
-				Publisher pub = new Publisher(topicType + "_" + robot_name, "geometry_msgs/Point", bridge);
+				Publisher pub = new Publisher(topicType + "_" + robot_name, "geometry_msgs/PointStamped", bridge);
 				publishers.add(pub);
 				break;
 			case "additional datatypes here.....":
@@ -91,11 +98,14 @@ public class JavaRosWrapper {
 	
 	}
 
-	public void sendMsg(ItemPosition dest){
+	public void sendMsg(ItemPosition dest, String type){
 		int i = 0;
 		while (i < publishers.size()){
 			if (publishers.get(i).getTopic().matches("Waypoint_" + robot_name)){
-				publishers.get(i).publish(new Point(dest.x, dest.y, dest.z));
+                Point p = new Point(dest.x, dest.y, dest.z);
+                Header h = new Header(0,0, type);
+                
+				publishers.get(i).publish(new PointStamped(h, p));
 				return;
 			}
 			i = i + 1;
@@ -180,6 +190,11 @@ public class JavaRosWrapper {
 						switch(msg.data){
 							case "TRUE":
 								switch(platform){
+                                    case "Quadcopter":
+                                        MotionAutomaton_Quadcopter motion;
+										motion = (MotionAutomaton_Quadcopter) gvh.plat.moat;
+										motion.reached = true;
+										break;
 									case "Car":
 										MotionAutomaton_Car motion;
 										motion = (MotionAutomaton_Car) gvh.plat.moat;
@@ -189,6 +204,11 @@ public class JavaRosWrapper {
 								break;
 							case "FALSE":
 								switch(platform){
+                                    case "Quadcopter":
+                                        MotionAutomaton_Quadcopter motion;
+										motion = (MotionAutomaton_Quadcopter) gvh.plat.moat;
+										motion.reached = false;
+										break;
 									case "Car":
 										//(MotionAutomaton_Car) gvh.plat.moat.reached = false;
 										MotionAutomaton_Car motion;

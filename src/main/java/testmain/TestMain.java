@@ -28,7 +28,7 @@ public class TestMain {
             numRobots = 1;
             botInfo = new BotInfoSelector[numRobots];
             // add color, robot type, and device type for each robot here
-            botInfo[0] = new BotInfoSelector("red", Common.CAR, Common.HTCONEM7);
+            botInfo[0] = new BotInfoSelector("red", Common.QUADCOPTER, Common.HTCONEM7);
             //botInfo[1] = new BotInfoSelector("green", Common.ARDRONE2, Common.HTCONEM7);
             //botInfo[1] = new BotInfoSelector("green", Common.IROBOT, Common.MOTOE);
             //botInfo[2] = new BotInfoSelector("blue", Common.ARDRONE2, Common.NEXUS7);

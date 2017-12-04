@@ -55,6 +55,8 @@ public class MotionAutomaton_Quadcopter extends RobotMotion {
     private static final MotionParameters DEFAULT_PARAMETERS = MotionParameters.defaultParameters();
     private volatile MotionParameters param = DEFAULT_PARAMETERS;
     
+    public waypoint_count = 0;
+    
     
 
     public MotionAutomaton_Quadcopter(GlobalVarHolder gvh) {
@@ -99,7 +101,17 @@ public class MotionAutomaton_Quadcopter extends RobotMotion {
     public void goTo(ItemPosition dest) {
 
         wrapper.createTopic("Waypoint");
-        wrapper.sendMsg(dest);  
+        //Create type
+        String type = "1";
+        if(waypoint_count == 0){
+            type = "0";
+        }
+        
+        if(dest.z <= 0){
+            type = "2";
+        }
+        wrapper.sendMsg(dest, type);  
+        waypoint_count++;
 
         startMotion();
     

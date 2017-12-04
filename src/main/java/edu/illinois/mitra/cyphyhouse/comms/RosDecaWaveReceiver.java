@@ -16,7 +16,7 @@ import edu.illinois.mitra.cyphyhouse.interfaces.RobotEventListener.Event;
 import edu.illinois.mitra.cyphyhouse.models.ModelARDrone2;
 import edu.illinois.mitra.cyphyhouse.models.Model_iRobot;
 import edu.illinois.mitra.cyphyhouse.models.Model_Car;
-import edu.illinois.mitra.cyphyhouse.models.Model_quadcopter;
+import edu.illinois.mitra.cyphyhouse.models.Model_Quadcopter;
 import edu.illinois.mitra.cyphyhouse.objects.Common;
 import edu.illinois.mitra.cyphyhouse.objects.ItemPosition;
 import edu.illinois.mitra.cyphyhouse.objects.ObstacleList;
@@ -46,7 +46,7 @@ public class RosDecaWaveReceiver extends Thread implements GpsReceiver {
 	private String name = null;
 	private boolean received = false;
 
-	private final int[][] goalpos = {{10,20,0},{30,40,0},{50,60,0},{70,80,0}};
+	private final int[][] goalpos = {{0,0,1},{1,1,1},{1,-1,1},{-1,-1,1},{-1,1,1},{0,0,0}};
 	
 
 	public RosDecaWaveReceiver(GlobalVarHolder gvh, String TopicName, PositionList robotPositions,
