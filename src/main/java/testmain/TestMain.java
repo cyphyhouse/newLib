@@ -67,7 +67,7 @@ public class TestMain {
             init.createAppInstance(appToRun);
 
 
-            init.launch(4, 10);
+            init.launch(6, 10);
 
 
 
