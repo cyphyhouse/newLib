@@ -5,7 +5,7 @@ import edu.illinois.mitra.cyphyhouse.gvh.GlobalVarHolder;
 import edu.illinois.mitra.cyphyhouse.interfaces.Cancellable;
 import edu.illinois.mitra.cyphyhouse.interfaces.TrackedRobot;
 import edu.illinois.mitra.cyphyhouse.models.Model_iRobot;
-import edu.illinois.mitra.cyphyhouse.models.Model_quadcopter;
+import edu.illinois.mitra.cyphyhouse.models.Model_Quadcopter;
 import edu.illinois.mitra.cyphyhouse.objects.ItemPosition;
 import edu.illinois.mitra.cyphyhouse.objects.ObstacleList;
 
@@ -41,8 +41,8 @@ public class ReachAvoid extends Thread implements Cancellable {
 		TrackedRobot model = gvh.plat.model;
 		if(model instanceof Model_iRobot){
 			radius = ((Model_iRobot) model).radius;
-		}else if(model instanceof Model_quadcopter){
-			radius = ((Model_quadcopter) model).radius;
+		}else if(model instanceof Model_Quadcopter){
+			radius = ((Model_Quadcopter) model).radius;
 		}
 		else{
 			//default value here;

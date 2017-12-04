@@ -55,7 +55,7 @@ public class MotionAutomaton_Quadcopter extends RobotMotion {
     private static final MotionParameters DEFAULT_PARAMETERS = MotionParameters.defaultParameters();
     private volatile MotionParameters param = DEFAULT_PARAMETERS;
     
-    public waypoint_count = 0;
+    public int waypoint_count = 0;
     
     
 
