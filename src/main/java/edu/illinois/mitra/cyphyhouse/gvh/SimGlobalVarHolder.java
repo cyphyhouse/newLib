@@ -8,7 +8,6 @@ import edu.illinois.mitra.cyphyhouse.Handler.LooperThread;
 import edu.illinois.mitra.cyphyhouse.harness.*;
 import edu.illinois.mitra.cyphyhouse.interfaces.TrackedRobot;
 import edu.illinois.mitra.cyphyhouse.models.*;
-import edu.illinois.mitra.cyphyhouse.motion.MotionAutomaton_Quadcopter;
 import edu.illinois.mitra.cyphyhouse.motion.MotionAutomaton_iRobot;
 import edu.illinois.mitra.cyphyhouse.motion.ReachAvoid;
 import edu.illinois.mitra.cyphyhouse.motion.MotionHandlerConfig;
@@ -83,33 +82,6 @@ public class SimGlobalVarHolder extends GlobalVarHolder {
 				plat.moat = new MotionAutomaton_iRobot(this, simHandlerIRobot);
 				plat.moat.start();
 			}
-		}
-		else if(initpos instanceof Model_Quadcopter){
-			IPCHandler simHandlerQuad = new IPCHandler(looperTh.getLooperRef()) {
-				@Override
-				public void handleMessage(IPCMessage msg) {
-					switch (msg.what) {
-						case MotionHandlerConfig.CMD_DRONE_TAKEOFF:
-							log.i(TAG, "Drone taking off");
-							controlInCheck(0, 0, 0, 1);
-							engine.getGps().setControlInput((String) msg.obj,
-									0, 0, 0,
-									((Model_Quadcopter) plat.model).max_gaz);
-							break;
-						case MotionHandlerConfig.CMD_DRONE_LAND:
-							log.i(TAG, "Drone landing");
-							engine.getGps().setControlInput((String) msg.obj,
-									0, 0, 0, 0);
-							break;
-						case MotionHandlerConfig.CMD_DRONE_HOVER:
-							log.i(TAG, "Drone hovering");
-							controlInCheck(0, 0, 0, 0);
-							break;
-					}
-				}
-			};
-			plat.moat = new MotionAutomation_Quadcopter(this, simHandlerQuad);
-			plat.moat.start();
 		}
 		else {
 			throw new RuntimeException("After adding a model, please add the motion controler for that model in SimGlobalVarHolder.java");

@@ -11,6 +11,7 @@ import ros.SubscriptionRequestMsg;
 import ros.msgs.sensor_msgs.LaserScan;
 import ros.msgs.geometry_msgs.Point;
 import ros.msgs.std_msgs.Header;
+import ros.msgs.std_msgs.Time;
 import ros.msgs.geometry_msgs.PointStamped;
 import ros.msgs.std_msgs.PrimitiveMsg;
 import ros.tools.MessageUnpacker;

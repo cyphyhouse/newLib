@@ -17,7 +17,7 @@ import edu.illinois.mitra.cyphyhouse.objects.PositionList;
 public class Model_Quadcopter extends ItemPosition implements TrackedRobot{
 	// for default values, see initial_helper()
 
-	public double radius;
+	public int radius;
 	
 	public Random rand;
 

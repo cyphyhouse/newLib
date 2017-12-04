@@ -64,7 +64,7 @@ public class BotInfoSelector {
                 bluetooth = "5C:F3:70:75:BB:2F";
                 this.type = new Model_iRobot(name, 0,0);
             }
-            else if(type == Common.MINIDRONE) {
+            else if(type == Common.QUADCOPTER) {
                 bluetooth = "green1";
                 this.type = new Model_Quadcopter(name, 0,0);
             }
@@ -81,7 +81,7 @@ public class BotInfoSelector {
                 bluetooth = "5C:F3:70:76:CE:B4";
                 this.type = new Model_iRobot(name, 0,0);
             }
-            else if(type == Common.MINIDRONE) {
+            else if(type == Common.QUADCOPTER) {
                 bluetooth = "Mars_122317";
                 this.type = new Model_Quadcopter(name, 0,0);
             }
@@ -98,7 +98,7 @@ public class BotInfoSelector {
                 bluetooth = "5C:F3:70:76:C9:D4";
                 this.type = new Model_iRobot(name, 0,0);
             }
-            else if(type == Common.MINIDRONE) {
+            else if(type == Common.QUADCOPTER) {
                 //bluetooth = ""; There isn't a white drone set-up yet
             }
         }
