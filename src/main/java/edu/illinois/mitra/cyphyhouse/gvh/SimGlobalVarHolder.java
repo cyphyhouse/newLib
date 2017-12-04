@@ -8,7 +8,7 @@ import edu.illinois.mitra.cyphyhouse.Handler.LooperThread;
 import edu.illinois.mitra.cyphyhouse.harness.*;
 import edu.illinois.mitra.cyphyhouse.interfaces.TrackedRobot;
 import edu.illinois.mitra.cyphyhouse.models.*;
-import edu.illinois.mitra.cyphyhouse.motion.MotionAutomation_Quadcopter;
+import edu.illinois.mitra.cyphyhouse.motion.MotionAutomaton_Quadcopter;
 import edu.illinois.mitra.cyphyhouse.motion.MotionAutomaton_iRobot;
 import edu.illinois.mitra.cyphyhouse.motion.ReachAvoid;
 import edu.illinois.mitra.cyphyhouse.motion.MotionHandlerConfig;
