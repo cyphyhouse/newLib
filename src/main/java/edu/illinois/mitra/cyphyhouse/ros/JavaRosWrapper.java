@@ -120,7 +120,7 @@ public class JavaRosWrapper {
 			if (publishers.get(i).getTopic().matches("Waypoint_" + robot_name)){
                 Point p = new Point(dest.x, dest.y, dest.z);
                 Time t = new Time(0,0);
-                Header h = new Header(0,t, "");
+                Header h = new Header(0,t, "3");
                 
 				publishers.get(i).publish(new PointStamped(h, p));
 				return;

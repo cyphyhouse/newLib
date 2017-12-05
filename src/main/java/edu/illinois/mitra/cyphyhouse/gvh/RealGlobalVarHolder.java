@@ -10,6 +10,7 @@ import edu.illinois.mitra.cyphyhouse.interfaces.TrackedRobot;
 import edu.illinois.mitra.cyphyhouse.motion.MotionAutomation_ARDrone2;
 import edu.illinois.mitra.cyphyhouse.motion.MotionAutomaton_iRobot;
 import edu.illinois.mitra.cyphyhouse.motion.MotionAutomaton_Car;
+import edu.illinois.mitra.cyphyhouse.motion.MotionAutomaton_Quadcopter;
 import edu.illinois.mitra.cyphyhouse.motion.ReachAvoid;
 import edu.illinois.mitra.cyphyhouse.objects.ObstacleList;
 import edu.illinois.mitra.cyphyhouse.objects.PositionList;
@@ -41,7 +42,7 @@ public class RealGlobalVarHolder extends GlobalVarHolder {
 		super.gps = new Gps(this, new RosDecaWaveReceiver(this,"DecaWave",new PositionList(),new PositionList(), new ObstacleList(), new Vector<ObstacleList>(3,2) ));
 		plat.model = initpos;
 		plat.reachAvoid = new ReachAvoid(this);
-		plat.moat = new MotionAutomaton_Car(this);
+		plat.moat = new MotionAutomaton_Quadcopter(this);
 		plat.moat.start();
 	}
 

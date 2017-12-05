@@ -46,9 +46,9 @@ public class BotInfoSelector {
                 this.type = new ModelARDrone2(name, 0,0,0);
                 this.ip = "10.195.252.163";
             }
-			else if(type == Common.CAR){
-				this.type = new Model_Car(name, 0,0);
-			}
+            else if(type == Common.CAR){
+                this.type = new Model_Car(name, 0,0);
+            }
 
         }
 
