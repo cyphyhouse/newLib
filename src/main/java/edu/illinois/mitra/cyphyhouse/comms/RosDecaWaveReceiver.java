@@ -46,7 +46,7 @@ public class RosDecaWaveReceiver extends Thread implements GpsReceiver {
 	private String name = null;
 	private boolean received = false;
 
-	private final int[][] goalpos = {{0,0,1},{1,1,1},{1,-1,1},{-1,-1,1},{-1,1,1},{0,0,0}};
+	private final int[][] goalpos = {{0,0,150},{150,150,150},{150,-150,150},{-150,-150,150},{-150,150,150},{0,0,0}};
 	
 
 	public RosDecaWaveReceiver(GlobalVarHolder gvh, String TopicName, PositionList robotPositions,
