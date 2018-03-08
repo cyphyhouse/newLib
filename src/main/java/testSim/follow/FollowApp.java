@@ -77,7 +77,7 @@ public class FollowApp extends LogicThread {
          
 
         while(true) {
-            //System.out.println(stage+ " "+ robotIndex); 
+            System.out.println(stage+ " "+ robotIndex); 
             switch(stage) {
                 case PICK:
                     arrived = false;
@@ -97,7 +97,7 @@ public class FollowApp extends LogicThread {
                         
                     if(destinations.isEmpty()||robotIndex == 0) {
                         stage = Stage.WAIT;
-
+                        System.out.println("HERE1");
                     } else {
                         int numwaypoints = destinations.size();
                         if (index >= numwaypoints)
@@ -107,6 +107,7 @@ public class FollowApp extends LogicThread {
                         System.out.println(currentDestination.toString());
                         destinations.remove(currentDestination.getName());
                         gvh.plat.moat.goTo(currentDestination);
+                        System.out.println("HERE2");
                         stage = Stage.GO;
                     }
                     break;
@@ -142,15 +143,14 @@ public class FollowApp extends LogicThread {
             }
         }
        int i = receivedMsgs.size(); 
-       
        if (m.getMID() == DEST_MSG && !m.getFrom().equals(name) && !alreadyReceived) {
             receivedMsgs.add(m);
             String dest = m.getContents().toString();
             dest = dest.replace(" ",",").replace("`","");
             String[] parts = dest.split(",");
-            int x = (int) Float.parseFloat(parts[0])*1000;
-            int y = (int) Float.parseFloat(parts[1])*1000;
-            int z = (int) Float.parseFloat(parts[2])*1000;
+            int x = (int) (Float.parseFloat(parts[0])*1000);
+            int y = (int) (Float.parseFloat(parts[1])*1000);
+            int z = (int) (Float.parseFloat(parts[2])*1000);
             String name = Integer.toString(i) +"-A";
             ItemPosition p = new ItemPosition(name,x,y,z);
             destinations.put(p.getName(),p);
