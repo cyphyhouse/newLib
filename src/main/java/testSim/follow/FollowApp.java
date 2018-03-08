@@ -32,8 +32,10 @@ import edu.illinois.mitra.cyphyhouse.interfaces.MutualExclusion;
 public class FollowApp extends LogicThread {
     private static final String TAG = "Follow App";
     private static final int DEST_MSG = 23;
+    private static final int ERASE_MSG = 24;
     private int destIndex;
     int lineno = 0;
+    int eraseline = -1;
     private int numBots;
     private int numWaypoints;
     private boolean arrived = false;
@@ -42,9 +44,12 @@ public class FollowApp extends LogicThread {
     private DSM dsm;
     private boolean wait0 = false;
     private MutualExclusion mutex0;
+
     private HashSet<RobotMessage> receivedMsgs = new HashSet<RobotMessage>();
+    private HashSet<RobotMessage> erasedMsgs = new HashSet<RobotMessage>();
 
     final Map<String, ItemPosition> destinations = new HashMap<String, ItemPosition>();
+    final Map<String, Integer> erasemap = new HashMap<String, Integer>();
     // execute a function that takes a string and returns a string
     ItemPosition currentDestination;
     private enum Stage {
@@ -61,6 +66,7 @@ public class FollowApp extends LogicThread {
         MotionParameters param = settings.build();
         gvh.plat.moat.setParameters(param);
         gvh.comms.addMsgListener(this, DEST_MSG);
+        gvh.comms.addMsgListener(this, ERASE_MSG);
 
         // bot names must be bot0, bot1, ... botn for this to work
         String intValue = name.replaceAll("[^0-9]", "");
@@ -117,12 +123,18 @@ public class FollowApp extends LogicThread {
                           stage = Stage.WAIT;}
                        else {
                           stage = Stage.PICK;
+                          break;
                        }
                        arrived = true;
                     }
                     break;
                 case WAIT:
-                    if (arrived || robotIndex == 0) 
+                    if (arrived && robotIndex != 0) { 
+                       stage = Stage.PICK;
+                       RobotMessage erase = new RobotMessage("ALL",name, ERASE_MSG, "");
+                       gvh.comms.addOutgoingMessage(erase);
+                    }
+                    if (robotIndex == 0)
                        stage = Stage.PICK;
                     stage = Stage.GO;
                     break;
@@ -142,10 +154,17 @@ public class FollowApp extends LogicThread {
                 break;
             }
         }
+        for(RobotMessage msg : erasedMsgs) {
+            if(msg.getFrom().equals(m.getFrom()) && msg.getContents().equals(m.getContents())) {
+                alreadyReceived = true;
+                break;
+            }
+        }
        int i = receivedMsgs.size(); 
+       int j = erasedMsgs.size(); 
        if (m.getMID() == DEST_MSG && !m.getFrom().equals(name) && !alreadyReceived) {
             receivedMsgs.add(m);
-            gvh.log.d(TAG, "received from " + m.getFrom());
+            gvh.log.d(TAG, "received destination message from " + m.getFrom());
 
             String dest = m.getContents().toString();
             dest = dest.replace(" ",",").replace("`","");
@@ -158,6 +177,12 @@ public class FollowApp extends LogicThread {
             destinations.put(p.getName(),p);
               
         }
+       if (m.getMID() == ERASE_MSG && !m.getFrom().equals(name) && !alreadyReceived) {
+            erasedMsgs.add(m);
+            gvh.log.d(TAG, "received erase message from " + m.getFrom());
+              
+        }
+       
        
     }
 
