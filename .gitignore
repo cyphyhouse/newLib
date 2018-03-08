@@ -31,7 +31,6 @@ logs/**
 .idea/libraries
 
 #maven:
-target/
 
 # Mongo Explorer plugin:
 .idea/mongoSettings.xml

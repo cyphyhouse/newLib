@@ -145,6 +145,8 @@ public class FollowApp extends LogicThread {
        int i = receivedMsgs.size(); 
        if (m.getMID() == DEST_MSG && !m.getFrom().equals(name) && !alreadyReceived) {
             receivedMsgs.add(m);
+            gvh.log.d(TAG, "received from " + m.getFrom());
+
             String dest = m.getContents().toString();
             dest = dest.replace(" ",",").replace("`","");
             String[] parts = dest.split(",");
