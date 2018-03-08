@@ -208,12 +208,12 @@ class MapUI:
             # Add to task list
             global TASK_LIST
             if TASK_LIST == None:
-                TASK_LIST = [[x_physical, y_physical, 1.5, self.task_id]]
-                TASK_LIST = [[x_physical, y_physical, 1.5, self.task_id]]
+                TASK_LIST = [[x_physical, y_physical, 1.5]]
+                TASK_LIST = [[x_physical, y_physical, 1.5]]
                 global NEW_TASK_FLAG
                 NEW_TASK_FLAG = True
             else:
-                TASK_LIST.append([x_physical, y_physical, 1.5, self.task_id])
+                TASK_LIST.append([x_physical, y_physical, 1.5])
                 global NEW_TASK_FLAG
                 NEW_TASK_FLAG = True
 
