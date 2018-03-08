@@ -5,122 +5,126 @@ package testmain;
  * This app was created to test the drones. The bots will each go to an assigned waypoint.
  * Once both bots have arrived at their respective waypoints, they will then go to the next waypoints.
  */
+import java.net.*;
+import java.io.*;
+import java.util.*;
+import java.lang.*;
+import java.nio.file.*;
+import java.util.stream.Stream;
 
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-
-
+import edu.illinois.mitra.cyphyhouse.functions.DSMMultipleAttr;
 import edu.illinois.mitra.cyphyhouse.comms.RobotMessage;
 import edu.illinois.mitra.cyphyhouse.gvh.GlobalVarHolder;
 import edu.illinois.mitra.cyphyhouse.interfaces.LogicThread;
 import edu.illinois.mitra.cyphyhouse.motion.MotionParameters;
+import edu.illinois.mitra.cyphyhouse.motion.RRTNode;
 import edu.illinois.mitra.cyphyhouse.motion.MotionParameters.COLAVOID_MODE_TYPE;
 import edu.illinois.mitra.cyphyhouse.objects.ItemPosition;
+import edu.illinois.mitra.cyphyhouse.objects.ObstacleList;
+import edu.illinois.mitra.cyphyhouse.objects.PositionList;
+import edu.illinois.mitra.cyphyhouse.interfaces.DSM;
+import edu.illinois.mitra.cyphyhouse.functions.GroupSetMutex;
+import edu.illinois.mitra.cyphyhouse.interfaces.MutualExclusion;
 
 
 public class FollowApp extends LogicThread {
     private static final String TAG = "Follow App";
-    public static final int ARRIVED_MSG = 22;
+    private static final int DEST_MSG = 23;
     private int destIndex;
-    private int messageCount = 0;
+    int lineno = 0;
     private int numBots;
     private int numWaypoints;
     private boolean arrived = false;
-    private boolean goForever = false;	//modified
-    private int msgNum = 0;
+    private boolean goForever = false;
+    private int robotIndex;
+    private DSM dsm;
+    private boolean wait0 = false;
+    private MutualExclusion mutex0;
     private HashSet<RobotMessage> receivedMsgs = new HashSet<RobotMessage>();
 
     final Map<String, ItemPosition> destinations = new HashMap<String, ItemPosition>();
+    // execute a function that takes a string and returns a string
     ItemPosition currentDestination;
-
     private enum Stage {
-        INIT, PICK, GO, DONE, WAIT
-    };
-
-    private Stage stage = Stage.INIT;
-
+        PICK, GO, DONE, WAIT
+    }; 
+    private int index;
+    private Stage stage = Stage.PICK;
+    boolean connected = false;
     public FollowApp(GlobalVarHolder gvh) {
         super(gvh);
         MotionParameters.Builder settings = new MotionParameters.Builder();
+//		settings.ROBOT_RADIUS(400);
         settings.COLAVOID_MODE(COLAVOID_MODE_TYPE.USE_COLAVOID);
         MotionParameters param = settings.build();
         gvh.plat.moat.setParameters(param);
-        for(ItemPosition i : gvh.gps.getWaypointPositions())
-            destinations.put(i.getName(), i);
-        gvh.comms.addMsgListener(this, ARRIVED_MSG);
+        gvh.comms.addMsgListener(this, DEST_MSG);
+
         // bot names must be bot0, bot1, ... botn for this to work
         String intValue = name.replaceAll("[^0-9]", "");
-        destIndex = Integer.parseInt(intValue);
+        destIndex = 0;
+        robotIndex = Integer.parseInt(intValue);
         numBots = gvh.id.getParticipants().size();
+        dsm = new DSMMultipleAttr(gvh); 
+        mutex0 = new GroupSetMutex(gvh,0);
+
     }
 
     @Override
     public List<Object> callStarL() {
+         
+
         while(true) {
-            //System.out.println("in FollowApp, stage:"+stage);
+            System.out.println(stage); 
             switch(stage) {
-                case INIT:
-			System.out.println("DOING INIT\n");
-                    for(ItemPosition i : gvh.gps.getWaypointPositions())
-                        destinations.put(i.getName(), i);
-                    numWaypoints = destinations.size();
-                    stage = Stage.PICK;
                 case PICK:
-			System.out.println("DOING PICK\n");
                     arrived = false;
-                    if(destinations.isEmpty()) {
-                        stage = Stage.DONE;
-			System.out.println("EMPTY BAD\n");
-                    } else {
-			System.out.println("GOOD\n");
-                        currentDestination = getDestination(destinations, destIndex);
-			System.out.println(currentDestination);
-                        //Log.d(TAG, currentDestination.toString());
-                        destIndex++;
-                        if(destIndex >= numWaypoints) {
-                            destIndex = 0;
+		    String line;
+                        //System.out.println(lineno+" "+robotIndex); 
+       
+                        try (Stream<String> lines = Files.lines(Paths.get("tasks.txt"))) {
+                           line = lines.skip(lineno).findFirst().get();      
+                           System.out.println(line);
+                           RobotMessage inform = new RobotMessage("ALL", name, DEST_MSG, line);
+                           gvh.comms.addOutgoingMessage(inform);
+                           lineno  = lineno +1;
+     
                         }
-			
-			System.out.println(gvh.plat.moat.getClass().getName());
+                        catch (IOException e) {System.out.println("E1");}
+                        catch (NoSuchElementException e) {System.out.println("E2");stage = Stage.WAIT;lineno = lineno - 1;}
+                        catch (IllegalArgumentException e) {System.out.println("E3");stage = Stage.WAIT;lineno = 0;}
+                        
+                    if(destinations.isEmpty()||robotIndex == 0) {
+                        stage = Stage.WAIT;
+
+                    } else {
+                        int numwaypoints = destinations.size();
+                        if (index >= numwaypoints)
+                           stage = Stage.WAIT;
+                        currentDestination = getDestination(destinations, index);
+                        index++;
+                        System.out.println(currentDestination.toString());
+                        destinations.remove(currentDestination.getName());
                         gvh.plat.moat.goTo(currentDestination);
-						//System.out.println("RETURNEDS\n");
-					
-
-			//boolean b = gvh.plat.moat instanceof String
-
-			
                         stage = Stage.GO;
                     }
                     break;
                 case GO:
-			//System.out.println("DOING GO\n");
-					
-					//System.out.println(!gvh.plat.moat.inMotion);
                     if(!gvh.plat.moat.inMotion) {
-                        if(!goForever) {
-                            if (currentDestination != null)
-                                destinations.remove(currentDestination.getName());
-                        }
-                        RobotMessage inform = new RobotMessage("ALL", name, ARRIVED_MSG, Integer.toString(msgNum));
-                        msgNum++;
-                        gvh.log.d(TAG, "At Goal, sent message");
-                        gvh.comms.addOutgoingMessage(inform);
-                        arrived = true;
-                        stage = Stage.WAIT;
+                       if (!arrived && currentDestination != null){
+                          stage = Stage.WAIT;}
+                       else {
+                          stage = Stage.PICK;
+                       }
+                       arrived = true;
                     }
                     break;
                 case WAIT:
-			System.out.println("DOING WAIT\n");
-                    if((messageCount >= numBots - 1) && arrived) {
-                        messageCount = 0;
-                        stage = Stage.PICK;
-                    }
+                    if (arrived || robotIndex == 0) 
+                       stage = Stage.PICK;
+                    stage = Stage.GO;
                     break;
                 case DONE:
-			System.out.println("DOING DONE\n");
                     return null;
             }
             sleep(100);
@@ -136,41 +140,30 @@ public class FollowApp extends LogicThread {
                 break;
             }
         }
-        if(m.getMID() == ARRIVED_MSG && !m.getFrom().equals(name) && !alreadyReceived) {
-            gvh.log.d(TAG, "Adding to message count from " + m.getFrom());
+       int i = receivedMsgs.size(); 
+       
+       if (m.getMID() == DEST_MSG && !m.getFrom().equals(name) && !alreadyReceived) {
             receivedMsgs.add(m);
-            messageCount++;
+            String dest = m.getContents().toString();
+            dest = dest.replace(" ",",").replace("`","");
+            String[] parts = dest.split(",");
+            int x = (int) Float.parseFloat(parts[0])*1000;
+            int y = (int) Float.parseFloat(parts[1])*1000;
+            int z = (int) Float.parseFloat(parts[2])*1000;
+            String name = Integer.toString(i) +"-A";
+            ItemPosition p = new ItemPosition(name,x,y,z);
+            destinations.put(p.getName(),p);
+              
         }
-       /* if((messageCount == numBots) && arrived) {
-            messageCount = 0;
-            stage = Stage.PICK;
-        }*/
+       
     }
-
 
     @SuppressWarnings("unchecked")
     private <X, T> T getDestination(Map<X, T> map, int index) {
         // Keys must be 0-A format for this to work
-        String key = "Goal"+Integer.toString(index);
+        String key = Integer.toString(index) + "-A";
         // this is for key that is just an int, no -A
         //String key = Integer.toString(index);
         return map.get(key);
-    }
-
-    private String StageToString(Stage curr)
-    {
-        switch (curr){
-            case INIT:
-                return "INIT";
-            case PICK:
-                return "PICK";
-            case GO:
-                return "GO";
-            case DONE:
-                return "DOEN";
-            case WAIT:
-                return "WAIT";
-        }
-        return "UNKNOWN";
     }
 }
