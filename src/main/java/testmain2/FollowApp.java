@@ -1,4 +1,4 @@
-package testmain;
+package testmain2;
 
 /**
  * Created by VerivitalLab on 2/26/2016.
@@ -115,6 +115,7 @@ public class FollowApp extends LogicThread {
                     if(!gvh.plat.moat.inMotion) {
                        if (!arrived && currentDestination != null){
                           stage = Stage.WAIT;}
+		       else{stage = Stage.PICK;}
                        if (robotIndex == 0) {
                           stage = Stage.WAIT;}
                        arrived = true;

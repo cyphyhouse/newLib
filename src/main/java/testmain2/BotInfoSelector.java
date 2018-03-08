@@ -1,4 +1,4 @@
-package testmain;
+package testmain2;
 
 
 import edu.illinois.mitra.cyphyhouse.interfaces.TrackedRobot;
@@ -27,7 +27,7 @@ public class BotInfoSelector {
         if(color.equals("red")) {
             name = "bot0"; // assign name: bot0 is always red
             if(deviceType == Common.NEXUS7) {
-                ip = ""; // reserved IP address of red Nexus7 tablet
+                ip = "192.168.1.110"; // reserved IP address of red Nexus7 tablet
             }
             else if(deviceType == Common.MOTOE) {
                 ip = "192.168.1.114"; // reserved IP address of red MotoE phone
@@ -55,7 +55,7 @@ public class BotInfoSelector {
         if(color.equals("green")) {
             name = "bot1";
             if(deviceType == Common.NEXUS7) {
-                ip = "192.168.1.111";
+                ip = "";
             }
             else if(deviceType == Common.MOTOE) {
                 ip = "192.168.1.115";

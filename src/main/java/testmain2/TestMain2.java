@@ -1,4 +1,4 @@
-package testmain;
+package testmain2;
 
 import edu.illinois.mitra.cyphyhouse.gvh.GlobalVarHolder;
 import edu.illinois.mitra.cyphyhouse.gvh.RealGlobalVarHolder;
@@ -10,7 +10,7 @@ import java.util.HashMap;
 /**
  * Created by SC on 11/14/16.
  */
-public class TestMain {
+public class TestMain2 {
         // Row 0 = names
         // Row 1 = MACs
         // Row 2 = IPs
@@ -28,7 +28,7 @@ public class TestMain {
             numRobots = 1;
             botInfo = new BotInfoSelector[numRobots];
             // add color, robot type, and device type for each robot here
-            botInfo[0] = new BotInfoSelector("red", Common.QUADCOPTER, Common.HTCONEM7);
+            botInfo[0] = new BotInfoSelector("green", Common.QUADCOPTER, Common.HTCONEM7);
             //botInfo[1] = new BotInfoSelector("green", Common.QUADCOPTER, Common.HTCONEM7);
             //botInfo[1] = new BotInfoSelector("green", Common.IROBOT, Common.MOTOE);
             //botInfo[2] = new BotInfoSelector("blue", Common.ARDRONE2, Common.NEXUS7);
