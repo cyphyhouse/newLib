@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.001616089064463997" branch-rate="0.0" lines-covered="9" lines-valid="5569" branches-covered="0" branches-valid="2074" complexity="2.395759717314488" version="2.1.1" timestamp="1520550905723">
+<coverage line-rate="0.001616089064463997" branch-rate="0.0" lines-covered="9" lines-valid="5569" branches-covered="0" branches-valid="2074" complexity="2.395759717314488" version="2.1.1" timestamp="1520551854670">
 	<sources>
 		<source>/home/peter/newLib/target/generated-sources/annotations</source>
 		<source>/home/peter/newLib/src/main/java</source>
@@ -6630,24 +6630,24 @@
 					<methods>
 						<method name="&lt;clinit&gt;" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="9" hits="16" branch="false"/>
+								<line number="9" hits="17" branch="false"/>
 							</lines>
 						</method>
 						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="8" hits="48" branch="false"/>
+								<line number="8" hits="51" branch="false"/>
 							</lines>
 						</method>
 						<method name="d" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="23" hits="16" branch="false"/>
-								<line number="24" hits="16" branch="false"/>
+								<line number="23" hits="17" branch="false"/>
+								<line number="24" hits="17" branch="false"/>
 							</lines>
 						</method>
 						<method name="e" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="13" hits="16" branch="false"/>
-								<line number="14" hits="16" branch="false"/>
+								<line number="13" hits="17" branch="false"/>
+								<line number="14" hits="17" branch="false"/>
 							</lines>
 						</method>
 						<method name="getLog" signature="()Ljava/lang/String;" line-rate="0.0" branch-rate="1.0" complexity="0">
@@ -6657,20 +6657,20 @@
 						</method>
 						<method name="i" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="18" hits="16" branch="false"/>
-								<line number="19" hits="16" branch="false"/>
+								<line number="18" hits="17" branch="false"/>
+								<line number="19" hits="17" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="8" hits="48" branch="false"/>
-						<line number="9" hits="16" branch="false"/>
-						<line number="13" hits="16" branch="false"/>
-						<line number="14" hits="16" branch="false"/>
-						<line number="18" hits="16" branch="false"/>
-						<line number="19" hits="16" branch="false"/>
-						<line number="23" hits="16" branch="false"/>
-						<line number="24" hits="16" branch="false"/>
+						<line number="8" hits="51" branch="false"/>
+						<line number="9" hits="17" branch="false"/>
+						<line number="13" hits="17" branch="false"/>
+						<line number="14" hits="17" branch="false"/>
+						<line number="18" hits="17" branch="false"/>
+						<line number="19" hits="17" branch="false"/>
+						<line number="23" hits="17" branch="false"/>
+						<line number="24" hits="17" branch="false"/>
 						<line number="28" hits="0" branch="false"/>
 					</lines>
 				</class>
@@ -6678,7 +6678,7 @@
 					<methods>
 						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="3" hits="48" branch="false"/>
+								<line number="3" hits="51" branch="false"/>
 							</lines>
 						</method>
 						<method name="saveLogFile" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
@@ -6688,7 +6688,7 @@
 						</method>
 					</methods>
 					<lines>
-						<line number="3" hits="48" branch="false"/>
+						<line number="3" hits="51" branch="false"/>
 						<line number="15" hits="0" branch="false"/>
 					</lines>
 				</class>
