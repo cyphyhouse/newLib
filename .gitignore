@@ -30,8 +30,8 @@ logs/**
 .idea/gradle.xml
 .idea/libraries
 
-#maven:
-target/
+#maven
+
 
 # Mongo Explorer plugin:
 .idea/mongoSettings.xml

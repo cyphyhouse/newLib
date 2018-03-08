@@ -55,7 +55,7 @@ public class BotInfoSelector {
         if(color.equals("green")) {
             name = "bot1";
             if(deviceType == Common.NEXUS7) {
-                ip = "192.168.1.111";
+                ip = "192.168.1.16";
             }
             else if(deviceType == Common.MOTOE) {
                 ip = "192.168.1.115";
