@@ -9,7 +9,6 @@ import java.net.*;
 import java.io.*;
 import java.util.*;
 import java.lang.*;
-
 import java.nio.file.*;
 import java.util.stream.Stream;
 
@@ -42,8 +41,8 @@ public class FollowApp extends LogicThread {
     private int robotIndex;
     private DSM dsm;
     private boolean wait0 = false;
-    private MutualExclusion mutex0;
-
+    private MutualExclusion mutex0; 
+    boolean dgt = false;
     private HashSet<RobotMessage> receivedMsgs = new HashSet<RobotMessage>();
     private HashSet<RobotMessage> erasedMsgs = new HashSet<RobotMessage>();
 
@@ -112,6 +111,7 @@ public class FollowApp extends LogicThread {
                         System.out.println(currentDestination.toString());
                         destinations.remove(currentDestination.getName());
                         gvh.plat.moat.goTo(currentDestination);
+                        dgt = true;
                         System.out.println("HERE2");
                         stage = Stage.GO;
                     }
@@ -121,6 +121,12 @@ public class FollowApp extends LogicThread {
                        if (!arrived && currentDestination != null){
                           stage = Stage.WAIT;}
                        else {
+                          if (dgt == true) {
+                       eraseline++;
+                       RobotMessage erase = new RobotMessage("ALL",name, ERASE_MSG, Integer.toString(eraseline));
+                       gvh.comms.addOutgoingMessage(erase);
+                       dgt = false;
+                       }
                           stage = Stage.PICK;
                           break;
                        }
@@ -130,8 +136,6 @@ public class FollowApp extends LogicThread {
                 case WAIT:
                     if (arrived && robotIndex != 0) { 
                        stage = Stage.PICK;
-                       RobotMessage erase = new RobotMessage("ALL",name, ERASE_MSG, "");
-                       gvh.comms.addOutgoingMessage(erase);
                     }
                     if (robotIndex == 0)
                        stage = Stage.PICK;
