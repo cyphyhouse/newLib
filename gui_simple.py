@@ -60,7 +60,7 @@ class MapUI:
         global DRONE_ICON
         DRONE_ICON = PhotoImage(file="drone.gif")
 
-        buttons_frame = Canvas(master, width=163, height=140, bg=BUTTONS_BKG_COLOUR, highlightthickness=1, highlightbackground='dim grey')
+        buttons_frame = Canvas(master, width=160, height=200, bg=BUTTONS_BKG_COLOUR, highlightthickness=1, highlightbackground='dim grey')
         buttons_frame.place(x=40,y=230)
 
         # Define UI buttons
@@ -68,7 +68,11 @@ class MapUI:
         self.add_tasks_b = Checkbutton(master, text="Add Tasks", variable=self.add_tasks_flg, highlightbackground=BUTTONS_BKG_COLOUR, background=BUTTONS_BKG_COLOUR)
         self.add_tasks_b.place(x=77,y=270)
 
-        self.clear_wp_b = Button(master, text='Clear Tasks', command=self.clear_wp, highlightbackground=BUTTONS_BKG_COLOUR)
+        self.clear_wp_b = Button(master, text='Land', command=self.land, highlightbackground='red', highlightthickness=3)
+        self.clear_wp_b.config(width=10)
+        self.clear_wp_b.place(x=65, y=350)
+        
+        self.clear_wp_b = Button(master, text='Take Off', command=self.take_off, highlightbackground='green', highlightthickness=3)
         self.clear_wp_b.config(width=10)
         self.clear_wp_b.place(x=65, y=300)
         
@@ -174,6 +178,14 @@ class MapUI:
             MAP_CANVAS.delete(element_id[0])
         global UI_WP_LIST
         UI_WP_LIST = None
+        
+    def take_off(self):
+        with open("tasks.txt",'a') as file_obj:
+            message = "0.00 0.00 1.50"
+            self.task_id += 1
+            message = message + "\n"
+            file_obj.write(message.encode())
+            file_obj.close()
 
     '''
     def gen_wp_file(self):
@@ -184,6 +196,11 @@ class MapUI:
     def land(self):
         # Send a new task with position (0,0,0) z=0 tells drone to land
         print("land")
+        with open("tasks.txt",'a') as file_obj:
+            message = "0.00 0.00 0.00"
+            message = message + "\n"
+            file_obj.write(message.encode())
+            
 
 
 
@@ -256,10 +273,10 @@ def socket_loop():
     # Define the port on which you want to connect
     port = 12345
 
-    '''
+    
     ### Commented out block to recieve Vicon data for now so UI doesn't ####
     ### stall when not connected to the Vicon                           ####
-    s.connect(('192.168.1.15', port))
+    s.connect(('', port))
 
     # receive data from the Vicon
     position = s.recv(1024)
@@ -274,7 +291,7 @@ def socket_loop():
     PREV_ROBOT_LOCATION = CANVAS_PTR.create_image(position[0], position[1], image=DRONE_ICON)
     
     s.close()
-    '''
+    
     
     
     #Send new task to reciver on drone, the reciever will write to tasks.txt
@@ -295,10 +312,11 @@ def socket_loop():
     with open("erase.txt",'r') as erase_file:
         for line in erase_file:
             task_id = int(line[0])
-            for element_id in UI_WP_LIST:
-                if element_id[1] == task_id:
-                    MAP_CANVAS.delete(element_id[0])
-                    UI_WP_LIST.remove(element_id)
+            if UI_WP_LIST != None:
+                for element_id in UI_WP_LIST:
+                    if element_id[1] == task_id:
+                        MAP_CANVAS.delete(element_id[0])
+                        UI_WP_LIST.remove(element_id)
    
             
     
