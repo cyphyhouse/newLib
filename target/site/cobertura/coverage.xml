@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.0016031350195938724" branch-rate="0.0" lines-covered="9" lines-valid="5614" branches-covered="0" branches-valid="2158" complexity="2.4051825677267376" version="2.1.1" timestamp="1520553108893">
+<coverage line-rate="0.0016008537886872999" branch-rate="0.0" lines-covered="9" lines-valid="5622" branches-covered="0" branches-valid="2182" complexity="2.4063604240282683" version="2.1.1" timestamp="1520553861096">
 	<sources>
 		<source>/home/peter/newLib/target/generated-sources/annotations</source>
 		<source>/home/peter/newLib/src/main/java</source>
@@ -6630,24 +6630,24 @@
 					<methods>
 						<method name="&lt;clinit&gt;" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="9" hits="22" branch="false"/>
+								<line number="9" hits="23" branch="false"/>
 							</lines>
 						</method>
 						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="8" hits="66" branch="false"/>
+								<line number="8" hits="69" branch="false"/>
 							</lines>
 						</method>
 						<method name="d" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="23" hits="22" branch="false"/>
-								<line number="24" hits="22" branch="false"/>
+								<line number="23" hits="23" branch="false"/>
+								<line number="24" hits="23" branch="false"/>
 							</lines>
 						</method>
 						<method name="e" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="13" hits="22" branch="false"/>
-								<line number="14" hits="22" branch="false"/>
+								<line number="13" hits="23" branch="false"/>
+								<line number="14" hits="23" branch="false"/>
 							</lines>
 						</method>
 						<method name="getLog" signature="()Ljava/lang/String;" line-rate="0.0" branch-rate="1.0" complexity="0">
@@ -6657,20 +6657,20 @@
 						</method>
 						<method name="i" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="18" hits="22" branch="false"/>
-								<line number="19" hits="22" branch="false"/>
+								<line number="18" hits="23" branch="false"/>
+								<line number="19" hits="23" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="8" hits="66" branch="false"/>
-						<line number="9" hits="22" branch="false"/>
-						<line number="13" hits="22" branch="false"/>
-						<line number="14" hits="22" branch="false"/>
-						<line number="18" hits="22" branch="false"/>
-						<line number="19" hits="22" branch="false"/>
-						<line number="23" hits="22" branch="false"/>
-						<line number="24" hits="22" branch="false"/>
+						<line number="8" hits="69" branch="false"/>
+						<line number="9" hits="23" branch="false"/>
+						<line number="13" hits="23" branch="false"/>
+						<line number="14" hits="23" branch="false"/>
+						<line number="18" hits="23" branch="false"/>
+						<line number="19" hits="23" branch="false"/>
+						<line number="23" hits="23" branch="false"/>
+						<line number="24" hits="23" branch="false"/>
 						<line number="28" hits="0" branch="false"/>
 					</lines>
 				</class>
@@ -6678,7 +6678,7 @@
 					<methods>
 						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="3" hits="66" branch="false"/>
+								<line number="3" hits="69" branch="false"/>
 							</lines>
 						</method>
 						<method name="saveLogFile" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
@@ -6688,7 +6688,7 @@
 						</method>
 					</methods>
 					<lines>
-						<line number="3" hits="66" branch="false"/>
+						<line number="3" hits="69" branch="false"/>
 						<line number="15" hits="0" branch="false"/>
 					</lines>
 				</class>
@@ -21048,7 +21048,7 @@
 				</class>
 			</classes>
 		</package>
-		<package name="testmain" line-rate="0.0" branch-rate="0.0" complexity="5.5">
+		<package name="testmain" line-rate="0.0" branch-rate="0.0" complexity="5.571428571428571">
 			<classes>
 				<class name="testmain.BotInfoSelector" filename="testmain/BotInfoSelector.java" line-rate="0.0" branch-rate="0.0" complexity="22.0">
 					<methods>
@@ -21336,7 +21336,7 @@
 						<line number="106" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="testmain.FollowApp" filename="testmain/FollowApp.java" line-rate="0.0" branch-rate="0.0" complexity="8.75">
+				<class name="testmain.FollowApp" filename="testmain/FollowApp.java" line-rate="0.0" branch-rate="0.0" complexity="9.0">
 					<methods>
 						<method name="&lt;init&gt;" signature="(Ledu/illinois/mitra/cyphyhouse/gvh/GlobalVarHolder;)V" line-rate="0.0" branch-rate="0.0" complexity="0">
 							<lines>
@@ -21632,8 +21632,9 @@
 							<lines>
 								<line number="191" hits="0" branch="false"/>
 								<line number="194" hits="0" branch="false"/>
-								<line number="195" hits="0" branch="false"/>
 								<line number="198" hits="0" branch="false"/>
+								<line number="205" hits="0" branch="false"/>
+								<line number="208" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="receive" signature="(Ledu/illinois/mitra/cyphyhouse/comms/RobotMessage;)V" line-rate="0.0" branch-rate="0.0" complexity="0">
@@ -21751,7 +21752,29 @@
 								<line number="184" hits="0" branch="false"/>
 								<line number="185" hits="0" branch="false"/>
 								<line number="186" hits="0" branch="false"/>
+								<line number="187" hits="0" branch="false"/>
+								<line number="188" hits="0" branch="false"/>
+								<line number="189" hits="0" branch="false"/>
 								<line number="190" hits="0" branch="false"/>
+								<line number="192" hits="0" branch="false"/>
+								<line number="193" hits="0" branch="true" condition-coverage="0% (0/24)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+										<condition number="1" type="jump" coverage="0%"/>
+										<condition number="2" type="jump" coverage="0%"/>
+										<condition number="3" type="jump" coverage="0%"/>
+										<condition number="4" type="jump" coverage="0%"/>
+										<condition number="5" type="jump" coverage="0%"/>
+										<condition number="6" type="jump" coverage="0%"/>
+										<condition number="7" type="jump" coverage="0%"/>
+										<condition number="8" type="jump" coverage="0%"/>
+										<condition number="9" type="jump" coverage="0%"/>
+										<condition number="10" type="jump" coverage="0%"/>
+										<condition number="11" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="195" hits="0" branch="false"/>
+								<line number="200" hits="0" branch="false"/>
 							</lines>
 						</method>
 					</methods>
@@ -22147,14 +22170,37 @@
 						<line number="184" hits="0" branch="false"/>
 						<line number="185" hits="0" branch="false"/>
 						<line number="186" hits="0" branch="false"/>
+						<line number="187" hits="0" branch="false"/>
+						<line number="188" hits="0" branch="false"/>
+						<line number="189" hits="0" branch="false"/>
 						<line number="190" hits="0" branch="false"/>
 						<line number="191" hits="0" branch="false"/>
+						<line number="192" hits="0" branch="false"/>
+						<line number="193" hits="0" branch="true" condition-coverage="0% (0/24)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+								<condition number="1" type="jump" coverage="0%"/>
+								<condition number="2" type="jump" coverage="0%"/>
+								<condition number="3" type="jump" coverage="0%"/>
+								<condition number="4" type="jump" coverage="0%"/>
+								<condition number="5" type="jump" coverage="0%"/>
+								<condition number="6" type="jump" coverage="0%"/>
+								<condition number="7" type="jump" coverage="0%"/>
+								<condition number="8" type="jump" coverage="0%"/>
+								<condition number="9" type="jump" coverage="0%"/>
+								<condition number="10" type="jump" coverage="0%"/>
+								<condition number="11" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
 						<line number="194" hits="0" branch="false"/>
 						<line number="195" hits="0" branch="false"/>
 						<line number="198" hits="0" branch="false"/>
+						<line number="200" hits="0" branch="false"/>
+						<line number="205" hits="0" branch="false"/>
+						<line number="208" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="testmain.FollowApp$1" filename="testmain/FollowApp.java" line-rate="0.0" branch-rate="1.0" complexity="8.75">
+				<class name="testmain.FollowApp$1" filename="testmain/FollowApp.java" line-rate="0.0" branch-rate="1.0" complexity="9.0">
 					<methods>
 						<method name="&lt;clinit&gt;" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
@@ -22172,7 +22218,7 @@
 						<line number="86" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="testmain.FollowApp$Stage" filename="testmain/FollowApp.java" line-rate="0.0" branch-rate="1.0" complexity="8.75">
+				<class name="testmain.FollowApp$Stage" filename="testmain/FollowApp.java" line-rate="0.0" branch-rate="1.0" complexity="9.0">
 					<methods>
 						<method name="&lt;clinit&gt;" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>

@@ -1,4 +1,4 @@
-package testSim.follow;
+package testmain;
 
 /**
  * Created by VerivitalLab on 2/26/2016.
@@ -183,7 +183,17 @@ public class FollowApp extends LogicThread {
        if (m.getMID() == ERASE_MSG && !m.getFrom().equals(name) && !alreadyReceived) {
             erasedMsgs.add(m);
             gvh.log.d(TAG, "received erase message from " + m.getFrom());
-              
+            String linenum = m.getContents().toString().replace("`","");
+            int x = Integer.parseInt(linenum);
+            try(FileWriter fw = new FileWriter("erase.txt", true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter out = new PrintWriter(bw))
+            {
+               out.println(x);
+              } catch (IOException e) {
+               //exception handling left as an exercise for the reader
+               }
+
         }
        
        
