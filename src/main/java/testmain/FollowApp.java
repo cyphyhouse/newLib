@@ -181,7 +181,7 @@ public class FollowApp extends LogicThread {
               
         }
        if (m.getMID() == ERASE_MSG && !m.getFrom().equals(name) && !alreadyReceived) {
-            erasedMsgs.add(m);
+            /*erasedMsgs.add(m);
             //gvh.log.d(TAG, "received erase message from " + m.getFrom());
             String linenum = m.getContents().toString().replace("`","");
             int x = Integer.parseInt(linenum);
@@ -192,7 +192,7 @@ public class FollowApp extends LogicThread {
                out.println(x);
               } catch (IOException e) {
                //exception handling left as an exercise for the reader
-               }
+               }*/
 
         }
        
