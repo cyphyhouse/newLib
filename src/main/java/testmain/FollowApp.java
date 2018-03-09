@@ -185,14 +185,14 @@ public class FollowApp extends LogicThread {
             gvh.log.d(TAG, "received erase message from " + m.getFrom());
             String linenum = m.getContents().toString().replace("`","");
             int x = Integer.parseInt(linenum);
-            /*try(FileWriter fw = new FileWriter("erase.txt", true);
+            try(FileWriter fw = new FileWriter("erase.txt", true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter out = new PrintWriter(bw))
             {
                out.println(x);
               } catch (IOException e) {
                //exception handling left as an exercise for the reader
-               }*/
+               }
 
         }
        
