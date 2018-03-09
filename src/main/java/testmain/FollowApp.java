@@ -181,11 +181,11 @@ public class FollowApp extends LogicThread {
               
         }
        if (m.getMID() == ERASE_MSG && !m.getFrom().equals(name) && !alreadyReceived) {
-            /*erasedMsgs.add(m);
-            //gvh.log.d(TAG, "received erase message from " + m.getFrom());
+            erasedMsgs.add(m);
+            gvh.log.d(TAG, "received erase message from " + m.getFrom());
             String linenum = m.getContents().toString().replace("`","");
             int x = Integer.parseInt(linenum);
-            try(FileWriter fw = new FileWriter("erase.txt", true);
+            /*try(FileWriter fw = new FileWriter("erase.txt", true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter out = new PrintWriter(bw))
             {
