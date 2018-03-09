@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.0016008537886872999" branch-rate="0.0" lines-covered="9" lines-valid="5622" branches-covered="0" branches-valid="2182" complexity="2.4063604240282683" version="2.1.1" timestamp="1520555002664">
+<coverage line-rate="0.0015926384710670677" branch-rate="0.0" lines-covered="9" lines-valid="5651" branches-covered="0" branches-valid="2200" complexity="2.4075382803297996" version="2.1.1" timestamp="1520560213465">
 	<sources>
 		<source>/home/peter/newLib/target/generated-sources/annotations</source>
 		<source>/home/peter/newLib/src/main/java</source>
@@ -710,7 +710,7 @@
 				</class>
 			</classes>
 		</package>
-		<package name="edu.illinois.mitra.cyphyhouse.comms" line-rate="0.0" branch-rate="0.0" complexity="2.376146788990826">
+		<package name="edu.illinois.mitra.cyphyhouse.comms" line-rate="0.0" branch-rate="0.0" complexity="2.385321100917431">
 			<classes>
 				<class name="edu.illinois.mitra.cyphyhouse.comms.LossyMessageSender" filename="edu/illinois/mitra/cyphyhouse/comms/LossyMessageSender.java" line-rate="0.0" branch-rate="0.0" complexity="3.0">
 					<methods>
@@ -1792,7 +1792,7 @@
 						<line number="164" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="edu.illinois.mitra.cyphyhouse.comms.SmartCommsHandler" filename="edu/illinois/mitra/cyphyhouse/comms/SmartCommsHandler.java" line-rate="0.0" branch-rate="0.0" complexity="2.5384615384615383">
+				<class name="edu.illinois.mitra.cyphyhouse.comms.SmartCommsHandler" filename="edu/illinois/mitra/cyphyhouse/comms/SmartCommsHandler.java" line-rate="0.0" branch-rate="0.0" complexity="2.6153846153846154">
 					<methods>
 						<method name="&lt;init&gt;" signature="(Ledu/illinois/mitra/cyphyhouse/gvh/GlobalVarHolder;Ledu/illinois/mitra/cyphyhouse/interfaces/SmartComThread;)V" line-rate="0.0" branch-rate="0.0" complexity="0">
 							<lines>
@@ -1850,6 +1850,13 @@
 								<line number="195" hits="0" branch="false"/>
 								<line number="196" hits="0" branch="false"/>
 								<line number="197" hits="0" branch="false"/>
+								<line number="198" hits="0" branch="false"/>
+								<line number="199" hits="0" branch="false"/>
+								<line number="200" hits="0" branch="false"/>
+								<line number="201" hits="0" branch="false"/>
+								<line number="202" hits="0" branch="false"/>
+								<line number="204" hits="0" branch="false"/>
+								<line number="205" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="handleReceived" signature="(Ledu/illinois/mitra/cyphyhouse/comms/UdpMessage;)V" line-rate="0.0" branch-rate="0.0" complexity="0">
@@ -1882,26 +1889,30 @@
 						</method>
 						<method name="nameToIp" signature="(Ledu/illinois/mitra/cyphyhouse/comms/UdpMessage;)Ljava/lang/String;" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="219" hits="0" branch="false"/>
+								<line number="224" hits="0" branch="false"/>
+								<line number="227" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="nameToIp" signature="(Ljava/lang/String;)Ljava/lang/String;" line-rate="0.0" branch-rate="0.0" complexity="0">
 							<lines>
-								<line number="207" hits="0" branch="true" condition-coverage="0% (0/4)">
+								<line number="213" hits="0" branch="false"/>
+								<line number="214" hits="0" branch="false"/>
+								<line number="215" hits="0" branch="true" condition-coverage="0% (0/4)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
 										<condition number="1" type="jump" coverage="0%"/>
 									</conditions>
 								</line>
-								<line number="208" hits="0" branch="false"/>
-								<line number="210" hits="0" branch="true" condition-coverage="0% (0/2)">
+								<line number="216" hits="0" branch="false"/>
+								<line number="217" hits="0" branch="false"/>
+								<line number="218" hits="0" branch="true" condition-coverage="0% (0/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
 									</conditions>
 								</line>
-								<line number="211" hits="0" branch="false"/>
-								<line number="212" hits="0" branch="false"/>
-								<line number="214" hits="0" branch="false"/>
+								<line number="219" hits="0" branch="false"/>
+								<line number="220" hits="0" branch="false"/>
+								<line number="222" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="run" signature="()V" line-rate="0.0" branch-rate="0.0" complexity="0">
@@ -1966,13 +1977,30 @@
 								<line number="123" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="sendAck" signature="(Ledu/illinois/mitra/cyphyhouse/comms/UdpMessage;)V" line-rate="0.0" branch-rate="1.0" complexity="0">
+						<method name="sendAck" signature="(Ledu/illinois/mitra/cyphyhouse/comms/UdpMessage;)V" line-rate="0.0" branch-rate="0.0" complexity="0">
 							<lines>
-								<line number="200" hits="0" branch="false"/>
-								<line number="201" hits="0" branch="false"/>
-								<line number="202" hits="0" branch="false"/>
 								<line number="203" hits="0" branch="false"/>
-								<line number="204" hits="0" branch="false"/>
+								<line number="206" hits="0" branch="false"/>
+								<line number="207" hits="0" branch="true" condition-coverage="0% (0/4)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+										<condition number="1" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="208" hits="0" branch="false"/>
+								<line number="209" hits="0" branch="false"/>
+								<line number="210" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="211" hits="0" branch="false"/>
+								<line number="212" hits="0" branch="true" condition-coverage="0% (0/4)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+										<condition number="1" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
 							</lines>
 						</method>
 					</methods>
@@ -2085,11 +2113,15 @@
 						<line number="195" hits="0" branch="false"/>
 						<line number="196" hits="0" branch="false"/>
 						<line number="197" hits="0" branch="false"/>
+						<line number="198" hits="0" branch="false"/>
+						<line number="199" hits="0" branch="false"/>
 						<line number="200" hits="0" branch="false"/>
 						<line number="201" hits="0" branch="false"/>
 						<line number="202" hits="0" branch="false"/>
 						<line number="203" hits="0" branch="false"/>
 						<line number="204" hits="0" branch="false"/>
+						<line number="205" hits="0" branch="false"/>
+						<line number="206" hits="0" branch="false"/>
 						<line number="207" hits="0" branch="true" condition-coverage="0% (0/4)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>
@@ -2097,18 +2129,42 @@
 							</conditions>
 						</line>
 						<line number="208" hits="0" branch="false"/>
+						<line number="209" hits="0" branch="false"/>
 						<line number="210" hits="0" branch="true" condition-coverage="0% (0/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>
 							</conditions>
 						</line>
 						<line number="211" hits="0" branch="false"/>
-						<line number="212" hits="0" branch="false"/>
+						<line number="212" hits="0" branch="true" condition-coverage="0% (0/4)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+								<condition number="1" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="213" hits="0" branch="false"/>
 						<line number="214" hits="0" branch="false"/>
+						<line number="215" hits="0" branch="true" condition-coverage="0% (0/4)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+								<condition number="1" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="216" hits="0" branch="false"/>
+						<line number="217" hits="0" branch="false"/>
+						<line number="218" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
 						<line number="219" hits="0" branch="false"/>
+						<line number="220" hits="0" branch="false"/>
+						<line number="222" hits="0" branch="false"/>
+						<line number="224" hits="0" branch="false"/>
+						<line number="227" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="edu.illinois.mitra.cyphyhouse.comms.SmartCommsHandler$1" filename="edu/illinois/mitra/cyphyhouse/comms/SmartCommsHandler.java" line-rate="0.0" branch-rate="0.0" complexity="2.5384615384615383">
+				<class name="edu.illinois.mitra.cyphyhouse.comms.SmartCommsHandler$1" filename="edu/illinois/mitra/cyphyhouse/comms/SmartCommsHandler.java" line-rate="0.0" branch-rate="0.0" complexity="2.6153846153846154">
 					<methods>
 						<method name="&lt;init&gt;" signature="(Ledu/illinois/mitra/cyphyhouse/comms/SmartCommsHandler;)V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
@@ -2160,38 +2216,69 @@
 						<line number="189" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="edu.illinois.mitra.cyphyhouse.comms.SmartCommsHandler$ResendTimer" filename="edu/illinois/mitra/cyphyhouse/comms/SmartCommsHandler.java" line-rate="0.0" branch-rate="0.0" complexity="2.5384615384615383">
+				<class name="edu.illinois.mitra.cyphyhouse.comms.SmartCommsHandler$ResendTimer" filename="edu/illinois/mitra/cyphyhouse/comms/SmartCommsHandler.java" line-rate="0.0" branch-rate="0.0" complexity="2.6153846153846154">
 					<methods>
-						<method name="&lt;init&gt;" signature="(Ledu/illinois/mitra/cyphyhouse/comms/SmartCommsHandler;Ledu/illinois/mitra/cyphyhouse/comms/UdpMessage;)V" line-rate="0.0" branch-rate="1.0" complexity="0">
+						<method name="&lt;init&gt;" signature="(Ledu/illinois/mitra/cyphyhouse/comms/SmartCommsHandler;Ledu/illinois/mitra/cyphyhouse/comms/UdpMessage;)V" line-rate="0.0" branch-rate="0.0" complexity="0">
 							<lines>
 								<line number="227" hits="0" branch="false"/>
 								<line number="228" hits="0" branch="false"/>
 								<line number="229" hits="0" branch="false"/>
 								<line number="230" hits="0" branch="false"/>
 								<line number="231" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="run" signature="()V" line-rate="0.0" branch-rate="0.0" complexity="0">
-							<lines>
+								<line number="232" hits="0" branch="false"/>
+								<line number="233" hits="0" branch="false"/>
+								<line number="234" hits="0" branch="false"/>
 								<line number="235" hits="0" branch="false"/>
+								<line number="236" hits="0" branch="false"/>
 								<line number="237" hits="0" branch="true" condition-coverage="0% (0/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
 									</conditions>
 								</line>
+								<line number="238" hits="0" branch="false"/>
 								<line number="239" hits="0" branch="true" condition-coverage="0% (0/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
 									</conditions>
 								</line>
+							</lines>
+						</method>
+						<method name="run" signature="()V" line-rate="0.0" branch-rate="0.0" complexity="0">
+							<lines>
 								<line number="240" hits="0" branch="false"/>
 								<line number="241" hits="0" branch="false"/>
-								<line number="242" hits="0" branch="false"/>
-								<line number="244" hits="0" branch="false"/>
-								<line number="245" hits="0" branch="false"/>
+								<line number="242" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="243" hits="0" branch="false"/>
+								<line number="244" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="245" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="246" hits="0" branch="false"/>
+								<line number="247" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
 								<line number="248" hits="0" branch="false"/>
+								<line number="249" hits="0" branch="false"/>
 								<line number="250" hits="0" branch="false"/>
 								<line number="251" hits="0" branch="false"/>
+								<line number="252" hits="0" branch="false"/>
+								<line number="253" hits="0" branch="false"/>
+								<line number="255" hits="0" branch="false"/>
+								<line number="256" hits="0" branch="false"/>
+								<line number="258" hits="0" branch="false"/>
+								<line number="259" hits="0" branch="false"/>
 							</lines>
 						</method>
 					</methods>
@@ -2201,12 +2288,17 @@
 						<line number="229" hits="0" branch="false"/>
 						<line number="230" hits="0" branch="false"/>
 						<line number="231" hits="0" branch="false"/>
+						<line number="232" hits="0" branch="false"/>
+						<line number="233" hits="0" branch="false"/>
+						<line number="234" hits="0" branch="false"/>
 						<line number="235" hits="0" branch="false"/>
+						<line number="236" hits="0" branch="false"/>
 						<line number="237" hits="0" branch="true" condition-coverage="0% (0/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>
 							</conditions>
 						</line>
+						<line number="238" hits="0" branch="false"/>
 						<line number="239" hits="0" branch="true" condition-coverage="0% (0/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>
@@ -2214,12 +2306,38 @@
 						</line>
 						<line number="240" hits="0" branch="false"/>
 						<line number="241" hits="0" branch="false"/>
-						<line number="242" hits="0" branch="false"/>
-						<line number="244" hits="0" branch="false"/>
-						<line number="245" hits="0" branch="false"/>
+						<line number="242" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="243" hits="0" branch="false"/>
+						<line number="244" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="245" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="246" hits="0" branch="false"/>
+						<line number="247" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
 						<line number="248" hits="0" branch="false"/>
+						<line number="249" hits="0" branch="false"/>
 						<line number="250" hits="0" branch="false"/>
 						<line number="251" hits="0" branch="false"/>
+						<line number="252" hits="0" branch="false"/>
+						<line number="253" hits="0" branch="false"/>
+						<line number="255" hits="0" branch="false"/>
+						<line number="256" hits="0" branch="false"/>
+						<line number="258" hits="0" branch="false"/>
+						<line number="259" hits="0" branch="false"/>
 					</lines>
 				</class>
 				<class name="edu.illinois.mitra.cyphyhouse.comms.SmartUdpComThread" filename="edu/illinois/mitra/cyphyhouse/comms/SmartUdpComThread.java" line-rate="0.0" branch-rate="0.0" complexity="3.2">
@@ -6630,24 +6748,24 @@
 					<methods>
 						<method name="&lt;clinit&gt;" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="9" hits="33" branch="false"/>
+								<line number="9" hits="36" branch="false"/>
 							</lines>
 						</method>
 						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="8" hits="99" branch="false"/>
+								<line number="8" hits="108" branch="false"/>
 							</lines>
 						</method>
 						<method name="d" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="23" hits="33" branch="false"/>
-								<line number="24" hits="33" branch="false"/>
+								<line number="23" hits="36" branch="false"/>
+								<line number="24" hits="36" branch="false"/>
 							</lines>
 						</method>
 						<method name="e" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="13" hits="33" branch="false"/>
-								<line number="14" hits="33" branch="false"/>
+								<line number="13" hits="36" branch="false"/>
+								<line number="14" hits="36" branch="false"/>
 							</lines>
 						</method>
 						<method name="getLog" signature="()Ljava/lang/String;" line-rate="0.0" branch-rate="1.0" complexity="0">
@@ -6657,20 +6775,20 @@
 						</method>
 						<method name="i" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="18" hits="33" branch="false"/>
-								<line number="19" hits="33" branch="false"/>
+								<line number="18" hits="36" branch="false"/>
+								<line number="19" hits="36" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="8" hits="99" branch="false"/>
-						<line number="9" hits="33" branch="false"/>
-						<line number="13" hits="33" branch="false"/>
-						<line number="14" hits="33" branch="false"/>
-						<line number="18" hits="33" branch="false"/>
-						<line number="19" hits="33" branch="false"/>
-						<line number="23" hits="33" branch="false"/>
-						<line number="24" hits="33" branch="false"/>
+						<line number="8" hits="108" branch="false"/>
+						<line number="9" hits="36" branch="false"/>
+						<line number="13" hits="36" branch="false"/>
+						<line number="14" hits="36" branch="false"/>
+						<line number="18" hits="36" branch="false"/>
+						<line number="19" hits="36" branch="false"/>
+						<line number="23" hits="36" branch="false"/>
+						<line number="24" hits="36" branch="false"/>
 						<line number="28" hits="0" branch="false"/>
 					</lines>
 				</class>
@@ -6678,7 +6796,7 @@
 					<methods>
 						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="3" hits="99" branch="false"/>
+								<line number="3" hits="108" branch="false"/>
 							</lines>
 						</method>
 						<method name="saveLogFile" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
@@ -6688,7 +6806,7 @@
 						</method>
 					</methods>
 					<lines>
-						<line number="3" hits="99" branch="false"/>
+						<line number="3" hits="108" branch="false"/>
 						<line number="15" hits="0" branch="false"/>
 					</lines>
 				</class>

@@ -191,9 +191,17 @@ public class SmartCommsHandler extends Thread {
 	}
 
 	protected synchronized void handleAck(UdpMessage Ack) {
+
+	/* NullPointer encountered while testing sending ACKS even though IPs are correct in BotInfoSelector*/
+	
+        try{
 		int seq = Ack.getSeqNum();
 		String from = Ack.getContents().getFrom();
 		sentMessages.get(from).remove(seq);
+		}
+		catch (NullPointerException e){
+		
+		} 
 	}
 
 	private void sendAck(UdpMessage msg) {

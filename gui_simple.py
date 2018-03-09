@@ -289,20 +289,19 @@ def socket_loop():
             global NEW_TASK_FLAG
             NEW_TASK_FLAG = False
        
-    '''
+    
     #Check if any tasks have been done, if so, remove flame icon from screen
-    with open("tasks.txt",'r') as file_obj:
-        for line in file_obj:
-            cur_line = line.split()
-            done_flag = float(cur_line[1])
-            if done_flag == 1.0:
-                task_id = float(cur_line[0])
-                for element_id in UI_WP_LIST:
-                    if element_id[1] == task_id:
-                        MAP_CANVAS.delete(element_id[0])
-                        UI_WP_LIST.remove(element_id)
-                        # ADD SOME OTHER STUFF HERE TO REMOVE FROM TASK LIST
-    '''
+    
+    with open("erase.txt",'r') as erase_file:
+        for line in erase_file:
+            task_id = int(line[0])
+            for element_id in UI_WP_LIST:
+                if element_id[1] == task_id:
+                    MAP_CANVAS.delete(element_id[0])
+                    UI_WP_LIST.remove(element_id)
+   
+            
+    
 
     '''
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)       
