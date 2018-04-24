@@ -27,6 +27,10 @@ import edu.illinois.mitra.cyphyhouse.comms.UdpGpsReceiver;
 import edu.illinois.mitra.cyphyhouse.motion.MotionAutomaton_Car;
 import edu.illinois.mitra.cyphyhouse.motion.MotionAutomaton_Quadcopter;
 
+
+/* JavaRosWrapper Class */
+/* Use to publish and subscribe to ROS topics in Java code */
+
 public class JavaRosWrapper {
 	public RosBridge bridge;
 	public String robot_name;
@@ -36,8 +40,10 @@ public class JavaRosWrapper {
 	public GlobalVarHolder gvh;
 	public Model_Car model_car;
 	public Model_iRobot model_irobot;
-    public Model_Quadcopter model_quadcopter;
+   	public Model_Quadcopter model_quadcopter;
 	public String platform;
+
+
 
 	public JavaRosWrapper(String port, String name, GlobalVarHolder gvh, String platform){
 		this.robot_name = name;
@@ -47,15 +53,12 @@ public class JavaRosWrapper {
 
 		switch(platform){
 			case "Car":
-				//this.model_car = (Model_Car)gvh.gps.getMyPosition();
 				break;
 			case "iRobot":
-				//this.model_irobot = (Model_iRobot).gvh.gps.getMyPosition();
-				//this.model_irobot = (Model_iRobot)gvh.gps.getMyPosition();
 				break;
-            case "Quadcopter":
-                break;
-		}
+            		case "Quadcopter":
+                		break;
+				}
 		
 		this.platform = platform;
 
@@ -63,10 +66,14 @@ public class JavaRosWrapper {
 		bridge.connect(port, true);
 	}
 
+
+
+	/* Create a new topic to publish to */
 	public void createTopic(String topicType){
 		int i = 0;
 		switch(topicType){
 			case "Waypoint": 
+				/* See if topic already exists, if it does, return. Else create a new publisher and add to list */
 				while (i < publishers.size()){
 					if (publishers.get(i).getTopic().matches("Waypoint_" + robot_name)){
 						return;
@@ -81,6 +88,10 @@ public class JavaRosWrapper {
 		}
 	}
 
+
+
+
+	/* Remove a topic from the publishers list */
 	public void removeTopic(String topicType){										
 		switch(topicType){
 			case "Waypoint":
@@ -99,6 +110,9 @@ public class JavaRosWrapper {
 	
 	}
 
+
+	
+	/* Publish a new position message with "type" specified in the message header*/ 
 	public void sendMsg(ItemPosition dest, String type){
 		int i = 0;
 		while (i < publishers.size()){
@@ -114,6 +128,8 @@ public class JavaRosWrapper {
 		}
 	}
     
+
+	/* Publish a new position message */
     public void sendMsg(ItemPosition dest){
 		int i = 0;
 		while (i < publishers.size()){
@@ -131,6 +147,9 @@ public class JavaRosWrapper {
 
 
 
+
+	/* Subscribe to an existing ROS topic and define a callback function. Callback
+	   function is run whenever a new message is found on that ROS topic */
 	public void subscribe_to_ROS(String topic, String topicType){
 		int i = 0;
 			while (i < subscribed_topics.size()){
@@ -141,34 +160,30 @@ public class JavaRosWrapper {
 			}
 		switch (topicType){
 			case "Waypoint":
+				/* Subscribe to a topic */
 				bridge.subscribe(SubscriptionRequestMsg.generate(topic)
 					.setType("geometry_msgs/Point")
 					.setThrottleRate(1000)
 					.setQueueLength(0),
 				new RosListenDelegate() {
 
+					/* Define callback function */
 					public void receive(JsonNode data, String stringRep) {
 						MessageUnpacker<Point> unpacker = new MessageUnpacker<Point>(Point.class);
 						Point msg = unpacker.unpackRosMessage(data);
-						/*model.TESTX = msg.x;
-						if(robot_name.matches("iRobot0")){
-							System.out.println("Updated " + robot_name + "'s value to: " + model.TESTX);
-						}
-
-									//System.out.println(msg.x + " " + msg.y + " " +msg.z + " " + robot_name);*/
-							
 					}
 				}
 				);
 				break;
 
 			case "DecaWave":
+				/* Subscribe to a topic */
 				bridge.subscribe(SubscriptionRequestMsg.generate(topic)
 					.setType("geometry_msgs/Point")
 					.setThrottleRate(1)
 					.setQueueLength(0),
 				new RosListenDelegate() {
-
+					/* Define callback function */
 					public void receive(JsonNode data, String stringRep) {
 						MessageUnpacker<Point> unpacker = new MessageUnpacker<Point>(Point.class);
 						Point msg = unpacker.unpackRosMessage(data);
@@ -179,14 +194,6 @@ public class JavaRosWrapper {
 						catch(InterruptedException e){
 		
 						}
-						//UdpGpsReceiver receive = (UdpGpsReceiver)gvh.gps.mGpsReceiver;
-						//receive.receive_position_msg(msg);
-						/*model.TESTX = msg.x;
-						if(robot_name.matches("iRobot0")){
-							System.out.println("Updated " + robot_name + "'s value to: " + model.TESTX);
-						}
-
-									//System.out.println(msg.x + " " + msg.y + " " +msg.z + " " + robot_name);*/
 							
 					}
 				}
@@ -204,7 +211,6 @@ public class JavaRosWrapper {
 					public void receive(JsonNode data, String stringRep) {
 						MessageUnpacker<PrimitiveMsg<String>> unpacker = new MessageUnpacker<PrimitiveMsg<String>>(PrimitiveMsg.class);
 						PrimitiveMsg<String> msg = unpacker.unpackRosMessage(data);
-						//ADD STUFF HERE
 						switch(msg.data){
 							case "TRUE":
 								switch(platform){
