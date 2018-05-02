@@ -1,0 +1,146 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Parser &#8212; Koffee 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Compiler" href="mycompiler.html" />
+    <link rel="prev" title="Indentation Lexer" href="indentlexer.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-kparser">
+<span id="parser"></span><h1>Parser<a class="headerlink" href="#module-kparser" title="Permalink to this headline">¶</a></h1>
+<p>The file <em>kparser.py</em> includes a parser for <em>Koord</em> programs
+which enables us to generate Java code. We use the abstract syntax
+tree module to construct the syntax tree from this parser.
+The syntax of <em>Koord</em> is given as follows :</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">pgm:</th><td class="field-body"><strong>agnt</strong></td>
+</tr>
+<tr class="field-even field"><th class="field-name">agnt:</th><td class="field-body">AGENT CID NL</td>
+</tr>
+</tbody>
+</table>
+<p>The parser uses the indentation lexer to tokenize the code,
+and passes the parsed result as an abstract syntax
+tree to the compiler, which in turn generates java code.</p>
+<dl class="class">
+<dt id="kparser.myparser">
+<em class="property">class </em><code class="descclassname">kparser.</code><code class="descname">myparser</code><span class="sig-paren">(</span><em>lexer=None</em><span class="sig-paren">)</span><a class="headerlink" href="#kparser.myparser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>We create a parser class which can take in a different lexical analyzer as well</p>
+<dl class="method">
+<dt id="kparser.myparser.parse">
+<code class="descname">parse</code><span class="sig-paren">(</span><em>code</em><span class="sig-paren">)</span><a class="headerlink" href="#kparser.myparser.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function to take code as input, tokenize it using the lexer,
+and parse it.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>code (str) : code to be parsed.</dd>
+<dt>Returns:</dt>
+<dd>result (pgmAst) : return the abstract syntax tree of the program</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="kparser.p_agnt">
+<code class="descclassname">kparser.</code><code class="descname">p_agnt</code><span class="sig-paren">(</span><em>p</em><span class="sig-paren">)</span><a class="headerlink" href="#kparser.p_agnt" title="Permalink to this definition">¶</a></dt>
+<dd><p>agnt : AGENT CID NL</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="kparser.p_error">
+<code class="descclassname">kparser.</code><code class="descname">p_error</code><span class="sig-paren">(</span><em>p</em><span class="sig-paren">)</span><a class="headerlink" href="#kparser.p_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>to find line with error</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="kparser.p_pgm">
+<code class="descclassname">kparser.</code><code class="descname">p_pgm</code><span class="sig-paren">(</span><em>p</em><span class="sig-paren">)</span><a class="headerlink" href="#kparser.p_pgm" title="Permalink to this definition">¶</a></dt>
+<dd><p>pgm : agnt</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="indentlexer.html" title="previous chapter">Indentation Lexer</a></li>
+      <li>Next: <a href="mycompiler.html" title="next chapter">Compiler</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/kparser.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Ritwika Ghosh.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/kparser.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

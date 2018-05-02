@@ -1,0 +1,9 @@
+Generating Java imports
+=======================
+
+
+.. automodule:: imports 
+    :members:
+    :undoc-members:
+    :inherited-members:
+    :show-inheritance:

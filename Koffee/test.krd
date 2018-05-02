@@ -1,0 +1,28 @@
+agent Task
+
+#def type task:
+#    int id 
+#    pos location
+#    bool assigned 
+
+
+
+module Motion :
+   actuators:
+      pos target
+   sensors:
+      pos position
+
+
+#allwrite:
+#   list<task> tq
+
+
+#local:
+#   int status
+#   task current
+
+#addTask:
+#   pre (true);
+#   eff :
+#       status =  1
