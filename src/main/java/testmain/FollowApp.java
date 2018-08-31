@@ -104,8 +104,10 @@ public class FollowApp extends LogicThread {
                         stage = Stage.WAIT;
                         //System.out.println("HERE1");
                     } else {
+			System.out.println("HERE1");
                         int numwaypoints = destinations.size();
                         if (index >= numwaypoints) {
+			 System.out.println("GOING TO WAIT");
                            stage = Stage.WAIT;
                            break;
                         }
@@ -166,6 +168,7 @@ public class FollowApp extends LogicThread {
                     }
                     break;
                 case WAIT:
+			System.out.println("IN WAIT");
                     if (arrived && robotIndex != 0) { 
                        stage = Stage.PICK;
                     }
