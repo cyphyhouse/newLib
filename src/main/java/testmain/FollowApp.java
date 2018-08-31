@@ -119,7 +119,10 @@ public class FollowApp extends LogicThread {
                     }
                     break;
                 case GO:
+			
+			System.out.println("MOTION FLAG "+gvh.plat.moat.inMotion);
                     if(!gvh.plat.moat.inMotion) {
+			
 			System.out.println("IN GO");
                        if (!arrived && currentDestination != null){
                           stage = Stage.WAIT;}
