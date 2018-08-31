@@ -116,10 +116,10 @@ public class FollowApp extends LogicThread {
                         }
                         catch (NullPointerException e) {stage = Stage.DONE;lineno = lineno - 1; break;}
                         int z = currentDestination.getZ(); 
-                        index++;
+                  
                         if(!takeoff) {
                           System.out.println("taking off");
-                              destinations.remove(currentDestination.getName());
+                              //destinations.remove(currentDestination.getName());
                               gvh.plat.moat.goTo(currentDestination);
                               dgt = true;
                               takeoff = true;
@@ -127,18 +127,19 @@ public class FollowApp extends LogicThread {
                               break;
  
                         }
+			index++;
 			System.out.println("z value is: " + z);
                         if (z >= 1500 && robotIndex == 1) {
 			
                               System.out.println(currentDestination.getZ()+" "+robotIndex);
-                              destinations.remove(currentDestination.getName());
+                              //destinations.remove(currentDestination.getName());
                               gvh.plat.moat.goTo(currentDestination);
                               dgt = true;
                         }
                         else  {
                             if (z < 1250 && robotIndex == 2) {
                               System.out.println(currentDestination.getZ()+" "+robotIndex);
-                              destinations.remove(currentDestination.getName());
+                              //destinations.remove(currentDestination.getName());
                               gvh.plat.moat.goTo(currentDestination);
                               dgt = true;
                             } 
