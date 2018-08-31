@@ -83,7 +83,7 @@ public class FollowApp extends LogicThread {
          
     
         while(true) {
-            System.out.println("ROBOT INDEX= "+ robotIndex); 
+            System.out.println("ROBOT INDEX= "+ robotIndex + "stage: " + stage); 
             switch(stage) {
                 case PICK:
                     arrived = false;
