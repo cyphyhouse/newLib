@@ -120,12 +120,15 @@ public class FollowApp extends LogicThread {
                     break;
                 case GO:
                     if(!gvh.plat.moat.inMotion) {
+			System.out.println("IN GO");
                        if (!arrived && currentDestination != null){
                           stage = Stage.WAIT;}
                        else {
                           if (dgt == true) {
+				System.out.println("IN ERASE");
                        eraseline++;
                        RobotMessage erase = new RobotMessage("ALL",name, ERASE_MSG, Integer.toString(eraseline));
+		       
                        gvh.comms.addOutgoingMessage(erase);
                        dgt = false;
                        }
