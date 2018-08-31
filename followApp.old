@@ -43,7 +43,6 @@ public class FollowApp extends LogicThread {
     private boolean wait0 = false;
     private MutualExclusion mutex0; 
     boolean dgt = false;
-    boolean takeoff = false;
     private HashSet<RobotMessage> receivedMsgs = new HashSet<RobotMessage>();
     private HashSet<RobotMessage> erasedMsgs = new HashSet<RobotMessage>();
   
@@ -115,24 +114,14 @@ public class FollowApp extends LogicThread {
                         catch (NullPointerException e) {stage = Stage.DONE;lineno = lineno - 1; break;}
                         int z = currentDestination.getZ(); 
                         index++;
-                        if(!takeoff) {
-                          System.out.println("taking off");
-                              destinations.remove(currentDestination.getName());
-                              gvh.plat.moat.goTo(currentDestination);
-                              dgt = true;
-                              takeoff = true;
-                              stage = Stage.GO;
-                              break;
- 
-                        }
-                        if (z >= 1500 && robotIndex == 1) {
+                        if (z >= 1000 && robotIndex == 1) {
                               System.out.println(currentDestination.getZ()+" "+robotIndex);
                               destinations.remove(currentDestination.getName());
                               gvh.plat.moat.goTo(currentDestination);
                               dgt = true;
                         }
                         else  {
-                            if (z < 1250 && robotIndex == 2) {
+                            if (z < 1000 && robotIndex == 2) {
                               System.out.println(currentDestination.getZ()+" "+robotIndex);
                               destinations.remove(currentDestination.getName());
                               gvh.plat.moat.goTo(currentDestination);
