@@ -83,7 +83,7 @@ public class FollowApp extends LogicThread {
          
     
         while(true) {
-            //System.out.println(stage+ " "+ robotIndex); 
+            System.out.println("ROBOT INDEX= "+ robotIndex); 
             switch(stage) {
                 case PICK:
                     arrived = false;
@@ -125,7 +125,9 @@ public class FollowApp extends LogicThread {
                               break;
  
                         }
+			System.out.println("z value is: " + z);
                         if (z >= 1500 && robotIndex == 1) {
+			
                               System.out.println(currentDestination.getZ()+" "+robotIndex);
                               destinations.remove(currentDestination.getName());
                               gvh.plat.moat.goTo(currentDestination);
