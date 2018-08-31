@@ -76,7 +76,7 @@ public class BotInfoSelector {
 
         if(color.equals("blue")) {
             name = "bot2";
-            ip = "192.168.1.112";
+            ip = "192.168.1.18";
             if(type == Common.IROBOT) {
                 bluetooth = "5C:F3:70:76:CE:B4";
                 this.type = new Model_iRobot(name, 0,0);
