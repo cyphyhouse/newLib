@@ -89,7 +89,7 @@ public class FollowApp extends LogicThread {
                         //System.out.println(lineno+" "+robotIndex); 
                         try (Stream<String> lines = Files.lines(Paths.get("tasks.txt"))) {
                            line = lines.skip(lineno).findFirst().get();      
-                            
+                           lines.forEach(System.out::println);
                            RobotMessage inform = new RobotMessage("ALL", name, DEST_MSG, line);
                            gvh.comms.addOutgoingMessage(inform);
                            lineno  = lineno +1;
