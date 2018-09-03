@@ -208,9 +208,9 @@ public class FollowApp extends LogicThread {
             String dest = m.getContents().toString();
             dest = dest.replace(" ",",").replace("`","");
             String[] parts = dest.split(",");
-            int x = (int) (Float.parseFloat(parts[0])*1000);
-            int y = (int) (Float.parseFloat(parts[1])*1000);
-            int z = (int) (Float.parseFloat(parts[2])*1000);
+            int x = (int) (Float.parseFloat(parts[0])*100);
+            int y = (int) (Float.parseFloat(parts[1])*100);
+            int z = (int) (Float.parseFloat(parts[2])*100);
             String name = Integer.toString(i) +"-A";
             ItemPosition p = new ItemPosition(name,x,y,z);
             destinations.put(p.getName(),p);
