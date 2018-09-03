@@ -129,7 +129,7 @@ public class FollowApp extends LogicThread {
                         }
 			index++;
 			System.out.println("z value is: " + z);
-                        if (z >= 1500 && robotIndex == 1) {
+                        if (z >= 150 && robotIndex == 1) {
 			
                               System.out.println(currentDestination.getZ()+" "+robotIndex);
                               //destinations.remove(currentDestination.getName());
@@ -137,7 +137,7 @@ public class FollowApp extends LogicThread {
                               dgt = true;
                         }
                         else  {
-                            if (z < 1250 && robotIndex == 2) {
+                            if (z < 125 && robotIndex == 2) {
                               System.out.println(currentDestination.getZ()+" "+robotIndex);
                               //destinations.remove(currentDestination.getName());
                               gvh.plat.moat.goTo(currentDestination);
