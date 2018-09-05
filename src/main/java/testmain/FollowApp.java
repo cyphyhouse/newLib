@@ -262,6 +262,59 @@ public class FollowApp extends LogicThread {
         //String key = Integer.toString(index);
         return map.get(key);
     }
+    
+    private boolean getXsection(double[] x1, double[] x2, double[] x3, double[] x4) {
+        double[] p1 = new double[3];
+        double[] p2 = new double[3];
+        double[] tmp1 = new double[3];
+        double[] tmp2 = new double[3];
+        p1 = sub(x2, x1, 3);
+        p2 = sub(x4, x3, 3);
+        
+        if (p1[2] == 0) {//Stay at same height
+            tmp1 = cross(p1, x3);
+            if (tmp1[2] == 0) { 
+                // intersection happens
+                return true;
+            }
+        }
+        else if (p2[2] == 0) {
+            tmp1 = cross(p2, x1);
+            if (tmp1[2] == 0) {
+                // intersection
+                return true;
+            }
+        }
+        else if (Math.abs(x2[2] - x4[2]) < 0.5) {
+            // If the final heights are close enough, check if paths intersect
+            tmp1 = cross(p1, x3);
+            tmp2 = cross(p1, x4);
+            double s1 = Math.signum(tmp1[2]);
+            double s2 = Math.signum(tmp2[2]);
+            if ((s1 != s2) && ((s1 != 0) || (s2 != 0))) {
+                //intersection happens
+                return true;
+            }
+        } 
+        
+        return false;
+    }
+    
+    private double[] sub(double[] A, double[] B, int cols) {
+        double[] C = new double[cols];
+        for(int i = 0; i < cols; i++) {
+            C[i] = A[i] - B[i];
+        }
+        return C;
+    }
+    
+    private double[] cross(double[] u, double[] v) {
+        double[] w = new double[3];
+        w[0] = u[1]*v[2] - u[2]*v[1];
+        w[1] = -(u[0]*v[2] - u[2]*v[0]);
+        w[2] = u[0]*v[1] - u[1]*v[0];
+        return w;
+    }
 }
 
 
