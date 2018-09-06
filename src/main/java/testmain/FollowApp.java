@@ -141,14 +141,16 @@ public class FollowApp extends LogicThread {
 			System.out.println("z value is: " + z);
 
 			if (z == -100 && robotIndex == 1){
-			      System.out.println(currentDestination.getZ()+" "+robotIndex);
+			      currentDestination = new ItemPosition("name",currentDestionation.getX(),currentDestination.getY(),0);
+			      //System.out.println(currentDestination.getZ()+" "+robotIndex);
                               //destinations.remove(currentDestination.getName());
                               gvh.plat.moat.goTo(currentDestination);
                               dgt = true;
 			      stage = Stage.DONE;
 			} 
 			if (z == -200 && robotIndex == 2){
-			      System.out.println(currentDestination.getZ()+" "+robotIndex);
+			      currentDestination = new ItemPosition("name",currentDestionation.getX(),currentDestination.getY(),0);
+			      //System.out.println(currentDestination.getZ()+" "+robotIndex);
                               //destinations.remove(currentDestination.getName());
                               gvh.plat.moat.goTo(currentDestination);
                               dgt = true;
