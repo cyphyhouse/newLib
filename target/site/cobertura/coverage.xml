@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.0016105941302791697" branch-rate="0.0" lines-covered="9" lines-valid="5588" branches-covered="0" branches-valid="2020" complexity="2.4342723004694835" version="2.1.1" timestamp="1536260414377">
+<coverage line-rate="0.0016105941302791697" branch-rate="0.0" lines-covered="9" lines-valid="5588" branches-covered="0" branches-valid="2020" complexity="2.4342723004694835" version="2.1.1" timestamp="1536261463264">
 	<sources>
 		<source>/home/ubuntu/newlib/target/generated-sources/annotations</source>
 		<source>--source</source>
