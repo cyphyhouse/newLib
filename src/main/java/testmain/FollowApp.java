@@ -5,6 +5,11 @@ package testmain;
  * This app was created to test the drones. The bots will each go to an assigned waypoint.
  * Once both bots have arrived at their respective waypoints, they will then go to the next waypoints.
  */
+/**
+ * Created by VerivitalLab on 2/26/2016.
+ * This app was created to test the drones. The bots will each go to an assigned waypoint.
+ * Once both bots have arrived at their respective waypoints, they will then go to the next waypoints.
+ */
 import java.net.*;
 import java.io.*;
 import java.util.*;
@@ -31,10 +36,10 @@ public class FollowApp extends LogicThread {
     private static final String TAG = "Follow App";
     private static final int DEST_MSG = 23;
     private static final int ERASE_MSG = 24;
-    private int destIndex;
     int lineno = 0;
     int eraseline = -1;
     private int numBots;
+    boolean init = true;
     private int numWaypoints;
     private boolean arrived = false;
     private boolean goForever = false;
@@ -52,10 +57,12 @@ public class FollowApp extends LogicThread {
     final Map<String, Integer> erasemap = new HashMap<String, Integer>();
     // execute a function that takes a string and returns a string
     ItemPosition currentDestination;
+    ItemPosition currentPosition;
     private enum Stage {
         PICK, GO, DONE, WAIT
     }; 
     private int index;
+    public int testindex;
     private Stage stage = Stage.PICK;
     boolean connected = false;
     public FollowApp(GlobalVarHolder gvh) {
@@ -70,7 +77,6 @@ public class FollowApp extends LogicThread {
 
         // bot names must be bot0, bot1, ... botn for this to work
         String intValue = name.replaceAll("[^0-9]", "");
-        destIndex = 0;
         robotIndex = Integer.parseInt(intValue);
         numBots = gvh.id.getParticipants().size();
         dsm = new DSMMultipleAttr(gvh); 
@@ -80,10 +86,13 @@ public class FollowApp extends LogicThread {
 
     @Override
     public List<Object> callStarL() {
-         
-    
+        dsm.createMW("testindex",0);
+       
         while(true) {
-            System.out.println("ROBOT INDEX= "+ robotIndex + "stage: " + stage); 
+            testindex = Integer.parseInt(dsm.get("testindex","*"));
+
+            //System.out.println("ROBOT INDEX= "+ robotIndex + "stage: " + stage); 
+            //System.out.println("ROBOT INDEX= "+ robotIndex + "testindex: " + testindex+ "index: "+index); 
             switch(stage) {
                 case PICK:
                     arrived = false;
@@ -104,69 +113,82 @@ public class FollowApp extends LogicThread {
                         stage = Stage.WAIT;
                         //System.out.println("HERE1");
                     } else {
-			System.out.println("HERE1");
+			//System.out.println("HERE1");
                         int numwaypoints = destinations.size();
-                        if (index >= numwaypoints) {
-			 System.out.println("GOING TO WAIT");
+                        if (testindex >= numwaypoints) {
+			 //System.out.println("GOING TO WAIT");
                            stage = Stage.WAIT;
                            break;
                         }
                         try {
-                        currentDestination = getDestination(destinations, index);
+                        currentDestination = getDestination(destinations, testindex);
+                        if (!takeoff && robotIndex == 1) {
+                           currentDestination = new ItemPosition("name",currentDestination.getX()+50,currentDestination.getY()+50,currentDestination.getZ()+100);
+                        } 
+                        else {if (!takeoff && robotIndex == 2) {
+                           currentDestination = new ItemPosition("name",currentDestination.getX()-50,currentDestination.getY()-50,currentDestination.getZ());
+                        }}
+                        takeoff = true;
+                        currentPosition = gvh.gps.getMyPosition();
+                        if(!wait0){	
+						mutex0.requestEntry(0);
+						wait0 = true;
+					}
+					if(mutex0.clearToEnter(0)){
+						testindex = testindex +1;
+                                                System.out.println("incrementing testindex "+robotIndex);
+						dsm.put("testindex", "*", testindex + 1);
+						mutex0.exit(0);
+					}
                         }
                         catch (NullPointerException e) {stage = Stage.DONE;lineno = lineno - 1; break;}
                         int z = currentDestination.getZ(); 
                   
-                        if(!takeoff && z>=150 && robotIndex == 1) {
-                          System.out.println("taking off");
+                        /*if(!takeoff && z>=1500 && robotIndex == 1) {
+                              //System.out.println("taking off");
                               //destinations.remove(currentDestination.getName());
                               gvh.plat.moat.goTo(currentDestination);
+
                               dgt = true;
                               takeoff = true;
                               stage = Stage.GO;
                               break;
-                        }
+                        }*/
+                        
 
-			if(!takeoff && z<=125 && robotIndex == 2) {
-                          System.out.println("taking off");
+			/*if(!takeoff && z<=1250 && robotIndex == 2) {
+                              //System.out.println("taking off");
                               //destinations.remove(currentDestination.getName());
                               gvh.plat.moat.goTo(currentDestination);
+                              
                               dgt = true;
                               takeoff = true;
                               stage = Stage.GO;
                               break;
-                        }
+                        }*/
 
-			index++;
-			System.out.println("z value is: " + z);
+			/*index++;
+                        
+			System.out.println("z value is: " + z);*/
 
-			if (z == -100 && robotIndex == 1){
-			      currentDestination = new ItemPosition("name",currentDestination.getX(),currentDestination.getY(),0);
+			if (z == 0){
 			      //System.out.println(currentDestination.getZ()+" "+robotIndex);
                               //destinations.remove(currentDestination.getName());
                               gvh.plat.moat.goTo(currentDestination);
                               dgt = true;
 			      stage = Stage.DONE;
 			} 
-			if (z == -200 && robotIndex == 2){
-			      currentDestination = new ItemPosition("name",currentDestination.getX(),currentDestination.getY(),0);
-			      //System.out.println(currentDestination.getZ()+" "+robotIndex);
-                              //destinations.remove(currentDestination.getName());
-                              gvh.plat.moat.goTo(currentDestination);
-                              dgt = true;
-			      stage = Stage.DONE;
-			}
 
-                        if (z >= 150 && robotIndex == 1) {
+                        //if (z >= 1500 && robotIndex == 1) {
 			
-                              System.out.println(currentDestination.getZ()+" "+robotIndex);
+                              //System.out.println(currentDestination.getZ()+" "+robotIndex);
                               //destinations.remove(currentDestination.getName());
                               gvh.plat.moat.goTo(currentDestination);
                               dgt = true;
-                        }
+                        /*}
                         else  {
-                            if (z < 125 && robotIndex == 2) {
-                              System.out.println(currentDestination.getZ()+" "+robotIndex);
+                            if (z < 1250 && robotIndex == 2) {
+                              //System.out.println(currentDestination.getZ()+" "+robotIndex);
                               //destinations.remove(currentDestination.getName());
                               gvh.plat.moat.goTo(currentDestination);
                               dgt = true;
@@ -175,7 +197,7 @@ public class FollowApp extends LogicThread {
                             }
                         }
                         //System.out.println(currentDestination.toString());
-                        //System.out.println("HERE2");
+                        //System.out.println("HERE2");*/
                         stage = Stage.GO;
                     }
                     break;
@@ -189,15 +211,18 @@ public class FollowApp extends LogicThread {
                        RobotMessage erase = new RobotMessage("ALL",name, ERASE_MSG, Integer.toString(eraseline));
                        gvh.comms.addOutgoingMessage(erase);
                        dgt = false;
+                       wait0 = false;
                        }
                           stage = Stage.PICK;
                           break;
                        }
                        arrived = true;
+                         
+
                     }
                     break;
                 case WAIT:
-			System.out.println("IN WAIT");
+	            //System.out.println("IN WAIT");
                     if (arrived && robotIndex != 0) { 
                        stage = Stage.PICK;
                     }
