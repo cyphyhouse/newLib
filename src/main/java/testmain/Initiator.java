@@ -28,7 +28,7 @@ public class Initiator implements MessageListener{
 
     // SharedPreferences variables
     private static final String PREF_SELECTED_ROBOT = "SELECTED_ROBOT";
-    private int selectedRobot = 2;
+    private int selectedRobot = 1;
 
     // Logic thread executor
     private ExecutorService executor = Executors.newFixedThreadPool(1);
