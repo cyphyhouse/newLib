@@ -147,7 +147,7 @@ public class FollowApp extends LogicThread {
                               dgt = true;
 			      stage = Stage.DONE;
 			} 
-			if (z == -200 && robotIndex == 1){
+			if (z == -200 && robotIndex == 2){
 			      System.out.println(currentDestination.getZ()+" "+robotIndex);
                               //destinations.remove(currentDestination.getName());
                               gvh.plat.moat.goTo(currentDestination);
