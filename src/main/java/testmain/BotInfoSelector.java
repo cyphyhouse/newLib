@@ -27,7 +27,7 @@ public class BotInfoSelector {
         if(color.equals("red")) {
             name = "bot0"; // assign name: bot0 is always red
             if(deviceType == Common.HTCONEM7) {
-                ip = "192.168.1.35"; // reserved IP address of red Nexus7 tablet
+                ip = "192.168.1.38"; // reserved IP address of red Nexus7 tablet
             }
             else if(deviceType == Common.MOTOE) {
                 ip = "192.168.1.114"; // reserved IP address of red MotoE phone
