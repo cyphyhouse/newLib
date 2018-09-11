@@ -162,6 +162,27 @@ public class JavaRosWrapper {
 				);
 				break;
 
+
+			case "Position":
+				bridge.subscribe(SubscriptionRequestMsg.generate(topic)
+					.setType("geometry_msgs/Point")
+					.setThrottleRate(1)
+					.setQueueLength(0),
+				new RosListenDelegate() {
+
+					public void receive(JsonNode data, String stringRep) {
+						MessageUnpacker<Point> unpacker = new MessageUnpacker<Point>(Point.class);
+						Point msg = unpacker.unpackRosMessage(data);
+
+						//System.out.println(msg.z);
+						
+						gvh.plat.model = new Model_Quadcopter("copter", (int)msg.x, (int)msg.y, (int)msg.z);
+					}
+				}
+				);
+				break;
+				
+
 			case "DecaWave":
 				bridge.subscribe(SubscriptionRequestMsg.generate(topic)
 					.setType("geometry_msgs/Point")

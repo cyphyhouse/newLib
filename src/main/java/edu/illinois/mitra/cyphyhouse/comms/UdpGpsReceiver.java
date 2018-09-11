@@ -21,6 +21,7 @@ import edu.illinois.mitra.cyphyhouse.objects.ItemPosition;
 import edu.illinois.mitra.cyphyhouse.objects.ObstacleList;
 import edu.illinois.mitra.cyphyhouse.objects.PositionList;
 import ros.msgs.geometry_msgs.Point;
+import edu.illinois.mitra.cyphyhouse.ros.JavaRosWrapper;
 
 /**
  * Hardware specific. Opens a UDP socket for receiving GPS broadcasts. 
@@ -68,6 +69,12 @@ public class UdpGpsReceiver extends Thread implements GpsReceiver {
 
 		gvh.log.i(TAG, "Listening to GPS host on port " + port);
 		gvh.trace.traceEvent(TAG, "Created", gvh.time());
+
+		System.out.println("SUBSCRIBING TO POSITION DATA FROM VRPN");
+		JavaRosWrapper wrapper;
+		wrapper = new JavaRosWrapper("ws://localhost:9090", name, this.gvh, "Quadcopter");
+		wrapper.subscribe_to_ROS("WHATEVER VRPN TOPIC IS CALLED", "Position");
+		
 	}
 
 	private final int[] mypos = {0,0,0};//the pos of the robot
