@@ -85,13 +85,16 @@ public class FollowApp extends LogicThread {
     public List<Object> callStarL() {
         dsm.createMW("testindex",0);
        
+	
         while(true) {
             testindex = Integer.parseInt(dsm.get("testindex","*"));
 
-            //System.out.println("ROBOT INDEX= "+ robotIndex + "stage: " + stage); 
+            System.out.println("ROBOT INDEX= "+ robotIndex + "stage: " + stage); 
             //System.out.println("ROBOT INDEX= "+ robotIndex + "testindex: " + testindex+ "index: "+index); 
             switch(stage) {
                 case PICK:
+
+			System.out.println("HERE A");
                     arrived = false;
 		    String line;
                         //System.out.println(lineno+" "+robotIndex); 
@@ -106,6 +109,9 @@ public class FollowApp extends LogicThread {
                         catch (IOException e) {}
                         catch (NoSuchElementException e) {stage = Stage.WAIT;lineno = lineno - 1;}
                         catch (IllegalArgumentException e) {stage = Stage.WAIT;lineno = 0;}
+
+			System.out.println("HERE B");
+
                     if(destinations.isEmpty()||robotIndex == 0) {
                         stage = Stage.WAIT;
                         break;
@@ -118,16 +124,27 @@ public class FollowApp extends LogicThread {
                            stage = Stage.WAIT;
                            break;
                         }
+
+
+			System.out.println("HERE C");
+
+
+
                         try {
                         currentDestination = getDestination(destinations, testindex);
                         if (!takeoff && robotIndex == 1) {
+			System.out.println("HERE D");
                            currentDestination = new ItemPosition("name",currentDestination.getX()+50,currentDestination.getY()+50,currentDestination.getZ()+100);
                         } 
                         else {if (!takeoff && robotIndex == 2) {
+				System.out.println("HERE E");
                            currentDestination = new ItemPosition("name",currentDestination.getX()-50,currentDestination.getY()-50,currentDestination.getZ());
                         }}
                         takeoff = true;
                         currentPosition = gvh.gps.getMyPosition();
+
+
+			System.out.println("HERE F");
                         if(!wait0){	
 						mutex0.requestEntry(0);
 						wait0 = true;
@@ -142,6 +159,8 @@ public class FollowApp extends LogicThread {
                         catch (NullPointerException e) {stage = Stage.DONE;lineno = lineno - 1; break;}
                         int z = currentDestination.getZ(); 
                   
+
+			System.out.println("HERE G");
                         /*if(!takeoff && z>=1500 && robotIndex == 1) {
                               //System.out.println("taking off");
                               //destinations.remove(currentDestination.getName());
