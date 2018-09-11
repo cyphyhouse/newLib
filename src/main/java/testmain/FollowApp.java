@@ -62,7 +62,7 @@ public class FollowApp extends LogicThread {
         PICK, GO, DONE, WAIT
     }; 
     private int index;
-    public int testindex;
+    public int testindex = 0;
     private Stage stage = Stage.PICK;
     boolean connected = false;
     public FollowApp(GlobalVarHolder gvh) {
@@ -89,7 +89,7 @@ public class FollowApp extends LogicThread {
         dsm.createMW("testindex",0);
        
         while(true) {
-            testindex = Integer.parseInt(dsm.get("testindex","*"));
+            //testindex = Integer.parseInt(dsm.get("testindex","*"));
 
             //System.out.println("ROBOT INDEX= "+ robotIndex + "stage: " + stage); 
             //System.out.println("ROBOT INDEX= "+ robotIndex + "testindex: " + testindex+ "index: "+index); 
@@ -100,7 +100,7 @@ public class FollowApp extends LogicThread {
                         //System.out.println(lineno+" "+robotIndex); 
                         try (Stream<String> lines = Files.lines(Paths.get("tasks.txt"))) {
                            line = lines.skip(lineno).findFirst().get();      
-                            
+                           System.out.println("PICK "+robotIndex); 
                            RobotMessage inform = new RobotMessage("ALL", name, DEST_MSG, line);
                            gvh.comms.addOutgoingMessage(inform);
                            lineno  = lineno +1;
@@ -130,7 +130,7 @@ public class FollowApp extends LogicThread {
                         }}
                         takeoff = true;
                         currentPosition = gvh.gps.getMyPosition();
-                        if(!wait0){	
+                        /*if(!wait0){	
 						mutex0.requestEntry(0);
 						wait0 = true;
 					}
@@ -139,7 +139,8 @@ public class FollowApp extends LogicThread {
                                                 System.out.println("incrementing testindex "+robotIndex);
 						dsm.put("testindex", "*", testindex + 1);
 						mutex0.exit(0);
-					}
+					}*/
+                        testindex++;
                         }
                         catch (NullPointerException e) {stage = Stage.DONE;lineno = lineno - 1; break;}
                         int z = currentDestination.getZ(); 
