@@ -108,6 +108,7 @@ public class FollowApp extends LogicThread {
                         catch (IllegalArgumentException e) {stage = Stage.WAIT;lineno = 0;}
                     if(destinations.isEmpty()||robotIndex == 0) {
                         stage = Stage.WAIT;
+                        break;
                         //System.out.println("HERE1");
                     } else {
 			//System.out.println("HERE1");
@@ -120,10 +121,10 @@ public class FollowApp extends LogicThread {
                         try {
                         currentDestination = getDestination(destinations, testindex);
                         if (!takeoff && robotIndex == 1) {
-                           currentDestination = new ItemPosition("name",currentDestination.getX()+50,currentDestination.getY()+50,currentDestination.getZ()+100);
+                           currentDestination = new ItemPosition("name",currentDestination.getX()+500,currentDestination.getY()+500,currentDestination.getZ()+1000);
                         } 
                         else {if (!takeoff && robotIndex == 2) {
-                           currentDestination = new ItemPosition("name",currentDestination.getX()-50,currentDestination.getY()-50,currentDestination.getZ());
+                           currentDestination = new ItemPosition("name",currentDestination.getX()-500,currentDestination.getY()-500,currentDestination.getZ());
                         }}
                         takeoff = true;
                         currentPosition = gvh.gps.getMyPosition();
@@ -258,9 +259,9 @@ public class FollowApp extends LogicThread {
             String dest = m.getContents().toString();
             dest = dest.replace(" ",",").replace("`","");
             String[] parts = dest.split(",");
-            int x = (int) (Float.parseFloat(parts[0])*100);
-            int y = (int) (Float.parseFloat(parts[1])*100);
-            int z = (int) (Float.parseFloat(parts[2])*100);
+            int x = (int) (Float.parseFloat(parts[0])*1000);
+            int y = (int) (Float.parseFloat(parts[1])*1000);
+            int z = (int) (Float.parseFloat(parts[2])*1000);
             String name = Integer.toString(i) +"-A";
             ItemPosition p = new ItemPosition(name,x,y,z);
             destinations.put(p.getName(),p);
