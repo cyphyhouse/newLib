@@ -121,10 +121,10 @@ public class FollowApp extends LogicThread {
                         try {
                         currentDestination = getDestination(destinations, testindex);
                         if (!takeoff && robotIndex == 1) {
-                           currentDestination = new ItemPosition("name",currentDestination.getX()+500,currentDestination.getY()+500,currentDestination.getZ()+1000);
+                           currentDestination = new ItemPosition("name",currentDestination.getX()+50,currentDestination.getY()+50,currentDestination.getZ()+100);
                         } 
                         else {if (!takeoff && robotIndex == 2) {
-                           currentDestination = new ItemPosition("name",currentDestination.getX()-500,currentDestination.getY()-500,currentDestination.getZ());
+                           currentDestination = new ItemPosition("name",currentDestination.getX()-50,currentDestination.getY()-50,currentDestination.getZ());
                         }}
                         takeoff = true;
                         currentPosition = gvh.gps.getMyPosition();
@@ -181,6 +181,7 @@ public class FollowApp extends LogicThread {
 			
                               //System.out.println(currentDestination.getZ()+" "+robotIndex);
                               //destinations.remove(currentDestination.getName());
+				System.out.println("REACHED CALLING GOTO FUNCTION");
                               gvh.plat.moat.goTo(currentDestination);
                               dgt = true;
                         /*}
