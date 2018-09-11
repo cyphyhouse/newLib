@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.0" branch-rate="0.0" lines-covered="0" lines-valid="5522" branches-covered="0" branches-valid="1974" complexity="2.4075382803297996" version="2.1.1" timestamp="1536701415817">
+<coverage line-rate="0.0016298442593263311" branch-rate="0.0" lines-covered="9" lines-valid="5522" branches-covered="0" branches-valid="1974" complexity="2.4075382803297996" version="2.1.1" timestamp="1536701559843">
 	<sources>
 		<source>/home/pi/newLib/target/generated-sources/annotations</source>
 		<source>--source</source>
@@ -6188,7 +6188,7 @@
 				</class>
 			</classes>
 		</package>
-		<package name="edu.illinois.mitra.cyphyhouse.gvh" line-rate="0.0" branch-rate="0.0" complexity="1.56">
+		<package name="edu.illinois.mitra.cyphyhouse.gvh" line-rate="0.04326923076923077" branch-rate="0.0" complexity="1.56">
 			<classes>
 				<class name="edu.illinois.mitra.cyphyhouse.gvh.AndroidPlatform" filename="edu/illinois/mitra/cyphyhouse/gvh/AndroidPlatform.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
 					<methods>
@@ -6630,28 +6630,28 @@
 						<line number="33" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="edu.illinois.mitra.cyphyhouse.gvh.JavaLogging" filename="edu/illinois/mitra/cyphyhouse/gvh/JavaLogging.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
+				<class name="edu.illinois.mitra.cyphyhouse.gvh.JavaLogging" filename="edu/illinois/mitra/cyphyhouse/gvh/JavaLogging.java" line-rate="0.8888888888888888" branch-rate="1.0" complexity="1.0">
 					<methods>
-						<method name="&lt;clinit&gt;" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
+						<method name="&lt;clinit&gt;" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="9" hits="0" branch="false"/>
+								<line number="9" hits="1" branch="false"/>
 							</lines>
 						</method>
-						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
+						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="8" hits="0" branch="false"/>
+								<line number="8" hits="3" branch="false"/>
 							</lines>
 						</method>
-						<method name="d" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="0.0" branch-rate="1.0" complexity="0">
+						<method name="d" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="23" hits="0" branch="false"/>
-								<line number="24" hits="0" branch="false"/>
+								<line number="23" hits="1" branch="false"/>
+								<line number="24" hits="1" branch="false"/>
 							</lines>
 						</method>
-						<method name="e" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="0.0" branch-rate="1.0" complexity="0">
+						<method name="e" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="13" hits="0" branch="false"/>
-								<line number="14" hits="0" branch="false"/>
+								<line number="13" hits="1" branch="false"/>
+								<line number="14" hits="1" branch="false"/>
 							</lines>
 						</method>
 						<method name="getLog" signature="()Ljava/lang/String;" line-rate="0.0" branch-rate="1.0" complexity="0">
@@ -6659,30 +6659,30 @@
 								<line number="28" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="i" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="0.0" branch-rate="1.0" complexity="0">
+						<method name="i" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="18" hits="0" branch="false"/>
-								<line number="19" hits="0" branch="false"/>
+								<line number="18" hits="1" branch="false"/>
+								<line number="19" hits="1" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="8" hits="0" branch="false"/>
-						<line number="9" hits="0" branch="false"/>
-						<line number="13" hits="0" branch="false"/>
-						<line number="14" hits="0" branch="false"/>
-						<line number="18" hits="0" branch="false"/>
-						<line number="19" hits="0" branch="false"/>
-						<line number="23" hits="0" branch="false"/>
-						<line number="24" hits="0" branch="false"/>
+						<line number="8" hits="3" branch="false"/>
+						<line number="9" hits="1" branch="false"/>
+						<line number="13" hits="1" branch="false"/>
+						<line number="14" hits="1" branch="false"/>
+						<line number="18" hits="1" branch="false"/>
+						<line number="19" hits="1" branch="false"/>
+						<line number="23" hits="1" branch="false"/>
+						<line number="24" hits="1" branch="false"/>
 						<line number="28" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="edu.illinois.mitra.cyphyhouse.gvh.Logging" filename="edu/illinois/mitra/cyphyhouse/gvh/Logging.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
+				<class name="edu.illinois.mitra.cyphyhouse.gvh.Logging" filename="edu/illinois/mitra/cyphyhouse/gvh/Logging.java" line-rate="0.5" branch-rate="1.0" complexity="1.0">
 					<methods>
-						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
+						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="3" hits="0" branch="false"/>
+								<line number="3" hits="3" branch="false"/>
 							</lines>
 						</method>
 						<method name="saveLogFile" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
@@ -6692,7 +6692,7 @@
 						</method>
 					</methods>
 					<lines>
-						<line number="3" hits="0" branch="false"/>
+						<line number="3" hits="3" branch="false"/>
 						<line number="15" hits="0" branch="false"/>
 					</lines>
 				</class>
