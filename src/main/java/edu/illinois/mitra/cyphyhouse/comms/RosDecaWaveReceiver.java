@@ -68,7 +68,7 @@ public class RosDecaWaveReceiver extends Thread implements GpsReceiver {
 		System.out.println("SUBSCRIBING TO POSITION DATA FROM VRPN");
 		JavaRosWrapper wrapper;
 		wrapper = new JavaRosWrapper("ws://localhost:9090", name, this.gvh, "Quadcopter");
-		wrapper.subscribe_to_ROS("/vrpn_client_node/cyphyhousecopter1/pose", "Position");
+		wrapper.subscribe_to_ROS("NOTHING", "Position");
 
 
 		gvh.log.i(TAG, "Subscribing to ROS TOPIC " + TopicName);
