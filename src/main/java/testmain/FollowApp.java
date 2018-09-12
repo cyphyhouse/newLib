@@ -102,6 +102,7 @@ public class FollowApp extends LogicThread {
                     if(destinations.isEmpty()||robotIndex == 0) {
                         stage = Stage.WAIT;
                         System.out.println("HERE1");
+                        break;
                     } else {
                         int numwaypoints = destinations.size();
                         if (index >= numwaypoints)
@@ -116,7 +117,7 @@ public class FollowApp extends LogicThread {
 						dsm.put("testindex", "*", testindex + 1);
 						mutex0.exit(0);
 					}
-                        
+                        System.out.println("testindex:"+ testindex);
                         currentDestination = getDestination(destinations, index);
                         index++;
                         destinations.remove(currentDestination.getName());
