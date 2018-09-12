@@ -31,13 +31,11 @@ public class FollowApp extends LogicThread {
     private static final String TAG = "Follow App";
     private static final int DEST_MSG = 23;
     private static final int ERASE_MSG = 24;
-    private int destIndex;
     int lineno = 0;
     int eraseline = -1;
     private int numBots;
     private int numWaypoints;
     private boolean arrived = false;
-    private boolean goForever = false;
     private int robotIndex;
     private DSM dsm;
     private boolean wait0 = false;
@@ -54,6 +52,7 @@ public class FollowApp extends LogicThread {
         PICK, GO, DONE, WAIT
     }; 
     private int index;
+    private int testindex;
     private Stage stage = Stage.PICK;
     boolean connected = false;
     public FollowApp(GlobalVarHolder gvh) {
@@ -68,7 +67,6 @@ public class FollowApp extends LogicThread {
 
         // bot names must be bot0, bot1, ... botn for this to work
         String intValue = name.replaceAll("[^0-9]", "");
-        destIndex = 0;
         robotIndex = Integer.parseInt(intValue);
         numBots = gvh.id.getParticipants().size();
         dsm = new DSMMultipleAttr(gvh); 
@@ -80,8 +78,10 @@ public class FollowApp extends LogicThread {
     public List<Object> callStarL() {
          
 
+        dsm.createMW("testindex",0);
         while(true) {
-            System.out.println(stage+ " "+ robotIndex); 
+            testindex = Integer.parseInt(dsm.get("testindex","*"));
+
             switch(stage) {
                 case PICK:
                     arrived = false;
@@ -106,13 +106,22 @@ public class FollowApp extends LogicThread {
                         int numwaypoints = destinations.size();
                         if (index >= numwaypoints)
                            stage = Stage.WAIT;
+                        if(!wait0){	
+						mutex0.requestEntry(0);
+						wait0 = true;
+					}
+					if(mutex0.clearToEnter(0)){
+						testindex = testindex +1;
+                                                System.out.println("incrementing testindex "+robotIndex);
+						dsm.put("testindex", "*", testindex + 1);
+						mutex0.exit(0);
+					}
+                        
                         currentDestination = getDestination(destinations, index);
                         index++;
-                        System.out.println(currentDestination.toString());
                         destinations.remove(currentDestination.getName());
                         gvh.plat.moat.goTo(currentDestination);
                         dgt = true;
-                        System.out.println("HERE2");
                         stage = Stage.GO;
                     }
                     break;
@@ -126,6 +135,7 @@ public class FollowApp extends LogicThread {
                        RobotMessage erase = new RobotMessage("ALL",name, ERASE_MSG, Integer.toString(eraseline));
                        gvh.comms.addOutgoingMessage(erase);
                        dgt = false;
+                       wait0 = false;
                        }
                           stage = Stage.PICK;
                           break;
