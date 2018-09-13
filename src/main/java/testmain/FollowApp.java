@@ -114,7 +114,7 @@ public class FollowApp extends LogicThread {
 			System.out.println("IN MIDDLE OF PICK");
                         currentDestination = getDestination(destinations, testindex);
 			System.out.println("cur dest:" + currentDestination);
-			System.out.println("clear to enter:" + mutex0.clearToEnter(0));
+			//System.out.println("clear to enter:" + mutex0.clearToEnter(0));
 			System.out.println("HERE AA");
                         if(!wait0){	
 						System.out.println("HERE BB");
