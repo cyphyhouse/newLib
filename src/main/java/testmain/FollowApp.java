@@ -81,7 +81,7 @@ public class FollowApp extends LogicThread {
          
 
         dsm.createMW("testindex",0);
-	dsm.createMW("num_robots",numBots);
+	dsm.createMW("num_robots",numBots-1);
         //dsm.createMW("turn",1);
         while(true) {
 	    
