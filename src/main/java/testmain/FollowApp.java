@@ -79,6 +79,7 @@ public class FollowApp extends LogicThread {
 
         dsm.createMW("testindex",0);
         while(true) {
+	    System.out.println("stage at beginning loop:"+ stage);
             testindex = Integer.parseInt(dsm.get("testindex","*"));
 
             switch(stage) {
@@ -139,6 +140,7 @@ public class FollowApp extends LogicThread {
                     }
                     break;
                 case GO:
+		    System.out.println("currentDest:" + currentDestination);
                     if(!gvh.plat.moat.inMotion) {
                        if (!arrived && currentDestination != null){
                           stage = Stage.WAIT;}
