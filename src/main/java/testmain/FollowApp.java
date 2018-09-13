@@ -119,7 +119,7 @@ public class FollowApp extends LogicThread {
 						mutex0.exit(0);
 					}
                         System.out.println("testindex:"+ testindex);
-                        currentDestination = getDestination(destinations, testindex);
+                        currentDestination = getDestination(destinations, index);
                         index++;
                         destinations.remove(currentDestination.getName());
                         gvh.plat.moat.goTo(currentDestination);
