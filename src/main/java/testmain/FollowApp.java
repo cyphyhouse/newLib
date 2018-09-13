@@ -120,12 +120,18 @@ public class FollowApp extends LogicThread {
 				dsm.put("testindex", "*", testindex);
 				mutex0.exit(0);
 			}
+			else {
+			    break;
+                        }
                         
                 
                         destinations.remove(currentDestination.getName());
                         gvh.plat.moat.goTo(currentDestination);
                         dgt = true;
                         stage = Stage.GO;
+                        if (currentDestination.getZ() == 0) {
+                           stage = Stage.DONE;
+                        }
                     }
                     break;
                 case GO:
