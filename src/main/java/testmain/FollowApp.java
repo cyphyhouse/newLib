@@ -107,6 +107,8 @@ public class FollowApp extends LogicThread {
                         int numwaypoints = destinations.size();
                         if (index >= numwaypoints)
                            stage = Stage.WAIT;
+			System.out.println("testindex:"+ testindex);
+                        currentDestination = getDestination(destinations, testindex);
                         if(!wait0){	
 						mutex0.requestEntry(0);
 						wait0 = true;
@@ -118,9 +120,6 @@ public class FollowApp extends LogicThread {
 						dsm.put("testindex", "*", testindex);
 						mutex0.exit(0);
 					}
-                        System.out.println("testindex:"+ testindex);
-                        currentDestination = getDestination(destinations, index);
-                        index++;
                         destinations.remove(currentDestination.getName());
                         gvh.plat.moat.goTo(currentDestination);
                         dgt = true;
