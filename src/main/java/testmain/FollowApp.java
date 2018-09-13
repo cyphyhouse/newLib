@@ -42,6 +42,7 @@ public class FollowApp extends LogicThread {
     private MutualExclusion mutex0; 
     boolean dgt = false;
     boolean entered_mutex = false;
+    private int turn = 2;
     private HashSet<RobotMessage> receivedMsgs = new HashSet<RobotMessage>();
     private HashSet<RobotMessage> erasedMsgs = new HashSet<RobotMessage>();
 
@@ -79,13 +80,14 @@ public class FollowApp extends LogicThread {
          
 
         dsm.createMW("testindex",0);
+        dsm.createMW("turn",1);
         while(true) {
 	    
-		System.out.println("entered_mutex: "+entered_mutex);
+		//System.out.println("entered_mutex: "+entered_mutex);
             
 	    //System.out.println("stage at beginning loop:"+ stage);
             testindex = Integer.parseInt(dsm.get("testindex","*"));
-
+            turn = Integer.parseInt(dsm.get("turn","*"));
             switch(stage) {
                 case PICK:
                     arrived = false;
@@ -126,7 +128,7 @@ public class FollowApp extends LogicThread {
                                                 break;
               
 			}
-			else if(mutex0.clearToEnter(0)){
+			else if(mutex0.clearToEnter(0) && turn == robotIndex){
 				testindex = testindex +1;
 				dsm.put("testindex", "*", testindex);
 				destinations.remove(currentDestination.getName());
@@ -170,12 +172,10 @@ public class FollowApp extends LogicThread {
                 case WAIT:
 		    //System.out.println("WAIT STAGE 1");
                     if (arrived && robotIndex != 0) { 
-		       //System.out.println("WAIT STAGE 2");
                        stage = Stage.PICK;
+                       dsm.put("turn", "*", 2);  //setting turn for other robot
 		       if(entered_mutex == true){
-			  //System.out.println("WAIT STAGE 3");
 		          mutex0.exit(0);
-			  //System.out.println("WAIT STAGE 4");
 			  entered_mutex = false;
 		          break;
 		       }
