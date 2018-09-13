@@ -108,7 +108,7 @@ public class FollowApp extends LogicThread {
                         System.out.println("testindex:"+ testindex);
                         if (index >= numwaypoints)
                            stage = Stage.WAIT;
-                        currentDestination = getDestination(destinations, index);
+                        currentDestination = getDestination(destinations, testindex);
                         if(!wait0){	
 						mutex0.requestEntry(0);
 						wait0 = true;
