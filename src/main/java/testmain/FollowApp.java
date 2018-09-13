@@ -200,12 +200,12 @@ public class FollowApp extends LogicThread {
                 break;
             }
         }
-        for(RobotMessage msg : erasedMsgs) {
+        /*for(RobotMessage msg : erasedMsgs) {
             if(msg.getFrom().equals(m.getFrom()) && msg.getContents().equals(m.getContents())) {
                 alreadyReceived = true;
                 break;
             }
-        }
+        }*/
        int i = receivedMsgs.size(); 
        int j = erasedMsgs.size(); 
        if (m.getMID() == DEST_MSG && !m.getFrom().equals(name) && !alreadyReceived) {
@@ -223,7 +223,7 @@ public class FollowApp extends LogicThread {
             destinations.put(p.getName(),p);
               
         }
-       if (m.getMID() == ERASE_MSG && !m.getFrom().equals(name) && !alreadyReceived) {
+       /*if (m.getMID() == ERASE_MSG && !m.getFrom().equals(name) && !alreadyReceived) {
             erasedMsgs.add(m);
             gvh.log.d(TAG, "received erase message from " + m.getFrom());
             String linenum = m.getContents().toString().replace("`","");
@@ -237,7 +237,7 @@ public class FollowApp extends LogicThread {
                //exception handling left as an exercise for the reader
                }
 
-        }
+        }*/
        
        
     }

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.0" branch-rate="0.0" lines-covered="0" lines-valid="5512" branches-covered="0" branches-valid="1960" complexity="2.3992932862190814" version="2.1.1" timestamp="1536874626686">
+<coverage line-rate="0.0" branch-rate="0.0" lines-covered="0" lines-valid="5496" branches-covered="0" branches-valid="1924" complexity="2.391048292108363" version="2.1.1" timestamp="1536875001335">
 	<sources>
 		<source>/home/peter/newLib/target/generated-sources/annotations</source>
 		<source>/home/peter/newLib/src/main/java</source>
@@ -21052,7 +21052,7 @@
 				</class>
 			</classes>
 		</package>
-		<package name="testmain" line-rate="0.0" branch-rate="0.0" complexity="5.071428571428571">
+		<package name="testmain" line-rate="0.0" branch-rate="0.0" complexity="4.571428571428571">
 			<classes>
 				<class name="testmain.BotInfoSelector" filename="testmain/BotInfoSelector.java" line-rate="0.0" branch-rate="0.0" complexity="10.0">
 					<methods>
@@ -21190,7 +21190,7 @@
 						<line number="112" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="testmain.FollowApp" filename="testmain/FollowApp.java" line-rate="0.0" branch-rate="0.0" complexity="10.25">
+				<class name="testmain.FollowApp" filename="testmain/FollowApp.java" line-rate="0.0" branch-rate="0.0" complexity="8.5">
 					<methods>
 						<method name="&lt;init&gt;" signature="(Ledu/illinois/mitra/cyphyhouse/gvh/GlobalVarHolder;)V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
@@ -21368,20 +21368,6 @@
 								<line number="199" hits="0" branch="false"/>
 								<line number="200" hits="0" branch="false"/>
 								<line number="202" hits="0" branch="false"/>
-								<line number="203" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="204" hits="0" branch="true" condition-coverage="0% (0/4)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-										<condition number="1" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="205" hits="0" branch="false"/>
-								<line number="206" hits="0" branch="false"/>
-								<line number="208" hits="0" branch="false"/>
 								<line number="209" hits="0" branch="false"/>
 								<line number="210" hits="0" branch="false"/>
 								<line number="211" hits="0" branch="true" condition-coverage="0% (0/6)">
@@ -21402,38 +21388,6 @@
 								<line number="221" hits="0" branch="false"/>
 								<line number="222" hits="0" branch="false"/>
 								<line number="223" hits="0" branch="false"/>
-								<line number="226" hits="0" branch="true" condition-coverage="0% (0/6)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-										<condition number="1" type="jump" coverage="0%"/>
-										<condition number="2" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="227" hits="0" branch="false"/>
-								<line number="228" hits="0" branch="false"/>
-								<line number="229" hits="0" branch="false"/>
-								<line number="230" hits="0" branch="false"/>
-								<line number="231" hits="0" branch="false"/>
-								<line number="232" hits="0" branch="false"/>
-								<line number="233" hits="0" branch="false"/>
-								<line number="235" hits="0" branch="false"/>
-								<line number="236" hits="0" branch="true" condition-coverage="0% (0/24)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-										<condition number="1" type="jump" coverage="0%"/>
-										<condition number="2" type="jump" coverage="0%"/>
-										<condition number="3" type="jump" coverage="0%"/>
-										<condition number="4" type="jump" coverage="0%"/>
-										<condition number="5" type="jump" coverage="0%"/>
-										<condition number="6" type="jump" coverage="0%"/>
-										<condition number="7" type="jump" coverage="0%"/>
-										<condition number="8" type="jump" coverage="0%"/>
-										<condition number="9" type="jump" coverage="0%"/>
-										<condition number="10" type="jump" coverage="0%"/>
-										<condition number="11" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="238" hits="0" branch="false"/>
 								<line number="243" hits="0" branch="false"/>
 							</lines>
 						</method>
@@ -21599,20 +21553,6 @@
 						<line number="199" hits="0" branch="false"/>
 						<line number="200" hits="0" branch="false"/>
 						<line number="202" hits="0" branch="false"/>
-						<line number="203" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="204" hits="0" branch="true" condition-coverage="0% (0/4)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-								<condition number="1" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="205" hits="0" branch="false"/>
-						<line number="206" hits="0" branch="false"/>
-						<line number="208" hits="0" branch="false"/>
 						<line number="209" hits="0" branch="false"/>
 						<line number="210" hits="0" branch="false"/>
 						<line number="211" hits="0" branch="true" condition-coverage="0% (0/6)">
@@ -21633,44 +21573,12 @@
 						<line number="221" hits="0" branch="false"/>
 						<line number="222" hits="0" branch="false"/>
 						<line number="223" hits="0" branch="false"/>
-						<line number="226" hits="0" branch="true" condition-coverage="0% (0/6)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-								<condition number="1" type="jump" coverage="0%"/>
-								<condition number="2" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="227" hits="0" branch="false"/>
-						<line number="228" hits="0" branch="false"/>
-						<line number="229" hits="0" branch="false"/>
-						<line number="230" hits="0" branch="false"/>
-						<line number="231" hits="0" branch="false"/>
-						<line number="232" hits="0" branch="false"/>
-						<line number="233" hits="0" branch="false"/>
-						<line number="235" hits="0" branch="false"/>
-						<line number="236" hits="0" branch="true" condition-coverage="0% (0/24)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-								<condition number="1" type="jump" coverage="0%"/>
-								<condition number="2" type="jump" coverage="0%"/>
-								<condition number="3" type="jump" coverage="0%"/>
-								<condition number="4" type="jump" coverage="0%"/>
-								<condition number="5" type="jump" coverage="0%"/>
-								<condition number="6" type="jump" coverage="0%"/>
-								<condition number="7" type="jump" coverage="0%"/>
-								<condition number="8" type="jump" coverage="0%"/>
-								<condition number="9" type="jump" coverage="0%"/>
-								<condition number="10" type="jump" coverage="0%"/>
-								<condition number="11" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="238" hits="0" branch="false"/>
 						<line number="243" hits="0" branch="false"/>
 						<line number="248" hits="0" branch="false"/>
 						<line number="251" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="testmain.FollowApp$1" filename="testmain/FollowApp.java" line-rate="0.0" branch-rate="1.0" complexity="10.25">
+				<class name="testmain.FollowApp$1" filename="testmain/FollowApp.java" line-rate="0.0" branch-rate="1.0" complexity="8.5">
 					<methods>
 						<method name="&lt;clinit&gt;" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
@@ -21682,7 +21590,7 @@
 						<line number="91" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="testmain.FollowApp$Stage" filename="testmain/FollowApp.java" line-rate="0.0" branch-rate="1.0" complexity="10.25">
+				<class name="testmain.FollowApp$Stage" filename="testmain/FollowApp.java" line-rate="0.0" branch-rate="1.0" complexity="8.5">
 					<methods>
 						<method name="&lt;clinit&gt;" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
