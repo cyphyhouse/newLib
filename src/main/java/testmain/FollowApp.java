@@ -162,11 +162,16 @@ public class FollowApp extends LogicThread {
                     }
                     break;
                 case WAIT:
+		    System.out.println("WAIT STAGE 1");
                     if (arrived && robotIndex != 0) { 
+		       System.out.println("WAIT STAGE 2");
                        stage = Stage.PICK;
 		       if(entered_mutex == true){
+			  System.out.println("WAIT STAGE 3");
 		          mutex0.exit(0);
+			  System.out.println("WAIT STAGE 4");
 			  entered_mutex = false;
+		          break;
 		       }
                     }
                     if (robotIndex == 0)
