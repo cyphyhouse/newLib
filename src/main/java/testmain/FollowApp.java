@@ -80,8 +80,9 @@ public class FollowApp extends LogicThread {
 
         dsm.createMW("testindex",0);
         while(true) {
-	    boolean clear_to_enter = mutex0.clearToEnter(0);
-            System.out.println("clear to eneter:" + clear_to_enter);
+	    if(mutex0.clearToEnter(0))
+		System.out.println("CLEAR TO ENTER");
+            
 	    //System.out.println("stage at beginning loop:"+ stage);
             testindex = Integer.parseInt(dsm.get("testindex","*"));
 
