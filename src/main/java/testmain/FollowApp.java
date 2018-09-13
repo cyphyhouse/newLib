@@ -51,7 +51,6 @@ public class FollowApp extends LogicThread {
     private enum Stage {
         PICK, GO, DONE, WAIT
     }; 
-    private int index;
     private int testindex;
     private Stage stage = Stage.PICK;
     boolean connected = false;
@@ -106,7 +105,7 @@ public class FollowApp extends LogicThread {
                     } else {
                         int numwaypoints = destinations.size();
                         System.out.println("testindex:"+ testindex);
-                        if (index >= numwaypoints)
+                        if (testindex >= numwaypoints)
                            stage = Stage.WAIT;
                         currentDestination = getDestination(destinations, testindex);
                         if(!wait0){	
@@ -121,7 +120,7 @@ public class FollowApp extends LogicThread {
 						mutex0.exit(0);
 					}
                         
-                        index++;
+                
                         destinations.remove(currentDestination.getName());
                         gvh.plat.moat.goTo(currentDestination);
                         dgt = true;
