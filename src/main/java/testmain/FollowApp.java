@@ -80,7 +80,7 @@ public class FollowApp extends LogicThread {
 
         dsm.createMW("testindex",0);
         while(true) {
-	    System.out.println("stage at beginning loop:"+ stage);
+	    //System.out.println("stage at beginning loop:"+ stage);
             testindex = Integer.parseInt(dsm.get("testindex","*"));
 
             switch(stage) {
@@ -111,13 +111,13 @@ public class FollowApp extends LogicThread {
 			//System.out.println("stage:"+ stage);
                         if (testindex >= numwaypoints)
                            stage = Stage.WAIT;
-			System.out.println("IN MIDDLE OF PICK");
+			//System.out.println("IN MIDDLE OF PICK");
                         currentDestination = getDestination(destinations, testindex);
-			System.out.println("cur dest:" + currentDestination);
+			//System.out.println("cur dest:" + currentDestination);
 			//System.out.println("clear to enter:" + mutex0.clearToEnter(0));
-			System.out.println("HERE AA");
+			//System.out.println("HERE AA");
                         if(!wait0){	
-						System.out.println("HERE BB");
+						//System.out.println("HERE BB");
 						mutex0.requestEntry(0);
 						wait0 = true;
                                                 break;
@@ -125,7 +125,6 @@ public class FollowApp extends LogicThread {
 			}
 			else if(mutex0.clearToEnter(0)){
 				testindex = testindex +1;
-                                System.out.println("incrementing testindex "+robotIndex);
 				dsm.put("testindex", "*", testindex);
 				destinations.remove(currentDestination.getName());
                         	gvh.plat.moat.goTo(currentDestination);
@@ -147,7 +146,7 @@ public class FollowApp extends LogicThread {
                     }
                     break;
                 case GO:
-		    System.out.println("currentDest:" + currentDestination);
+		    //System.out.println("currentDest:" + currentDestination);
                     if(!gvh.plat.moat.inMotion) {
                        if (!arrived && currentDestination != null){
                           stage = Stage.WAIT;}
@@ -166,14 +165,14 @@ public class FollowApp extends LogicThread {
                     }
                     break;
                 case WAIT:
-		    System.out.println("WAIT STAGE 1");
+		    //System.out.println("WAIT STAGE 1");
                     if (arrived && robotIndex != 0) { 
-		       System.out.println("WAIT STAGE 2");
+		       //System.out.println("WAIT STAGE 2");
                        stage = Stage.PICK;
 		       if(entered_mutex == true){
-			  System.out.println("WAIT STAGE 3");
+			  //System.out.println("WAIT STAGE 3");
 		          mutex0.exit(0);
-			  System.out.println("WAIT STAGE 4");
+			  //System.out.println("WAIT STAGE 4");
 			  entered_mutex = false;
 		          break;
 		       }
