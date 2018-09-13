@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.0" branch-rate="0.0" lines-covered="0" lines-valid="5496" branches-covered="0" branches-valid="1924" complexity="2.391048292108363" version="2.1.1" timestamp="1536875640743">
+<coverage line-rate="0.0" branch-rate="0.0" lines-covered="0" lines-valid="5493" branches-covered="0" branches-valid="1924" complexity="2.391048292108363" version="2.1.1" timestamp="1536875976519">
 	<sources>
 		<source>/home/peter/newLib/target/generated-sources/annotations</source>
 		<source>/home/peter/newLib/src/main/java</source>
@@ -21225,9 +21225,7 @@
 						<method name="callStarL" signature="()Ljava/util/List;" line-rate="0.0" branch-rate="0.0" complexity="0">
 							<lines>
 								<line number="82" hits="0" branch="false"/>
-								<line number="83" hits="0" branch="false"/>
 								<line number="89" hits="0" branch="false"/>
-								<line number="90" hits="0" branch="false"/>
 								<line number="91" hits="0" branch="true" condition-coverage="0% (0/5)">
 									<conditions>
 										<condition number="0" type="switch" coverage="0%"/>
@@ -21324,7 +21322,6 @@
 									</conditions>
 								</line>
 								<line number="175" hits="0" branch="false"/>
-								<line number="176" hits="0" branch="false"/>
 								<line number="177" hits="0" branch="true" condition-coverage="0% (0/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
@@ -21420,9 +21417,7 @@
 						<line number="74" hits="0" branch="false"/>
 						<line number="76" hits="0" branch="false"/>
 						<line number="82" hits="0" branch="false"/>
-						<line number="83" hits="0" branch="false"/>
 						<line number="89" hits="0" branch="false"/>
-						<line number="90" hits="0" branch="false"/>
 						<line number="91" hits="0" branch="true" condition-coverage="0% (0/5)">
 							<conditions>
 								<condition number="0" type="switch" coverage="0%"/>
@@ -21519,7 +21514,6 @@
 							</conditions>
 						</line>
 						<line number="175" hits="0" branch="false"/>
-						<line number="176" hits="0" branch="false"/>
 						<line number="177" hits="0" branch="true" condition-coverage="0% (0/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>

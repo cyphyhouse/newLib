@@ -80,14 +80,14 @@ public class FollowApp extends LogicThread {
          
 
         dsm.createMW("testindex",0);
-        dsm.createMW("turn",1);
+        //dsm.createMW("turn",1);
         while(true) {
 	    
 		//System.out.println("entered_mutex: "+entered_mutex);
             
 	    //System.out.println("stage at beginning loop:"+ stage);
             testindex = Integer.parseInt(dsm.get("testindex","*"));
-            turn = Integer.parseInt(dsm.get("turn","*"));
+            //turn = Integer.parseInt(dsm.get("turn","*"));
             switch(stage) {
                 case PICK:
                     arrived = false;
@@ -128,7 +128,7 @@ public class FollowApp extends LogicThread {
                                                 break;
               
 			}
-			else if(mutex0.clearToEnter(0) && turn == robotIndex){
+			else if(mutex0.clearToEnter(0) && testindex%2 == robotIndex%2){
 				testindex = testindex +1;
 				dsm.put("testindex", "*", testindex);
 				destinations.remove(currentDestination.getName());
@@ -173,7 +173,7 @@ public class FollowApp extends LogicThread {
 		    //System.out.println("WAIT STAGE 1");
                     if (arrived && robotIndex != 0) { 
                        stage = Stage.PICK;
-                       dsm.put("turn", "*", 1);  //setting turn for other robot
+                       //dsm.put("turn", "*", 1);  //setting turn for other robot
 		       if(entered_mutex == true){
 		          mutex0.exit(0);
 			  entered_mutex = false;
