@@ -54,6 +54,7 @@ public class FollowApp extends LogicThread {
         PICK, GO, DONE, WAIT
     }; 
     private int testindex;
+    private int num_robots;
     private Stage stage = Stage.PICK;
     boolean connected = false;
     public FollowApp(GlobalVarHolder gvh) {
@@ -80,6 +81,7 @@ public class FollowApp extends LogicThread {
          
 
         dsm.createMW("testindex",0);
+	dsm.createMW("num_robots",numBots);
         //dsm.createMW("turn",1);
         while(true) {
 	    
@@ -121,6 +123,9 @@ public class FollowApp extends LogicThread {
 			//System.out.println("cur dest:" + currentDestination);
 			//System.out.println("clear to enter:" + mutex0.clearToEnter(0));
 			//System.out.println("HERE AA");
+                        
+			num_robots = Integer.parseInt(dsm.get("num_robots","*"));
+
                         if(!wait0){	
 						//System.out.println("HERE BB");
 						mutex0.requestEntry(0);
@@ -128,7 +133,8 @@ public class FollowApp extends LogicThread {
                                                 break;
               
 			}
-			else if(mutex0.clearToEnter(0) && testindex%2 == robotIndex%2){
+
+			else if(mutex0.clearToEnter(0) && testindex%num_robots == robotIndex%num_robots){
 				//testindex = testindex +1;
 				//dsm.put("testindex", "*", testindex);
 				destinations.remove(currentDestination.getName());
@@ -149,7 +155,9 @@ public class FollowApp extends LogicThread {
 				stage = Stage.DONE;
 			   if(entered_mutex == true){
 			  testindex = testindex +1;
+			  num_robots = Integer.parseInt(dsm.get("num_robots","*"));
 		          dsm.put("testindex", "*", testindex);
+                          dsm.put("num_robots", "*", num_robots-1);
 		          mutex0.exit(0);
 			  entered_mutex = false;
 		          break;
