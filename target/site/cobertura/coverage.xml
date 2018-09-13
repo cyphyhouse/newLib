@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.0" branch-rate="0.0" lines-covered="0" lines-valid="5504" branches-covered="0" branches-valid="1956" complexity="2.396937573616019" version="2.1.1" timestamp="1536866396483">
+<coverage line-rate="0.0" branch-rate="0.0" lines-covered="0" lines-valid="5505" branches-covered="0" branches-valid="1956" complexity="2.396937573616019" version="2.1.1" timestamp="1536866859593">
 	<sources>
 		<source>/home/peter/newLib/target/generated-sources/annotations</source>
 		<source>/home/peter/newLib/src/main/java</source>
@@ -21320,6 +21320,7 @@
 										<condition number="1" type="jump" coverage="0%"/>
 									</conditions>
 								</line>
+								<line number="157" hits="0" branch="false"/>
 								<line number="158" hits="0" branch="false"/>
 								<line number="160" hits="0" branch="true" condition-coverage="0% (0/2)">
 									<conditions>
@@ -21549,6 +21550,7 @@
 								<condition number="1" type="jump" coverage="0%"/>
 							</conditions>
 						</line>
+						<line number="157" hits="0" branch="false"/>
 						<line number="158" hits="0" branch="false"/>
 						<line number="160" hits="0" branch="true" condition-coverage="0% (0/2)">
 							<conditions>
