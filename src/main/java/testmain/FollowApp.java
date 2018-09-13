@@ -118,7 +118,7 @@ public class FollowApp extends LogicThread {
 				testindex = testindex +1;
                                 System.out.println("incrementing testindex "+robotIndex);
 				dsm.put("testindex", "*", testindex);
-				mutex0.exit(0);
+				//mutex0.exit(0);
 			}
 			else {
 			    break;
@@ -154,6 +154,7 @@ public class FollowApp extends LogicThread {
                     break;
                 case WAIT:
                     if (arrived && robotIndex != 0) { 
+		       mutex0.exit(0);
                        stage = Stage.PICK;
                     }
                     if (robotIndex == 0)
