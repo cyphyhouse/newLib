@@ -173,7 +173,7 @@ public class FollowApp extends LogicThread {
 		    //System.out.println("WAIT STAGE 1");
                     if (arrived && robotIndex != 0) { 
                        stage = Stage.PICK;
-                       dsm.put("turn", "*", 2);  //setting turn for other robot
+                       dsm.put("turn", "*", 1);  //setting turn for other robot
 		       if(entered_mutex == true){
 		          mutex0.exit(0);
 			  entered_mutex = false;
