@@ -102,19 +102,22 @@ public class FollowApp extends LogicThread {
                         
                     if(destinations.isEmpty()||robotIndex == 0) {
                         stage = Stage.WAIT;
-                        System.out.println("HERE1");
+                        //System.out.println("HERE1");
                         break;
                     } else {
                         int numwaypoints = destinations.size();
-                        System.out.println("testindex:"+ testindex);
-			System.out.println("wait0:"+ wait0);
-			System.out.println("stage:"+ stage);
+                        //System.out.println("testindex:"+ testindex);
+			//System.out.println("wait0:"+ wait0);
+			//System.out.println("stage:"+ stage);
                         if (testindex >= numwaypoints)
                            stage = Stage.WAIT;
 			System.out.println("IN MIDDLE OF PICK");
                         currentDestination = getDestination(destinations, testindex);
+			System.out.println("cur dest:" + currentDestination);
 			System.out.println("clear to enter:" + mutex0.clearToEnter(0));
+			System.out.println("HERE AA");
                         if(!wait0){	
+						System.out.println("HERE BB");
 						mutex0.requestEntry(0);
 						wait0 = true;
                                                 break;
