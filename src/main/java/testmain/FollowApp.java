@@ -115,11 +115,11 @@ public class FollowApp extends LogicThread {
 					if(mutex0.clearToEnter(0)){
 						testindex = testindex +1;
                                                 System.out.println("incrementing testindex "+robotIndex);
-						dsm.put("testindex", "*", testindex + 1);
+						dsm.put("testindex", "*", testindex);
 						mutex0.exit(0);
 					}
                         System.out.println("testindex:"+ testindex);
-                        currentDestination = getDestination(destinations, index);
+                        currentDestination = getDestination(destinations, testindex);
                         index++;
                         destinations.remove(currentDestination.getName());
                         gvh.plat.moat.goTo(currentDestination);
