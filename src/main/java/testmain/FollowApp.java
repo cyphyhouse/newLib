@@ -112,7 +112,7 @@ public class FollowApp extends LogicThread {
 						wait0 = true;
               
 					}
-					else if(mutex0.clearToEnter(0)){
+					if(mutex0.clearToEnter(0)){
 						testindex = testindex +1;
                                                 System.out.println("incrementing testindex "+robotIndex);
 						dsm.put("testindex", "*", testindex + 1);
