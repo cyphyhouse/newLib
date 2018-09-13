@@ -154,7 +154,7 @@ public class FollowApp extends LogicThread {
                     break;
                 case WAIT:
                     if (arrived && robotIndex != 0) { 
-		       mutex0.exit(0);
+		       //mutex0.exit(0);
                        stage = Stage.PICK;
                     }
                     if (robotIndex == 0)
