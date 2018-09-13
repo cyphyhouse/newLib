@@ -41,6 +41,7 @@ public class FollowApp extends LogicThread {
     private boolean wait0 = false;
     private MutualExclusion mutex0; 
     boolean dgt = false;
+    boolean entered_mutex = false;
     private HashSet<RobotMessage> receivedMsgs = new HashSet<RobotMessage>();
     private HashSet<RobotMessage> erasedMsgs = new HashSet<RobotMessage>();
 
@@ -124,6 +125,8 @@ public class FollowApp extends LogicThread {
 				dsm.put("testindex", "*", testindex);
 				destinations.remove(currentDestination.getName());
                         	gvh.plat.moat.goTo(currentDestination);
+				entered_mutex = true;
+
 				//mutex0.exit(0);
 			}
 			else {
@@ -161,7 +164,10 @@ public class FollowApp extends LogicThread {
                 case WAIT:
                     if (arrived && robotIndex != 0) { 
                        stage = Stage.PICK;
-		       mutex0.exit(0);
+		       if(entered_mutex == true){
+		          mutex0.exit(0);
+			  entered_mutex = false;
+		       }
                     }
                     if (robotIndex == 0)
                        stage = Stage.PICK;
