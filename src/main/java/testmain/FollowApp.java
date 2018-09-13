@@ -129,8 +129,8 @@ public class FollowApp extends LogicThread {
               
 			}
 			else if(mutex0.clearToEnter(0) && testindex%2 == robotIndex%2){
-				testindex = testindex +1;
-				dsm.put("testindex", "*", testindex);
+				//testindex = testindex +1;
+				//dsm.put("testindex", "*", testindex);
 				destinations.remove(currentDestination.getName());
                         	gvh.plat.moat.goTo(currentDestination);
 				entered_mutex = true;
