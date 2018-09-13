@@ -41,7 +41,7 @@ public class FollowApp extends LogicThread {
     private boolean wait0 = false;
     private MutualExclusion mutex0; 
     boolean dgt = false;
-    boolean entered_mutex = false;
+    //boolean entered_mutex = false;
     private int turn = 2;
     private HashSet<RobotMessage> receivedMsgs = new HashSet<RobotMessage>();
     private HashSet<RobotMessage> erasedMsgs = new HashSet<RobotMessage>();
@@ -133,9 +133,9 @@ public class FollowApp extends LogicThread {
 				dsm.put("testindex", "*", testindex);
 				destinations.remove(currentDestination.getName());
                         	gvh.plat.moat.goTo(currentDestination);
-				entered_mutex = true;
+				//entered_mutex = true;
 
-				//mutex0.exit(0);
+				mutex0.exit(0);
 			}
 			else {
 			    break;
@@ -157,15 +157,13 @@ public class FollowApp extends LogicThread {
                           stage = Stage.WAIT;}
                        else {
                           if (dgt == true) {
-                       eraseline++;
-                       RobotMessage erase = new RobotMessage("ALL",name, ERASE_MSG, Integer.toString(eraseline));
-                       gvh.comms.addOutgoingMessage(erase);
-                       dgt = false;
-                       wait0 = false;
-                       }
+                       		dgt = false;
+                      		wait0 = false;
+                       	  }
                           stage = Stage.PICK;
                           break;
                        }
+		       	
                        arrived = true;
                     }
                     break;
@@ -174,11 +172,11 @@ public class FollowApp extends LogicThread {
                     if (arrived && robotIndex != 0) { 
                        stage = Stage.PICK;
                        //dsm.put("turn", "*", 1);  //setting turn for other robot
-		       if(entered_mutex == true){
-		          mutex0.exit(0);
-			  entered_mutex = false;
-		          break;
-		       }
+		       //if(entered_mutex == true){
+		         // mutex0.exit(0);
+			 // entered_mutex = false;
+		         // break;
+		       //}
                     }
                     if (robotIndex == 0)
                        stage = Stage.PICK;
