@@ -110,6 +110,7 @@ public class FollowApp extends LogicThread {
                         if (testindex >= numwaypoints)
                            stage = Stage.WAIT;
                         currentDestination = getDestination(destinations, testindex);
+			System.out.println("clear to enter:" + mutex0.clearToEnter(0));
                         if(!wait0){	
 						mutex0.requestEntry(0);
 						wait0 = true;
@@ -120,6 +121,8 @@ public class FollowApp extends LogicThread {
 				testindex = testindex +1;
                                 System.out.println("incrementing testindex "+robotIndex);
 				dsm.put("testindex", "*", testindex);
+				destinations.remove(currentDestination.getName());
+                        	gvh.plat.moat.goTo(currentDestination);
 				//mutex0.exit(0);
 			}
 			else {
@@ -127,8 +130,7 @@ public class FollowApp extends LogicThread {
                         }
                         
                 
-                        destinations.remove(currentDestination.getName());
-                        gvh.plat.moat.goTo(currentDestination);
+                        
                         dgt = true;
                         stage = Stage.GO;
                         if (currentDestination.getZ() == 0) {
