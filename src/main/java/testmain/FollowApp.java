@@ -111,6 +111,7 @@ public class FollowApp extends LogicThread {
 			System.out.println("stage:"+ stage);
                         if (testindex >= numwaypoints)
                            stage = Stage.WAIT;
+			System.out.println("IN MIDDLE OF PICK");
                         currentDestination = getDestination(destinations, testindex);
 			System.out.println("clear to enter:" + mutex0.clearToEnter(0));
                         if(!wait0){	
