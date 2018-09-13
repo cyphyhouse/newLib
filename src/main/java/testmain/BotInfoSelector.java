@@ -25,15 +25,17 @@ public class BotInfoSelector {
 
     public BotInfoSelector(String color, int type, int deviceType) {
         if(color.equals("red")) {
+
             name = "bot0"; // assign name: bot0 is always red
-            if(deviceType == Common.NEXUS7) {
+            ip = "192.168.1.35";
+            /*if(deviceType == Common.NEXUS7) {
                 ip = "192.168.1.35"; // reserved IP address of red Nexus7 tablet
-            }
+            }s
             else if(deviceType == Common.MOTOE) {
                 ip = "192.168.1.114"; // reserved IP address of red MotoE phone
             }
             else if(deviceType == Common.HTCONEM7){
-                ip = "192.168.1.36"; // FixMe: need to figure out
+                ip = "192.168.1.35"; // FixMe: need to figure out
             }
             if(type == Common.IROBOT) {
                 bluetooth = "5C:F3:70:75:BB:0E"; // bluetooth address of red raspberry pi on red irobot
@@ -48,13 +50,14 @@ public class BotInfoSelector {
             }
             else if(type == Common.CAR){
                 this.type = new Model_Car(name, 0,0);
-            }
+            }*/
 
         }
 
         if(color.equals("green")) {
             name = "bot1";
-            if(deviceType == Common.NEXUS7) {
+            ip = "192.168.1.31";
+           /* if(deviceType == Common.NEXUS7) {
                 ip = "192.168.1.31";
             }
             else if(deviceType == Common.HTCONEM7){
@@ -74,7 +77,7 @@ public class BotInfoSelector {
             else if(type == Common.ARDRONE2) {
                 this.type = new ModelARDrone2(name, 0,0,0);
                 this.ip = "10.195.69.206";
-            }
+            }*/
         }
 
         if(color.equals("blue")) {
