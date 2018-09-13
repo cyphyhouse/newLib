@@ -146,7 +146,15 @@ public class FollowApp extends LogicThread {
                         dgt = true;
                         stage = Stage.GO;
                         if (currentDestination.getZ() == 0) {
-                           stage = Stage.DONE;
+				stage = Stage.DONE;
+			   if(entered_mutex == true){
+			  testindex = testindex +1;
+		          dsm.put("testindex", "*", testindex);
+		          mutex0.exit(0);
+			  entered_mutex = false;
+		          break;
+		          }
+                           
                         }
                     }
                     break;
