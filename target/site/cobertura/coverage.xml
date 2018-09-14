@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.0016298442593263311" branch-rate="0.0" lines-covered="9" lines-valid="5522" branches-covered="0" branches-valid="1974" complexity="2.4075382803297996" version="2.1.1" timestamp="1536931948221">
+<coverage line-rate="0.0016313213703099511" branch-rate="0.0" lines-covered="9" lines-valid="5517" branches-covered="0" branches-valid="1970" complexity="2.4075382803297996" version="2.1.1" timestamp="1536932743650">
 	<sources>
 		<source>/home/mim/newLib/src/main/java</source>
 		<source>/home/mim/newLib/target/generated-sources/annotations</source>
@@ -21374,7 +21374,6 @@
 						</method>
 						<method name="callStarL" signature="()Ljava/util/List;" line-rate="0.0" branch-rate="0.0" complexity="0">
 							<lines>
-								<line number="84" hits="0" branch="false"/>
 								<line number="85" hits="0" branch="true" condition-coverage="0% (0/5)">
 									<conditions>
 										<condition number="0" type="switch" coverage="0%"/>
@@ -21402,7 +21401,6 @@
 									</conditions>
 								</line>
 								<line number="103" hits="0" branch="false"/>
-								<line number="104" hits="0" branch="false"/>
 								<line number="106" hits="0" branch="false"/>
 								<line number="107" hits="0" branch="true" condition-coverage="0% (0/2)">
 									<conditions>
@@ -21412,11 +21410,9 @@
 								<line number="108" hits="0" branch="false"/>
 								<line number="109" hits="0" branch="false"/>
 								<line number="110" hits="0" branch="false"/>
-								<line number="111" hits="0" branch="false"/>
 								<line number="112" hits="0" branch="false"/>
 								<line number="113" hits="0" branch="false"/>
 								<line number="114" hits="0" branch="false"/>
-								<line number="115" hits="0" branch="false"/>
 								<line number="116" hits="0" branch="false"/>
 								<line number="118" hits="0" branch="false"/>
 								<line number="120" hits="0" branch="true" condition-coverage="0% (0/2)">
@@ -21533,8 +21529,7 @@
 								<line number="188" hits="0" branch="false"/>
 								<line number="189" hits="0" branch="false"/>
 								<line number="190" hits="0" branch="false"/>
-								<line number="192" hits="0" branch="false"/>
-								<line number="193" hits="0" branch="true" condition-coverage="0% (0/24)">
+								<line number="193" hits="0" branch="true" condition-coverage="0% (0/20)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
 										<condition number="1" type="jump" coverage="0%"/>
@@ -21546,8 +21541,6 @@
 										<condition number="7" type="jump" coverage="0%"/>
 										<condition number="8" type="jump" coverage="0%"/>
 										<condition number="9" type="jump" coverage="0%"/>
-										<condition number="10" type="jump" coverage="0%"/>
-										<condition number="11" type="jump" coverage="0%"/>
 									</conditions>
 								</line>
 								<line number="195" hits="0" branch="false"/>
@@ -21582,7 +21575,6 @@
 						<line number="74" hits="0" branch="false"/>
 						<line number="75" hits="0" branch="false"/>
 						<line number="77" hits="0" branch="false"/>
-						<line number="84" hits="0" branch="false"/>
 						<line number="85" hits="0" branch="true" condition-coverage="0% (0/5)">
 							<conditions>
 								<condition number="0" type="switch" coverage="0%"/>
@@ -21610,7 +21602,6 @@
 							</conditions>
 						</line>
 						<line number="103" hits="0" branch="false"/>
-						<line number="104" hits="0" branch="false"/>
 						<line number="106" hits="0" branch="false"/>
 						<line number="107" hits="0" branch="true" condition-coverage="0% (0/2)">
 							<conditions>
@@ -21620,11 +21611,9 @@
 						<line number="108" hits="0" branch="false"/>
 						<line number="109" hits="0" branch="false"/>
 						<line number="110" hits="0" branch="false"/>
-						<line number="111" hits="0" branch="false"/>
 						<line number="112" hits="0" branch="false"/>
 						<line number="113" hits="0" branch="false"/>
 						<line number="114" hits="0" branch="false"/>
-						<line number="115" hits="0" branch="false"/>
 						<line number="116" hits="0" branch="false"/>
 						<line number="118" hits="0" branch="false"/>
 						<line number="120" hits="0" branch="true" condition-coverage="0% (0/2)">
@@ -21731,8 +21720,7 @@
 						<line number="188" hits="0" branch="false"/>
 						<line number="189" hits="0" branch="false"/>
 						<line number="190" hits="0" branch="false"/>
-						<line number="192" hits="0" branch="false"/>
-						<line number="193" hits="0" branch="true" condition-coverage="0% (0/24)">
+						<line number="193" hits="0" branch="true" condition-coverage="0% (0/20)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>
 								<condition number="1" type="jump" coverage="0%"/>
@@ -21744,8 +21732,6 @@
 								<condition number="7" type="jump" coverage="0%"/>
 								<condition number="8" type="jump" coverage="0%"/>
 								<condition number="9" type="jump" coverage="0%"/>
-								<condition number="10" type="jump" coverage="0%"/>
-								<condition number="11" type="jump" coverage="0%"/>
 							</conditions>
 						</line>
 						<line number="195" hits="0" branch="false"/>

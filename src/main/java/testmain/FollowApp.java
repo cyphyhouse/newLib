@@ -81,7 +81,7 @@ public class FollowApp extends LogicThread {
          
 
         while(true) {
-            System.out.println(stage+ " "+ robotIndex); 
+            //System.out.println(stage+ " "+ robotIndex); 
             switch(stage) {
                 case PICK:
                     arrived = false;
@@ -101,18 +101,18 @@ public class FollowApp extends LogicThread {
                         
                     if(destinations.isEmpty()||robotIndex == 0) {
                         stage = Stage.WAIT;
-                        System.out.println("HERE1");
+                        //System.out.println("HERE1");
                     } else {
                         int numwaypoints = destinations.size();
                         if (index >= numwaypoints)
                            stage = Stage.WAIT;
                         currentDestination = getDestination(destinations, index);
                         index++;
-                        System.out.println(currentDestination.toString());
+                        //System.out.println(currentDestination.toString());
                         destinations.remove(currentDestination.getName());
                         gvh.plat.moat.goTo(currentDestination);
                         dgt = true;
-                        System.out.println("HERE2");
+                        //System.out.println("HERE2");
                         stage = Stage.GO;
                     }
                     break;
@@ -189,7 +189,7 @@ public class FollowApp extends LogicThread {
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter out = new PrintWriter(bw))
             {
-               out.println(x);
+               //out.println(x);
               } catch (IOException e) {
                //exception handling left as an exercise for the reader
                }
