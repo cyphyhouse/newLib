@@ -27,13 +27,13 @@ public class BotInfoSelector {
         if(color.equals("red")) {
             name = "bot0"; // assign name: bot0 is always red
             if(deviceType == Common.NEXUS7) {
-                ip = "192.168.1.35"; // reserved IP address of red Nexus7 tablet
+                ip = "192.168.1.43"; // reserved IP address of red Nexus7 tablet
             }
             else if(deviceType == Common.MOTOE) {
                 ip = "192.168.1.114"; // reserved IP address of red MotoE phone
             }
             else if(deviceType == Common.HTCONEM7){
-                ip = "192.168.1.35"; // FixMe: need to figure out
+                ip = "192.168.1.43"; // FixMe: need to figure out
             }
             if(type == Common.IROBOT) {
                 bluetooth = "5C:F3:70:75:BB:0E"; // bluetooth address of red raspberry pi on red irobot
