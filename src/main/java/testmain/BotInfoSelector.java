@@ -27,7 +27,7 @@ public class BotInfoSelector {
         if(color.equals("red")) {
 
             name = "bot0"; // assign name: bot0 is always red
-            ip = "192.168.1.35";
+            ip = "192.168.1.43";
             /*if(deviceType == Common.NEXUS7) {
                 ip = "192.168.1.35"; // reserved IP address of red Nexus7 tablet
             }s
