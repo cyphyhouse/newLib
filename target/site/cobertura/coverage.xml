@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.0016363636363636363" branch-rate="0.0" lines-covered="9" lines-valid="5500" branches-covered="0" branches-valid="1926" complexity="2.392226148409894" version="2.1.1" timestamp="1537294553651">
+<coverage line-rate="0.0016360661697873114" branch-rate="0.0" lines-covered="9" lines-valid="5501" branches-covered="0" branches-valid="1926" complexity="2.392226148409894" version="2.1.1" timestamp="1537294728338">
 	<sources>
 		<source>/home/mim/newLib/src/main/java</source>
 		<source>/home/mim/newLib/target/generated-sources/annotations</source>
@@ -12717,7 +12717,7 @@
 						</method>
 						<method name="cancel" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="179" hits="0" branch="false"/>
+								<line number="180" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="goTo" signature="(Ledu/illinois/mitra/cyphyhouse/objects/ItemPosition;)V" line-rate="0.0" branch-rate="0.0" complexity="0">
@@ -12740,7 +12740,8 @@
 								<line number="114" hits="0" branch="false"/>
 								<line number="115" hits="0" branch="false"/>
 								<line number="116" hits="0" branch="false"/>
-								<line number="118" hits="0" branch="false"/>
+								<line number="117" hits="0" branch="false"/>
+								<line number="119" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="goTo" signature="(Ledu/illinois/mitra/cyphyhouse/objects/ItemPosition;Ledu/illinois/mitra/cyphyhouse/objects/ObstacleList;)V" line-rate="0.0" branch-rate="0.0" complexity="0">
@@ -12761,86 +12762,86 @@
 						</method>
 						<method name="motion_resume" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="183" hits="0" branch="false"/>
 								<line number="184" hits="0" branch="false"/>
+								<line number="185" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="motion_stop" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="188" hits="0" branch="false"/>
 								<line number="189" hits="0" branch="false"/>
 								<line number="190" hits="0" branch="false"/>
 								<line number="191" hits="0" branch="false"/>
 								<line number="192" hits="0" branch="false"/>
-								<line number="194" hits="0" branch="false"/>
+								<line number="193" hits="0" branch="false"/>
+								<line number="195" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="run" signature="()V" line-rate="0.0" branch-rate="0.0" complexity="0">
 							<lines>
-								<line number="136" hits="0" branch="false"/>
 								<line number="137" hits="0" branch="false"/>
-								<line number="141" hits="0" branch="true" condition-coverage="0% (0/2)">
+								<line number="138" hits="0" branch="false"/>
+								<line number="142" hits="0" branch="true" condition-coverage="0% (0/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
 									</conditions>
 								</line>
-								<line number="148" hits="0" branch="true" condition-coverage="0% (0/2)">
+								<line number="149" hits="0" branch="true" condition-coverage="0% (0/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
 									</conditions>
 								</line>
-								<line number="149" hits="0" branch="false"/>
-								<line number="151" hits="0" branch="true" condition-coverage="0% (0/3)">
+								<line number="150" hits="0" branch="false"/>
+								<line number="152" hits="0" branch="true" condition-coverage="0% (0/3)">
 									<conditions>
 										<condition number="0" type="switch" coverage="0%"/>
 									</conditions>
 								</line>
-								<line number="153" hits="0" branch="false"/>
-								<line number="156" hits="0" branch="true" condition-coverage="0% (0/2)">
+								<line number="154" hits="0" branch="false"/>
+								<line number="157" hits="0" branch="true" condition-coverage="0% (0/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
 									</conditions>
 								</line>
-								<line number="157" hits="0" branch="false"/>
 								<line number="158" hits="0" branch="false"/>
 								<line number="159" hits="0" branch="false"/>
-								<line number="172" hits="0" branch="false"/>
+								<line number="160" hits="0" branch="false"/>
+								<line number="173" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="setParameters" signature="(Ledu/illinois/mitra/cyphyhouse/motion/MotionParameters;)V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="215" hits="0" branch="false"/>
-								<line number="217" hits="0" branch="false"/>
+								<line number="216" hits="0" branch="false"/>
+								<line number="218" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="start" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="130" hits="0" branch="false"/>
 								<line number="131" hits="0" branch="false"/>
 								<line number="132" hits="0" branch="false"/>
+								<line number="133" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="startMotion" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="200" hits="0" branch="false"/>
-								<line number="203" hits="0" branch="false"/>
-								<line number="205" hits="0" branch="false"/>
-								<line number="207" hits="0" branch="false"/>
+								<line number="201" hits="0" branch="false"/>
+								<line number="204" hits="0" branch="false"/>
+								<line number="206" hits="0" branch="false"/>
 								<line number="208" hits="0" branch="false"/>
+								<line number="209" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="turnTo" signature="(Ledu/illinois/mitra/cyphyhouse/objects/ItemPosition;)V" line-rate="0.0" branch-rate="0.0" complexity="0">
 							<lines>
-								<line number="122" hits="0" branch="true" condition-coverage="0% (0/6)">
+								<line number="123" hits="0" branch="true" condition-coverage="0% (0/6)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
 										<condition number="1" type="jump" coverage="0%"/>
 										<condition number="2" type="jump" coverage="0%"/>
 									</conditions>
 								</line>
-								<line number="123" hits="0" branch="false"/>
 								<line number="124" hits="0" branch="false"/>
-								<line number="126" hits="0" branch="false"/>
+								<line number="125" hits="0" branch="false"/>
+								<line number="127" hits="0" branch="false"/>
 							</lines>
 						</method>
 					</methods>
@@ -12900,76 +12901,77 @@
 						<line number="114" hits="0" branch="false"/>
 						<line number="115" hits="0" branch="false"/>
 						<line number="116" hits="0" branch="false"/>
-						<line number="118" hits="0" branch="false"/>
-						<line number="122" hits="0" branch="true" condition-coverage="0% (0/6)">
+						<line number="117" hits="0" branch="false"/>
+						<line number="119" hits="0" branch="false"/>
+						<line number="123" hits="0" branch="true" condition-coverage="0% (0/6)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>
 								<condition number="1" type="jump" coverage="0%"/>
 								<condition number="2" type="jump" coverage="0%"/>
 							</conditions>
 						</line>
-						<line number="123" hits="0" branch="false"/>
 						<line number="124" hits="0" branch="false"/>
-						<line number="126" hits="0" branch="false"/>
-						<line number="130" hits="0" branch="false"/>
+						<line number="125" hits="0" branch="false"/>
+						<line number="127" hits="0" branch="false"/>
 						<line number="131" hits="0" branch="false"/>
 						<line number="132" hits="0" branch="false"/>
-						<line number="136" hits="0" branch="false"/>
+						<line number="133" hits="0" branch="false"/>
 						<line number="137" hits="0" branch="false"/>
-						<line number="141" hits="0" branch="true" condition-coverage="0% (0/2)">
+						<line number="138" hits="0" branch="false"/>
+						<line number="142" hits="0" branch="true" condition-coverage="0% (0/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>
 							</conditions>
 						</line>
-						<line number="148" hits="0" branch="true" condition-coverage="0% (0/2)">
+						<line number="149" hits="0" branch="true" condition-coverage="0% (0/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>
 							</conditions>
 						</line>
-						<line number="149" hits="0" branch="false"/>
-						<line number="151" hits="0" branch="true" condition-coverage="0% (0/3)">
+						<line number="150" hits="0" branch="false"/>
+						<line number="152" hits="0" branch="true" condition-coverage="0% (0/3)">
 							<conditions>
 								<condition number="0" type="switch" coverage="0%"/>
 							</conditions>
 						</line>
-						<line number="153" hits="0" branch="false"/>
-						<line number="156" hits="0" branch="true" condition-coverage="0% (0/2)">
+						<line number="154" hits="0" branch="false"/>
+						<line number="157" hits="0" branch="true" condition-coverage="0% (0/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>
 							</conditions>
 						</line>
-						<line number="157" hits="0" branch="false"/>
 						<line number="158" hits="0" branch="false"/>
 						<line number="159" hits="0" branch="false"/>
-						<line number="172" hits="0" branch="false"/>
-						<line number="179" hits="0" branch="false"/>
-						<line number="183" hits="0" branch="false"/>
+						<line number="160" hits="0" branch="false"/>
+						<line number="173" hits="0" branch="false"/>
+						<line number="180" hits="0" branch="false"/>
 						<line number="184" hits="0" branch="false"/>
-						<line number="188" hits="0" branch="false"/>
+						<line number="185" hits="0" branch="false"/>
 						<line number="189" hits="0" branch="false"/>
 						<line number="190" hits="0" branch="false"/>
 						<line number="191" hits="0" branch="false"/>
 						<line number="192" hits="0" branch="false"/>
-						<line number="194" hits="0" branch="false"/>
-						<line number="200" hits="0" branch="false"/>
-						<line number="203" hits="0" branch="false"/>
-						<line number="205" hits="0" branch="false"/>
-						<line number="207" hits="0" branch="false"/>
+						<line number="193" hits="0" branch="false"/>
+						<line number="195" hits="0" branch="false"/>
+						<line number="201" hits="0" branch="false"/>
+						<line number="204" hits="0" branch="false"/>
+						<line number="206" hits="0" branch="false"/>
 						<line number="208" hits="0" branch="false"/>
-						<line number="215" hits="0" branch="false"/>
-						<line number="217" hits="0" branch="false"/>
+						<line number="209" hits="0" branch="false"/>
+						<line number="216" hits="0" branch="false"/>
+						<line number="218" hits="0" branch="false"/>
 					</lines>
 				</class>
 				<class name="edu.illinois.mitra.cyphyhouse.motion.MotionAutomaton_Quadcopter$1" filename="edu/illinois/mitra/cyphyhouse/motion/MotionAutomaton_Quadcopter.java" line-rate="0.0" branch-rate="1.0" complexity="2.1666666666666665">
 					<methods>
 						<method name="&lt;clinit&gt;" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="151" hits="0" branch="false"/>
+								<line number="152" hits="0" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="151" hits="0" branch="false"/>
+						<line number="152" hits="0" branch="false"/>
 					</lines>
 				</class>
 				<class name="edu.illinois.mitra.cyphyhouse.motion.MotionAutomaton_Quadcopter$STAGE" filename="edu/illinois/mitra/cyphyhouse/motion/MotionAutomaton_Quadcopter.java" line-rate="0.0" branch-rate="1.0" complexity="2.1666666666666665">
