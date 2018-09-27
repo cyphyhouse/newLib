@@ -28,6 +28,12 @@ public class BotInfoSelector {
 
             name = "bot0"; // assign name: bot0 is always red
             ip = "192.168.0.118";
+            if(type == Common.QUADCOPTER) {
+                this.type = new Model_Quadcopter(name, 0,0);
+            }
+            else if(type == Common.CAR){
+                this.type = new Model_Car(name, 0,0);
+            }
             /*if(deviceType == Common.NEXUS7) {
                 ip = "192.168.1.35"; // reserved IP address of red Nexus7 tablet
             }s
@@ -57,6 +63,12 @@ public class BotInfoSelector {
         if(color.equals("green")) {
             name = "bot1";
             ip = "192.168.0.119";
+            if(type == Common.QUADCOPTER) {
+                this.type = new Model_Quadcopter(name, 0,0);
+            }
+            else if(type == Common.CAR){
+                this.type = new Model_Car(name, 0,0);
+            }
            /* if(deviceType == Common.NEXUS7) {
                 ip = "192.168.1.31";
             }
