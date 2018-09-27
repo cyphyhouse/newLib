@@ -31,6 +31,8 @@ public class MotionAutomaton_Car extends RobotMotion {
 
 	public GlobalVarHolder gvh;
 
+	public boolean reached = false;
+
 	// Motion tracking
 	protected ItemPosition destination;
 	private Model_Car mymodel;
@@ -59,6 +61,10 @@ public class MotionAutomaton_Car extends RobotMotion {
 		super(gvh.id.getName());
 		name = gvh.id.getName();
 		this.gvh = gvh;
+		this.mymodel = (Model_Car)gvh.gps.getMyPosition();
+		wrapper = new JavaRosWrapper("ws://localhost:9090", name, this.gvh, "Car");
+		wrapper.subscribe_to_ROS("Reached", "Reached Message");
+		reached = false;
 		
 	}
 
@@ -71,8 +77,8 @@ public class MotionAutomaton_Car extends RobotMotion {
 		myHandler = handler;
 		
 		wrapper = new JavaRosWrapper("ws://localhost:9090", name, this.gvh, "Car");
-		wrapper.subscribe_to_ROS("point_msgs", "Waypoint");
-		wrapper.subscribe_to_ROS("str", "Reached Message");
+		//wrapper.subscribe_to_ROS("point_msgs", "Waypoint");
+		//wrapper.subscribe_to_ROS("str", "Reached Message");
 		
 		
 	}
@@ -83,6 +89,7 @@ public class MotionAutomaton_Car extends RobotMotion {
 //            Log.d(TAG, "Going to X: " + Integer.toString(dest.x) + " Y: " + Integer.toString(dest.y));
 			//this.destination = dest;
 			this.obsList = obsList;
+			System.out.println("about to start motion\n");
 			startMotion();
 		}
 
@@ -90,13 +97,14 @@ public class MotionAutomaton_Car extends RobotMotion {
 	}
 	
 	public void goTo(ItemPosition dest) {
-		Scanner in = new Scanner(((Model_Car)gvh.gps.getMyPosition()).name).useDelimiter("[^0-9]+");
-		int index = in.nextInt();
-        Vector<ObstacleList> temp = gvh.gps.getViews();
-        ObstacleList obsList;
 
-	wrapper.createTopic("Waypoint");
-	wrapper.sendMsg(dest);
+		wrapper.createTopic("Waypoint");
+		wrapper.sendMsg(dest);	
+
+		startMotion();
+	
+	return;
+	//goTo(dest, obsList);
 	//Model_iRobot model = (Model_iRobot)gvh.gps.getMyPosition();
 	//if(name.matches("iRobot0")){
 	//	System.out.println("Retrieved value " + model.TESTX + " from gvh: " + name);
@@ -107,7 +115,7 @@ public class MotionAutomaton_Car extends RobotMotion {
 
 
 
-        if(!temp.isEmpty()) {
+       /* if(!temp.isEmpty()) {
             obsList = temp.elementAt(index);
         }
         else {
@@ -115,7 +123,7 @@ public class MotionAutomaton_Car extends RobotMotion {
         }
         //obsList = new ObstacleList();
 		// work in progress here
-		goTo(dest, obsList);
+		goTo(dest, obsList);*/
 	}
 
 	public void turnTo(ItemPosition dest) {
@@ -142,7 +150,12 @@ public class MotionAutomaton_Car extends RobotMotion {
 				//Notice: interesting here....
                 // why is getModel being used? Think it should be get position.
 				//mypos = (Model_iRobot)gvh.plat.getModel();
-			
+				//System.out.println("Doing Motion\n");
+				//reached_goal = true;
+
+				if(reached == true){
+					inMotion = false;
+				}
 				switch(stage){
 					case MOVING:
 						break;
@@ -197,11 +210,16 @@ public class MotionAutomaton_Car extends RobotMotion {
 	
 
 	private void startMotion() {
+	
 		running = true;
-		stage = STAGE.MOVING;
+	
+		//stage = STAGE.MOVING;
 		inMotion = true;
+	
 		reached_goal = false;
-		mymodel.reached = false;
+		
+		reached = false;
+		return;
 	}
 	
 	// Detects an imminent collision with another robot or with any obstacles
@@ -216,6 +234,7 @@ public class MotionAutomaton_Car extends RobotMotion {
 
 
 	//ADD IMPLEMENTATION OF ROBOT EVENTS///////////////////
+	// EVENTS: Event {MOTION, GPS, GPS_SELF, WAYPOINT_RECEIVED};
 
 
 
