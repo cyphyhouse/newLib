@@ -23,7 +23,6 @@ import edu.illinois.mitra.cyphyhouse.gvh.GlobalVarHolder;
 import edu.illinois.mitra.cyphyhouse.models.Model_iRobot;
 import edu.illinois.mitra.cyphyhouse.models.Model_Car;
 import edu.illinois.mitra.cyphyhouse.models.Model_Quadcopter;
-import edu.illinois.mitra.cyphyhouse.comms.UdpGpsReceiver;
 import edu.illinois.mitra.cyphyhouse.motion.MotionAutomaton_Car;
 import edu.illinois.mitra.cyphyhouse.motion.MotionAutomaton_Quadcopter;
 

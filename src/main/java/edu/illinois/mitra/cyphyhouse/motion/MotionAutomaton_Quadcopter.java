@@ -1,13 +1,13 @@
 package edu.illinois.mitra.cyphyhouse.motion;
 
-import edu.illinois.mitra.cyphyhouse.Handler.IPCHandler;
+
 import edu.illinois.mitra.cyphyhouse.gvh.GlobalVarHolder;
 import edu.illinois.mitra.cyphyhouse.interfaces.RobotEventListener;
 import edu.illinois.mitra.cyphyhouse.models.Model_Quadcopter;
 import edu.illinois.mitra.cyphyhouse.objects.Common;
 import edu.illinois.mitra.cyphyhouse.objects.ItemPosition;
 import edu.illinois.mitra.cyphyhouse.objects.ObstacleList;
-import edu.illinois.mitra.cyphyhouse.motion.ReachAvoid;
+//import edu.illinois.mitra.cyphyhouse.motion.ReachAvoid;
 
 import edu.illinois.mitra.cyphyhouse.ros.JavaRosWrapper;
 
@@ -23,7 +23,6 @@ import java.io.*;
 public class MotionAutomaton_Quadcopter extends RobotMotion {
     protected static final String TAG = "MotionAutomaton";
     protected static final String ERR = "Critical Error";
-    private IPCHandler myHandler;
     private String name;
 
     private JavaRosWrapper wrapper;
@@ -67,21 +66,6 @@ public class MotionAutomaton_Quadcopter extends RobotMotion {
         wrapper = new JavaRosWrapper("ws://localhost:9090", name, this.gvh, "Quadcopter");
         wrapper.subscribe_to_ROS("Reached", "Reached Message");
         reached = false;
-        
-    }
-
-    public MotionAutomaton_Quadcopter(GlobalVarHolder gvh, IPCHandler handler){
-        super(gvh.id.getName());
-        name = gvh.id.getName();
-        this.gvh = gvh;
-        this.mymodel = (Model_Quadcopter)gvh.gps.getMyPosition();
-        
-        myHandler = handler;
-        
-        wrapper = new JavaRosWrapper("ws://localhost:9090", name, this.gvh, "Quadcopter");
-        //wrapper.subscribe_to_ROS("point_msgs", "Waypoint");
-        //wrapper.subscribe_to_ROS("str", "Reached Message");
-        
         
     }
 
@@ -186,7 +170,7 @@ public class MotionAutomaton_Quadcopter extends RobotMotion {
 
     @Override
     public void motion_stop() {
-        myHandler.obtaintMsg(MotionHandlerConfig.CMD_IROBOT_MOTION_STOP, name).sendToHandler();
+
         running = false;
         stage = MotionAutomaton_Quadcopter.STAGE.INIT;
         destination = null;

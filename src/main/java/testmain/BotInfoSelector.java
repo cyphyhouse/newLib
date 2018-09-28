@@ -2,8 +2,6 @@ package testmain;
 
 
 import edu.illinois.mitra.cyphyhouse.interfaces.TrackedRobot;
-import edu.illinois.mitra.cyphyhouse.models.ModelARDrone2;
-import edu.illinois.mitra.cyphyhouse.models.Model_iRobot;
 import edu.illinois.mitra.cyphyhouse.models.Model_Quadcopter;
 import edu.illinois.mitra.cyphyhouse.models.Model_Car;
 import edu.illinois.mitra.cyphyhouse.objects.Common;
@@ -93,31 +91,24 @@ public class BotInfoSelector {
         }
 
         if(color.equals("blue")) {
-            name = "bot2";
-            ip = "192.168.1.18";
-            if(type == Common.IROBOT) {
-                bluetooth = "5C:F3:70:76:CE:B4";
-                this.type = new Model_iRobot(name, 0,0);
-            }
-            else if(type == Common.QUADCOPTER) {
-                bluetooth = "Mars_122317";
+            name = "bot3";
+            ip = "192.168.1.31";
+            if(type == Common.QUADCOPTER) {
                 this.type = new Model_Quadcopter(name, 0,0);
             }
-            else if(type == Common.ARDRONE2) {
-                this.type = new ModelARDrone2(name, 0,0,0);
-                this.ip = "10.195.182.197";
+            else if(type == Common.CAR){
+                this.type = new Model_Car(name, 0,0);
             }
         }
 
         if(color.equals("white")) {
-            name = "bot3";
-            ip = "192.168.1.113";
-            if(type == Common.IROBOT) {
-                bluetooth = "5C:F3:70:76:C9:D4";
-                this.type = new Model_iRobot(name, 0,0);
+            name = "bot4";
+            ip = "192.168.1.31";
+            if(type == Common.QUADCOPTER) {
+                this.type = new Model_Quadcopter(name, 0,0);
             }
-            else if(type == Common.QUADCOPTER) {
-                //bluetooth = ""; There isn't a white drone set-up yet
+            else if(type == Common.CAR){
+                this.type = new Model_Car(name, 0,0);
             }
         }
 

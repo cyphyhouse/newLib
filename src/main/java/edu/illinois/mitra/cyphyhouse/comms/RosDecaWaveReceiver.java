@@ -1,23 +1,12 @@
 package edu.illinois.mitra.cyphyhouse.comms;
 
-import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.util.Enumeration;
 import java.util.Vector;
 
 import edu.illinois.mitra.cyphyhouse.exceptions.ItemFormattingException;
 import edu.illinois.mitra.cyphyhouse.gvh.GlobalVarHolder;
 import edu.illinois.mitra.cyphyhouse.interfaces.GpsReceiver;
 import edu.illinois.mitra.cyphyhouse.interfaces.RobotEventListener.Event;
-import edu.illinois.mitra.cyphyhouse.models.ModelARDrone2;
-import edu.illinois.mitra.cyphyhouse.models.Model_iRobot;
 import edu.illinois.mitra.cyphyhouse.models.Model_Car;
-import edu.illinois.mitra.cyphyhouse.models.Model_Quadcopter;
-import edu.illinois.mitra.cyphyhouse.objects.Common;
 import edu.illinois.mitra.cyphyhouse.objects.ItemPosition;
 import edu.illinois.mitra.cyphyhouse.objects.ObstacleList;
 import edu.illinois.mitra.cyphyhouse.objects.PositionList;
