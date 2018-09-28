@@ -62,7 +62,7 @@ public class TestMain {
             init.connect();
 
 
-            appToRun = new TaskApp(gvh);
+            appToRun = new FollowApp(gvh);
 
 
             init.createAppInstance(appToRun);

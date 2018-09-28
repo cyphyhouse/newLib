@@ -27,8 +27,8 @@ import edu.illinois.mitra.cyphyhouse.functions.GroupSetMutex;
 import edu.illinois.mitra.cyphyhouse.interfaces.MutualExclusion;
 
 
-public class TaskApp extends LogicThread {
-    private static final String TAG = "Task App";
+public class FollowApp extends LogicThread {
+    private static final String TAG = "Follow App";
     private static final int DEST_MSG = 23;
     private static final int ERASE_MSG = 24;
     int lineno = 0;
@@ -57,7 +57,7 @@ public class TaskApp extends LogicThread {
     private int num_robots;
     private Stage stage = Stage.PICK;
     boolean connected = false;
-    public TaskApp(GlobalVarHolder gvh) {
+    public FollowApp(GlobalVarHolder gvh) {
         super(gvh);
         MotionParameters.Builder settings = new MotionParameters.Builder();
 //		settings.ROBOT_RADIUS(400);
@@ -106,9 +106,6 @@ public class TaskApp extends LogicThread {
                     catch (IOException e) {}
                     catch (NoSuchElementException e) {stage = Stage.WAIT;lineno = lineno - 1;}
                     catch (IllegalArgumentException e) {stage = Stage.WAIT;lineno = 0;}
-
-
-                    System.out.println(getDestination(destinations, 1));
 
                     if(destinations.isEmpty()||robotIndex == 0) {
                         stage = Stage.WAIT;
@@ -212,7 +209,6 @@ public class TaskApp extends LogicThread {
 
     @Override
     protected void receive(RobotMessage m) {
-        System.out.println("GOT A MESSAGE");
         boolean alreadyReceived = false;
         for(RobotMessage msg : receivedMsgs) {
             if(msg.getFrom().equals(m.getFrom()) && msg.getContents().equals(m.getContents())) {

@@ -42,10 +42,10 @@
 /home/peter/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/objects/Point3d.java
 /home/peter/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/motion/MotionAutomaton_iRobot.java
 /home/peter/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/gvh/Logging.java
+/home/peter/newLib/src/main/java/testmain/FollowApp.java
 /home/peter/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/ros/SubscriptionRequestMsg.java
 /home/peter/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/objects/DSMVariable.java
 /home/peter/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/objects/Common.java
-/home/peter/newLib/src/main/java/testmain/TaskApp.java
 /home/peter/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/interfaces/Cancellable.java
 /home/peter/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/ros/msgs/geometry_msgs/Twist.java
 /home/peter/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/motion/MotionHandlerConfig.java
