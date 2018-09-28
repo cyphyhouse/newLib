@@ -3,7 +3,6 @@ edu/illinois/mitra/cyphyhouse/models/Model_Car.class
 ros/SubscriptionRequestMsg.class
 edu/illinois/mitra/cyphyhouse/objects/AttrValue.class
 edu/illinois/mitra/cyphyhouse/comms/MessageContents.class
-testmain/FollowApp$Stage.class
 edu/illinois/mitra/cyphyhouse/interfaces/ComThread.class
 edu/illinois/mitra/cyphyhouse/motion/MotionAutomaton_iRobot$STAGE.class
 edu/illinois/mitra/cyphyhouse/interfaces/StarLCallable.class
@@ -14,6 +13,7 @@ ros/RosBridge$FragmentManager.class
 edu/illinois/mitra/cyphyhouse/interfaces/AcceptsPointInput.class
 edu/illinois/mitra/cyphyhouse/comms/SmartCommsHandler$1.class
 edu/illinois/mitra/cyphyhouse/objects/TraceWriter.class
+testmain/TaskApp.class
 ros/msgs/geometry_msgs/Twist.class
 edu/illinois/mitra/cyphyhouse/interfaces/TrackedRobot.class
 edu/illinois/mitra/cyphyhouse/motion/MotionParameters.class
@@ -33,6 +33,7 @@ edu/illinois/mitra/cyphyhouse/gvh/GeneralJavaPlatform.class
 ros/msgs/std_msgs/Time.class
 edu/illinois/mitra/cyphyhouse/gvh/Trace.class
 edu/illinois/mitra/cyphyhouse/motion/MotionHandlerConfig.class
+testmain/TaskApp$Stage.class
 edu/illinois/mitra/cyphyhouse/interfaces/GpsReceiver.class
 edu/illinois/mitra/cyphyhouse/motion/MotionAutomaton_Quadcopter$1.class
 ros/RosListenDelegate$LegacyFormat.class
@@ -62,7 +63,6 @@ edu/illinois/mitra/cyphyhouse/motion/MotionAutomaton_iRobot$COLSTAGE2.class
 ros/tools/MessageUnpacker.class
 edu/illinois/mitra/cyphyhouse/motion/MotionAutomaton_iRobot$1.class
 edu/illinois/mitra/cyphyhouse/motion/MotionParameters$COLAVOID_MODE_TYPE.class
-testmain/FollowApp$1.class
 edu/illinois/mitra/cyphyhouse/objects/ItemPosition.class
 edu/illinois/mitra/cyphyhouse/exceptions/ItemFormattingException.class
 edu/illinois/mitra/cyphyhouse/interfaces/Traceable.class
@@ -99,4 +99,3 @@ edu/illinois/mitra/cyphyhouse/motion/MotionAutomaton_Car$1.class
 edu/illinois/mitra/cyphyhouse/comms/UdpMessage$MessageState.class
 ros/Publisher.class
 edu/illinois/mitra/cyphyhouse/models/Model_iRobot.class
-testmain/FollowApp.class
