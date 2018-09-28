@@ -69,7 +69,6 @@ edu/illinois/mitra/cyphyhouse/interfaces/Traceable.class
 edu/illinois/mitra/cyphyhouse/interfaces/RobotEventListener$Event.class
 ros/tools/PeriodicPublisher.class
 edu/illinois/mitra/cyphyhouse/objects/Point.class
-testmain/TaskApp$1.class
 edu/illinois/mitra/cyphyhouse/comms/RosDecaWaveReceiver.class
 ros/RosBridge$RosBridgeSubscriber.class
 edu/illinois/mitra/cyphyhouse/interfaces/Cancellable.class
