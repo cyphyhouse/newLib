@@ -17,7 +17,7 @@ public class TestMain {
         private static String[][] participants;
         private static int numRobots;
         private static BotInfoSelector[] botInfo;
-        private static int selectedRobot = 0;
+        private static int selectedRobot = 1;
         volatile private static GlobalVarHolder gvh;
         private static LogicThread appToRun = null;
 
@@ -29,7 +29,7 @@ public class TestMain {
             botInfo = new BotInfoSelector[numRobots];
             // add color, robot type, and device type for each robot here
             botInfo[0] = new BotInfoSelector("red", Common.QUADCOPTER, Common.HTCONEM7);
-            botInfo[1] = new BotInfoSelector("green", Common.CAR, Common.HTCONEM7);
+            botInfo[1] = new BotInfoSelector("green", Common.QUADCOPTER, Common.HTCONEM7);
             //botInfo[2] = new BotInfoSelector("blue", Common.QUADCOPTER, Common.HTCONEM7);
             //botInfo[1] = new BotInfoSelector("green", Common.IROBOT, Common.MOTOE);
             //botInfo[2] = new BotInfoSelector("blue", Common.ARDRONE2, Common.NEXUS7);

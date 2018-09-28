@@ -27,7 +27,7 @@ public class BotInfoSelector {
         if(color.equals("red")) {
 
             name = "bot0"; // assign name: bot0 is always red
-            ip = "192.168.0.118";
+            ip = "192.168.1.35";
             if(type == Common.QUADCOPTER) {
                 this.type = new Model_Quadcopter(name, 0,0);
             }
@@ -62,7 +62,7 @@ public class BotInfoSelector {
 
         if(color.equals("green")) {
             name = "bot1";
-            ip = "192.168.0.119";
+            ip = "192.168.1.31";
             if(type == Common.QUADCOPTER) {
                 this.type = new Model_Quadcopter(name, 0,0);
             }

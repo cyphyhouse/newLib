@@ -82,6 +82,7 @@ public class FollowApp extends LogicThread {
 
         dsm.createMW("testindex",0);
 	dsm.createMW("num_robots",numBots-1);
+        dsm.createMW("tasklist", "1", "task1", "2", "task2");
         //dsm.createMW("turn",1);
         while(true) {
 	    
@@ -90,6 +91,9 @@ public class FollowApp extends LogicThread {
 	    //System.out.println("stage at beginning loop:"+ stage);
             testindex = Integer.parseInt(dsm.get("testindex","*"));
             //turn = Integer.parseInt(dsm.get("turn","*"));
+
+            System.out.println(dsm.get("tasklist", "*", "1"));
+
             switch(stage) {
                 case PICK:
                     arrived = false;
