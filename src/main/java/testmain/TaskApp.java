@@ -83,11 +83,11 @@ public class TaskApp extends LogicThread {
         dsm.createMW("num_robots", numBots - 1);
 
         while (true) {
-            mk_list_from_file("tasks.txt", name, DEST_MSG);
+            //mk_list_from_file("tasks.txt", name, DEST_MSG);
             currentDestination = getDestination(destinations, 1);
             System.out.println("size of destinations is: " + destinations.size());
             System.out.println("destinations empty?: " + destinations.isEmpty());
-            destinations.remove(currentDestination.getName());
+            //destinations.remove(currentDestination.getName());
             System.out.println("size of destinations is: " + destinations.size());
             System.out.println("destinations empty?: " + destinations.isEmpty());
             sleep(300);
