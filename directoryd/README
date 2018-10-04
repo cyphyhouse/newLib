@@ -1,0 +1,96 @@
+directoryd
+==========
+
+This is a software package that provides service directory support for
+the HoTDeC testbed. It uses a decentralized architecture to
+automatically discover services on other nodes.
+
+I (Daniel) edited this so that we could use this for the quadcopter for device discovery.
+
+Requirements
+------------
+
+* czmq              (sudo apt-get install libczmq-dev)
+* Avahi             (sudo apt-get install libavahi-client-dev)
+* Protocol Buffers  (sudo apt-get install protobuf-compiler)
+* cmake
+
+Build & Installation
+--------------------
+
+First make sure you have the protobuf compiler installed so that you can do
+    protoc --cpp_out=protobuf Services.proto
+    
+Then do
+
+    mkdir build
+    cd build
+    cmake ..
+    make
+
+You can change the installation location by changing the
+CMAKE_INSTALL_PREFIX:
+
+    cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..
+
+You can create an installer using cpack in the build directory:
+
+    cpack
+
+You can install either using `make install` or using one of the
+cpack-created installers.
+
+Usage
+-----
+
+    directoryd [-dh]
+        -d      launch as daemon
+        -h      help
+        -D      dump protobuf messages as TextFormat
+
+directoryd should be used as a daemon that runs in the background. It
+creates a zeromq ipc socket in /tmp/directoryd.
+
+API
+---
+
+See `Services.proto`. You can `Register` or `Unregister` your services, or
+you can `Find` services.
+
+* Registration requires a `name`, which is unique to each instance of
+  your service. You can provide one or more `location`s for your
+  service, which require a `type` (what kind of services this is --
+  vision, controller, something new, etc), and either
+  a `port` or a `resource`. It is assumed that the service you're
+  registering is local -- that is, on the same machine as the directoryd
+  node. `resource` registration is not supported yet. Finally, you can
+  provide `txt` entries -- these are key-value pairs of meta-data about
+  your service. For example, you can provide version information or
+  other useful data to client services.
+
+* Unregister simply requires a `name`.
+
+* Finding a service is flexible. You need to specify a `type` of service
+  to look for, but in addition, you can filter by `name` and/or by `txt`
+  entries.
+
+Your service must send a `heartbeat` message once per second in order to
+maintain its registration. Any other message (`find`, `register`,
+`unregister`) also counts for the heartbeat. You will not receive a
+notification if you have been disconnected in this way.
+
+Everything else will receive a reply. A reply to a `find` will include a
+`findresult`; otherwise, you will get back the same `type` of request.
+On a failure result, you will also receive a `result` string.
+
+A client library is provided that supports all of the above
+functionality. See the `ddclient` directory for more information.
+`query.hpp` provides find functionality, and `register.hpp` provides
+registration and lifetime management. Example usage is provided in
+`test_query.cpp` and `test_register.cpp`.
+
+Copying/License
+---------------
+
+See COPYING.
+

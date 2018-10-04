@@ -1,0 +1,55 @@
+package directoryd;
+
+enum RequestType { REGISTER = 1; UNREGISTER = 2; FIND = 3; HEARTBEAT = 4; }
+message TxtField {
+    required string key = 1;
+    required string value = 2;
+}
+
+message ServiceRequest {
+    message Register {
+	message Location {
+	    required string type = 1;
+	    optional int32 port = 2;
+	    optional string resource = 3;
+	}
+	required string name = 1;
+	repeated Location location = 2;
+	repeated TxtField txt = 3;
+    }
+
+    message Unregister {
+	required string name = 1;
+    }
+
+    message Find {
+	required string type = 1;
+	optional string name = 2;
+	repeated TxtField txt = 3;
+    }
+
+    // Identifies which field is filled in.
+    required RequestType type = 1 [ default = HEARTBEAT ];
+
+    // One of the following may be filled in.
+    optional Register register = 2;
+    optional Unregister unregister = 3;
+    optional Find find = 4;
+}
+
+message ServiceReply {
+    message FindResult {
+	message Location {
+	    optional string address = 1;
+	    optional int32 port = 2;
+	    optional string resource = 3;
+	}
+	required Location location = 1;
+	repeated TxtField txt = 2;
+    }
+
+    required RequestType type = 1;
+    required bool success = 2 [ default = true ];
+    optional string result = 3;
+    repeated FindResult findresult = 4;
+}
