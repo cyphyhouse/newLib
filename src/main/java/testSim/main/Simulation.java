@@ -57,13 +57,19 @@ public class Simulation {
 		Set<String> blockedRobots = new HashSet<String>();
 
 		// Create participants and instantiate SimApps
-		for(int i = 0; i < settings.N_IROBOTS; i++) {
+		int robot_number;
+		for(robot_number = 0; robot_number < settings.N_IROBOTS; robot_number++) {
 			// Mapping between iRobot name and IP address
-			participants.put(settings.IROBOT_NAME + i, "192.168.0." + i);
+			System.out.println("rn is:" + robot_number);
+			participants.put(settings.IROBOT_NAME + robot_number, "192.168.0." + robot_number);
+			System.out.println("finished adding robot: " + robot_number);
 		}
-		for(int j = 0; j < settings.N_QUADCOPTERS; j++) {
+		for(int j = robot_number; j < robot_number + settings.N_QUADCOPTERS; j++) {
 			// Mapping between quadcopter name and IP address
+			System.out.println("j is: " + j);
 			participants.put(settings.QUADCOPTER_NAME + j, "192.168.0." + (j+settings.N_IROBOTS));
+			System.out.println("finished adding quadcopter: " + j);
+
 		}
 		
 		// Start the simulation engine
@@ -142,9 +148,9 @@ public class Simulation {
 		}
 		 */
 		// Create each iRobot
-		for(int i = 0; i < settings.N_IROBOTS; i++) {
+		for(robot_number = 0; robot_number < settings.N_IROBOTS; robot_number++) {
 			Model_iRobot initialPosition = null;
-			String botName = settings.IROBOT_NAME + i;
+			String botName = settings.IROBOT_NAME + robot_number;
 			ItemPosition initialPos = t_initialPositions.getPosition(botName);
 			if(initialPos != null){
 				initialPosition = new Model_iRobot(initialPos);
@@ -166,10 +172,10 @@ public class Simulation {
 					System.out.println("too many tries for BOT"+botName+"please increase settings.GRID_XSIZE/GRID_YSIZE or remove some obstacles");
 				}
 			}
-			if(i< settings.N_DBOTS){
+			if(robot_number< settings.N_DBOTS){
 				initialPosition.type = 1;
 			}
-			else if((i>=settings.N_DBOTS) && (i<(settings.N_DBOTS + settings.N_RBOTS))){
+			else if((robot_number>=settings.N_DBOTS) && (robot_number<(settings.N_DBOTS + settings.N_RBOTS))){
 				initialPosition.type = 2;	
 			}
 			else{
@@ -184,7 +190,7 @@ public class Simulation {
 			simEngine.addLogging(sa.gvh.log);
 
 		}
-		for(int i = 0; i < settings.N_QUADCOPTERS; i++) {
+		for(int i = robot_number; i < robot_number + settings.N_QUADCOPTERS; i++) {
 			Model_quadcopter initialPosition = null;
 			String botName = settings.QUADCOPTER_NAME + i;
 			ItemPosition initialPos = t_initialPositions.getPosition(botName);
@@ -344,27 +350,6 @@ public class Simulation {
                         rd.add(nextBot);
                     }
                 }
-
-                // the code below doesn't work because when using both bot types it will try to cast one as the other
-
-				/*if(((PositionList) arg).getList().get(0) instanceof Model_iRobot){
-					ArrayList<Model_iRobot> pos = ((PositionList<Model_iRobot>) arg).getList();
-					// Add robots
-					for(Model_iRobot ip : pos) {
-						RobotData nextBot = new RobotData(ip.name, ip.x, ip.y, ip.angle, ip.receivedTime);
-						nextBot.radius = settings.BOT_RADIUS;
-						rd.add(nextBot);
-					}
-				}
-				else if(((PositionList) arg).getList().get(0) instanceof Model_quadcopter){
-					ArrayList<Model_quadcopter> pos = ((PositionList<Model_quadcopter>) arg).getList();
-					// Add robots
-					for(Model_quadcopter ip : pos) {
-						RobotData nextBot = new RobotData(ip.name, ip.x, ip.y, ip.z, ip.yaw, ip.pitch, ip.roll, ip.receivedTime);
-						nextBot.radius = settings.BOT_RADIUS;
-						rd.add(nextBot);
-					}
-				}*/
 
 				gl.updateData(rd, simEngine.getTime());
 			}
