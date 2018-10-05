@@ -17,6 +17,7 @@ import edu.illinois.mitra.cyphyhouse.interfaces.MutualExclusion;
 import edu.illinois.mitra.cyphyhouse.motion.MotionParameters;
 import edu.illinois.mitra.cyphyhouse.motion.MotionParameters.COLAVOID_MODE_TYPE;
 import edu.illinois.mitra.cyphyhouse.objects.ItemPosition;
+import edu.illinois.mitra.cyphyhouse.objects.ObstacleList;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -39,20 +40,22 @@ public class FollowApp extends LogicThread {
     int lineno = 0;
     private static final int DEST_MSG = 23;
     private HashSet<RobotMessage> receivedMsgs = new HashSet<RobotMessage>();
+
+    //list of destinations
     final Map<String, ItemPosition> destinations = new HashMap<String, ItemPosition>();
 
 
     //motion module declaration
     ItemPosition currentDestination;
 
-    boolean dgt = false;
-    private boolean arrived = false;
 
     private enum Stage {
         PICK, GO, DONE, WAIT
     }
 
     public int testindex = 0;
+    ObstacleList obs;
+
     private Stage stage = Stage.PICK;
 
     public FollowApp(GlobalVarHolder gvh) {
@@ -63,6 +66,7 @@ public class FollowApp extends LogicThread {
         MotionParameters param = settings.build();
         gvh.plat.moat.setParameters(param);
         gvh.comms.addMsgListener(this, DEST_MSG);
+        obs = gvh.gps.getObspointPositions();
 
         // bot names must be bot0, bot1, ... botn for this to work
         String intValue = name.replaceAll("[^0-9]", "");
@@ -79,7 +83,6 @@ public class FollowApp extends LogicThread {
         while (true) {
             switch (stage) {
                 case PICK:
-                    arrived = false;
                     if (robotIndex == 0) {
                         updatedests("tasks.txt", DEST_MSG, name, lineno);
                         lineno = lineno + 1;
@@ -100,29 +103,31 @@ public class FollowApp extends LogicThread {
                             }
                             if (mutex0.clearToEnter(0)) {
                                 testindex = Integer.parseInt(dsm.get("testindex", "*"));
+                                System.out.println("robot "+ robotIndex + " has testindex "+testindex);
                                 currentDestination = getDestination(destinations, testindex);
-                                System.out.println(robotIndex + " is going to " + currentDestination);
                                 testindex = testindex + 1;
                                 dsm.put("testindex", "*", testindex);
+
+                                //exit conditions
+                                wait0 = false;
                                 mutex0.exit(0);
 
                             } else {
                                 break;
                             }
                         } catch (NullPointerException e) {
-                            stage = Stage.DONE;
+                            stage = Stage.WAIT;
                             //lineno = lineno - 1;
                             break;
                         }
                         if (currentDestination == null) {
-                            stage = Stage.DONE;
+                            stage = Stage.WAIT;
                             break;
                         }
 
                         gvh.plat.moat.goTo(currentDestination);
-                        dgt = true;
                         if (currentDestination.getZ() == 0) {
-                            stage = Stage.DONE;
+                            stage = Stage.WAIT;
                         } else {
                             stage = Stage.GO;
                         }
@@ -130,33 +135,26 @@ public class FollowApp extends LogicThread {
                     break;
                 case GO:
                     if (!gvh.plat.moat.inMotion) {
-                        if (!arrived && currentDestination != null) {
+                        if (!gvh.plat.moat.done && currentDestination != null) {
                             stage = Stage.WAIT;
                         } else {
-                            if (dgt == true) {
-                                dgt = false;
-                                wait0 = false;
-                            }
                             stage = Stage.PICK;
                             break;
                         }
-                        arrived = true;
 
 
                     }
                     break;
                 case WAIT:
-                    if (arrived && robotIndex != 0) {
+                    if (!gvh.plat.moat.done && robotIndex != 0) {
                         stage = Stage.PICK;
                     }
                     if (robotIndex == 0)
                         stage = Stage.PICK;
                     stage = Stage.GO;
                     break;
-                case DONE:
-                    return null;
             }
-            sleep(100);
+            sleep(300);
         }
     }
 
@@ -200,10 +198,7 @@ public class FollowApp extends LogicThread {
 
     @SuppressWarnings("unchecked")
     private <X, T> T getDestination(Map<X, T> map, int index) {
-        // Keys must be 0-A format for this to work
         String key = Integer.toString(index) + "-A";
-        // this is for key that is just an int, no -A
-        //String key = Integer.toString(index);
         return map.get(key);
     }
 }
