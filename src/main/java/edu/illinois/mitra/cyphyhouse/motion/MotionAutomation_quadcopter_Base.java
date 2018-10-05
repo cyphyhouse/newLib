@@ -88,8 +88,8 @@ public class MotionAutomation_quadcopter_Base extends RobotMotion {
 		gvh.threadCreated(this);
 		// some control parameters
 		double kpx,kpy,kpz, kdx,kdy,kdz;
-		kpx = kpy = kpz = 0.00033; //used to be 0.00033
-		kdx = kdy = kdz = 0.0006;  //used to be 0.0006
+		kpx = kpy = kpz = 0.00030; //used to be 0.00033
+		kdx = kdy = kdz = 0.0008;  //used to be 0.0006
 		while(true) {
 			//			gvh.gps.getObspointPositions().updateObs();
 			if(running) {

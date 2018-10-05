@@ -55,6 +55,8 @@ public class FollowApp extends LogicThread {
     public int testindex = 0;
     private Stage stage = Stage.PICK;
 
+    public GlobalVarHolder gvh;
+
     public FollowApp(GlobalVarHolder gvh) {
         super(gvh);
         MotionParameters.Builder settings = new MotionParameters.Builder();
@@ -69,6 +71,7 @@ public class FollowApp extends LogicThread {
         robotIndex = Integer.parseInt(intValue);
         dsm = new DSMMultipleAttr(gvh);
         mutex0 = new GroupSetMutex(gvh, 0);
+        this.gvh = gvh;
 
     }
 
