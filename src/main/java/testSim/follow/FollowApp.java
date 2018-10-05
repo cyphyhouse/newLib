@@ -45,6 +45,7 @@ public class FollowApp extends LogicThread {
     final Map<String, ItemPosition> destinations = new HashMap<String, ItemPosition>();
 
 
+    public GlobalVarHolder gvh;
     //motion module declaration
     ItemPosition currentDestination;
 
@@ -73,7 +74,7 @@ public class FollowApp extends LogicThread {
         robotIndex = Integer.parseInt(intValue);
         dsm = new DSMMultipleAttr(gvh);
         mutex0 = new GroupSetMutex(gvh, 0);
-
+        this.gvh = gvh;
     }
 
     @Override
