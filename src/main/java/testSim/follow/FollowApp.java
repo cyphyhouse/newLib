@@ -154,7 +154,8 @@ public class FollowApp extends LogicThread {
                     stage = Stage.GO;
                     break;
             }
-            sleep(300);
+            Random ran = new Random(); 
+            sleep(ran.nextInt(200) + 100);
         }
     }
 
