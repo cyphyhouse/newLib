@@ -23,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.JFrame;
 
 import edu.illinois.mitra.cyphyhouse.harness.RealisticSimGpsProvider;
+import edu.illinois.mitra.cyphyhouse.harness.IdealSimGpsProvider;
 import edu.illinois.mitra.cyphyhouse.harness.SimGpsProvider;
 import edu.illinois.mitra.cyphyhouse.harness.SimulationEngine;
 import edu.illinois.mitra.cyphyhouse.interfaces.LogicThread;
@@ -91,8 +92,13 @@ public class Simulation {
 		// TODO: need to redefine the noises for models in general
         // According to Yixiao, IdealSimGpsProvider should not be used anymore
         // I've commented out this if statement so it cannot be used
+
+		// Peter's notes:
+		// Uncommenting for now to test gps provider without any noise
+		// UPDATE: tried using idealsimgps, doesnt work (gives null pointer expcetion when initializing)
 		/*if(settings.IDEAL_MOTION) {
 			gps = new IdealSimGpsProvider(simEngine, settings.GPS_PERIOD, settings.GPS_ANGLE_NOISE, settings.GPS_POSITION_NOISE);
+			//System.out.println("ADDED IDEAL SIM");
 		} else {
 			gps = new RealisticSimGpsProvider(simEngine, settings.GPS_PERIOD, settings.GPS_ANGLE_NOISE, settings.GPS_POSITION_NOISE);
 		}*/

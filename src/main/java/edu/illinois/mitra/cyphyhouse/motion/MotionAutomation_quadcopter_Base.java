@@ -88,8 +88,8 @@ public class MotionAutomation_quadcopter_Base extends RobotMotion {
 		gvh.threadCreated(this);
 		// some control parameters
 		double kpx,kpy,kpz, kdx,kdy,kdz;
-		kpx = kpy = kpz = 0.00033;
-		kdx = kdy = kdz = 0.0006;
+		kpx = kpy = kpz = 0.00033; //used to be 0.00033
+		kdx = kdy = kdz = 0.0006;  //used to be 0.0006
 		while(true) {
 			//			gvh.gps.getObspointPositions().updateObs();
 			if(running) {
@@ -103,6 +103,7 @@ public class MotionAutomation_quadcopter_Base extends RobotMotion {
 				colliding = (stage != STAGE.LAND && mypos.gaz < -50);
 
 				if(!colliding && stage != null) {
+
 					switch(stage) {
 					case INIT:
 						if(mode == OPMODE.GO_TO) {
@@ -152,7 +153,6 @@ public class MotionAutomation_quadcopter_Base extends RobotMotion {
 						break;
 					case HOVER:
 						setControlInput(0,0,0, 0);
-						// do nothing
 						break;
 					case TAKEOFF:
 						switch(mypos.z/(safeHeight/2)){
@@ -191,11 +191,35 @@ public class MotionAutomation_quadcopter_Base extends RobotMotion {
 						done = true;
 						gvh.log.i(TAG, "At goal!");
 						gvh.log.i("DoneFlag", "write");
-						if(param.STOP_AT_DESTINATION){
+
+						/*if(param.STOP_AT_DESTINATION){
 							hover();
 							next = STAGE.HOVER;
-						}
-						running = false;
+						}*/
+
+						/* this keeps quadcopter hovering over the point once its reached its destination instead of
+						   moving off the screen at a constant speed
+						 */
+
+						//System.out.println("dest is: " + destination.x + " " + destination.y);
+						//System.out.println("vel: " + mypos.v_x + " " + mypos.v_y);
+						double Ax_d, Ay_d = 0.0;
+						double Ryaw, Rroll, Rpitch, Rvs, Ryawsp = 0.0;
+						//		System.out.println(destination.x - mypos.x + " , " + mypos.v_x);
+						Ax_d = (kpx * (destination.x - mypos.x) - kdx * mypos.v_x) ;
+						Ay_d = (kpy * (destination.y - mypos.y) - kdy * mypos.v_y) ;
+						Ryaw = Math.atan2(destination.y - mypos.y, destination.x - mypos.x);
+						//Ryaw = Math.atan2((destination.y - mypos.x), (destination.x - mypos.y));
+						Ryawsp = kpz * ((Ryaw - Math.toRadians(mypos.yaw)));
+						Rroll = Math.asin((Ay_d * Math.cos(Math.toRadians(mypos.yaw)) - Ax_d * Math.sin(Math.toRadians(mypos.yaw))) %1);
+						Rpitch = Math.asin( (-Ay_d * Math.sin(Math.toRadians(mypos.yaw)) - Ax_d * Math.cos(Math.toRadians(mypos.yaw))) / (Math.cos(Rroll)) %1);
+						Rvs = (kpz * (destination.z - mypos.z) - kdz * mypos.v_z);
+						//	System.out.println(Ryaw + " , " + Ryawsp + " , " +  Rroll  + " , " +  Rpitch + " , " + Rvs);
+
+						setControlInputRescale(Math.toDegrees(Ryawsp),Math.toDegrees(Rpitch)%360,Math.toDegrees(Rroll)%360,Rvs);
+
+						running = true;  /* need to keep running to be true for quadcopter to hover in GOAL state */
+
 						inMotion = false;
 						break;
 					case STOP:

@@ -101,7 +101,7 @@ public class FollowApp extends LogicThread {
                             if (mutex0.clearToEnter(0)) {
                                 testindex = Integer.parseInt(dsm.get("testindex", "*"));
                                 currentDestination = getDestination(destinations, testindex);
-                                System.out.println(robotIndex + "is going to " + currentDestination);
+                                System.out.println(robotIndex + " is going to " + currentDestination);
                                 testindex = testindex + 1;
                                 dsm.put("testindex", "*", testindex);
                                 mutex0.exit(0);
