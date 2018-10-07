@@ -86,9 +86,16 @@ public class DrawPanel extends ZoomablePanel
 				}
 				
 				// Draw world bounding box
-				g.setColor(Color.gray);
-				g.setStroke(new BasicStroke(10));
-				//g.drawRect(0, 0, width, height);
+				if(settings.DRAW_WORLD_BOUNDARY) {
+					int stroke_thickness = 25;
+					g.setColor(Color.gray);
+					g.setStroke(new BasicStroke(stroke_thickness));
+
+					// The centre of world is at (0,0) and our world
+					// extends from -width to width in the x direction
+					// and -height to height in the y direction.
+					g.drawRect(-width, -height, 2*width, 2*height);
+				}
 				
 				// Determine scale
 				scaleFactor =  (int) toRealCoords(a).distance(toRealCoords(b));

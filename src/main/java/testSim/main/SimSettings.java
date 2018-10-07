@@ -219,6 +219,11 @@ public class SimSettings {
 	 */
 	public final boolean DRAW_ROBOT_TYPE;
 
+	/**
+	 * Enables/disables drawing of world boundary in simulator window
+	 */
+	public final boolean DRAW_WORLD_BOUNDARY;
+
 
 	private static final SimSettings defaultInstance = new Builder().build();
 
@@ -271,6 +276,7 @@ public class SimSettings {
 		private boolean DRAW_OBSPOINTS = true;
 		private boolean DRAW_WAYPOINT_NAMES = true;
 		private boolean DRAW_ROBOT_TYPE = false;
+		private boolean DRAW_WORLD_BOUNDARY = true;
 
 
 		public Builder De_Radius(int length) {
@@ -485,6 +491,11 @@ public class SimSettings {
 			return this;
 		}
 
+		public Builder DRAW_WORLD_BOUNDARY(boolean DRAW_WORLD_BOUNDARY){
+			this.DRAW_WORLD_BOUNDARY = DRAW_WORLD_BOUNDARY;
+			return this;
+		}
+
 		public SimSettings build() {
 			return new SimSettings(this);
 		}
@@ -534,6 +545,7 @@ public class SimSettings {
 		this.DRAW_OBSPOINTS = builder.DRAW_OBSPOINTS;
 		this.DRAW_WAYPOINT_NAMES = builder.DRAW_WAYPOINT_NAMES;
 		this.DRAW_ROBOT_TYPE = builder.DRAW_ROBOT_TYPE;
+		this.DRAW_WORLD_BOUNDARY = builder.DRAW_WORLD_BOUNDARY;
 		
 	}
 }
