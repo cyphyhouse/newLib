@@ -224,6 +224,11 @@ public class SimSettings {
 	 */
 	public final boolean DRAW_WORLD_BOUNDARY;
 
+	/**
+	 * Enables/disables drawing of base robot (robot0)
+	 */
+	public final boolean DRAW_BASE_ROBOT;
+
 
 	private static final SimSettings defaultInstance = new Builder().build();
 
@@ -277,6 +282,7 @@ public class SimSettings {
 		private boolean DRAW_WAYPOINT_NAMES = true;
 		private boolean DRAW_ROBOT_TYPE = false;
 		private boolean DRAW_WORLD_BOUNDARY = true;
+		private boolean DRAW_BASE_ROBOT = true;
 
 
 		public Builder De_Radius(int length) {
@@ -496,6 +502,11 @@ public class SimSettings {
 			return this;
 		}
 
+		public Builder DRAW_BASE_ROBOT(boolean DRAW_BASE_ROBOT){
+			this.DRAW_BASE_ROBOT = DRAW_BASE_ROBOT;
+			return this;
+		}
+
 		public SimSettings build() {
 			return new SimSettings(this);
 		}
@@ -546,6 +557,7 @@ public class SimSettings {
 		this.DRAW_WAYPOINT_NAMES = builder.DRAW_WAYPOINT_NAMES;
 		this.DRAW_ROBOT_TYPE = builder.DRAW_ROBOT_TYPE;
 		this.DRAW_WORLD_BOUNDARY = builder.DRAW_WORLD_BOUNDARY;
+		this.DRAW_BASE_ROBOT = builder.DRAW_BASE_ROBOT;
 		
 	}
 }
