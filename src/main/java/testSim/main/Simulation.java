@@ -61,15 +61,11 @@ public class Simulation {
 		int robot_number;
 		for(robot_number = 0; robot_number < settings.N_IROBOTS; robot_number++) {
 			// Mapping between iRobot name and IP address
-			System.out.println("rn is:" + robot_number);
 			participants.put(settings.IROBOT_NAME + robot_number, "192.168.0." + robot_number);
-			System.out.println("finished adding robot: " + robot_number);
 		}
 		for(int j = robot_number; j < robot_number + settings.N_QUADCOPTERS; j++) {
 			// Mapping between quadcopter name and IP address
-			System.out.println("j is: " + j);
 			participants.put(settings.QUADCOPTER_NAME + j, "192.168.0." + (j+settings.N_IROBOTS));
-			System.out.println("finished adding quadcopter: " + j);
 
 		}
 		
@@ -162,20 +158,25 @@ public class Simulation {
 				initialPosition = new Model_iRobot(initialPos);
 			}
 			// If no initial position was supplied, randomly generate one
-			if(initialPosition == null) {	
-				//	System.out.println("null position in list");
-				int retries = 0;
-				boolean valid = false;
-				while(retries++ < 10000 && (!acceptableStart(initialPosition) || !valid))
-				{
-					initialPosition = new Model_iRobot(botName, rand.nextInt(settings.GRID_XSIZE), rand.nextInt(settings.GRID_YSIZE), rand.nextInt(360));
-					if(list != null){
-						valid = (list.validstarts(initialPosition, initialPosition.radius));
-					}	
+			if(initialPosition == null) {
+
+				//Set robot 0 to be outside of world boundary area (robot0 is base computer)
+				if(robot_number == 0){
+					initialPosition = new Model_iRobot(botName, settings.GRID_XSIZE + 500, settings.GRID_YSIZE);
 				}
-				if(retries > 10000)
-				{
-					System.out.println("too many tries for BOT"+botName+"please increase settings.GRID_XSIZE/GRID_YSIZE or remove some obstacles");
+				else {
+					//	System.out.println("null position in list");
+					int retries = 0;
+					boolean valid = false;
+					while (retries++ < 10000 && (!acceptableStart(initialPosition) || !valid)) {
+						initialPosition = new Model_iRobot(botName, rand.nextInt(settings.GRID_XSIZE), rand.nextInt(settings.GRID_YSIZE), rand.nextInt(360));
+						if (list != null) {
+							valid = (list.validstarts(initialPosition, initialPosition.radius));
+						}
+					}
+					if (retries > 10000) {
+						System.out.println("too many tries for BOT" + botName + "please increase settings.GRID_XSIZE/GRID_YSIZE or remove some obstacles");
+					}
 				}
 			}
 			if(robot_number< settings.N_DBOTS){

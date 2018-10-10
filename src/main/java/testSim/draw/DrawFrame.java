@@ -30,7 +30,9 @@ public class DrawFrame extends JFrame
 		
 		dp = new DrawPanel(robotNames, blockedWireless, settings);
 		dp.setWorld(settings.GRID_XSIZE, settings.GRID_YSIZE);
-		dp.setDefaultPosition(-750, -3100, 24);
+
+		// Default position displays (x,y) in top left hand corner of window
+		dp.setDefaultPosition(0, 0, 24);
 		getContentPane().add(dp);
 		
 	}

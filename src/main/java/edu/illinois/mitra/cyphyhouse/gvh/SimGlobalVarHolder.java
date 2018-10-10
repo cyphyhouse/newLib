@@ -36,14 +36,10 @@ public class SimGlobalVarHolder extends GlobalVarHolder {
 		super.plat = new GeneralJavaPlatform();
 		plat.model = initpos;
 		plat.reachAvoid = new ReachAvoid(this);
-        // Yixiao says IdealSimGpsProvider shouldn't be used. Should probably remove the if else here.
+
 		if(initpos instanceof Model_iRobot){
-			if(engine.getGps() instanceof IdealSimGpsProvider) {
-				plat.moat = new IdealSimMotionAutomaton(this, (IdealSimGpsProvider)engine.getGps());
-			} else {
-				plat.moat = new RealisticSimMotionAutomaton_iRobot(this, engine.getGps());
-				plat.moat.start();
-			}
+			plat.moat = new RealisticSimMotionAutomaton_iRobot(this, engine.getGps());
+			plat.moat.start();
 		}
 		else if(initpos instanceof Model_quadcopter){
 			plat.moat = new RealisticSimMotionAutomation_quadcopter(this, engine.getGps());
