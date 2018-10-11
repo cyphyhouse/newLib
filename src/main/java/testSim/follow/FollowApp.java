@@ -123,6 +123,7 @@ public class FollowApp extends LogicThread {
                                 System.out.println(pathmsg);
                                 //System.out.println(mkObstacles(path).obstacle);
                                 dsm.put("testindex", "*", testindex);
+                                sleep(800);
                                 inMutex0 = true;
                                 //exit conditions
                                 wait0 = false;
