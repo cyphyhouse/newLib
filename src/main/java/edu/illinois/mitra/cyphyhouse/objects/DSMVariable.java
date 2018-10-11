@@ -12,12 +12,14 @@ import java.util.*;
  */
 public class DSMVariable {
 	public String name;
+	public int index;
 	//public int id;
 	public String attr;
 	public HashMap<String, AttrValue> values;
 	public String owner;
 
 	//constructor
+
 	public DSMVariable(String name, String owner) {
 		this.name = name;
 		this.owner = owner;
@@ -29,6 +31,13 @@ public class DSMVariable {
 		this.values = new HashMap<String, AttrValue>();
 		this.values.put("default", new AttrValue(value, timestamp));
 	}
+	public DSMVariable(String name, String owner, int index, String value, long timestamp ) {
+	    this.name = name;
+	    this.index = index;
+	    this.owner = owner;
+	    this.values = new HashMap<String,AttrValue>();
+	    this.values.put("default", new AttrValue(value, timestamp));
+    }
 	public DSMVariable(String name, String owner, String attr, String value, long timestamp) {
 		this.name = name;
 		this.owner = owner;
@@ -78,7 +87,7 @@ public class DSMVariable {
 		}
 		return infolist;
 	}
-	private long get_oldestTS() {
+	private long get_oldestTS() {	
 		if(values.isEmpty()){
 			return 0; 
 		}

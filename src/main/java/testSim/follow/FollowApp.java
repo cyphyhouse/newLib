@@ -18,6 +18,9 @@ import edu.illinois.mitra.cyphyhouse.motion.MotionParameters;
 import edu.illinois.mitra.cyphyhouse.motion.MotionParameters.COLAVOID_MODE_TYPE;
 import edu.illinois.mitra.cyphyhouse.objects.ItemPosition;
 import edu.illinois.mitra.cyphyhouse.objects.ObstacleList;
+import edu.illinois.mitra.cyphyhouse.motion.RRTNode;
+import edu.illinois.mitra.cyphyhouse.objects.Obstacles;
+import edu.illinois.mitra.cyphyhouse.objects.Point3d;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -35,10 +38,12 @@ public class FollowApp extends LogicThread {
     private DSM dsm;
     private boolean wait0 = false;
     private MutualExclusion mutex0;
+    private boolean inMutex0 = false;
 
     //reading from ui
     int lineno = 0;
     private static final int DEST_MSG = 23;
+    private static final int PATH_MSG = 24;
     private HashSet<RobotMessage> receivedMsgs = new HashSet<RobotMessage>();
 
     //list of destinations
@@ -56,6 +61,9 @@ public class FollowApp extends LogicThread {
 
     public int testindex = 0;
     ObstacleList obs;
+    Stack<ItemPosition> path;
+    RRTNode pathnode;
+
 
     private Stage stage = Stage.PICK;
 
@@ -67,7 +75,7 @@ public class FollowApp extends LogicThread {
         MotionParameters param = settings.build();
         gvh.plat.moat.setParameters(param);
         gvh.comms.addMsgListener(this, DEST_MSG);
-        obs = gvh.gps.getObspointPositions();
+        //obs = (ObstacleList) gvh.gps.get_robot_Positions();
 
         // bot names must be bot0, bot1, ... botn for this to work
         String intValue = name.replaceAll("[^0-9]", "");
@@ -80,6 +88,7 @@ public class FollowApp extends LogicThread {
     @Override
     public List<Object> callStarL() {
         dsm.createMW("testindex", 0);
+
 
         while (true) {
             switch (stage) {
@@ -107,11 +116,17 @@ public class FollowApp extends LogicThread {
                                 System.out.println("robot "+ robotIndex + " has testindex "+testindex);
                                 currentDestination = getDestination(destinations, testindex);
                                 testindex = testindex + 1;
+                                ItemPosition mypos = gvh.gps.getMyPosition();
+                                pathnode = new RRTNode(mypos.x,mypos.y);
+                                path = pathnode.findRoute(currentDestination,200,obs,0,100,0,100,mypos,100);
+                                RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, path.toString());
+                                System.out.println(pathmsg);
+                                //System.out.println(mkObstacles(path).obstacle);
                                 dsm.put("testindex", "*", testindex);
-
+                                inMutex0 = true;
                                 //exit conditions
                                 wait0 = false;
-                                mutex0.exit(0);
+                                //mutex0.exit(0);
 
                             } else {
                                 break;
@@ -126,6 +141,7 @@ public class FollowApp extends LogicThread {
                             break;
                         }
 
+                        //gvh.plat.reachAvoid.doReachAvoid(gvh.gps.getMyPosition(), currentDestination,obs);
                         gvh.plat.moat.goTo(currentDestination);
                         if (currentDestination.getZ() == 0) {
                             stage = Stage.WAIT;
@@ -152,11 +168,17 @@ public class FollowApp extends LogicThread {
                     }
                     if (robotIndex == 0)
                         stage = Stage.PICK;
+
                     stage = Stage.GO;
                     break;
             }
-            Random ran = new Random(); 
+
+            Random ran = new Random();
             sleep(ran.nextInt(200) + 100);
+            if (inMutex0) {
+                mutex0.exit(0);
+                inMutex0 = false;
+            }
         }
     }
 
@@ -202,5 +224,19 @@ public class FollowApp extends LogicThread {
     private <X, T> T getDestination(Map<X, T> map, int index) {
         String key = Integer.toString(index) + "-A";
         return map.get(key);
+    }
+
+    private Obstacles mkObstacles(Stack<ItemPosition>  pathstack) {
+        Obstacles result = new Obstacles();
+        while(!pathstack.empty()) {
+            ItemPosition p = pathstack.pop();
+            if (p != null) {
+                result.add(p.x, p.y, p.z);
+            } else {
+                continue;
+            }
+        }
+        return result;
+
     }
 }

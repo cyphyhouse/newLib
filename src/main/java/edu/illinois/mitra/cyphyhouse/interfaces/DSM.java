@@ -15,7 +15,11 @@ public interface DSM extends Cancellable{
 	public abstract boolean putAll(List<DSMVariable> tuples);
 	public abstract boolean put(String name, String owner, int value);
 	public abstract boolean put(String name, String owner, String attr, int value);
+    public abstract boolean put(String name,String owner,int index,int value);
+    public abstract boolean put(String name,String owner,int index,String value);
 	public abstract boolean put(String name, String owner, String ... attr_and_value);
-	public abstract boolean createMW(String name, int value);	
+	public abstract boolean createMW(String name, int value);
+	public abstract boolean createArrayMW(String name,int index,int value);
+	public abstract boolean createArrayMW(String name,int index,String value);
 	public abstract boolean createMW(String name, String ... attr_and_value);
 }

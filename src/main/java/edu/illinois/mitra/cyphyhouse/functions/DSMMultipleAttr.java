@@ -177,6 +177,20 @@ public class DSMMultipleAttr implements DSM, MessageListener{
 		return put(input);
 	}
 
+    @Override
+    public boolean put(String name, String owner,int index, int value) {
+        // put default attribute and value into variable
+        DSMVariable input = new DSMVariable(name, owner, index, String.valueOf(value), getConsistantTS(owner));
+        return put(input);
+    }
+
+    @Override
+    public boolean put(String name, String owner,int index, String value) {
+        // put default attribute and value into variable
+        DSMVariable input = new DSMVariable(name, owner, index, String.valueOf(value), getConsistantTS(owner));
+        return put(input);
+    }
+
 	@Override
 	public boolean put(String name, String owner, int value) {
 		// put default attribute and value into variable
@@ -253,6 +267,16 @@ public class DSMMultipleAttr implements DSM, MessageListener{
 		DSMVariable input = new DSMVariable(name, "*", curTS, attr_and_value);
 		return put(input);
 	}
+	public  boolean createArrayMW(String name,int index,int value) {
+	    if (get(name,"*") != null) {
+            return false;
+        }
+        DSMVariable input = new DSMVariable(name,"*",index,String.valueOf(value),-1);
+	    return put(input);
+	}
+
+	public  boolean createArrayMW(String name,int index,String value) {return false;}
+
 
 	@Override
 	public boolean createMW(String name, int value) {

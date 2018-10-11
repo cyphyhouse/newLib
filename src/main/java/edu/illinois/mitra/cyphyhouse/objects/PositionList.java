@@ -89,4 +89,6 @@ public class PositionList<T extends ItemPosition> implements Iterable<T> {
 	public Iterator<T> iterator() {
 		return positions.values().iterator();
 	}
+
+
 }

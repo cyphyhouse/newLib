@@ -309,16 +309,7 @@ public class MotionAutomation_quadcopter_Base extends RobotMotion {
 		}
 		//Bluetooth command to control the drone
 	//	gvh.log.i(TAG, "control input as, yaw, pitch, roll, thrust " + yaw_v + ", " + pitch + ", " +roll + ", " +gaz);
-		/*
-		if(running) {
-			if(velocity != 0) {
-				sendMotionEvent(Common.MOT_STRAIGHT, velocity);
-			} else {
-				sendMotionEvent(Common.MOT_STOPPED, 0);
-			}
-			bti.send(BluetoothCommands.straight(velocity));
-		}
-		 */
+
 	}
 
 	/**
