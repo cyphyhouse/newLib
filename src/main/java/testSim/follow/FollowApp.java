@@ -75,7 +75,7 @@ public class FollowApp extends LogicThread {
         MotionParameters param = settings.build();
         gvh.plat.moat.setParameters(param);
         gvh.comms.addMsgListener(this, DEST_MSG);
-        //obs = (ObstacleList) gvh.gps.get_robot_Positions();
+        obs = gvh.gps.getObspointPositions();
 
         // bot names must be bot0, bot1, ... botn for this to work
         String intValue = name.replaceAll("[^0-9]", "");
@@ -121,7 +121,8 @@ public class FollowApp extends LogicThread {
                                 path = pathnode.findRoute(currentDestination,200,obs,0,100,0,100,mypos,100);
                                 RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, path.toString());
                                 System.out.println(pathmsg);
-                                dsm.put("testindex","*", testindex);
+                                //System.out.println(mkObstacles(path).obstacle);
+                                dsm.put("testindex", "*", testindex);
                                 inMutex0 = true;
                                 //exit conditions
                                 wait0 = false;
