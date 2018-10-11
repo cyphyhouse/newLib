@@ -121,8 +121,7 @@ public class FollowApp extends LogicThread {
                                 path = pathnode.findRoute(currentDestination,200,obs,0,100,0,100,mypos,100);
                                 RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, path.toString());
                                 System.out.println(pathmsg);
-                                //System.out.println(mkObstacles(path).obstacle);
-                                dsm.put("testindex", "*", testindex);
+                                dsm.put("testindex","*", testindex);
                                 inMutex0 = true;
                                 //exit conditions
                                 wait0 = false;
