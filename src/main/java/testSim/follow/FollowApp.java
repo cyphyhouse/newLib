@@ -61,7 +61,7 @@ public class FollowApp extends LogicThread {
 
     public int testindex = 0;
     ObstacleList obs;
-    Stack<ItemPosition> path;
+    public Stack<ItemPosition> path;
     RRTNode pathnode;
 
 

@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
+import java.util.*;
 
 import edu.illinois.mitra.cyphyhouse.gvh.SimGlobalVarHolder;
 import edu.illinois.mitra.cyphyhouse.interfaces.LogicThread;
@@ -18,19 +19,29 @@ public class FollowDrawer extends Drawer {
 	@Override
 	public void draw(LogicThread lt, Graphics2D g) {
 		FollowApp app = (FollowApp) lt;
+		ItemPosition model = (ItemPosition)app.gvh.plat.getModel();
+
+		/* Get robot path and display */
+		Stack<ItemPosition> path = app.path;
+		if(path != null) {
+			g.setColor(Color.BLUE);
+
+			//get point at the top of stack and draw a line from robot to it
+			g.drawLine(path.peek().x, path.peek().y, model.x, model.y);
+
+			//check if there are more points in the path, if there are, draw their path onto the screen
+			if(path.size() > 1){
+				for(int i = path.size()-1; i > 0; i--){
+					g.drawLine(path.get(i).x, path.get(i).y, path.get(i-1).x, path.get(i-1).y);
+				}
+			}
+		}
 
 		g.setColor(Color.RED);
 		for(ItemPosition dest : app.destinations.values()) {
 			g.fillRect(dest.getX(), dest.getY(), 26, 26);
 		}
 
-		ItemPosition model = (ItemPosition)app.gvh.plat.getModel();
-		if(app.currentDestination != null)
-			g.drawLine(app.currentDestination.getX(), app.currentDestination.getY(), model.x, model.y);
-		/*g.setColor(selectColor);
-		g.setStroke(stroke);
-		if(app.currentDestination != null)
-			g.drawOval(app.currentDestination.getX() - 20, app.currentDestination.getY() - 20, 40, 40);*/
 	}
 
 }
