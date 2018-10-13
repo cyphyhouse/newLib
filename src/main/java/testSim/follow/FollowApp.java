@@ -145,8 +145,8 @@ public class FollowApp extends LogicThread {
                         }
                         System.out.println(obs);
                         System.out.println(pos);
-                        gvh.plat.reachAvoid.doReachAvoid(gvh.gps.getMyPosition(), currentDestination,obs);
-                        //gvh.plat.moat.goTo(currentDestination);
+                        //gvh.plat.reachAvoid.doReachAvoid(gvh.gps.getMyPosition(), currentDestination,obs);
+                        gvh.plat.moat.goTo(currentDestination);
                         if (currentDestination.getZ() == 0) {
                             stage = Stage.WAIT;
                         } else {

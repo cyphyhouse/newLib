@@ -263,7 +263,7 @@ public class ObstacleList {
 		return;
 	}
 	public String toString() {
-	    String s = "";
+	    String s = "OBslist : ";
 	    for (int i = 0 ; i < ObList.size(); i++) {
 	        s += ObList.elementAt(i).toString() + " ";
         }

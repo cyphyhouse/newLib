@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.0016175413371675054" branch-rate="0.0" lines-covered="9" lines-valid="5564" branches-covered="0" branches-valid="2004" complexity="2.462232243517475" version="2.1.1" timestamp="1539453611966">
+<coverage line-rate="0.0016175413371675054" branch-rate="0.0" lines-covered="9" lines-valid="5564" branches-covered="0" branches-valid="2004" complexity="2.462232243517475" version="2.1.1" timestamp="1539453881558">
 	<sources>
 		<source>/home/mim/newLib/src/main/java</source>
 		<source>/home/mim/newLib/target/generated-sources/annotations</source>
@@ -19338,7 +19338,7 @@
 								<line number="144" hits="0" branch="false"/>
 								<line number="146" hits="0" branch="false"/>
 								<line number="147" hits="0" branch="false"/>
-								<line number="148" hits="0" branch="false"/>
+								<line number="149" hits="0" branch="false"/>
 								<line number="150" hits="0" branch="true" condition-coverage="0% (0/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
@@ -19588,7 +19588,7 @@
 						<line number="144" hits="0" branch="false"/>
 						<line number="146" hits="0" branch="false"/>
 						<line number="147" hits="0" branch="false"/>
-						<line number="148" hits="0" branch="false"/>
+						<line number="149" hits="0" branch="false"/>
 						<line number="150" hits="0" branch="true" condition-coverage="0% (0/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>
