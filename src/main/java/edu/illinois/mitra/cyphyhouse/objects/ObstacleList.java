@@ -262,6 +262,13 @@ public class ObstacleList {
 		}
 		return;
 	}
+	public String toString() {
+	    String s = "";
+	    for (int i = 0 ; i < ObList.size(); i++) {
+	        s += ObList.elementAt(i).toString() + " ";
+        }
+        return s;
+    }
 
 	
 }
