@@ -48,7 +48,8 @@ public class Obstacles {
 		timeFrame = -1;
 		height = -1;
 	}
-	
+
+
 	public Obstacles(int x, int y, int z){
 		obstacle = new Vector<Point3d>(4, 3);
 		add(x, y, z) ;
@@ -65,7 +66,16 @@ public class Obstacles {
 		Point3d temp = new Point3d(x,y, z);
 		obstacle.add(temp) ;
 	}
-	
+
+	public String toString() {
+	   String s = "";
+	   Iterator it = obstacle.iterator();
+	   while (it.hasNext()) {
+	       s += it.next().toString();
+	       s+= " ";
+       }
+       return s;
+    }
     /**
      * return a clone so the obstacles cannot be modified
      * TODO: check that this deep copies all the points too

@@ -76,7 +76,18 @@ public class FollowApp extends LogicThread {
         gvh.plat.moat.setParameters(param);
         gvh.comms.addMsgListener(this, DEST_MSG);
         obs = gvh.gps.getObspointPositions();
+
         pos = gvh.gps.get_robot_Positions();
+        Iterator it = pos.iterator();
+        while (it.hasNext()) {
+
+            ItemPosition ipos = (ItemPosition) it.next();
+            if (ipos.getName() == name) {
+                continue;
+            }
+            //obs.add(new Obstacles(ipos.x,ipos.y,ipos.z));
+        }
+
         String intValue = name.replaceAll("[^0-9]", "");
         robotIndex = Integer.parseInt(intValue);
         dsm = new DSMMultipleAttr(gvh);
@@ -87,6 +98,7 @@ public class FollowApp extends LogicThread {
     @Override
     public List<Object> callStarL() {
         dsm.createMW("testindex", 0);
+
         while (true) {
 
             switch (stage) {
@@ -103,6 +115,7 @@ public class FollowApp extends LogicThread {
                             stage = Stage.WAIT;
                             break;
                         }
+
                         try {
                             if (!wait0) {
                                 mutex0.requestEntry(0);
@@ -116,10 +129,10 @@ public class FollowApp extends LogicThread {
                                 testindex = testindex + 1;
                                 ItemPosition mypos = gvh.gps.getMyPosition();
 
-                                pathnode = new RRTNode(mypos.x,mypos.y);
-                                path = pathnode.findRoute(currentDestination,200,obs,0,100,0,100,mypos,100);
-                                RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, path.toString());
-                                gvh.comms.addOutgoingMessage(pathmsg);
+                                //pathnode = new RRTNode(mypos.x,mypos.y);
+                                //path = pathnode.findRoute(currentDestination,200,obs,0,100,0,100,mypos,100);
+                                //RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, path.toString());
+                                //gvh.comms.addOutgoingMessage(pathmsg);
 
                                 //System.out.println(pathmsg);
                                 //PEEK, GOTO , POP. (repeat untill null) .
@@ -144,7 +157,7 @@ public class FollowApp extends LogicThread {
                             break;
                         }
                         System.out.println(obs);
-                        System.out.println(pos);
+                        System.out.println("posL\n" + pos);
                         //gvh.plat.reachAvoid.doReachAvoid(gvh.gps.getMyPosition(), currentDestination,obs);
                         gvh.plat.moat.goTo(currentDestination);
                         if (currentDestination.getZ() == 0) {
