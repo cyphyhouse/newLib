@@ -113,6 +113,7 @@ edu/illinois/mitra/cyphyhouse/comms/SmartUdpComThread.class
 edu/illinois/mitra/cyphyhouse/interfaces/SimComChannel.class
 edu/illinois/mitra/cyphyhouse/motion/MotionAutomaton_iRobot_Base$COLSTAGE1.class
 testSim/main/ObstLoader.class
+testSim/follow/Task.class
 testSim/draw/ZoomablePanel$PaintThread.class
 testmain/Initiator.class
 edu/illinois/mitra/cyphyhouse/harness/DecoupledDelayQueue.class

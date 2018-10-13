@@ -16,7 +16,7 @@ public class ReachAvoid extends Thread implements Cancellable {
 	/**
 	 * default 5 retries using different parameters, can be set to other values 
 	 */
-	public int tries = 5;
+	public int tries = 1;
 	public int radius;
 	protected enum STAGE_R {
 		IDLE, PLAN, PICK, MOVE
@@ -98,7 +98,7 @@ public class ReachAvoid extends Thread implements Cancellable {
 				yUpper = Math.max(start.y, dest.y) + (yRange+radius)*(counter+1)/2;
 				
 				RRTNode path = new RRTNode(start.x, start.y);
-				pathStack = path.findRoute(dest, 1000, planObs, xLower, xUpper, yLower,yUpper, start, radius);
+				pathStack = path.findRoute(dest, 100, planObs, xLower, xUpper, yLower,yUpper, start, radius);
 				if(pathStack == null){
 					counter ++ ; 
 					if(counter > tries){
@@ -118,8 +118,9 @@ public class ReachAvoid extends Thread implements Cancellable {
 			case PICK:
 				if(!pathStack.empty()){
 					//if did not reach last midway point, go back to path planning
-					ItemPosition goMidPoint = pathStack.pop();
+					ItemPosition goMidPoint = pathStack.peek();
 					gvh.plat.moat.goTo(goMidPoint);
+					pathStack.pop();
 					gvh.log.i(TAG, " go to called to: " + goMidPoint.toString());
 					stage = STAGE_R.MOVE;
 				}

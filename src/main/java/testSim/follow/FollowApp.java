@@ -16,11 +16,8 @@ import edu.illinois.mitra.cyphyhouse.interfaces.LogicThread;
 import edu.illinois.mitra.cyphyhouse.interfaces.MutualExclusion;
 import edu.illinois.mitra.cyphyhouse.motion.MotionParameters;
 import edu.illinois.mitra.cyphyhouse.motion.MotionParameters.COLAVOID_MODE_TYPE;
-import edu.illinois.mitra.cyphyhouse.objects.ItemPosition;
-import edu.illinois.mitra.cyphyhouse.objects.ObstacleList;
+import edu.illinois.mitra.cyphyhouse.objects.*;
 import edu.illinois.mitra.cyphyhouse.motion.RRTNode;
-import edu.illinois.mitra.cyphyhouse.objects.Obstacles;
-import edu.illinois.mitra.cyphyhouse.objects.Point3d;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -45,9 +42,11 @@ public class FollowApp extends LogicThread {
     private static final int DEST_MSG = 23;
     private static final int PATH_MSG = 24;
     private HashSet<RobotMessage> receivedMsgs = new HashSet<RobotMessage>();
+    private HashSet<RobotMessage> pathMsgs = new HashSet<RobotMessage>();
 
     //list of destinations
     final Map<String, ItemPosition> destinations = new HashMap<String, ItemPosition>();
+    final Map<String, Task> taskLocations = new HashMap<String,Task>();
 
 
     public GlobalVarHolder gvh;
@@ -63,6 +62,7 @@ public class FollowApp extends LogicThread {
     ObstacleList obs;
     public Stack<ItemPosition> path;
     RRTNode pathnode;
+    PositionList pos;
 
 
     private Stage stage = Stage.PICK;
@@ -76,8 +76,7 @@ public class FollowApp extends LogicThread {
         gvh.plat.moat.setParameters(param);
         gvh.comms.addMsgListener(this, DEST_MSG);
         obs = gvh.gps.getObspointPositions();
-
-        // bot names must be bot0, bot1, ... botn for this to work
+        pos = gvh.gps.get_robot_Positions();
         String intValue = name.replaceAll("[^0-9]", "");
         robotIndex = Integer.parseInt(intValue);
         dsm = new DSMMultipleAttr(gvh);
@@ -88,9 +87,8 @@ public class FollowApp extends LogicThread {
     @Override
     public List<Object> callStarL() {
         dsm.createMW("testindex", 0);
-
-
         while (true) {
+
             switch (stage) {
                 case PICK:
                     if (robotIndex == 0) {
@@ -117,10 +115,14 @@ public class FollowApp extends LogicThread {
                                 currentDestination = getDestination(destinations, testindex);
                                 testindex = testindex + 1;
                                 ItemPosition mypos = gvh.gps.getMyPosition();
+
                                 pathnode = new RRTNode(mypos.x,mypos.y);
                                 path = pathnode.findRoute(currentDestination,200,obs,0,100,0,100,mypos,100);
                                 RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, path.toString());
-                                System.out.println(pathmsg);
+                                gvh.comms.addOutgoingMessage(pathmsg);
+
+                                //System.out.println(pathmsg);
+                                //PEEK, GOTO , POP. (repeat untill null) .
                                 //System.out.println(mkObstacles(path).obstacle);
                                 dsm.put("testindex", "*", testindex);
                                 sleep(800);
@@ -141,7 +143,8 @@ public class FollowApp extends LogicThread {
                             stage = Stage.WAIT;
                             break;
                         }
-
+                        System.out.println(obs);
+                        System.out.println(pos);
                         //gvh.plat.reachAvoid.doReachAvoid(gvh.gps.getMyPosition(), currentDestination,obs);
                         gvh.plat.moat.goTo(currentDestination);
                         if (currentDestination.getZ() == 0) {
@@ -192,7 +195,17 @@ public class FollowApp extends LogicThread {
                 break;
             }
         }
+        for (RobotMessage msg : pathMsgs) {
+            if (msg.getFrom().equals(m.getFrom()) && msg.getContents().equals(m.getContents())) {
+                alreadyReceived = true;
+                break;
+            }
+        }
+
         int i = receivedMsgs.size();
+        int j = pathMsgs.size();
+
+
         if (m.getMID() == DEST_MSG && !m.getFrom().equals(name) && !alreadyReceived) {
             receivedMsgs.add(m);
             gvh.log.d(TAG, "received destination message from " + m.getFrom());
@@ -206,11 +219,28 @@ public class FollowApp extends LogicThread {
             String name = Integer.toString(i) + "-A";
             ItemPosition p = new ItemPosition(name, x, y, z);
             destinations.put(p.getName(), p);
+            taskLocations.put(p.getName(),new Task(p,i));
 
         }
+
+        if (m.getMID() == PATH_MSG && !m.getFrom().equals(name) && !alreadyReceived) {
+            pathMsgs.add(m);
+            gvh.log.d(TAG, "received path message from " + m.getFrom());
+
+            System.out.println(m.getContents().toString());
+
+        }
+
+
+
+
+
+
+
     }
 
     private void updatedests(String filename, int msgtype, String robotname, int lineno) {
+
         try (Stream<String> lines = Files.lines(Paths.get(filename))) {
             String line = lines.skip(lineno).findFirst().get();
             RobotMessage inform = new RobotMessage("ALL", robotname, msgtype, line);
@@ -227,17 +257,20 @@ public class FollowApp extends LogicThread {
         return map.get(key);
     }
 
-    private Obstacles mkObstacles(Stack<ItemPosition>  pathstack) {
-        Obstacles result = new Obstacles();
-        while(!pathstack.empty()) {
-            ItemPosition p = pathstack.pop();
-            if (p != null) {
-                result.add(p.x, p.y, p.z);
-            } else {
-                continue;
-            }
+    private <X,T> T getTask(Map <X,T> map, int index) {
+        String key = Integer.toString(index)+ "-A";
+        return map.get(key);
+    }
+
+
+    private <X,T> void getUnassignedTask(Map <X,T> map) {
+        Iterator it = map.values().iterator();
+        while (it.hasNext()) {
+            System.out.println(it.next().toString());
+
+
         }
-        return result;
 
     }
+
 }

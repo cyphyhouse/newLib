@@ -68,7 +68,11 @@ public class ObstacleList {
 		this.ObList.addAll((Vector<Obstacles>)Oblist.clone());
 		this.updateObs();
 	}
-	
+
+	public void add(Obstacles ob) {
+		this.ObList.add(ob);
+		this.updateObs();
+	}
 	/**
 	* This method is used for checking if the line alone destination and current has any intersection with any obstacles
 	*/
@@ -258,5 +262,6 @@ public class ObstacleList {
 		}
 		return;
 	}
+
 	
 }
