@@ -2,6 +2,7 @@ package testSim.follow;
 
 import edu.illinois.mitra.cyphyhouse.objects.ItemPosition;
 
+import java.util.Random;
 import java.util.Stack;
 
 public class SimplePP {
@@ -19,18 +20,20 @@ public class SimplePP {
          int x = 0;
          int y = 0;
          int z = 0;
+         Random ran = new Random();
+
          if (this.destination.x > i.x) {
-             x = i.x + xdist;
+             x = i.x + xdist + ran.nextInt((600) + 1)-300;
          }
          else {
-             x = i.x - xdist;
+             x = i.x - xdist + ran.nextInt((600) + 1)-300;
          }
 
         if (this.destination.y > i.y) {
-            y = i.y + ydist;
+            y = i.y + ydist + ran.nextInt((600) + 1)-300;
         }
         else {
-            y = i.y - ydist;
+            y = i.y - ydist + ran.nextInt((600) + 1)-300;
         }
 
         if (this.destination.z > i.z) {

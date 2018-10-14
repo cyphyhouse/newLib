@@ -151,12 +151,12 @@ public class FollowApp extends LogicThread {
                                 //pathnode = new RRTNode(mypos.x,mypos.y);
                                 //Obstacles o = new Obstacles(1,1,1);
                                 //Vector<Obstacles> v = new Vector<>();
-                                SimplePP newp = new SimplePP(mypos,currentDestination,2);
+                                SimplePP newp = new SimplePP(mypos,currentDestination,4);
                                 path = newp.getPath();
-                                System.out.println("my position is :" + mypos);
-                                System.out.println("going to :" + currentDestination);
-                                System.out.println("path is: " + path);
-                                System.out.println(" ");
+                                //System.out.println("my position is :" + mypos);
+                                //System.out.println("going to :" + currentDestination);
+                                //System.out.println("path is: " + path);
+                                //System.out.println(" ");
                                 //RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, path.toString()+"###path");
                                 //gvh.comms.addOutgoingMessage(pathmsg);
                                 //System.out.println(pathmsg);
