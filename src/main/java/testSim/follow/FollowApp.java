@@ -348,6 +348,15 @@ public class FollowApp extends LogicThread {
 
     }
 
+    private boolean isclosetobots(Stack<ItemPosition> pathstack, Vector<Stack<ItemPosition>> robotStack, double mindist) {
+        int i = robotStack.size();
+        for (int j = 0; j < i; j++) {
+            if (isClose(pathstack,robotStack.get(j),mindist)) return true;
+            else continue;
+        }
+        return false;
+    }
+
     private boolean isClose(Stack<ItemPosition> pathstack, Stack<ItemPosition> obstack, double mindist) {
         int i = pathstack.size();
         int k = obstack.size();
