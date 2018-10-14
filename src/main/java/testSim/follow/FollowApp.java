@@ -106,6 +106,7 @@ public class FollowApp extends LogicThread {
         }
 
 
+
         while (true) {
             //System.out.println(stage + " "+ gvh.plat.reachAvoid.doneFlag+" "+name);
             //System.out.println(stage + " robotindex " + robotIndex);
@@ -425,6 +426,108 @@ public class FollowApp extends LogicThread {
         return s;
 
     }
+
+
+    private int closestDist(ItemPosition S1, ItemPosition E1, ItemPosition S2, ItemPosition E2){
+        Point3d u = new Point3d(S1.x-E1.x, S1.y-E1.y, S1.z-E1.z);
+        Point3d v = new Point3d(S2.x-E2.x, S2.y-E2.y, S2.z-E2.z);
+        Point3d w = new Point3d(E1.x-E2.x, E1.y-E2.y, E1.z-E2.z);
+
+        double a = dot(u,u);
+        double b = dot(u,v);
+        double c = dot(v,v);
+        double d = dot(u,w);
+        double e = dot(v,w);
+
+        double D = a*c - b*b;
+        double sc;
+        double sN;
+        double sD = D;
+        double tc;
+        double tN;
+        double tD = D;
+
+        double SMALL_NUM = 0.000001;
+
+        if(D < SMALL_NUM) {
+            sN = 0.0;
+            sD = 1.0;
+            tN = e;
+            tD = c;
+        }else{
+            sN = (b*e - c*d);
+            tN = (a*e - b*d);
+            if(sN < 0.0){
+                sN = 0.0;
+                tN = e;
+                tD = c;
+            }else if(sN > sD){
+                sN = sD;
+                tN = e+b;
+                tD = c;
+            }
+        }
+
+        if(tN < 0.0){
+            tN = 0.0;
+            if(-d < 0.0)
+                sN = 0.0;
+            else if (-d > a)
+                sN = sD;
+            else{
+                sN = -d;
+                sD = a;
+            }
+        } else if(tN > tD){
+            tN = tD;
+            if((-d + b) < 0.0)
+                sN = 0;
+            else if((-d + b) > a)
+                sN = sD;
+            else{
+                sN = (-d + b);
+                sD = a;
+            }
+        }
+
+        if(Math.abs(sN) < SMALL_NUM)
+            sc = 0.0;
+        else
+            sc = sN/sD;
+
+        if(Math.abs(tN) < SMALL_NUM)
+            tc = 0.0;
+        else
+            tc = tN/tD;
+
+
+        // sc * u
+        u.x = (int)sc*u.x;
+        u.y = (int)sc*u.y;
+        u.z = (int)sc*u.z;
+
+        // tc * v
+        v.x = (int)tc*v.x;
+        v.y = (int)tc*v.y;
+        v.z = (int)tc*v.z;
+
+        Point3d Dp = new Point3d(w.x+u.x-v.x, w.y+u.y-v.y, w.z+u.z-v.z);
+
+        double distance = Math.sqrt(Dp.x*Dp.x + Dp.y*Dp.y + Dp.z*Dp.z);
+
+        System.out.println("dist is "+distance);
+        return (int)distance;
+
+
+    }
+
+    private float dot(Point3d a, Point3d b){
+        return a.x*b.x + a.y*b.y + a.z*b.z;
+    }
+
+
+
+
     private boolean isClose(Stack<ItemPosition> pathstack, Stack<ItemPosition> obstack, double mindist) {
         int i = pathstack.size();
         int k = obstack.size();
