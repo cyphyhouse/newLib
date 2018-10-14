@@ -50,7 +50,9 @@ public class SimplePP {
     public Stack<ItemPosition> getPath() {
         int pl = this.pathLength;
         Stack<ItemPosition> path = new Stack<ItemPosition>();
-        path.push(this.start);
+        Stack<ItemPosition> temp = new Stack<ItemPosition>();
+
+        temp.push(this.start);
         int xdist = Math.abs(this.start.x - this.destination.x);
         int ydist = Math.abs(this.start.y - this.destination.y);
         int zdist = Math.abs(this.start.z - this.destination.z);
@@ -67,7 +69,11 @@ public class SimplePP {
             path.push(i);
             pl = pl - 1;
         }
-        path.push(destination);
+
+        temp.push(destination);
+        while (!temp.empty()){
+            path.push(temp.pop());
+        }
         return path;
     }
 
