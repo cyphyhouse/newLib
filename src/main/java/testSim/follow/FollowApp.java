@@ -61,7 +61,7 @@ public class FollowApp extends LogicThread {
     }
 
     public int testindex = 0;
-    ObstacleList obs;
+    Vector<Stack<ItemPosition>> obs;
     public Stack<ItemPosition> path;
     RRTNode pathnode;
     PositionList pos;
@@ -79,8 +79,8 @@ public class FollowApp extends LogicThread {
         gvh.comms.addMsgListener(this, DEST_MSG);
         gvh.comms.addMsgListener(this, PATH_MSG);
 
-        obs = gvh.gps.getObspointPositions();
-/*
+        obs = new Vector<>();
+
         pos = gvh.gps.get_robot_Positions();
         Iterator it = pos.iterator();
         while (it.hasNext()) {
@@ -89,8 +89,10 @@ public class FollowApp extends LogicThread {
             if (ipos.getName() == name) {
                 continue;
             }
-            obs.add(new Obstacles(ipos.x,ipos.y,ipos.z));
-        }*/
+            Stack<ItemPosition> o = new Stack<ItemPosition>();
+            o.push(ipos);
+            obs.add(o);
+        }
 
 
         String intValue = name.replaceAll("[^0-9]", "");
@@ -153,6 +155,7 @@ public class FollowApp extends LogicThread {
                                 //Vector<Obstacles> v = new Vector<>();
                                 SimplePP newp = new SimplePP(mypos, currentDestination, 4);
                                 path = newp.getPath();
+
                                 //System.out.println("my position is :" + mypos);
                                 //System.out.println("going to :" + currentDestination);
                                 System.out.println("  ");
