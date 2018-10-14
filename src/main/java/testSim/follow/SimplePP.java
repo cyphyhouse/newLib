@@ -26,18 +26,18 @@ public class SimplePP {
              x = i.x - xdist;
          }
 
-        if (this.destination.x > i.x) {
-            y = i.x + xdist;
+        if (this.destination.y > i.y) {
+            y = i.y + ydist;
         }
         else {
-            y = i.x - xdist;
+            y = i.y - ydist;
         }
 
-        if (this.destination.x > i.x) {
-            z = i.x + xdist;
+        if (this.destination.z > i.z) {
+            z = i.z + zdist;
         }
         else {
-            z = i.x - xdist;
+            z = i.z - zdist;
         }
 
         return new ItemPosition("pathPoint",x,y,z);
@@ -51,14 +51,18 @@ public class SimplePP {
         int xdist = Math.abs(this.start.x - this.destination.x);
         int ydist = Math.abs(this.start.y - this.destination.y);
         int zdist = Math.abs(this.start.z - this.destination.z);
+        //System.out.println("xdist: " + xdist + " ydist: " + ydist + " zdis: " + zdist);
+
         int xincrement = xdist/pathLength;
         int yincrement = ydist/pathLength;
         int zincrement = zdist/pathLength;
+        //System.out.println("xinc: " + xincrement + " yinc: " + yincrement + " zinc: " + zincrement);
+
         ItemPosition i = this.start;
         while (pl >= 1) {
             i = getPointAtDistance(i,xincrement,yincrement,zincrement);
             path.push(i);
-            pathLength = pl - 1;
+            pl = pl - 1;
         }
         path.push(destination);
         return path;
