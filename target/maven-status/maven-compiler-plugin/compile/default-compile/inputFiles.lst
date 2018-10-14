@@ -7,7 +7,6 @@
 /home/mim/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/functions/Transformation.java
 /home/mim/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/gvh/GeneralJavaPlatform.java
 /home/mim/newLib/src/main/java/testSim/main/Simulation.java
-/home/mim/newLib/src/main/java/testSim/follow/Path.java
 /home/mim/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/motion/MotionAutomation_ARDrone2.java
 /home/mim/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/gvh/Trace.java
 /home/mim/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/gvh/SimGlobalVarHolder.java
@@ -20,6 +19,7 @@
 /home/mim/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/comms/MessageContents.java
 /home/mim/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/gvh/JavaLogging.java
 /home/mim/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/objects/ItemPosition.java
+/home/mim/newLib/src/main/java/testSim/follow/SimplePP.java
 /home/mim/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/motion/PIDController.java
 /home/mim/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/harness/SimMsgInTransit.java
 /home/mim/newLib/src/main/java/testSim/main/SimApp.java

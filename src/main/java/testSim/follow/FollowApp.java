@@ -105,7 +105,7 @@ public class FollowApp extends LogicThread {
         dsm.createMW("testindex", 0);
 
         while (true) {
-            System.out.println(stage + " "+ gvh.plat.reachAvoid.doneFlag+" "+name);
+            //System.out.println(stage + " "+ gvh.plat.reachAvoid.doneFlag+" "+name);
 
             switch (stage) {
                 case PICK:
@@ -148,10 +148,11 @@ public class FollowApp extends LogicThread {
                                 testindex = testindex + 1;
                                 ItemPosition mypos = gvh.gps.getMyPosition();
 
-                                pathnode = new RRTNode(mypos.x,mypos.y);
+                                //pathnode = new RRTNode(mypos.x,mypos.y);
                                 //Obstacles o = new Obstacles(1,1,1);
                                 //Vector<Obstacles> v = new Vector<>();
-                                //path = pathnode.findRoute(currentDestination,200,new ObstacleList(o),0,1000,0,1000,mypos,0);
+                                SimplePP newp = new SimplePP(mypos,currentDestination,2);
+                                path = newp.getPath();
                                 //RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, path.toString()+"###path");
                                 //gvh.comms.addOutgoingMessage(pathmsg);
                                 //System.out.println(pathmsg);
@@ -199,10 +200,10 @@ public class FollowApp extends LogicThread {
 
                     break;
                 case GO:
-                    //if (!gvh.plat.moat.inMotion) {
-                    if (!gvh.plat.reachAvoid.doneFlag){
-                        //if (!gvh.plat.moat.done && currentDestination != null) {
-                        if (currentDestination != null) {
+                    if (!gvh.plat.moat.inMotion) {
+                    //if (!gvh.plat.reachAvoid.doneFlag){
+                        if (!gvh.plat.moat.done && currentDestination != null) {
+                        //if (currentDestination != null) {
                                 stage = Stage.GO;
                         }
                     }
@@ -215,8 +216,8 @@ public class FollowApp extends LogicThread {
 
                     break;
                 case WAIT:
-                    //if (!gvh.plat.moat.done && robotIndex != 0) {
-                    if (!gvh.plat.reachAvoid.doneFlag && robotIndex != 0) {
+                    if (!gvh.plat.moat.done && robotIndex != 0) {
+                    //if (!gvh.plat.reachAvoid.doneFlag && robotIndex != 0) {
 
                     stage = Stage.PICK;
                     }
