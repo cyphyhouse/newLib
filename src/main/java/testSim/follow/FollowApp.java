@@ -155,22 +155,9 @@ public class FollowApp extends LogicThread {
                                 //Vector<Obstacles> v = new Vector<>();
                                 SimplePP newp = new SimplePP(mypos, currentDestination, 4);
                                 path = newp.getPath();
-
-                                //System.out.println(isclosetobots(path, obs, 400));
-
-                                //System.out.println("my position is :" + mypos);
-                                //System.out.println("going to :" + currentDestination);
-                                /*System.out.println("  ");
-                                System.out.println("path is: ");
-                                System.out.println("peek is " + path.peek());
-                                for (int i = path.size() - 1; i >= 0; i--) {
-                                    System.out.println(path.get(i));
-                                }
-                                System.out.println("end of path");*/
                                 currentDestination = path.peek();
-                                //System.out.println(" ");
-                                //RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, path.toString()+"###path");
-                                //gvh.comms.addOutgoingMessage(pathmsg);
+                                RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path)+"###path");
+                                gvh.comms.addOutgoingMessage(pathmsg);
                                 //System.out.println(pathmsg);
                                 //PEEK, GOTO , POP. (repeat untill null) .
                                 //System.out.println(mkObstacles(path).obstacle);
@@ -275,14 +262,8 @@ public class FollowApp extends LogicThread {
             receivedMsgs.add(m);
             gvh.log.d(TAG, "received destination message from " + m.getFrom());
 
-            String dest = m.getContents().toString();
-            dest = dest.replace(" ", ",").replace("`", "");
-            String[] parts = dest.split(",");
-            int x = (int) (Float.parseFloat(parts[0]) * 1000);
-            int y = (int) (Float.parseFloat(parts[1]) * 1000);
-            int z = (int) (Float.parseFloat(parts[2]) * 1000);
-            String name = Integer.toString(i) + "-A";
-            ItemPosition p = new ItemPosition(name, x, y, z);
+            String iposmsg = m.getContents().toString();
+            ItemPosition p = msgtoipos(iposmsg,i,1000);
             destinations.put(p.getName(), p);
             taskLocations.put(p.getName(), new Task(p, i));
 
@@ -291,29 +272,104 @@ public class FollowApp extends LogicThread {
         if (m.getMID() == PATH_MSG && !m.getFrom().equals(name) && !alreadyReceived) {
             pathMsgs.add(m);
             gvh.log.d(TAG, "received path message from " + m.getFrom());
-            String mc = m.getContents().toString().replace("`","").replace(" ",",");
+            String mc = m.getContents().toString().replace("`","");
             String type = mc.split("###")[1];
+            String contents = mc.split("###")[0];
             int sentIndex = Integer.parseInt(m.getFrom().replaceAll("[^0-9]", ""));
             if (type.equalsIgnoreCase("mypos")) {
+                Stack<ItemPosition> path = msgtoiposstack(contents,j,1);
+                System.out.println(path+" "+name);
                 if (sentIndex > robotIndex) {
 
-                    System.out.println(obs.get(sentIndex-1)+" "+sentIndex+" "+robotIndex);
+                    obs.add(sentIndex-1,path);
+
+                    //System.out.println((sentIndex-1)+" "+sentIndex+" "+robotIndex+ " \n");
+
+                    //System.out.println(obs.get(sentIndex-1)+" "+sentIndex+" "+robotIndex);
                 }
                 else{
-                    System.out.println(obs.get(sentIndex)+" "+sentIndex+" "+robotIndex);
+                    obs.add(sentIndex,path);
+
+                    //System.out.println((sentIndex)+" "+sentIndex+" "+robotIndex+ " \n");
+
+                    //System.out.println(obs.get(sentIndex)+" "+sentIndex+" "+robotIndex);
 
                 }
 
 
             }
             else {
+                Stack<ItemPosition> path = msgtopathstack(contents,j,1);
+                if (sentIndex > robotIndex) {
+                    obs.add(sentIndex-1,path);
 
+                    //System.out.println((sentIndex-1)+" "+sentIndex+" "+robotIndex+ " \n");
+
+                    //System.out.println(obs.get(sentIndex-1)+" "+sentIndex+" "+robotIndex);
+                }
+                else{
+                    obs.add(sentIndex,path);
+
+                    //System.out.println((sentIndex)+" "+sentIndex+" "+robotIndex+ " \n");
+
+                    //System.out.println(obs.get(sentIndex)+" "+sentIndex+" "+robotIndex);
+
+                }
+                //String[] pathelements = contents.split("@@@");
             }
 
         }
 
 
     }
+
+
+    private ItemPosition msgtoipos(String iposmsg,int i,int scale) {
+        iposmsg = iposmsg.replace(" ", ",").replace("`", "");
+        String[] parts = iposmsg.split(",");
+        int x = (int) (Float.parseFloat(parts[0]) * scale);
+        int y = (int) (Float.parseFloat(parts[1]) * scale);
+        int z = (int) (Float.parseFloat(parts[2]) * scale);
+        String name = Integer.toString(i) + "-A";
+        ItemPosition p = new ItemPosition(name, x, y, z);
+        return p;
+    }
+
+    private Stack<ItemPosition> msgtopathstack(String pathmsg, int j, int scale) {
+        pathmsg = pathmsg.replace(".",",").replace(" ","");
+        String[] pathpoints = pathmsg.split("@@@");
+        Stack<ItemPosition> path = new Stack<ItemPosition>();
+        int i = pathpoints.length;
+        for (int k = 0; k < i; k++){
+            pathpoints[k] = pathpoints[k].split(":")[1];
+            pathpoints[k] = pathpoints[k].split(";")[0];
+            String[] parts = pathpoints[k].split(",");
+            int x = (int) (Float.parseFloat(parts[0]) * scale);
+            int y = (int) (Float.parseFloat(parts[1]) * scale);
+            int z = (int) (Float.parseFloat(parts[2]) * scale);
+            String name = Integer.toString(j) + "-A";
+            ItemPosition p = new ItemPosition(name, x, y, z);
+            path.push(p);
+        }
+        return path;
+    }
+    private Stack<ItemPosition> msgtoiposstack(String iposmsg, int j, int scale) {
+        iposmsg = iposmsg.replace(".",",").replace(" ","");
+        Stack<ItemPosition> path = new Stack<ItemPosition>();
+
+        iposmsg = iposmsg.split(":")[1];
+        iposmsg = iposmsg.split(";")[0];
+        String[] parts = iposmsg.split(",");
+        int x = (int) (Float.parseFloat(parts[0]) * scale);
+        int y = (int) (Float.parseFloat(parts[1]) * scale);
+        int z = (int) (Float.parseFloat(parts[2]) * scale);
+        String name = Integer.toString(j) + "-A";
+        ItemPosition p = new ItemPosition(name, x, y, z);
+        path.push(p);
+
+        return path;
+    }
+
 
     private void updatedests(String filename, int msgtype, String robotname, int lineno) {
 
@@ -359,6 +415,16 @@ public class FollowApp extends LogicThread {
         return false;
     }
 
+    private String constPathMsg(Stack<ItemPosition> path) {
+        Iterator pathit = path.iterator();
+        String s = "";
+        while (pathit.hasNext()) {
+            s += pathit.next();
+            s += "@@@";
+        }
+        return s;
+
+    }
     private boolean isClose(Stack<ItemPosition> pathstack, Stack<ItemPosition> obstack, double mindist) {
         int i = pathstack.size();
         int k = obstack.size();
