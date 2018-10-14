@@ -18,6 +18,7 @@ import edu.illinois.mitra.cyphyhouse.motion.MotionParameters;
 import edu.illinois.mitra.cyphyhouse.motion.MotionParameters.COLAVOID_MODE_TYPE;
 import edu.illinois.mitra.cyphyhouse.objects.*;
 import edu.illinois.mitra.cyphyhouse.motion.RRTNode;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -36,6 +37,7 @@ public class FollowApp extends LogicThread {
     private boolean wait0 = false;
     private MutualExclusion mutex0;
     private boolean inMutex0 = false;
+    private boolean updatePath = false;
 
     //reading from ui
     int lineno = 0;
@@ -75,8 +77,10 @@ public class FollowApp extends LogicThread {
         MotionParameters param = settings.build();
         gvh.plat.moat.setParameters(param);
         gvh.comms.addMsgListener(this, DEST_MSG);
-        obs = gvh.gps.getObspointPositions();
+        gvh.comms.addMsgListener(this, PATH_MSG);
 
+        obs = gvh.gps.getObspointPositions();
+/*
         pos = gvh.gps.get_robot_Positions();
         Iterator it = pos.iterator();
         while (it.hasNext()) {
@@ -85,8 +89,9 @@ public class FollowApp extends LogicThread {
             if (ipos.getName() == name) {
                 continue;
             }
-            //obs.add(new Obstacles(ipos.x,ipos.y,ipos.z));
-        }
+            obs.add(new Obstacles(ipos.x,ipos.y,ipos.z));
+        }*/
+
 
         String intValue = name.replaceAll("[^0-9]", "");
         robotIndex = Integer.parseInt(intValue);
@@ -100,23 +105,37 @@ public class FollowApp extends LogicThread {
         dsm.createMW("testindex", 0);
 
         while (true) {
+            System.out.println(stage + " "+ gvh.plat.reachAvoid.doneFlag+" "+name);
 
             switch (stage) {
                 case PICK:
+                    updatePath = false;
                     if (robotIndex == 0) {
                         updatedests("tasks.txt", DEST_MSG, name, lineno);
                         lineno = lineno + 1;
                     }
                     if (destinations.isEmpty() || robotIndex == 0) {
                         stage = Stage.WAIT;
+                        break;
                     } else {
                         testindex = Integer.parseInt(dsm.get("testindex", "*"));
                         if (testindex >= destinations.size()) {
                             stage = Stage.WAIT;
+
+                            if (updatePath) {
+
+                            }
+                            else{
+                                RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, gvh.gps.getMyPosition().toString()+"###mypos");
+                                gvh.comms.addOutgoingMessage(pathmsg);
+                                updatePath = false;
+
+                            }
                             break;
                         }
 
                         try {
+
                             if (!wait0) {
                                 mutex0.requestEntry(0);
                                 wait0 = true;
@@ -124,16 +143,17 @@ public class FollowApp extends LogicThread {
                             }
                             if (mutex0.clearToEnter(0)) {
                                 testindex = Integer.parseInt(dsm.get("testindex", "*"));
-                                System.out.println("robot "+ robotIndex + " has testindex "+testindex);
+                                //System.out.println("robot "+ robotIndex + " has testindex "+testindex);
                                 currentDestination = getDestination(destinations, testindex);
                                 testindex = testindex + 1;
                                 ItemPosition mypos = gvh.gps.getMyPosition();
 
-                                //pathnode = new RRTNode(mypos.x,mypos.y);
-                                //path = pathnode.findRoute(currentDestination,200,obs,0,100,0,100,mypos,100);
-                                //RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, path.toString());
+                                pathnode = new RRTNode(mypos.x,mypos.y);
+                                //Obstacles o = new Obstacles(1,1,1);
+                                //Vector<Obstacles> v = new Vector<>();
+                                //path = pathnode.findRoute(currentDestination,200,new ObstacleList(o),0,1000,0,1000,mypos,0);
+                                //RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, path.toString()+"###path");
                                 //gvh.comms.addOutgoingMessage(pathmsg);
-
                                 //System.out.println(pathmsg);
                                 //PEEK, GOTO , POP. (repeat untill null) .
                                 //System.out.println(mkObstacles(path).obstacle);
@@ -145,6 +165,16 @@ public class FollowApp extends LogicThread {
                                 //mutex0.exit(0);
 
                             } else {
+
+                                if (updatePath) {
+
+                                }
+                                else{
+                                    RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, gvh.gps.getMyPosition().toString()+"###mypos");
+                                    gvh.comms.addOutgoingMessage(pathmsg);
+                                    updatePath = false;
+
+                                }
                                 break;
                             }
                         } catch (NullPointerException e) {
@@ -156,8 +186,8 @@ public class FollowApp extends LogicThread {
                             stage = Stage.WAIT;
                             break;
                         }
-                        System.out.println(obs);
-                        System.out.println("posL\n" + pos);
+                        //System.out.println(obs);
+                        //System.out.println("posL\n" + pos);
                         //gvh.plat.reachAvoid.doReachAvoid(gvh.gps.getMyPosition(), currentDestination,obs);
                         gvh.plat.moat.goTo(currentDestination);
                         if (currentDestination.getZ() == 0) {
@@ -166,27 +196,34 @@ public class FollowApp extends LogicThread {
                             stage = Stage.GO;
                         }
                     }
+
                     break;
                 case GO:
-                    if (!gvh.plat.moat.inMotion) {
-                        if (!gvh.plat.moat.done && currentDestination != null) {
-                            stage = Stage.WAIT;
-                        } else {
+                    //if (!gvh.plat.moat.inMotion) {
+                    if (!gvh.plat.reachAvoid.doneFlag){
+                        //if (!gvh.plat.moat.done && currentDestination != null) {
+                        if (currentDestination != null) {
+                                stage = Stage.GO;
+                        }
+                    }
+                        else {
                             stage = Stage.PICK;
                             break;
                         }
 
 
-                    }
+
                     break;
                 case WAIT:
-                    if (!gvh.plat.moat.done && robotIndex != 0) {
-                        stage = Stage.PICK;
+                    //if (!gvh.plat.moat.done && robotIndex != 0) {
+                    if (!gvh.plat.reachAvoid.doneFlag && robotIndex != 0) {
+
+                    stage = Stage.PICK;
                     }
                     if (robotIndex == 0)
                         stage = Stage.PICK;
 
-                    stage = Stage.GO;
+
                     break;
             }
 
@@ -208,6 +245,7 @@ public class FollowApp extends LogicThread {
                 break;
             }
         }
+
         for (RobotMessage msg : pathMsgs) {
             if (msg.getFrom().equals(m.getFrom()) && msg.getContents().equals(m.getContents())) {
                 alreadyReceived = true;
@@ -235,14 +273,30 @@ public class FollowApp extends LogicThread {
             taskLocations.put(p.getName(),new Task(p,i));
 
         }
-
+/*
         if (m.getMID() == PATH_MSG && !m.getFrom().equals(name) && !alreadyReceived) {
             pathMsgs.add(m);
             gvh.log.d(TAG, "received path message from " + m.getFrom());
+            String mc = m.getContents().toString().replace("`","").replace(" ",",");
+            String type = mc.split("###")[1];
+            int sentIndex = Integer.parseInt(m.getFrom().replaceAll("[^0-9]", ""));
+            if (type.equalsIgnoreCase("mypos")) {
+                if (sentIndex > robotIndex) {
 
-            System.out.println(m.getContents().toString());
+                    System.out.println(obs.ObList.get(sentIndex-1)+" "+sentIndex+" "+robotIndex);
+                }
+                else{
+                    System.out.println(obs.ObList.get(sentIndex)+" "+sentIndex+" "+robotIndex);
 
-        }
+                }
+
+
+            }
+            else {
+
+            }
+
+        }*/
 
 
 
@@ -279,7 +333,7 @@ public class FollowApp extends LogicThread {
     private <X,T> void getUnassignedTask(Map <X,T> map) {
         Iterator it = map.values().iterator();
         while (it.hasNext()) {
-            System.out.println(it.next().toString());
+            System.out.println("here "+ it.next().toString());
 
 
         }

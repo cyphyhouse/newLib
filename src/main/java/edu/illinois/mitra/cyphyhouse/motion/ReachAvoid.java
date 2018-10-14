@@ -85,6 +85,7 @@ public class ReachAvoid extends Thread implements Cancellable {
 		super.run();
 		gvh.threadCreated(this);
 		while(running){
+		    System.out.println("size :"+pathStack.size());
 			switch(stage){
 			case IDLE:
 				//do nothing
@@ -125,7 +126,8 @@ public class ReachAvoid extends Thread implements Cancellable {
 					stage = STAGE_R.MOVE;
 				}
 				else{
-					if(gvh.plat.moat.done){
+                    //System.out.println("in reachavoid done");
+                    if(gvh.plat.moat.done){
 						gvh.log.i(TAG, " dest Reached: " + dest.toString());
 						stage = STAGE_R.IDLE;
 						doneFlag = true;
