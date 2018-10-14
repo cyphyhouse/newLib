@@ -24,15 +24,18 @@ public class FollowDrawer extends Drawer {
 		/* Get robot path and display */
 		Stack<ItemPosition> path = app.path;
 		if(path != null) {
-			g.setColor(Color.BLUE);
+			if(!path.empty()) {
+				g.setColor(Color.BLUE);
 
-			//get point at the top of stack and draw a line from robot to it
-			g.drawLine(path.peek().x, path.peek().y, model.x, model.y);
+				//get point at the top of stack and draw a line from robot to it
+				System.out.println(path.size());
+				g.drawLine(path.peek().x, path.peek().y, model.x, model.y);
 
-			//check if there are more points in the path, if there are, draw their path onto the screen
-			if(path.size() > 1){
-				for(int i = path.size()-1; i > 0; i--){
-					g.drawLine(path.get(i).x, path.get(i).y, path.get(i-1).x, path.get(i-1).y);
+				//check if there are more points in the path, if there are, draw their path onto the screen
+				if (path.size() > 1) {
+					for (int i = path.size() - 1; i > 0; i--) {
+						g.drawLine(path.get(i).x, path.get(i).y, path.get(i - 1).x, path.get(i - 1).y);
+					}
 				}
 			}
 		}

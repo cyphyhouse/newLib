@@ -106,7 +106,7 @@ public class FollowApp extends LogicThread {
 
         while (true) {
             //System.out.println(stage + " "+ gvh.plat.reachAvoid.doneFlag+" "+name);
-            System.out.println(stage + " robotindex " + robotIndex);
+            //System.out.println(stage + " robotindex " + robotIndex);
             switch (stage) {
                 case PICK:
                     updatePath = false;
@@ -116,6 +116,7 @@ public class FollowApp extends LogicThread {
                     }
                     if (destinations.isEmpty() || robotIndex == 0) {
                         stage = Stage.WAIT;
+                        //System.out.println("Going to wait from pick");
                         break;
                     } else {
                         testindex = Integer.parseInt(dsm.get("testindex", "*"));
@@ -155,7 +156,14 @@ public class FollowApp extends LogicThread {
                                 path = newp.getPath();
                                 //System.out.println("my position is :" + mypos);
                                 //System.out.println("going to :" + currentDestination);
-                                System.out.println("path is: " + path);
+                                System.out.println("  ");
+                                System.out.println("path is: ");
+                                System.out.println("peek is " + path.peek());
+                                for (int i=path.size()-1; i>=0 ; i--){
+                                    System.out.println(path.get(i));
+                                }
+                                System.out.println("end of path");
+                                currentDestination = path.peek();
                                 //System.out.println(" ");
                                 //RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, path.toString()+"###path");
                                 //gvh.comms.addOutgoingMessage(pathmsg);
@@ -197,32 +205,35 @@ public class FollowApp extends LogicThread {
                         System.out.println("calling goto for point: "+ currentDestination);
 
                         gvh.plat.moat.goTo(currentDestination);
-                        if (currentDestination.getZ() == 0) {
+                        stage = Stage.GO;
+                        /*if (currentDestination.getZ() == 0) {
                             stage = Stage.WAIT;
                         } else {
                             stage = Stage.GO;
-                        }
+                        }*/
                     }
 
                     break;
                 case GO:
+                    System.out.println("IN GO STAGE " +name);
                     if (!gvh.plat.moat.inMotion) {
                         if (!gvh.plat.moat.done && currentDestination != null) {
                             stage = Stage.GO;
                         } else {
-                            /*path.pop();
+                            path.pop();
                             if(path.empty()) {
+                                System.out.println("GOING BACK TO PICK " + name);
                                 stage = Stage.PICK;
                             } else {
                                 currentDestination = path.peek();
                                 gvh.plat.moat.goTo(currentDestination);
-                            }*/
-                            stage = Stage.PICK;
+                            }
                             break;
                         }
                     }
                     break;
                 case WAIT:
+                    //System.out.println("GOING TO PICK FROM WAIT STAGE " + robotIndex);
                     stage = Stage.PICK;
                     break;
             }

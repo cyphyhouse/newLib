@@ -66,7 +66,7 @@ public class SimplePP {
         ItemPosition i = this.start;
         while (pl >= 1) {
             i = getPointAtDistance(i,xincrement,yincrement,zincrement);
-            path.push(i);
+            temp.push(i);
             pl = pl - 1;
         }
 
