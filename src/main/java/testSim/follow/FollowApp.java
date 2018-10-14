@@ -156,6 +156,8 @@ public class FollowApp extends LogicThread {
                                 SimplePP newp = new SimplePP(mypos, currentDestination, 4);
                                 path = newp.getPath();
 
+                                System.out.println(isclosetobots(path, obs, 400));
+
                                 //System.out.println("my position is :" + mypos);
                                 //System.out.println("going to :" + currentDestination);
                                 System.out.println("  ");
@@ -365,7 +367,8 @@ public class FollowApp extends LogicThread {
             ItemPosition start = pathstack.get(j - 1);
             ItemPosition next = pathstack.get(j);
             if (k == 1) {
-                ItemPosition robotPos = obstack.pop();
+                System.out.println("isclose loop "+ j);
+                ItemPosition robotPos = obstack.peek();
                 double x1 = (double) robotPos.x;
                 double y1 = (double) robotPos.y;
                 double z1 = (double) robotPos.z;
@@ -398,7 +401,7 @@ public class FollowApp extends LogicThread {
                     else continue;
                 }
             }
-        }g
+        }
         return false;
 
     }
