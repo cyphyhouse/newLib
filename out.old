@@ -1,0 +1,1304 @@
+iRobot0 2
+PICK robotindex 0
+iRobot2 2
+PICK robotindex 2
+Going to wait from pick iRobot2
+iRobot1 2
+PICK robotindex 1
+Going to wait from pick iRobot1
+Going to wait from pick iRobot0
+WAIT robotindex 1
+WAIT robotindex 0
+WAIT robotindex 2
+PICK robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 1
+iRobot1 i is 0
+obstack size is 1
+7809
+6855
+6075
+5496
+4406
+iRobot1 i is 1
+obstack size is 1
+5770
+4480
+3629
+2707
+1413
+PICK robotindex 2
+WAIT robotindex 0
+PICK robotindex 2
+[1-A: 1066, 2941, 0. index 0] iRobot0
+[0-A: 1066, 2941, 0. index 0] iRobot1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+WAIT robotindex 0
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+iRobot2 i is 0
+obstack size is 1
+5703
+4747
+3779
+3920
+4434
+iRobot2 i is 1
+obstack size is 6
+3773
+3832
+3815
+3815
+4267
+3678
+3331
+3063
+3063
+3320
+4032
+3116
+2422
+2153
+2019
+4001
+3356
+2478
+1683
+548
+DISTANCE TOO CLOSE BREAKING iRobot2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+WAIT robotindex 0
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 1
+PICK robotindex 2
+PICK robotindex 1
+iRobot1 i is 0
+obstack size is 1
+5795
+6011
+6508
+6889
+7779
+iRobot1 i is 1
+obstack size is 1
+6412
+6012
+5739
+5373
+5576
+PICK robotindex 2
+WAIT robotindex 0
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+PICK robotindex 2
+WAIT robotindex 0
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+PICK robotindex 1
+iRobot1 i is 0
+obstack size is 1
+1145
+2022
+3253
+4288
+5724
+iRobot1 i is 1
+obstack size is 1
+3321
+3512
+4328
+4974
+6238
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+WAIT robotindex 0
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+PICK robotindex 2
+WAIT robotindex 0
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+PICK robotindex 2
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 0
+Going to wait from pick iRobot0
+PICK robotindex 2
+PICK robotindex 2
+GO robotindex 1
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+GO robotindex 1
+WAIT robotindex 0
+PICK robotindex 2
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0
+WAIT robotindex 0
+GO robotindex 1
+PICK robotindex 2
+PICK robotindex 2
+PICK robotindex 0
+Going to wait from pick iRobot0

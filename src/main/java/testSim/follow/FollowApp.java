@@ -63,7 +63,6 @@ public class FollowApp extends LogicThread {
     public int testindex = 0;
     Vector<Stack<ItemPosition>> obs;
     public Stack<ItemPosition> path;
-    RRTNode pathnode;
     PositionList pos;
 
 
@@ -121,7 +120,6 @@ public class FollowApp extends LogicThread {
                     }
                     if (destinations.isEmpty() || robotIndex == 0) {
                         stage = Stage.WAIT;
-                        //System.out.println("Going to wait from pick");
                         break;
                     } else {
                         testindex = Integer.parseInt(dsm.get("testindex", "*"));
@@ -148,7 +146,7 @@ public class FollowApp extends LogicThread {
                             }
                             if (mutex0.clearToEnter(0)) {
                                 testindex = Integer.parseInt(dsm.get("testindex", "*"));
-                                //System.out.println("robot "+ robotIndex + " has testindex "+testindex);
+                                System.out.println("robot "+ robotIndex + " has testindex "+testindex);
                                 currentDestination = getDestination(destinations, testindex);
                                 testindex = testindex + 1;
                                 ItemPosition mypos = gvh.gps.getMyPosition();
@@ -158,21 +156,28 @@ public class FollowApp extends LogicThread {
                                 //Vector<Obstacles> v = new Vector<>();
                                 SimplePP newp = new SimplePP(mypos, currentDestination, 4);
                                 path = newp.getPath();
-
+                                boolean breakpath = false;
 
                                 for(int i = 0; i < obs.size(); i++){
-                                    System.out.println(name+ " i is " + i);
-                                    if(isClose(path, obs.get(i), 2000)) {
+                                    //System.out.println(name+ " i is " + i);
+                                    if(isClose(path, obs.get(i), 800)) {
                                         mutex0.exit(0);
-                                        System.out.println("DISTANCE TOO CLOSE BREAKING");
-                                        break;
+                                        wait0 = false;
+                                        System.out.println("DISTANCE TOO CLOSE BREAKING "+name);
+                                        breakpath = true;
+                                        continue;
                                     }
+                                }
+                                if (breakpath){
+                                    stage = Stage.PICK;
+                                    break;
                                 }
 
 
                                 currentDestination = path.peek();
                                 RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path)+"###path");
                                 gvh.comms.addOutgoingMessage(pathmsg);
+                                updatePath = true;
                                 //System.out.println(pathmsg);
                                 //PEEK, GOTO , POP. (repeat untill null) .
                                 //System.out.println(mkObstacles(path).obstacle);
@@ -544,7 +549,7 @@ public class FollowApp extends LogicThread {
     private boolean isClose(Stack<ItemPosition> pathstack, Stack<ItemPosition> obstack, double mindist) {
         int i = pathstack.size();
         int k = obstack.size();
-        System.out.println("obstack size is " + k);
+        //System.out.println("obstack size is " + k);
 
         for (int j = 1; j < i; j++) {
             ItemPosition start = pathstack.get(j - 1);
@@ -561,7 +566,7 @@ public class FollowApp extends LogicThread {
                 /*System.out.println(distance);
                 System.out.println(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ");
                 System.out.println(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ");*/
-                System.out.println(distance);
+                //System.out.println(distance);
                if(distance <= mindist)
                    return true;
             } else {
@@ -570,7 +575,7 @@ public class FollowApp extends LogicThread {
                     ItemPosition start_stack = obstack.get(p - 1);
                     ItemPosition next_stack = obstack.get(p);
                     int distance =  closestDist(start, next, start_stack, next_stack);
-                    System.out.println(distance);
+                    //System.out.println(distance);
                     if(distance <= mindist)
                         return true;
                 }
