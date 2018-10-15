@@ -1,11 +1,3 @@
-iRobot1 2
-iRobot0 2
-iRobot2 2
-robot 2 has testindex 0
-robot 1 has testindex 1
-DISTANCE TOO CLOSE BREAKING iRobot1
-[0-A: 2097, 765, 0. index 0] iRobot2
-[1-A: 2097, 765, 0. index 0] iRobot0
-robot 2 has testindex 1
-robot 2 has testindex 2
-robot 2 has testindex 3
+iRobot3 going to pathPoint: 2223, 344, 0. index 0
+iRobot3 going to pathPoint: 715, -2760, 0. index 0
+iRobot3 going to pathPoint: 3963, -1131, 0. index 0

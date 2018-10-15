@@ -60,7 +60,7 @@ public class SimplePP {
 
         int xincrement = xdist/pathLength;
         int yincrement = ydist/pathLength;
-        int zincrement = zdist/pathLength;
+        int zincrement = 0;
         //System.out.println("xinc: " + xincrement + " yinc: " + yincrement + " zinc: " + zincrement);
 
         ItemPosition i = this.start;

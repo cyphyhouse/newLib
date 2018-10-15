@@ -38,13 +38,18 @@ public class FollowApp extends LogicThread {
     private MutualExclusion mutex0;
     private boolean inMutex0 = false;
     private boolean updatePath = false;
+    Vector<Integer> assigned = new Vector<>();
 
     //reading from ui
     int lineno = 0;
     private static final int DEST_MSG = 23;
     private static final int PATH_MSG = 24;
+
     private HashSet<RobotMessage> receivedMsgs = new HashSet<RobotMessage>();
     private HashSet<RobotMessage> pathMsgs = new HashSet<RobotMessage>();
+    private HashSet<RobotMessage> assignedMsgs = new HashSet<RobotMessage>();
+
+
 
     //list of destinations
     final Map<String, ItemPosition> destinations = new HashMap<String, ItemPosition>();
@@ -104,7 +109,7 @@ public class FollowApp extends LogicThread {
             obs.add(o);
         }
 
-        System.out.println(name + " " +obs.size());
+        //System.out.println(name + " " +obs.size());
 
 
 
@@ -142,11 +147,12 @@ public class FollowApp extends LogicThread {
                             if (!wait0) {
                                 mutex0.requestEntry(0);
                                 wait0 = true;
+                                sleep(200);
                                 break;
                             }
                             if (mutex0.clearToEnter(0)) {
                                 testindex = Integer.parseInt(dsm.get("testindex", "*"));
-                                System.out.println("robot "+ robotIndex + " has testindex "+testindex);
+                                //System.out.println("robot "+ robotIndex + " has testindex "+testindex);
                                 currentDestination = getDestination(destinations, testindex);
                                 testindex = testindex + 1;
                                 ItemPosition mypos = gvh.gps.getMyPosition();
@@ -157,13 +163,13 @@ public class FollowApp extends LogicThread {
                                 SimplePP newp = new SimplePP(mypos, currentDestination, 4);
                                 path = newp.getPath();
                                 boolean breakpath = false;
-
+                                sleep(400);
                                 for(int i = 0; i < obs.size(); i++){
                                     //System.out.println(name+ " i is " + i);
-                                    if(isClose(path, obs.get(i), 800)) {
+                                    if(isClose(path, obs.get(i), 1200)) {
                                         mutex0.exit(0);
                                         wait0 = false;
-                                        System.out.println("DISTANCE TOO CLOSE BREAKING "+name);
+                                        //System.out.println("DISTANCE TOO CLOSE BREAKING "+name);
                                         breakpath = true;
                                         continue;
                                     }
@@ -172,8 +178,7 @@ public class FollowApp extends LogicThread {
                                     stage = Stage.PICK;
                                     break;
                                 }
-
-
+                                System.out.println(name + " going to "+ path.get(0).toString());
                                 currentDestination = path.peek();
                                 RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path)+"###path");
                                 gvh.comms.addOutgoingMessage(pathmsg);
@@ -189,7 +194,7 @@ public class FollowApp extends LogicThread {
                                 //mutex0.exit(0);
 
                             } else {
-
+                                sleep(400);
                                 if (updatePath) {
 
                                 } else {
@@ -298,7 +303,7 @@ public class FollowApp extends LogicThread {
             int sentIndex = Integer.parseInt(m.getFrom().replaceAll("[^0-9]", ""));
             if (type.equalsIgnoreCase("mypos")) {
                 Stack<ItemPosition> path = msgtoiposstack(contents,j,1);
-                System.out.println(path+" "+name);
+                //System.out.println(path+" "+name);
                 if (sentIndex > robotIndex) {
 
                     obs.set(sentIndex-1,path);
