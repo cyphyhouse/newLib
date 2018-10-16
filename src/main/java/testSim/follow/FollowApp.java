@@ -158,7 +158,7 @@ public class FollowApp extends LogicThread {
                                 mutex0.requestEntry(0);
                                 wait0 = true;
                                 Random ran = new Random();
-                                sleep(ran.nextInt(200)+100);
+                                sleep(ran.nextInt(500)+100);
                                 break;
                             }
                             if (mutex0.clearToEnter(0)) {
