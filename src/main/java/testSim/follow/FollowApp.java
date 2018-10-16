@@ -336,6 +336,14 @@ public class FollowApp extends LogicThread {
             }
         }
 
+        for (RobotMessage msg : mutexMsgs) {
+            if (msg.getFrom().equals(m.getFrom()) && msg.getContents().equals(m.getContents())) {
+                alreadyReceived = true;
+                break;
+            }
+        }
+
+
         for (RobotMessage msg : receivedMsgs) {
             if (msg.getFrom().equals(m.getFrom()) && msg.getContents().equals(m.getContents())) {
                 alreadyReceived = true;
@@ -353,6 +361,7 @@ public class FollowApp extends LogicThread {
         int i = receivedMsgs.size();
         int j = pathMsgs.size();
         int k = assignedMsgs.size();
+        int x = mutexMsgs.size()
 
 
         if (m.getMID() == ASGN_MSG && !alreadyReceived && !(robotIndex == 0)) {
