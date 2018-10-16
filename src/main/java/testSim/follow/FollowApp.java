@@ -16,9 +16,9 @@ import edu.illinois.mitra.cyphyhouse.interfaces.LogicThread;
 import edu.illinois.mitra.cyphyhouse.interfaces.MutualExclusion;
 import edu.illinois.mitra.cyphyhouse.motion.MotionParameters;
 import edu.illinois.mitra.cyphyhouse.motion.MotionParameters.COLAVOID_MODE_TYPE;
-import edu.illinois.mitra.cyphyhouse.objects.*;
-import edu.illinois.mitra.cyphyhouse.motion.RRTNode;
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
+import edu.illinois.mitra.cyphyhouse.objects.ItemPosition;
+import edu.illinois.mitra.cyphyhouse.objects.Point3d;
+import edu.illinois.mitra.cyphyhouse.objects.PositionList;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -38,17 +38,16 @@ public class FollowApp extends LogicThread {
     private MutualExclusion mutex0;
     private boolean inMutex0 = false;
     private boolean updatePath = false;
-    Vector<Integer> assigned = new Vector<>();
 
     //reading from ui
     int lineno = 0;
     private static final int DEST_MSG = 23;
     private static final int PATH_MSG = 24;
+    private static final int ASGN_MSG = 25;
 
     private HashSet<RobotMessage> receivedMsgs = new HashSet<RobotMessage>();
     private HashSet<RobotMessage> pathMsgs = new HashSet<RobotMessage>();
     private HashSet<RobotMessage> assignedMsgs = new HashSet<RobotMessage>();
-
 
 
     //list of destinations
@@ -64,10 +63,13 @@ public class FollowApp extends LogicThread {
     private enum Stage {
         PICK, GO, DONE, WAIT
     }
-
+    int asgndsize;
+    int asgnIndex;
     public int testindex = 0;
     Vector<Stack<ItemPosition>> obs;
     public Stack<ItemPosition> path;
+    public Vector<Integer> assigned;
+
     PositionList pos;
 
 
@@ -82,8 +84,10 @@ public class FollowApp extends LogicThread {
         gvh.plat.moat.setParameters(param);
         gvh.comms.addMsgListener(this, DEST_MSG);
         gvh.comms.addMsgListener(this, PATH_MSG);
+        gvh.comms.addMsgListener(this, ASGN_MSG);
 
         obs = new Vector<>();
+        assigned = new Vector<>();
 
         String intValue = name.replaceAll("[^0-9]", "");
         robotIndex = Integer.parseInt(intValue);
@@ -112,10 +116,10 @@ public class FollowApp extends LogicThread {
         //System.out.println(name + " " +obs.size());
 
 
-
         while (true) {
             //System.out.println(stage + " "+ gvh.plat.reachAvoid.doneFlag+" "+name);
             //System.out.println(stage + " robotindex " + robotIndex);
+            System.out.println("assigned list is " + assigned.toString() + " for " + name);
             switch (stage) {
                 case PICK:
                     updatePath = false;
@@ -151,22 +155,56 @@ public class FollowApp extends LogicThread {
                                 break;
                             }
                             if (mutex0.clearToEnter(0)) {
-                                testindex = Integer.parseInt(dsm.get("testindex", "*"));
+                                //testindex = Integer.parseInt(dsm.get("testindex", "*"));
                                 //System.out.println("robot "+ robotIndex + " has testindex "+testindex);
-                                currentDestination = getDestination(destinations, testindex);
-                                testindex = testindex + 1;
-                                ItemPosition mypos = gvh.gps.getMyPosition();
+                                //currentDestination = getDestination(destinations, testindex);
+
+                                asgndsize = assigned.size();
+                                asgnIndex = 0;
+                                boolean foundpath = false;
+                                for (; asgnIndex < asgndsize; asgnIndex++) {
+                                    if (assigned.get(asgnIndex) == 0) {
+                                        currentDestination = getDestination(destinations, asgnIndex);
+                                        ItemPosition mypos = gvh.gps.getMyPosition();
+                                        SimplePP newp = new SimplePP(mypos, currentDestination, 4);
+                                        path = newp.getPath();
+                                        boolean breakpath = false;
+                                        for (int i = 0; i < obs.size(); i++) {
+                                            //System.out.println(name+ " i is " + i);
+                                            if (isClose(path, obs.get(i), 1200)) {
+                                                //mutex0.exit(0);
+                                                //wait0 = false;
+                                                //System.out.println("DISTANCE TOO CLOSE BREAKING "+name);
+                                                breakpath = true;
+                                            }
+                                            else{
+                                            }
+                                        }
+                                        if (breakpath) {breakpath = false;break;}
+                                        else {
+                                            foundpath = true;
+                                        }
+                                    }
+                                }
+                                if (!foundpath) {
+                                    break;
+                                }
+                                else{
+                                    foundpath = false;
+                                }
+                                //currentDestination = getDestination(destinations,asgnIndex);
+                                //testindex = testindex + 1;
+                                //ItemPosition mypos = gvh.gps.getMyPosition();
 
                                 //pathnode = new RRTNode(mypos.x,mypos.y);
                                 //Obstacles o = new Obstacles(1,1,1);
                                 //Vector<Obstacles> v = new Vector<>();
-                                SimplePP newp = new SimplePP(mypos, currentDestination, 4);
-                                path = newp.getPath();
-                                boolean breakpath = false;
-                                sleep(400);
-                                for(int i = 0; i < obs.size(); i++){
+                                //SimplePP newp = new SimplePP(mypos, currentDestination, 4);
+                                //path = newp.getPath();
+                                //boolean breakpath = false;
+                                /*for (int i = 0; i < obs.size(); i++) {
                                     //System.out.println(name+ " i is " + i);
-                                    if(isClose(path, obs.get(i), 1200)) {
+                                    if (isClose(path, obs.get(i), 1200)) {
                                         mutex0.exit(0);
                                         wait0 = false;
                                         //System.out.println("DISTANCE TOO CLOSE BREAKING "+name);
@@ -174,19 +212,23 @@ public class FollowApp extends LogicThread {
                                         continue;
                                     }
                                 }
-                                if (breakpath){
+                                if (breakpath) {
                                     stage = Stage.PICK;
                                     break;
-                                }
-                                System.out.println(name + " going to "+ path.get(0).toString());
+                                }*/
+                                //System.out.println(name + " going to " + path.get(0).toString())
+                                // ;
                                 currentDestination = path.peek();
-                                RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path)+"###path");
+                                RobotMessage asgnmsg = new RobotMessage("ALL", name, ASGN_MSG, String.valueOf(asgnIndex));
+                                RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path) + "###path");
                                 gvh.comms.addOutgoingMessage(pathmsg);
+                                gvh.comms.addOutgoingMessage(asgnmsg);
+
                                 updatePath = true;
                                 //System.out.println(pathmsg);
                                 //PEEK, GOTO , POP. (repeat untill null) .
                                 //System.out.println(mkObstacles(path).obstacle);
-                                dsm.put("testindex", "*", testindex);
+                                //dsm.put("testindex", "*", testindex);
                                 sleep(800);
                                 inMutex0 = true;
                                 //exit conditions
@@ -265,6 +307,13 @@ public class FollowApp extends LogicThread {
     @Override
     protected void receive(RobotMessage m) {
         boolean alreadyReceived = false;
+        for (RobotMessage msg : assignedMsgs) {
+            if (msg.getFrom().equals(m.getFrom()) && msg.getContents().equals(m.getContents())) {
+                alreadyReceived = true;
+                break;
+            }
+        }
+
         for (RobotMessage msg : receivedMsgs) {
             if (msg.getFrom().equals(m.getFrom()) && msg.getContents().equals(m.getContents())) {
                 alreadyReceived = true;
@@ -281,39 +330,50 @@ public class FollowApp extends LogicThread {
 
         int i = receivedMsgs.size();
         int j = pathMsgs.size();
+        int k = assignedMsgs.size();
 
+
+        if (m.getMID() == ASGN_MSG && !alreadyReceived && !(robotIndex == 0)) {
+            assignedMsgs.add(m);
+            gvh.log.d(TAG, "received assignment message from " + m.getFrom());
+
+            String asgnmsg = m.getContents().toString().replace("`", "");
+            int vectorid = Integer.parseInt(asgnmsg);
+            System.out.println("reached here on "+ name);
+            assigned.set(vectorid, 1);
+        }
 
         if (m.getMID() == DEST_MSG && !m.getFrom().equals(name) && !alreadyReceived) {
             receivedMsgs.add(m);
             gvh.log.d(TAG, "received destination message from " + m.getFrom());
 
             String iposmsg = m.getContents().toString();
-            ItemPosition p = msgtoipos(iposmsg,i,1000);
+            ItemPosition p = msgtoipos(iposmsg, i, 1000);
             destinations.put(p.getName(), p);
             taskLocations.put(p.getName(), new Task(p, i));
+            assigned.add(assigned.size(), 0);
 
         }
 
         if (m.getMID() == PATH_MSG && !m.getFrom().equals(name) && !alreadyReceived) {
             pathMsgs.add(m);
             gvh.log.d(TAG, "received path message from " + m.getFrom());
-            String mc = m.getContents().toString().replace("`","");
+            String mc = m.getContents().toString().replace("`", "");
             String type = mc.split("###")[1];
             String contents = mc.split("###")[0];
             int sentIndex = Integer.parseInt(m.getFrom().replaceAll("[^0-9]", ""));
             if (type.equalsIgnoreCase("mypos")) {
-                Stack<ItemPosition> path = msgtoiposstack(contents,j,1);
+                Stack<ItemPosition> path = msgtoiposstack(contents, j, 1);
                 //System.out.println(path+" "+name);
                 if (sentIndex > robotIndex) {
 
-                    obs.set(sentIndex-1,path);
+                    obs.set(sentIndex - 1, path);
 
                     //System.out.println((sentIndex-1)+" "+sentIndex+" "+robotIndex+ " \n");
 
                     //System.out.println(obs.get(sentIndex-1)+" "+sentIndex+" "+robotIndex);
-                }
-                else{
-                    obs.set(sentIndex,path);
+                } else {
+                    obs.set(sentIndex, path);
 
                     //System.out.println((sentIndex)+" "+sentIndex+" "+robotIndex+ " \n");
 
@@ -322,18 +382,16 @@ public class FollowApp extends LogicThread {
                 }
 
 
-            }
-            else {
-                Stack<ItemPosition> path = msgtopathstack(contents,j,1);
+            } else {
+                Stack<ItemPosition> path = msgtopathstack(contents, j, 1);
                 if (sentIndex > robotIndex) {
-                    obs.set(sentIndex-1,path);
+                    obs.set(sentIndex - 1, path);
 
                     //System.out.println((sentIndex-1)+" "+sentIndex+" "+robotIndex+ " \n");
 
                     //System.out.println(obs.get(sentIndex-1)+" "+sentIndex+" "+robotIndex);
-                }
-                else{
-                    obs.set(sentIndex,path);
+                } else {
+                    obs.set(sentIndex, path);
 
                     //System.out.println((sentIndex)+" "+sentIndex+" "+robotIndex+ " \n");
 
@@ -349,7 +407,7 @@ public class FollowApp extends LogicThread {
     }
 
 
-    private ItemPosition msgtoipos(String iposmsg,int i,int scale) {
+    private ItemPosition msgtoipos(String iposmsg, int i, int scale) {
         iposmsg = iposmsg.replace(" ", ",").replace("`", "");
         String[] parts = iposmsg.split(",");
         int x = (int) (Float.parseFloat(parts[0]) * scale);
@@ -361,11 +419,11 @@ public class FollowApp extends LogicThread {
     }
 
     private Stack<ItemPosition> msgtopathstack(String pathmsg, int j, int scale) {
-        pathmsg = pathmsg.replace(".",",").replace(" ","");
+        pathmsg = pathmsg.replace(".", ",").replace(" ", "");
         String[] pathpoints = pathmsg.split("@@@");
         Stack<ItemPosition> path = new Stack<ItemPosition>();
         int i = pathpoints.length;
-        for (int k = 0; k < i; k++){
+        for (int k = 0; k < i; k++) {
             pathpoints[k] = pathpoints[k].split(":")[1];
             pathpoints[k] = pathpoints[k].split(";")[0];
             String[] parts = pathpoints[k].split(",");
@@ -378,8 +436,9 @@ public class FollowApp extends LogicThread {
         }
         return path;
     }
+
     private Stack<ItemPosition> msgtoiposstack(String iposmsg, int j, int scale) {
-        iposmsg = iposmsg.replace(".",",").replace(" ","");
+        iposmsg = iposmsg.replace(".", ",").replace(" ", "");
         Stack<ItemPosition> path = new Stack<ItemPosition>();
 
         iposmsg = iposmsg.split(":")[1];
@@ -394,7 +453,6 @@ public class FollowApp extends LogicThread {
 
         return path;
     }
-
 
     private void updatedests(String filename, int msgtype, String robotname, int lineno) {
 
@@ -419,7 +477,6 @@ public class FollowApp extends LogicThread {
         return map.get(key);
     }
 
-
     private <X, T> void getUnassignedTask(Map<X, T> map) {
         Iterator it = map.values().iterator();
         while (it.hasNext()) {
@@ -434,7 +491,7 @@ public class FollowApp extends LogicThread {
     private boolean isclosetobots(Stack<ItemPosition> pathstack, Vector<Stack<ItemPosition>> robotStack, double mindist) {
         int i = robotStack.size();
         for (int j = 0; j < i; j++) {
-            if (isClose(pathstack,robotStack.get(j),mindist)) return true;
+            if (isClose(pathstack, robotStack.get(j), mindist)) return true;
             else continue;
         }
         return false;
@@ -451,19 +508,18 @@ public class FollowApp extends LogicThread {
 
     }
 
+    private int closestDist(ItemPosition S1, ItemPosition E1, ItemPosition S2, ItemPosition E2) {
+        Point3d u = new Point3d(S1.x - E1.x, S1.y - E1.y, S1.z - E1.z);
+        Point3d v = new Point3d(S2.x - E2.x, S2.y - E2.y, S2.z - E2.z);
+        Point3d w = new Point3d(E1.x - E2.x, E1.y - E2.y, E1.z - E2.z);
 
-    private int closestDist(ItemPosition S1, ItemPosition E1, ItemPosition S2, ItemPosition E2){
-        Point3d u = new Point3d(S1.x-E1.x, S1.y-E1.y, S1.z-E1.z);
-        Point3d v = new Point3d(S2.x-E2.x, S2.y-E2.y, S2.z-E2.z);
-        Point3d w = new Point3d(E1.x-E2.x, E1.y-E2.y, E1.z-E2.z);
+        double a = dot(u, u);
+        double b = dot(u, v);
+        double c = dot(v, v);
+        double d = dot(u, w);
+        double e = dot(v, w);
 
-        double a = dot(u,u);
-        double b = dot(u,v);
-        double c = dot(v,v);
-        double d = dot(u,w);
-        double e = dot(v,w);
-
-        double D = a*c - b*b;
+        double D = a * c - b * b;
         double sc;
         double sN;
         double sD = D;
@@ -473,83 +529,80 @@ public class FollowApp extends LogicThread {
 
         double SMALL_NUM = 0.000001;
 
-        if(D < SMALL_NUM) {
+        if (D < SMALL_NUM) {
             sN = 0.0;
             sD = 1.0;
             tN = e;
             tD = c;
-        }else{
-            sN = (b*e - c*d);
-            tN = (a*e - b*d);
-            if(sN < 0.0){
+        } else {
+            sN = (b * e - c * d);
+            tN = (a * e - b * d);
+            if (sN < 0.0) {
                 sN = 0.0;
                 tN = e;
                 tD = c;
-            }else if(sN > sD){
+            } else if (sN > sD) {
                 sN = sD;
-                tN = e+b;
+                tN = e + b;
                 tD = c;
             }
         }
 
-        if(tN < 0.0){
+        if (tN < 0.0) {
             tN = 0.0;
-            if(-d < 0.0)
+            if (-d < 0.0)
                 sN = 0.0;
             else if (-d > a)
                 sN = sD;
-            else{
+            else {
                 sN = -d;
                 sD = a;
             }
-        } else if(tN > tD){
+        } else if (tN > tD) {
             tN = tD;
-            if((-d + b) < 0.0)
+            if ((-d + b) < 0.0)
                 sN = 0;
-            else if((-d + b) > a)
+            else if ((-d + b) > a)
                 sN = sD;
-            else{
+            else {
                 sN = (-d + b);
                 sD = a;
             }
         }
 
-        if(Math.abs(sN) < SMALL_NUM)
+        if (Math.abs(sN) < SMALL_NUM)
             sc = 0.0;
         else
-            sc = sN/sD;
+            sc = sN / sD;
 
-        if(Math.abs(tN) < SMALL_NUM)
+        if (Math.abs(tN) < SMALL_NUM)
             tc = 0.0;
         else
-            tc = tN/tD;
+            tc = tN / tD;
 
 
         // sc * u
-        u.x = (int)sc*u.x;
-        u.y = (int)sc*u.y;
-        u.z = (int)sc*u.z;
+        u.x = (int) sc * u.x;
+        u.y = (int) sc * u.y;
+        u.z = (int) sc * u.z;
 
         // tc * v
-        v.x = (int)tc*v.x;
-        v.y = (int)tc*v.y;
-        v.z = (int)tc*v.z;
+        v.x = (int) tc * v.x;
+        v.y = (int) tc * v.y;
+        v.z = (int) tc * v.z;
 
-        Point3d Dp = new Point3d(w.x+u.x-v.x, w.y+u.y-v.y, w.z+u.z-v.z);
+        Point3d Dp = new Point3d(w.x + u.x - v.x, w.y + u.y - v.y, w.z + u.z - v.z);
 
-        double distance = Math.sqrt(Dp.x*Dp.x + Dp.y*Dp.y + Dp.z*Dp.z);
+        double distance = Math.sqrt(Dp.x * Dp.x + Dp.y * Dp.y + Dp.z * Dp.z);
 
-        return (int)distance;
+        return (int) distance;
 
 
     }
 
-    private float dot(Point3d a, Point3d b){
-        return a.x*b.x + a.y*b.y + a.z*b.z;
+    private float dot(Point3d a, Point3d b) {
+        return a.x * b.x + a.y * b.y + a.z * b.z;
     }
-
-
-
 
     private boolean isClose(Stack<ItemPosition> pathstack, Stack<ItemPosition> obstack, double mindist) {
         int i = pathstack.size();
@@ -567,21 +620,21 @@ public class FollowApp extends LogicThread {
                 System.out.println(start);
                 System.out.println(obstack.peek());*/
 
-               int distance =  closestDist(start, next, obstack.peek(), obstack.peek());
+                int distance = closestDist(start, next, obstack.peek(), obstack.peek());
                 /*System.out.println(distance);
                 System.out.println(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ");
                 System.out.println(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ");*/
                 //System.out.println(distance);
-               if(distance <= mindist)
-                   return true;
+                if (distance <= mindist)
+                    return true;
             } else {
                 for (int p = 1; p < k; p++) {
                     //System.out.println("checking for cross paths");
                     ItemPosition start_stack = obstack.get(p - 1);
                     ItemPosition next_stack = obstack.get(p);
-                    int distance =  closestDist(start, next, start_stack, next_stack);
+                    int distance = closestDist(start, next, start_stack, next_stack);
                     //System.out.println(distance);
-                    if(distance <= mindist)
+                    if (distance <= mindist)
                         return true;
                 }
             }
