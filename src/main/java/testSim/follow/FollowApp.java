@@ -88,6 +88,9 @@ public class FollowApp extends LogicThread {
 
         obs = new Vector<>();
         assigned = new Vector<>();
+        for (int i=0; i<12; i++){
+            assigned.add(0);
+        }
 
         String intValue = name.replaceAll("[^0-9]", "");
         robotIndex = Integer.parseInt(intValue);
@@ -117,9 +120,10 @@ public class FollowApp extends LogicThread {
 
 
         while (true) {
+            //System.out.println(name + "'s assigned list is: " + assigned);
             //System.out.println(stage + " "+ gvh.plat.reachAvoid.doneFlag+" "+name);
             //System.out.println(stage + " robotindex " + robotIndex);
-            System.out.println("assigned list is " + assigned.toString() + " for " + name);
+            //System.out.println("assigned list is " + assigned.toString() + " for " + name);
             switch (stage) {
                 case PICK:
                     updatePath = false;
@@ -128,6 +132,8 @@ public class FollowApp extends LogicThread {
                         lineno = lineno + 1;
                     }
                     if (destinations.isEmpty() || robotIndex == 0) {
+                        RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, gvh.gps.getMyPosition().toString() + "###mypos");
+                        gvh.comms.addOutgoingMessage(pathmsg);
                         stage = Stage.WAIT;
                         break;
                     } else {
@@ -151,23 +157,29 @@ public class FollowApp extends LogicThread {
                             if (!wait0) {
                                 mutex0.requestEntry(0);
                                 wait0 = true;
-                                sleep(200);
+                                Random ran = new Random();
+                                sleep(ran.nextInt(200)+100);
                                 break;
                             }
                             if (mutex0.clearToEnter(0)) {
                                 //testindex = Integer.parseInt(dsm.get("testindex", "*"));
                                 //System.out.println("robot "+ robotIndex + " has testindex "+testindex);
                                 //currentDestination = getDestination(destinations, testindex);
-
-                                asgndsize = assigned.size();
+                                System.out.println(name + " in mutex");
+                                asgndsize = 12;//assigned.size();
                                 asgnIndex = 0;
+                                Random r = new Random();
+                               // asgnIndex = r.nextInt(asgndsize);
                                 boolean foundpath = false;
-                                for (; asgnIndex < asgndsize; asgnIndex++) {
+                                for (asgnIndex = r.nextInt(asgndsize); asgnIndex < asgndsize; asgnIndex++) {
+                                    System.out.println(name + " asgnIDX is " + asgnIndex + " value is " + assigned.get(asgnIndex));
                                     if (assigned.get(asgnIndex) == 0) {
+                                        System.out.println(name + " gotten index: " + asgnIndex);
                                         currentDestination = getDestination(destinations, asgnIndex);
                                         ItemPosition mypos = gvh.gps.getMyPosition();
                                         SimplePP newp = new SimplePP(mypos, currentDestination, 4);
                                         path = newp.getPath();
+                                        sleep(5000);
                                         boolean breakpath = false;
                                         for (int i = 0; i < obs.size(); i++) {
                                             //System.out.println(name+ " i is " + i);
@@ -180,9 +192,11 @@ public class FollowApp extends LogicThread {
                                             else{
                                             }
                                         }
-                                        if (breakpath) {breakpath = false;break;}
+                                        System.out.println(breakpath);
+                                        if (breakpath) {breakpath = false;}
                                         else {
                                             foundpath = true;
+                                            break;
                                         }
                                     }
                                 }
@@ -223,20 +237,23 @@ public class FollowApp extends LogicThread {
                                 RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path) + "###path");
                                 gvh.comms.addOutgoingMessage(pathmsg);
                                 gvh.comms.addOutgoingMessage(asgnmsg);
+                                assigned.set(asgnIndex,1);
 
                                 updatePath = true;
                                 //System.out.println(pathmsg);
                                 //PEEK, GOTO , POP. (repeat untill null) .
                                 //System.out.println(mkObstacles(path).obstacle);
                                 //dsm.put("testindex", "*", testindex);
-                                sleep(800);
+                                Random ran = new Random();
+                                sleep(ran.nextInt(300)+100);
                                 inMutex0 = true;
                                 //exit conditions
                                 wait0 = false;
                                 //mutex0.exit(0);
 
                             } else {
-                                sleep(400);
+                                Random ran = new Random();
+                                sleep(ran.nextInt(800)+100);
                                 if (updatePath) {
 
                                 } else {
@@ -294,11 +311,11 @@ public class FollowApp extends LogicThread {
                     stage = Stage.PICK;
                     break;
             }
-
             Random ran = new Random();
-            sleep(ran.nextInt(200) + 100);
+            sleep(ran.nextInt(500)+100);
             if (inMutex0) {
                 mutex0.exit(0);
+                sleep(ran.nextInt(800)+100);
                 inMutex0 = false;
             }
         }
@@ -337,10 +354,14 @@ public class FollowApp extends LogicThread {
             assignedMsgs.add(m);
             gvh.log.d(TAG, "received assignment message from " + m.getFrom());
 
+            System.out.println(name + " beginning asgnmsg set");
             String asgnmsg = m.getContents().toString().replace("`", "");
             int vectorid = Integer.parseInt(asgnmsg);
-            System.out.println("reached here on "+ name);
+            //System.out.println("reached here on "+ name);
+            System.out.println("assigned size " + assigned.size());
+            //System.out.println("assigned size " + assigned.size());
             assigned.set(vectorid, 1);
+            System.out.println(name + " done asgnmsg set");
         }
 
         if (m.getMID() == DEST_MSG && !m.getFrom().equals(name) && !alreadyReceived) {
@@ -351,7 +372,7 @@ public class FollowApp extends LogicThread {
             ItemPosition p = msgtoipos(iposmsg, i, 1000);
             destinations.put(p.getName(), p);
             taskLocations.put(p.getName(), new Task(p, i));
-            assigned.add(assigned.size(), 0);
+            //assigned.add(assigned.size(), 0);
 
         }
 

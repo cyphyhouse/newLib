@@ -162,7 +162,7 @@ public class Simulation {
 
 				//Set robot 0 to be outside of world boundary area (robot0 is base computer)
 				if(robot_number == 0){
-					initialPosition = new Model_iRobot(botName, settings.GRID_XSIZE + 500, settings.GRID_YSIZE);
+					initialPosition = new Model_iRobot(botName, settings.GRID_XSIZE+10000, settings.GRID_YSIZE+10000);
 				}
 				else {
 					//	System.out.println("null position in list");
