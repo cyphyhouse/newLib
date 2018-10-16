@@ -44,12 +44,22 @@ public class FollowApp extends LogicThread {
     private static final int DEST_MSG = 23;
     private static final int PATH_MSG = 24;
     private static final int ASGN_MSG = 25;
-    private static final int MUTEX_MSG = 26;
+    private static final int MUTEX_REQUEST_MSG = 26;
+    private static final int MUTEX_RELEASE_MSG = 27;
+    private static final int MUTEX_GRANT_MSG = 28;
+
+
+    private boolean isLocked = false;
+
+    private PriorityQueue<Integer> requests = new PriorityQueue<Integer>();
 
     private HashSet<RobotMessage> receivedMsgs = new HashSet<RobotMessage>();
     private HashSet<RobotMessage> pathMsgs = new HashSet<RobotMessage>();
     private HashSet<RobotMessage> assignedMsgs = new HashSet<RobotMessage>();
-    private HashSet<RobotMessage> mutexMsgs = new HashSet<RobotMessage>();
+    private HashSet<RobotMessage> mutexReleaseMsgs = new HashSet<RobotMessage>();
+    private HashSet<RobotMessage> mutexRequestMsgs = new HashSet<RobotMessage>();
+    private HashSet<RobotMessage> mutexGrantMsgs = new HashSet<RobotMessage>();
+
 
 
     //list of destinations
@@ -67,6 +77,8 @@ public class FollowApp extends LogicThread {
     }
     int asgndsize;
     int asgnIndex;
+    int msgId = 0;
+    boolean hasMutex = false;
     public int testindex = 0;
     Vector<Stack<ItemPosition>> obs;
     public Stack<ItemPosition> path;
@@ -87,6 +99,9 @@ public class FollowApp extends LogicThread {
         gvh.comms.addMsgListener(this, DEST_MSG);
         gvh.comms.addMsgListener(this, PATH_MSG);
         gvh.comms.addMsgListener(this, ASGN_MSG);
+        gvh.comms.addMsgListener(this, MUTEX_GRANT_MSG);
+        gvh.comms.addMsgListener(this, MUTEX_RELEASE_MSG);
+        gvh.comms.addMsgListener(this, MUTEX_REQUEST_MSG);
 
         obs = new Vector<>();
         assigned = new Vector<>();
@@ -157,13 +172,16 @@ public class FollowApp extends LogicThread {
                         try {
 
                             if (!wait0) {
-                                mutex0.requestEntry(0);
+                                String mutexreqmsg = String.valueOf(robotIndex)+" "+ String.valueOf(msgId);
+                                RobotMessage mutexrequestmsg = new RobotMessage("ALL", name, MUTEX_REQUEST_MSG,mutexreqmsg );
+                                gvh.comms.addOutgoingMessage(mutexrequestmsg);
+                                //mutex0.requestEntry(0);
                                 wait0 = true;
                                 Random ran = new Random();
                                 sleep(ran.nextInt(500)+100);
                                 break;
                             }
-                            if (mutex0.clearToEnter(0)) {
+                            if (hasMutex) {
                                 System.out.println(name + " IN MUTEX");
                                 //testindex = Integer.parseInt(dsm.get("testindex", "*"));
                                 //System.out.println("robot "+ robotIndex + " has testindex "+testindex);
@@ -317,7 +335,11 @@ public class FollowApp extends LogicThread {
             sleep(ran.nextInt(500)+100);
             if (inMutex0) {
                 System.out.println(name + " RELEASING MUTEX");
-                mutex0.exit(0);
+                hasMutex = false;
+                String releaseMutex = String.valueOf(robotIndex) + " "+ String.valueOf(msgId);
+                RobotMessage mutexreleasemsg = new RobotMessage("ALL", name, MUTEX_RELEASE_MSG,releaseMutex);
+                gvh.comms.addOutgoingMessage(mutexreleasemsg);
+                msgId = msgId+1;
                 //sleep(ran.nextInt(800)+100);
                 inMutex0 = false;
             }
@@ -336,13 +358,24 @@ public class FollowApp extends LogicThread {
             }
         }
 
-        for (RobotMessage msg : mutexMsgs) {
+        for (RobotMessage msg : mutexRequestMsgs) {
             if (msg.getFrom().equals(m.getFrom()) && msg.getContents().equals(m.getContents())) {
                 alreadyReceived = true;
                 break;
             }
         }
-
+        for (RobotMessage msg : mutexReleaseMsgs) {
+            if (msg.getFrom().equals(m.getFrom()) && msg.getContents().equals(m.getContents())) {
+                alreadyReceived = true;
+                break;
+            }
+        }
+        for (RobotMessage msg : mutexGrantMsgs) {
+            if (msg.getFrom().equals(m.getFrom()) && msg.getContents().equals(m.getContents())) {
+                alreadyReceived = true;
+                break;
+            }
+        }
 
         for (RobotMessage msg : receivedMsgs) {
             if (msg.getFrom().equals(m.getFrom()) && msg.getContents().equals(m.getContents())) {
@@ -361,7 +394,66 @@ public class FollowApp extends LogicThread {
         int i = receivedMsgs.size();
         int j = pathMsgs.size();
         int k = assignedMsgs.size();
-        int x = mutexMsgs.size()
+        int l = mutexRequestMsgs.size();
+        int o = mutexReleaseMsgs.size();
+        int n = mutexGrantMsgs.size();
+
+
+        if (m.getMID() == MUTEX_REQUEST_MSG && robotIndex == 0 && !alreadyReceived) {
+            mutexRequestMsgs.add(m);
+            gvh.log.d(TAG, "received request message from " + m.getFrom());
+            String requestmsg = m.getContents().toString().replace("`","");
+            int requestid = Integer.parseInt(requestmsg.split(" ")[0]);
+            int msgid = Integer.parseInt(requestmsg.split(" ")[1]);
+
+            requests.add(requestid);
+            if (!isLocked) {
+                String grantmsgstr = String.valueOf(requestid)+" "+String.valueOf(msgid);
+                RobotMessage grantmsg = new RobotMessage("ALL", name, MUTEX_GRANT_MSG, grantmsgstr  );
+                gvh.comms.addOutgoingMessage(grantmsg);
+                isLocked = true;
+            }
+
+        }
+
+        if (m.getMID() == MUTEX_RELEASE_MSG && robotIndex == 0 && !alreadyReceived) {
+            mutexReleaseMsgs.add(m);
+            gvh.log.d(TAG, "received release message from " + m.getFrom());
+            String releasemsg = m.getContents().toString().replace("`","");
+            int releaseid = Integer.parseInt(releasemsg.split(" ")[0]);
+            int msgid = Integer.parseInt(releasemsg.split(" ")[1]);
+
+            if (releaseid == requests.peek()) {
+                requests.poll();
+                if (requests.size() == 0) {
+                    isLocked = false;
+                }
+                else {
+                    int requestid = requests.peek();
+                    String grantmsgstr = String.valueOf(requestid)+" "+String.valueOf(msgid);
+                    RobotMessage grantmsg = new RobotMessage("ALL", name, MUTEX_GRANT_MSG, grantmsgstr  );
+                    gvh.comms.addOutgoingMessage(grantmsg);
+                    isLocked = true;
+
+                }
+            }
+
+        }
+
+
+        if (m.getMID() == MUTEX_GRANT_MSG && !alreadyReceived) {
+            mutexGrantMsgs.add(m);
+            gvh.log.d(TAG, "received grant message from " + m.getFrom());
+            String grantmsg = m.getContents().toString().replace("`","");
+            int grantrobotid = Integer.parseInt(grantmsg.split(" ")[0]);
+            int grantmsgid = Integer.parseInt(grantmsg.split(" ")[1]);
+
+            if (grantrobotid == robotIndex && grantmsgid == msgId) {
+                hasMutex = true;
+            }
+        }
+
+
 
 
         if (m.getMID() == ASGN_MSG && !alreadyReceived && !(robotIndex == 0)) {
