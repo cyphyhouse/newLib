@@ -41,9 +41,11 @@ public class FollowDrawer extends Drawer {
 
 		g.setColor(Color.RED);
 		for(ItemPosition dest : app.destinations.values()) {
-			g.fillRect(dest.getX(), dest.getY(), 26, 26);
+			g.fillRect(dest.getX(), dest.getY(), 60, 60);
 		}
 
 	}
 
 }
+
+

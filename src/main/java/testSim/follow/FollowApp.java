@@ -44,10 +44,12 @@ public class FollowApp extends LogicThread {
     private static final int DEST_MSG = 23;
     private static final int PATH_MSG = 24;
     private static final int ASGN_MSG = 25;
+    private static final int MUTEX_MSG = 26;
 
     private HashSet<RobotMessage> receivedMsgs = new HashSet<RobotMessage>();
     private HashSet<RobotMessage> pathMsgs = new HashSet<RobotMessage>();
     private HashSet<RobotMessage> assignedMsgs = new HashSet<RobotMessage>();
+    private HashSet<RobotMessage> mutexMsgs = new HashSet<RobotMessage>();
 
 
     //list of destinations
@@ -88,7 +90,7 @@ public class FollowApp extends LogicThread {
 
         obs = new Vector<>();
         assigned = new Vector<>();
-        for (int i=0; i<12; i++){
+        for (int i=0; i<36; i++){
             assigned.add(0);
         }
 
@@ -108,7 +110,7 @@ public class FollowApp extends LogicThread {
         while (it.hasNext()) {
 
             ItemPosition ipos = (ItemPosition) it.next();
-            if (ipos.getName() == name) {
+            if (ipos.getName().equals(name)) {
                 continue;
             }
             Stack<ItemPosition> o = new Stack<ItemPosition>();
@@ -162,28 +164,29 @@ public class FollowApp extends LogicThread {
                                 break;
                             }
                             if (mutex0.clearToEnter(0)) {
+                                System.out.println(name + " IN MUTEX");
                                 //testindex = Integer.parseInt(dsm.get("testindex", "*"));
                                 //System.out.println("robot "+ robotIndex + " has testindex "+testindex);
                                 //currentDestination = getDestination(destinations, testindex);
-                                System.out.println(name + " in mutex");
-                                asgndsize = 12;//assigned.size();
+                                //System.out.println(name + " in mutex");
+                                asgndsize = 36;//assigned.size();
                                 asgnIndex = 0;
                                 Random r = new Random();
                                // asgnIndex = r.nextInt(asgndsize);
                                 boolean foundpath = false;
                                 for (asgnIndex = r.nextInt(asgndsize); asgnIndex < asgndsize; asgnIndex++) {
-                                    System.out.println(name + " asgnIDX is " + asgnIndex + " value is " + assigned.get(asgnIndex));
+                                    //System.out.println(name + " asgnIDX is " + asgnIndex + " value is " + assigned.get(asgnIndex));
                                     if (assigned.get(asgnIndex) == 0) {
-                                        System.out.println(name + " gotten index: " + asgnIndex);
+                                        //System.out.println(name + " gotten index: " + asgnIndex);
                                         currentDestination = getDestination(destinations, asgnIndex);
                                         ItemPosition mypos = gvh.gps.getMyPosition();
                                         SimplePP newp = new SimplePP(mypos, currentDestination, 4);
                                         path = newp.getPath();
-                                        sleep(5000);
+                                        //sleep(5000);
                                         boolean breakpath = false;
                                         for (int i = 0; i < obs.size(); i++) {
                                             //System.out.println(name+ " i is " + i);
-                                            if (isClose(path, obs.get(i), 1200)) {
+                                            if (isClose(path, obs.get(i), 1500)) {
                                                 //mutex0.exit(0);
                                                 //wait0 = false;
                                                 //System.out.println("DISTANCE TOO CLOSE BREAKING "+name);
@@ -192,7 +195,7 @@ public class FollowApp extends LogicThread {
                                             else{
                                             }
                                         }
-                                        System.out.println(breakpath);
+                                        //System.out.println(breakpath);
                                         if (breakpath) {breakpath = false;}
                                         else {
                                             foundpath = true;
@@ -237,6 +240,7 @@ public class FollowApp extends LogicThread {
                                 RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path) + "###path");
                                 gvh.comms.addOutgoingMessage(pathmsg);
                                 gvh.comms.addOutgoingMessage(asgnmsg);
+                                sleep(600);
                                 assigned.set(asgnIndex,1);
 
                                 updatePath = true;
@@ -244,8 +248,6 @@ public class FollowApp extends LogicThread {
                                 //PEEK, GOTO , POP. (repeat untill null) .
                                 //System.out.println(mkObstacles(path).obstacle);
                                 //dsm.put("testindex", "*", testindex);
-                                Random ran = new Random();
-                                sleep(ran.nextInt(300)+100);
                                 inMutex0 = true;
                                 //exit conditions
                                 wait0 = false;
@@ -253,12 +255,12 @@ public class FollowApp extends LogicThread {
 
                             } else {
                                 Random ran = new Random();
-                                sleep(ran.nextInt(800)+100);
                                 if (updatePath) {
 
                                 } else {
                                     RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, gvh.gps.getMyPosition().toString() + "###mypos");
                                     gvh.comms.addOutgoingMessage(pathmsg);
+                                    sleep(600);
                                     updatePath = false;
 
                                 }
@@ -314,8 +316,9 @@ public class FollowApp extends LogicThread {
             Random ran = new Random();
             sleep(ran.nextInt(500)+100);
             if (inMutex0) {
+                System.out.println(name + " RELEASING MUTEX");
                 mutex0.exit(0);
-                sleep(ran.nextInt(800)+100);
+                //sleep(ran.nextInt(800)+100);
                 inMutex0 = false;
             }
         }
@@ -324,6 +327,8 @@ public class FollowApp extends LogicThread {
     @Override
     protected void receive(RobotMessage m) {
         boolean alreadyReceived = false;
+
+
         for (RobotMessage msg : assignedMsgs) {
             if (msg.getFrom().equals(m.getFrom()) && msg.getContents().equals(m.getContents())) {
                 alreadyReceived = true;
@@ -354,14 +359,14 @@ public class FollowApp extends LogicThread {
             assignedMsgs.add(m);
             gvh.log.d(TAG, "received assignment message from " + m.getFrom());
 
-            System.out.println(name + " beginning asgnmsg set");
+            //System.out.println(name + " beginning asgnmsg set");
             String asgnmsg = m.getContents().toString().replace("`", "");
             int vectorid = Integer.parseInt(asgnmsg);
             //System.out.println("reached here on "+ name);
-            System.out.println("assigned size " + assigned.size());
+            //System.out.println("assigned size " + assigned.size());
             //System.out.println("assigned size " + assigned.size());
             assigned.set(vectorid, 1);
-            System.out.println(name + " done asgnmsg set");
+            //System.out.println(name + " done asgnmsg set");
         }
 
         if (m.getMID() == DEST_MSG && !m.getFrom().equals(name) && !alreadyReceived) {

@@ -7,9 +7,9 @@ public class Main {
 
 	public static void main(String[] args) {
 		SimSettings.Builder settings = new SimSettings.Builder();
-        settings.N_IROBOTS(4);
-        settings.N_QUADCOPTERS(1);
-		settings.TIC_TIME_RATE(10);
+        settings.N_IROBOTS(5);
+        settings.N_QUADCOPTERS(0);
+		settings.TIC_TIME_RATE(5);
         //settings.WAYPOINT_FILE("square.wpt");
 		//settings.WAYPOINT_FILE(System.getProperty("user.dir")+"\\trunk\\android\\RaceApp\\waypoints\\four1.wpt");
 		settings.DRAW_WAYPOINTS(false);
@@ -17,7 +17,10 @@ public class Main {
 		settings.IDEAL_MOTION(true);
 		settings.DRAWER(new FollowDrawer());
 		settings.DRAW_WORLD_BOUNDARY(true);
-		settings.DRAW_BASE_ROBOT(false);
+		settings.DRAW_BASE_ROBOT(true);
+		settings.GRID_XSIZE(10000);
+		settings.GRID_YSIZE(10000);
+		settings.INITIAL_POSITIONS_FILE("initial_positions.wpt");
 		
 		Simulation sim = new Simulation(FollowApp.class, settings.build());
 		sim.start();
