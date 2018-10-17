@@ -87,7 +87,7 @@ public class FollowApp extends LogicThread {
        
 	
         while(true) {
-            System.out.println(gvh.gps.getMyPosition());
+            //System.out.println("MY POSITION IS " + gvh.gps.getMyPosition());
 
             testindex = Integer.parseInt(dsm.get("testindex","*"));
 

@@ -10,6 +10,7 @@ import ros.RosListenDelegate;
 import ros.SubscriptionRequestMsg;
 import ros.msgs.sensor_msgs.LaserScan;
 import ros.msgs.geometry_msgs.Point;
+import ros.msgs.geometry_msgs.PoseStamped;
 import ros.msgs.std_msgs.Header;
 import ros.msgs.std_msgs.Time;
 import ros.msgs.geometry_msgs.PointStamped;
@@ -165,20 +166,22 @@ public class JavaRosWrapper {
 
 			case "Position":
 				bridge.subscribe(SubscriptionRequestMsg.generate(topic)
-					.setType("geometry_msgs/PointStamped")
-					.setThrottleRate(1)
+					.setType("geometry_msgs/PoseStamped")
+					.setThrottleRate(1000)
 					.setQueueLength(0),
 				new RosListenDelegate() {
 
 					public void receive(JsonNode data, String stringRep) {
-						MessageUnpacker<Point> unpacker = new MessageUnpacker<Point>(Point.class);
-						Point msg = unpacker.unpackRosMessage(data);
+						MessageUnpacker<PoseStamped> unpacker = new MessageUnpacker<PoseStamped>(PoseStamped.class);
+						PoseStamped msg = unpacker.unpackRosMessage(data);
 
+						//System.out.println("GOT POSITION");
 						//System.out.println(msg.z);
 
-						ItemPosition p = new ItemPosition(gvh.id.getName(), (int)msg.x, (int)msg.y, (int)msg.z);
+						ItemPosition p = new ItemPosition(gvh.id.getName(), (int)(msg.pose.position.x*100), (int)(msg.pose.position.y*100), (int)(msg.pose.position.z*100));
 						gvh.gps.setPosition(p);
-						System.out.println("ADDING POSITION " + msg.x + " " + msg.y);
+						//System.out.println("POSITION IS " + p);
+						//System.out.println("ADDING POSITION " + msg.pose.position.x + " " + msg.pose.position.y);
 						//gvh.plat.model = new Model_Quadcopter("copter", (int)msg.x, (int)msg.y, (int)msg.z);
 					}
 				}
