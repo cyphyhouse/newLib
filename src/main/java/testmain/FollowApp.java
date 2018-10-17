@@ -265,8 +265,7 @@ public class FollowApp extends LogicThread {
 
                     break;
                 case GO:
-                    if (!gvh.plat.moat.inMotion) {
-                        if (!gvh.plat.moat.done && currentDestination != null) {
+                    if (!gvh.plat.moat.done) {
                             System.out.println("trying to go still ");
                             stage = Stage.GO;
                         } else {
@@ -286,7 +285,7 @@ public class FollowApp extends LogicThread {
                             }
                             break;
                         }
-                    }
+
                     break;
                 case WAIT:
                     //System.out.println("in wait");
