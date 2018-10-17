@@ -107,7 +107,7 @@ public class FollowApp extends LogicThread {
 
         obs = new Vector<>();
         assigned = new Vector<>();
-        for (int i=0; i<36; i++){
+        for (int i=0; i<35; i++){
             assigned.add(0);
         }
 
@@ -203,8 +203,7 @@ public class FollowApp extends LogicThread {
                                 //System.out.println("robot "+ robotIndex + " has testindex "+testindex);
                                 //currentDestination = getDestination(destinations, testindex);
                                 //System.out.println(name + " in mutex");
-                                asgndsize = 36;//assigned.size();
-                                asgnIndex = 0;
+                                asgndsize = 35;//assigned.size();
                                 Random r = new Random();
                                // asgnIndex = r.nextInt(asgndsize);
                                 asgnIndex = r.nextInt(asgndsize);
@@ -228,7 +227,7 @@ public class FollowApp extends LogicThread {
 
                                         for (int i = 0; i < obs.size(); i++) {
                                             //System.out.println(name+ " i is " + i);
-                                            if (isClose(path, obs.get(i), 1500)) {
+                                            if (isClose(path, obs.get(i), 800)) {
                                                 //mutex0.exit(0);
                                                 //wait0 = false;
                                                 //System.out.println("DISTANCE TOO CLOSE BREAKING "+name);
