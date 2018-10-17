@@ -165,7 +165,7 @@ public class JavaRosWrapper {
 
 			case "Position":
 				bridge.subscribe(SubscriptionRequestMsg.generate(topic)
-					.setType("geometry_msgs/Point")
+					.setType("geometry_msgs/PointStamped")
 					.setThrottleRate(1)
 					.setQueueLength(0),
 				new RosListenDelegate() {
@@ -178,6 +178,7 @@ public class JavaRosWrapper {
 
 						ItemPosition p = new ItemPosition(gvh.id.getName(), (int)msg.x, (int)msg.y, (int)msg.z);
 						gvh.gps.setPosition(p);
+						System.out.println("ADDING POSITION " + msg.x + " " + msg.y);
 						//gvh.plat.model = new Model_Quadcopter("copter", (int)msg.x, (int)msg.y, (int)msg.z);
 					}
 				}
