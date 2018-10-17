@@ -106,7 +106,7 @@ public class FollowApp extends LogicThread {
 
         obs = new Vector<>();
         assigned = new Vector<>();
-        for (int i=0; i<35; i++){
+        for (int i=0; i<5; i++){
             assigned.add(0);
         }
 
@@ -163,7 +163,7 @@ public class FollowApp extends LogicThread {
                                 break;
                             }
                             if (hasMutex) {
-                                asgndsize = 35;//assigned.size();
+                                asgndsize = 5;//assigned.size();
                                 Random r = new Random();
                                 asgnIndex = r.nextInt(asgndsize);
                                 boolean foundpath = false;
@@ -534,7 +534,7 @@ public class FollowApp extends LogicThread {
 
     private void updatedests(String filename, int msgtype, String robotname, int lineno) {
 
-        for(lineno=0; lineno<34; lineno++) {
+        for(lineno=0; lineno<4; lineno++) {
             try (Stream<String> lines = Files.lines(Paths.get(filename))) {
                 String line = lines.skip(lineno).findFirst().get();
                 RobotMessage inform = new RobotMessage("ALL", robotname, msgtype, line);
