@@ -173,13 +173,13 @@ public class FollowApp extends LogicThread {
                                         currentDestination = getDestination(destinations, asgnIndex);
                                         if (currentDestination != null) {
                                             ItemPosition mypos = gvh.gps.getMyPosition();
-                                            SimplePP newp = new SimplePP(mypos, currentDestination, 4);
+                                            SimplePP newp = new SimplePP(mypos, currentDestination, 1);
                                             path = newp.getPath();
                                             sleep(100);
                                             boolean breakpath = false;
 
                                             for (int i = 0; i < obs.size(); i++) {
-                                                if (isClose(path, obs.get(i), 1200)) {
+                                                if (isClose(path, obs.get(i), 60)) {
                                                     breakpath = true;
                                                     break;
                                                 } else {
@@ -426,7 +426,7 @@ public class FollowApp extends LogicThread {
             gvh.log.d(TAG, "received destination message from " + m.getFrom());
 
             String iposmsg = m.getContents().toString();
-            ItemPosition p = msgtoipos(iposmsg, i, 1000);
+            ItemPosition p = msgtoipos(iposmsg, i, 100);
             destinations.put(p.getName(), p);
             taskLocations.put(p.getName(), new Task(p, i));
             //assigned.add(assigned.size(), 0);
