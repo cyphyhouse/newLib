@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: edu.illinois.mitra.cyphyhouse.gvh.JavaLoggingTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.319 sec - in edu.illinois.mitra.cyphyhouse.gvh.JavaLoggingTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.293 sec - in edu.illinois.mitra.cyphyhouse.gvh.JavaLoggingTest
