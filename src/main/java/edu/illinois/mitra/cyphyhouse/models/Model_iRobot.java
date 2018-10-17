@@ -223,6 +223,7 @@ public class Model_iRobot extends ItemPosition implements TrackedRobot{
 		int dX = 0, dY = 0;
 		double dA = 0;
 		// Arcing motion
+		//System.out.println(vFwd);
 		dA = aNoise + (vRad*timeSinceUpdate);
 		dX = (int) (xNoise + Math.cos(Math.toRadians(angle))*(vFwd*timeSinceUpdate));
 		dY = (int) (yNoise + Math.sin(Math.toRadians(angle))*(vFwd*timeSinceUpdate));

@@ -135,7 +135,7 @@ public class MotionParameters {
 	public static class Builder {
 		private int TURNSPEED_MAX = 110;
 		private int TURNSPEED_MIN = 25;
-		private int LINSPEED_MAX = 250;
+		private int LINSPEED_MAX = 750;
 		private int LINSPEED_MIN = 175;
 		private int GOAL_RADIUS = 75;
 		private int SLOWFWD_RADIUS = 700;

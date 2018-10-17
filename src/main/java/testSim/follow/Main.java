@@ -9,7 +9,7 @@ public class Main {
 		SimSettings.Builder settings = new SimSettings.Builder();
         settings.N_IROBOTS(5);
         settings.N_QUADCOPTERS(0);
-		settings.TIC_TIME_RATE(1);
+		settings.TIC_TIME_RATE(35);
         //settings.WAYPOINT_FILE("square.wpt");
 		//settings.WAYPOINT_FILE(System.getProperty("user.dir")+"\\trunk\\android\\RaceApp\\waypoints\\four1.wpt");
 		settings.DRAW_WAYPOINTS(false);
