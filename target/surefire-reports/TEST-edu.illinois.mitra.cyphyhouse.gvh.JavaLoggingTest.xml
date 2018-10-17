@@ -62,6 +62,6 @@
     <property name="sun.cpu.isalist" value=""/>
   </properties>
   <testcase name="d" classname="edu.illinois.mitra.cyphyhouse.gvh.JavaLoggingTest" time="0.004"/>
-  <testcase name="e" classname="edu.illinois.mitra.cyphyhouse.gvh.JavaLoggingTest" time="0"/>
-  <testcase name="i" classname="edu.illinois.mitra.cyphyhouse.gvh.JavaLoggingTest" time="0.001"/>
+  <testcase name="e" classname="edu.illinois.mitra.cyphyhouse.gvh.JavaLoggingTest" time="0.001"/>
+  <testcase name="i" classname="edu.illinois.mitra.cyphyhouse.gvh.JavaLoggingTest" time="0"/>
 </testsuite>
