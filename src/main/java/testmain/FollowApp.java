@@ -280,6 +280,7 @@ public class FollowApp extends LogicThread {
                     }
                     break;
                 case WAIT:
+                    System.out.println("in wait");
                     stage = Stage.PICK;
                     break;
 
