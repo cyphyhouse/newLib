@@ -235,6 +235,7 @@ public class FollowApp extends LogicThread {
                         }
 
                         gvh.plat.moat.goTo(currentDestination);
+                        System.out.println("going to "+ currentDestination);
                         stage = Stage.GO;
 
                     }
