@@ -266,7 +266,7 @@ public class FollowApp extends LogicThread {
                     break;
                 case GO:
                     if (!gvh.plat.moat.done) {
-                            System.out.println("trying to go still ");
+                            System.out.println("trying to go still "+gvh.plat.moat.done);
                             stage = Stage.GO;
                         } else {
                             ItemPosition ip = path.pop();
