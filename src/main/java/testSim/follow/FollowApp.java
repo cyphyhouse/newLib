@@ -139,7 +139,7 @@ public class FollowApp extends LogicThread {
 
 
         while (true) {
-            System.out.println(name  + " " + assigned);
+            //System.out.println(name  + " " + assigned);
             /*ItemPosition S1 = new ItemPosition("S1",-2325, 211,0);
             ItemPosition E1 = new ItemPosition("E1",-42, -2387,0);
             ItemPosition S2 = new ItemPosition("S2",-1697, -2549,0);
@@ -218,7 +218,7 @@ public class FollowApp extends LogicThread {
                                         ItemPosition mypos = gvh.gps.getMyPosition();
                                         SimplePP newp = new SimplePP(mypos, currentDestination, 4);
                                         path = newp.getPath();
-                                        sleep(200);
+                                        //sleep(200);
                                         boolean breakpath = false;
                                         /*System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
                                         System.out.println(name + " " + obs);
@@ -340,13 +340,15 @@ public class FollowApp extends LogicThread {
                         if (!gvh.plat.moat.done && currentDestination != null) {
                             stage = Stage.GO;
                         } else {
-                            path.pop();
+                            ItemPosition ip = path.pop();
                             if (path.empty()) {
                                 //System.out.println("GOING BACK TO PICK " + name);
                                 if(!assigned.contains(0))
                                     stage = Stage.DONE;
-                                else
+                                else {
                                     stage = Stage.PICK;
+                                    System.out.println(name + "Done a point " + ip);
+                                }
                             } else {
                                 currentDestination = path.peek();
                                 gvh.plat.moat.goTo(currentDestination);
@@ -361,12 +363,12 @@ public class FollowApp extends LogicThread {
                     break;
 
                 case DONE:
-                    System.out.println(assigned + " " + name);
+                    //System.out.println(assigned + " " + name);
                     break;
 
             }
             Random ran = new Random();
-            sleep(ran.nextInt(300)+100);
+            //sleep(ran.nextInt(300)+100);
             if (inMutex0) {
                 //System.out.println(name + " RELEASING MUTEX");
                 hasMutex = false;
@@ -376,8 +378,9 @@ public class FollowApp extends LogicThread {
                 msgId = msgId+1;
                 //sleep(ran.nextInt(800)+100);
                 inMutex0 = false;
-                sleep(ran.nextInt(800)+100);
+                //sleep(300);
             }
+            sleep(100);
         }
     }
 
