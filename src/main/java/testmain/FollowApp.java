@@ -85,7 +85,6 @@ public class FollowApp extends LogicThread {
     public Stack<ItemPosition> path;
     private Vector<Integer> assigned;
 
-    PositionList pos;
 
 
     private Stage stage = Stage.PICK;
@@ -120,7 +119,18 @@ public class FollowApp extends LogicThread {
     @Override
     public List<Object> callStarL() {
         dsm.createMW("testindex", 0);
+        ItemPosition[] ipos = new ItemPosition[3];
+        ipos[0] = new ItemPosition("quadcopter0",50,50,80);
+        ipos[1] = new ItemPosition("quadcopter1",20,20,0);
+        ipos[2] = new ItemPosition("quadcopter2",-20,-20,0);
 
+        for (int i = 0 ; i < 3 ; i ++) {
+            Stack<ItemPosition> o = new Stack<ItemPosition>();
+            if (i != robotIndex)
+                o.push(ipos[i]);
+            obs.add(o);
+        }
+        /*
         pos = gvh.gps.get_robot_Positions();
         Iterator it = pos.iterator();
         while (it.hasNext()) {
@@ -132,7 +142,7 @@ public class FollowApp extends LogicThread {
             Stack<ItemPosition> o = new Stack<ItemPosition>();
             o.push(ipos);
             obs.add(o);
-        }
+        }*/
 
         //System.out.println(name + " " +obs.size());
 
@@ -141,11 +151,15 @@ public class FollowApp extends LogicThread {
         }
 
         while (true) {
-
+            System.out.println(stage+" "+name);
             switch (stage) {
                 case PICK:
+                    if (robotIndex == 0) {
+                       break;
+                    }
                     updatePath = false;
-                    if (destinations.isEmpty() || robotIndex == 0) {
+
+                    if (destinations.isEmpty()) {
                         RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, gvh.gps.getMyPosition().toString() + "###mypos");
                         gvh.comms.addOutgoingMessage(pathmsg);
                         stage = Stage.WAIT;
