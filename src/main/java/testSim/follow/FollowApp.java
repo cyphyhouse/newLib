@@ -77,14 +77,13 @@ public class FollowApp extends LogicThread {
     private enum Stage {
         PICK, GO, DONE, WAIT
     }
-    int asgndsize;
-    int asgnIndex;
-    int msgId = 0;
-    boolean hasMutex = false;
-    public int testindex = 0;
-    Vector<Stack<ItemPosition>> obs;
+    private int asgndsize;
+    private int asgnIndex;
+    private int msgId = 0;
+    private boolean hasMutex = false;
+    private Vector<Stack<ItemPosition>> obs;
     public Stack<ItemPosition> path;
-    public Vector<Integer> assigned;
+    private Vector<Integer> assigned;
 
     PositionList pos;
 
@@ -137,52 +136,21 @@ public class FollowApp extends LogicThread {
 
         //System.out.println(name + " " +obs.size());
 
+        if (robotIndex == 0) {
+            updatedests("tasks.txt", DEST_MSG, name, lineno);
+        }
 
         while (true) {
-            //System.out.println(name  + " " + assigned);
-            /*ItemPosition S1 = new ItemPosition("S1",-2325, 211,0);
-            ItemPosition E1 = new ItemPosition("E1",-42, -2387,0);
-            ItemPosition S2 = new ItemPosition("S2",-1697, -2549,0);
-            ItemPosition E2 = new ItemPosition("E2",1276, 166,0);*/
-
-            /*ItemPosition S1 = new ItemPosition("S1",0, 0,0);
-            ItemPosition E1 = new ItemPosition("E1",0, 2,0);
-            ItemPosition S2 = new ItemPosition("S2",-1, 1,0);
-            ItemPosition E2 = new ItemPosition("E2",1, 1,0);*/
-            //System.out.println(closestDist(S1,  E1,  S2,  E2));
-            //System.out.println(name + "'s assigned list is: " + assigned);
-            //System.out.println(stage + " "+ gvh.plat.reachAvoid.doneFlag+" "+name);
-            //System.out.println(stage + " robotindex " + robotIndex);
-            //System.out.println("assigned list is " + assigned.toString() + " for " + name);
-            //System.out.println(name + " " + stage);
 
             switch (stage) {
                 case PICK:
                     updatePath = false;
-                    if (robotIndex == 0) {
-                        updatedests("tasks.txt", DEST_MSG, name, lineno);
-                        lineno = lineno + 1;
-                    }
                     if (destinations.isEmpty() || robotIndex == 0) {
                         RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, gvh.gps.getMyPosition().toString() + "###mypos");
                         gvh.comms.addOutgoingMessage(pathmsg);
                         stage = Stage.WAIT;
                         break;
                     } else {
-                        testindex = Integer.parseInt(dsm.get("testindex", "*"));
-                        if (testindex >= destinations.size()) {
-                            stage = Stage.WAIT;
-
-                            if (updatePath) {
-
-                            } else {
-                                RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, gvh.gps.getMyPosition().toString() + "###mypos");
-                                gvh.comms.addOutgoingMessage(pathmsg);
-                                updatePath = false;
-
-                            }
-                            break;
-                        }
 
                         try {
 
@@ -190,95 +158,49 @@ public class FollowApp extends LogicThread {
                                 String mutexreqmsg = String.valueOf(robotIndex)+" "+ String.valueOf(msgId) + " REQUEST";
                                 RobotMessage mutexrequestmsg = new RobotMessage("ALL", name, MUTEX_REQUEST_MSG,mutexreqmsg );
                                 gvh.comms.addOutgoingMessage(mutexrequestmsg);
-                                //mutex0.requestEntry(0);
                                 wait0 = true;
                                 Random ran = new Random();
-                                //sleep(ran.nextInt(500)+100);
                                 break;
                             }
                             if (hasMutex) {
-                                //
-                                //System.out.println(name + " IN MUTEX");
-                                //testindex = Integer.parseInt(dsm.get("testindex", "*"));
-                                //System.out.println("robot "+ robotIndex + " has testindex "+testindex);
-                                //currentDestination = getDestination(destinations, testindex);
-                                //System.out.println(name + " in mutex");
                                 asgndsize = 35;//assigned.size();
                                 Random r = new Random();
-                               // asgnIndex = r.nextInt(asgndsize);
                                 asgnIndex = r.nextInt(asgndsize);
                                 boolean foundpath = false;
-                                for (; asgnIndex < asgndsize; asgnIndex++) {
+                                for (asgnIndex=0; asgnIndex < asgndsize; asgnIndex++) {
                                     //System.out.println(name + " " + asgnIndex);
-                                    //System.out.println(name + " asgnIDX is " + asgnIndex + " value is " + assigned.get(asgnIndex));
                                     if (assigned.get(asgnIndex) == 0) {
-                                        //System.out.println(name + " gotten index: " + asgnIndex);
                                         currentDestination = getDestination(destinations, asgnIndex);
-                                        //System.out.println(name + " " + currentDestination);
-                                        ItemPosition mypos = gvh.gps.getMyPosition();
-                                        SimplePP newp = new SimplePP(mypos, currentDestination, 4);
-                                        path = newp.getPath();
-                                        //sleep(200);
-                                        boolean breakpath = false;
-                                        /*System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-                                        System.out.println(name + " " + obs);
-                                        System.out.println(name + " path is " + path);
-                                        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");*/
+                                        if (currentDestination != null) {
+                                            ItemPosition mypos = gvh.gps.getMyPosition();
+                                            SimplePP newp = new SimplePP(mypos, currentDestination, 4);
+                                            path = newp.getPath();
+                                            sleep(100);
+                                            boolean breakpath = false;
 
-                                        for (int i = 0; i < obs.size(); i++) {
-                                            //System.out.println(name+ " i is " + i);
-                                            if (isClose(path, obs.get(i), 800)) {
-                                                //mutex0.exit(0);
-                                                //wait0 = false;
-                                                //System.out.println("DISTANCE TOO CLOSE BREAKING "+name);
-                                                breakpath = true;
+                                            for (int i = 0; i < obs.size(); i++) {
+                                                if (isClose(path, obs.get(i), 1200)) {
+                                                    breakpath = true;
+                                                    break;
+                                                } else {
+                                                }
                                             }
-                                            else{
+                                            if (!breakpath) {
+                                                foundpath = true;
+                                                break;
                                             }
                                         }
-                                        //System.out.println(breakpath);
-                                        if (breakpath) {breakpath = false;}
-                                        else {
-                                            foundpath = true;
+                                        else
                                             break;
-                                        }
                                     }
                                 }
-                                //System.out.println(name + " DONE FOR LOOP");
+                                //System.out.println("FOR LOOP DONE");
                                 if (!foundpath) {
-                                    //System.out.println("BREAKING");
                                     inMutex0 = true;
+                                    wait0 = false;
                                     break;
                                 }
-                                else{
-                                    foundpath = false;
-                                }
-                                //currentDestination = getDestination(destinations,asgnIndex);
-                                //testindex = testindex + 1;
-                                //ItemPosition mypos = gvh.gps.getMyPosition();
 
-                                //pathnode = new RRTNode(mypos.x,mypos.y);
-                                //Obstacles o = new Obstacles(1,1,1);
-                                //Vector<Obstacles> v = new Vector<>();
-                                //SimplePP newp = new SimplePP(mypos, currentDestination, 4);
-                                //path = newp.getPath();
-                                //boolean breakpath = false;
-                                /*for (int i = 0; i < obs.size(); i++) {
-                                    //System.out.println(name+ " i is " + i);
-                                    if (isClose(path, obs.get(i), 1200)) {
-                                        mutex0.exit(0);
-                                        wait0 = false;
-                                        //System.out.println("DISTANCE TOO CLOSE BREAKING "+name);
-                                        breakpath = true;
-                                        continue;
-                                    }
-                                }
-                                if (breakpath) {
-                                    stage = Stage.PICK;
-                                    break;
-                                }*/
-                                //System.out.println(name + " going to " + path.get(0).toString())
-                                // ;
                                 currentDestination = path.peek();
                                 RobotMessage asgnmsg = new RobotMessage("ALL", name, ASGN_MSG, String.valueOf(asgnIndex));
                                 RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path) + "###path");
@@ -288,23 +210,15 @@ public class FollowApp extends LogicThread {
                                 assigned.set(asgnIndex,1);
 
                                 updatePath = true;
-                                //System.out.println(pathmsg);
-                                //PEEK, GOTO , POP. (repeat untill null) .
-                                //System.out.println(mkObstacles(path).obstacle);
-                                //dsm.put("testindex", "*", testindex);
-                                //exit conditions
                                 inMutex0 = true;
                                 wait0 = false;
-                                //mutex0.exit(0);
 
                             } else {
-                                Random ran = new Random();
                                 if (updatePath) {
 
                                 } else {
                                     RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, gvh.gps.getMyPosition().toString() + "###mypos");
                                     gvh.comms.addOutgoingMessage(pathmsg);
-                                    //sleep(800);
                                     updatePath = false;
 
                                 }
@@ -319,23 +233,14 @@ public class FollowApp extends LogicThread {
                             stage = Stage.WAIT;
                             break;
                         }
-                        //System.out.println(obs);
-                        //System.out.println("posL\n" + pos);
-                        //gvh.plat.reachAvoid.doReachAvoid(gvh.gps.getMyPosition(), currentDestination,obs);
-                        //System.out.println("calling goto for point: " + currentDestination);
 
                         gvh.plat.moat.goTo(currentDestination);
                         stage = Stage.GO;
-                        /*if (currentDestination.getZ() == 0) {
-                            stage = Stage.WAIT;
-                        } else {
-                            stage = Stage.GO;
-                        }*/
+
                     }
 
                     break;
                 case GO:
-                    //System.out.println("IN GO STAGE " + name);
                     if (!gvh.plat.moat.inMotion) {
                         if (!gvh.plat.moat.done && currentDestination != null) {
                             stage = Stage.GO;
@@ -358,29 +263,23 @@ public class FollowApp extends LogicThread {
                     }
                     break;
                 case WAIT:
-                    //System.out.println("GOING TO PICK FROM WAIT STAGE " + robotIndex);
                     stage = Stage.PICK;
                     break;
 
                 case DONE:
-                    //System.out.println(assigned + " " + name);
                     break;
 
             }
             Random ran = new Random();
-            //sleep(ran.nextInt(300)+100);
             if (inMutex0) {
-                //System.out.println(name + " RELEASING MUTEX");
                 hasMutex = false;
                 String releaseMutex = String.valueOf(robotIndex) + " "+ String.valueOf(msgId);
                 RobotMessage mutexreleasemsg = new RobotMessage("ALL", name, MUTEX_RELEASE_MSG,releaseMutex);
                 gvh.comms.addOutgoingMessage(mutexreleasemsg);
                 msgId = msgId+1;
-                //sleep(ran.nextInt(800)+100);
                 inMutex0 = false;
-                //sleep(300);
             }
-            sleep(100);
+            sleep(600);
         }
     }
 
@@ -635,13 +534,15 @@ public class FollowApp extends LogicThread {
 
     private void updatedests(String filename, int msgtype, String robotname, int lineno) {
 
-        try (Stream<String> lines = Files.lines(Paths.get(filename))) {
-            String line = lines.skip(lineno).findFirst().get();
-            RobotMessage inform = new RobotMessage("ALL", robotname, msgtype, line);
-            gvh.comms.addOutgoingMessage(inform);
-        } catch (IOException e) {
-        } catch (NoSuchElementException e) {
-        } catch (IllegalArgumentException e) {
+        for(lineno=0; lineno<34; lineno++) {
+            try (Stream<String> lines = Files.lines(Paths.get(filename))) {
+                String line = lines.skip(lineno).findFirst().get();
+                RobotMessage inform = new RobotMessage("ALL", robotname, msgtype, line);
+                gvh.comms.addOutgoingMessage(inform);
+            } catch (IOException e) {
+            } catch (NoSuchElementException e) {
+            } catch (IllegalArgumentException e) {
+            }
         }
     }
 
