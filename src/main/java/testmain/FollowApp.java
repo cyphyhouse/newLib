@@ -160,6 +160,7 @@ public class FollowApp extends LogicThread {
                     updatePath = false;
 
                     if (destinations.isEmpty()) {
+                        System.out.println("empty destinations");
                         RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, gvh.gps.getMyPosition().toString() + "###mypos");
                         gvh.comms.addOutgoingMessage(pathmsg);
                         stage = Stage.WAIT;
