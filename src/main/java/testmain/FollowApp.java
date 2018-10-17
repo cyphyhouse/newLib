@@ -167,6 +167,7 @@ public class FollowApp extends LogicThread {
                     } else {
 
                         try {
+                            System.out.println("trying to get mutex");
 
                             if (!wait0) {
                                 String mutexreqmsg = String.valueOf(robotIndex)+" "+ String.valueOf(msgId) + " REQUEST";
