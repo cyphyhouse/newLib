@@ -35,7 +35,6 @@ public class FollowApp extends LogicThread {
     //Dsm initializations
     private DSM dsm;
     private boolean wait0 = false;
-    private MutualExclusion mutex0;
     private boolean inMutex0 = false;
     private boolean updatePath = false;
 
@@ -50,6 +49,7 @@ public class FollowApp extends LogicThread {
 
 
     private boolean isLocked = false;
+    private boolean takeoff = false;
 
     private Queue<Integer> requests = new LinkedList();
     private Queue<Integer> requestIDXs = new LinkedList();
@@ -112,7 +112,6 @@ public class FollowApp extends LogicThread {
         String intValue = name.replaceAll("[^0-9]", "");
         robotIndex = Integer.parseInt(intValue);
         dsm = new DSMMultipleAttr(gvh);
-        mutex0 = new GroupSetMutex(gvh, 0);
         this.gvh = gvh;
     }
 
@@ -156,6 +155,20 @@ public class FollowApp extends LogicThread {
                 case PICK:
                     if (robotIndex == 0) {
                        break;
+                    }
+                    if (!takeoff) {
+                        ItemPosition mypos = gvh.gps.getMyPosition();
+                        if (mypos == null) break;
+                        else {
+                            ItemPosition takeoffpoint = new ItemPosition("takeoff",mypos.x,mypos.y,mypos.z+100);
+                            path.push(takeoffpoint);
+                            gvh.plat.moat.goTo(takeoffpoint);
+                            takeoff =true;
+                            RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, mypos.toString() + "###mypos");
+                            gvh.comms.addOutgoingMessage(pathmsg);
+                            stage = Stage.GO;
+                            break;
+                        }
                     }
                     updatePath = false;
 
