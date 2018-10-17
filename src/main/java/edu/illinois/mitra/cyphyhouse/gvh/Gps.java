@@ -84,5 +84,8 @@ public class Gps {
 	public Vector<ObstacleList> getViews(){
 		return viewOfWorlds;
 	}
+
+	public void setPosition(ItemPosition p) { robot_positions.setPositions(name, p); }
+
 	
 }

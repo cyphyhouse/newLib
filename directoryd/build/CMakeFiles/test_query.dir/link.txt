@@ -1,0 +1,1 @@
+/usr/bin/c++    -Wall -Wno-unused-parameter -Wextra -Werror -g -std=c++0x   CMakeFiles/test_query.dir/ddclient/test_query.cpp.o  -o ../bin/test_query -rdynamic -lzmq libddclient++.so -lczmq -lprotobuf -Wl,-rpath,/home/peter/newLib/directoryd/build 

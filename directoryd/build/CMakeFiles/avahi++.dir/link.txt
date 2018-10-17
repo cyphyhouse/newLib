@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC  -Wall -Wno-unused-parameter -Wextra -Werror -g -std=c++0x  -shared -Wl,-soname,libavahi++.so -o libavahi++.so CMakeFiles/avahi++.dir/Avahi.cpp.o CMakeFiles/avahi++.dir/Browser.cpp.o CMakeFiles/avahi++.dir/Registrar.cpp.o -lavahi-client 

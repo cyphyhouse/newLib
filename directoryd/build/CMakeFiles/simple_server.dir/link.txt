@@ -1,0 +1,1 @@
+/usr/bin/c++    -Wall -Wno-unused-parameter -Wextra -Werror -g -std=c++0x   CMakeFiles/simple_server.dir/simple_server.cpp.o  -o ../bin/simple_server -rdynamic -lzmq 

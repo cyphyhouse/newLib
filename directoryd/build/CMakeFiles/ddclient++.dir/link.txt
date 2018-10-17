@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC  -Wall -Wno-unused-parameter -Wextra -Werror -g -std=c++0x  -shared -Wl,-soname,libddclient++.so -o libddclient++.so CMakeFiles/ddclient++.dir/ddclient/ddclient.cpp.o CMakeFiles/ddclient++.dir/ddclient/query.cpp.o CMakeFiles/ddclient++.dir/ddclient/register.cpp.o CMakeFiles/ddclient++.dir/protobuf/Services.pb.cc.o -lczmq -lprotobuf 

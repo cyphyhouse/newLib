@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/peter/newLib/directoryd/ddclient/ddclient.hpp
+czmq.h
+-
+
+/home/peter/newLib/directoryd/ddclient/query.hpp
+vector
+-
+string
+-
+map
+-
+unordered_map
+-
+stdexcept
+-
+ddclient.hpp
+/home/peter/newLib/directoryd/ddclient/ddclient.hpp
+
+/home/peter/newLib/directoryd/ddclient/test_query.cpp
+iostream
+-
+string
+-
+fstream
+-
+zmq.hpp
+-
+query.hpp
+/home/peter/newLib/directoryd/ddclient/query.hpp
+

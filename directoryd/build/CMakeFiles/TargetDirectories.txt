@@ -1,0 +1,15 @@
+/home/peter/newLib/directoryd/build/CMakeFiles/edit_cache.dir
+/home/peter/newLib/directoryd/build/CMakeFiles/package_source.dir
+/home/peter/newLib/directoryd/build/CMakeFiles/rebuild_cache.dir
+/home/peter/newLib/directoryd/build/CMakeFiles/package.dir
+/home/peter/newLib/directoryd/build/CMakeFiles/directoryd.dir
+/home/peter/newLib/directoryd/build/CMakeFiles/simple_server.dir
+/home/peter/newLib/directoryd/build/CMakeFiles/list_install_components.dir
+/home/peter/newLib/directoryd/build/CMakeFiles/simple_client.dir
+/home/peter/newLib/directoryd/build/CMakeFiles/install/strip.dir
+/home/peter/newLib/directoryd/build/CMakeFiles/install/local.dir
+/home/peter/newLib/directoryd/build/CMakeFiles/avahi++.dir
+/home/peter/newLib/directoryd/build/CMakeFiles/ddclient++.dir
+/home/peter/newLib/directoryd/build/CMakeFiles/install.dir
+/home/peter/newLib/directoryd/build/CMakeFiles/test_query.dir
+/home/peter/newLib/directoryd/build/CMakeFiles/test_reg.dir

@@ -1,0 +1,2 @@
+# Hashes of file build rules.
+4579c89e8b7f85b0656b74ddc10fba5f ../protobuf/Services.pb.cc

@@ -175,8 +175,10 @@ public class JavaRosWrapper {
 						Point msg = unpacker.unpackRosMessage(data);
 
 						//System.out.println(msg.z);
-						
-						gvh.plat.model = new Model_Quadcopter("copter", (int)msg.x, (int)msg.y, (int)msg.z);
+
+						ItemPosition p = new ItemPosition(gvh.id.getName(), (int)msg.x, (int)msg.y, (int)msg.z);
+						gvh.gps.setPosition(p);
+						//gvh.plat.model = new Model_Quadcopter("copter", (int)msg.x, (int)msg.y, (int)msg.z);
 					}
 				}
 				);

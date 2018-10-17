@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/peter/newLib/directoryd/simple_server.cpp
+iostream
+-
+string
+-
+fstream
+-
+zmq.hpp
+-
+unistd.h
+-
+stdio.h
+-
+

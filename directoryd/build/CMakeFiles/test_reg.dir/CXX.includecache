@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/peter/newLib/directoryd/ddclient/ddclient.hpp
+czmq.h
+-
+
+/home/peter/newLib/directoryd/ddclient/register.hpp
+ddclient.hpp
+/home/peter/newLib/directoryd/ddclient/ddclient.hpp
+string
+-
+map
+-
+stdexcept
+-
+
+/home/peter/newLib/directoryd/ddclient/test_register.cpp
+iostream
+-
+sstream
+-
+string
+-
+thread
+-
+zmq.hpp
+-
+register.hpp
+/home/peter/newLib/directoryd/ddclient/register.hpp
+

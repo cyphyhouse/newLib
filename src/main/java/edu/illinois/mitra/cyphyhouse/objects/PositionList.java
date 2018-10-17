@@ -43,6 +43,10 @@ public class PositionList<T extends ItemPosition> implements Iterable<T> {
 		}
 		return null;
 	}
+
+	public void setPositions(String name, T p){
+		positions.put(name, p);
+	}
 	
 	/**
 	 * @param exp The regex string to match against
