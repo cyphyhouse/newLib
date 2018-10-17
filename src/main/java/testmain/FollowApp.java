@@ -161,10 +161,11 @@ public class FollowApp extends LogicThread {
                         if (mypos == null) break;
                         else {
                             ItemPosition takeoffpoint = new ItemPosition("takeoff",mypos.x,mypos.y,mypos.z+100);
+                            path = new Stack<ItemPosition>();
                             path.push(takeoffpoint);
                             gvh.plat.moat.goTo(takeoffpoint);
                             takeoff =true;
-                            RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, mypos.toString() + "###mypos");
+                            RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path) + "###mypos");
                             gvh.comms.addOutgoingMessage(pathmsg);
                             stage = Stage.GO;
                             break;
