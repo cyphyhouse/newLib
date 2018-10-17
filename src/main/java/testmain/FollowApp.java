@@ -223,7 +223,7 @@ public class FollowApp extends LogicThread {
                                     wait0 = false;
                                     break;
                                 }
-
+                                path.pop();
                                 currentDestination = path.peek();
                                 RobotMessage asgnmsg = new RobotMessage("ALL", name, ASGN_MSG, String.valueOf(asgnIndex));
                                 RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path) + "###path");
