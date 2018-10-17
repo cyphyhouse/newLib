@@ -267,16 +267,18 @@ public class FollowApp extends LogicThread {
                 case GO:
                     if (!gvh.plat.moat.inMotion) {
                         if (!gvh.plat.moat.done && currentDestination != null) {
+                            System.out.println("trying to go still ");
                             stage = Stage.GO;
                         } else {
                             ItemPosition ip = path.pop();
+
                             if (path.empty()) {
-                                //System.out.println("GOING BACK TO PICK " + name);
+                                System.out.println("GOING BACK TO PICK " + name);
                                 if(!assigned.contains(0))
                                     stage = Stage.DONE;
                                 else {
                                     stage = Stage.PICK;
-                                    System.out.println(name + "Done a point " + ip);
+                                    //System.out.println(name + "Done a point " + ip);
                                 }
                             } else {
                                 currentDestination = path.peek();
@@ -287,7 +289,7 @@ public class FollowApp extends LogicThread {
                     }
                     break;
                 case WAIT:
-                    System.out.println("in wait");
+                    //System.out.println("in wait");
                     stage = Stage.PICK;
                     break;
 
