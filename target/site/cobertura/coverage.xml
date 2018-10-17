@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.0015267175572519084" branch-rate="0.0" lines-covered="9" lines-valid="5895" branches-covered="0" branches-valid="2103" complexity="2.462686567164179" version="2.1.1" timestamp="1539814733921">
+<coverage line-rate="0.0015267175572519084" branch-rate="0.0" lines-covered="9" lines-valid="5895" branches-covered="0" branches-valid="2103" complexity="2.462686567164179" version="2.1.1" timestamp="1539815523255">
 	<sources>
 		<source>/home/mim/newLib/src/main/java</source>
 		<source>/home/mim/newLib/target/generated-sources/annotations</source>
@@ -21475,7 +21475,6 @@
 									</conditions>
 								</line>
 								<line number="149" hits="0" branch="false"/>
-								<line number="153" hits="0" branch="false"/>
 								<line number="154" hits="0" branch="true" condition-coverage="0% (0/4)">
 									<conditions>
 										<condition number="0" type="switch" coverage="0%"/>
@@ -22255,7 +22254,6 @@
 							</conditions>
 						</line>
 						<line number="149" hits="0" branch="false"/>
-						<line number="153" hits="0" branch="false"/>
 						<line number="154" hits="0" branch="true" condition-coverage="0% (0/4)">
 							<conditions>
 								<condition number="0" type="switch" coverage="0%"/>
@@ -23379,6 +23377,7 @@
 								<line number="29" hits="0" branch="false"/>
 								<line number="31" hits="0" branch="false"/>
 								<line number="32" hits="0" branch="false"/>
+								<line number="33" hits="0" branch="false"/>
 								<line number="37" hits="0" branch="false"/>
 								<line number="38" hits="0" branch="true" condition-coverage="0% (0/2)">
 									<conditions>
@@ -23420,6 +23419,7 @@
 						<line number="29" hits="0" branch="false"/>
 						<line number="31" hits="0" branch="false"/>
 						<line number="32" hits="0" branch="false"/>
+						<line number="33" hits="0" branch="false"/>
 						<line number="37" hits="0" branch="false"/>
 						<line number="38" hits="0" branch="true" condition-coverage="0% (0/2)">
 							<conditions>

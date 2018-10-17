@@ -25,12 +25,12 @@ public class TestMain {
             // Load the participants
             //participants = IdentityLoader.loadIdentities(IDENTITY_FILE_URL);
             // Put number of robots being used here
-            numRobots = 2;
+            numRobots = 3;
             botInfo = new BotInfoSelector[numRobots];
             // add color, robot type, and device type for each robot here
             botInfo[0] = new BotInfoSelector("red", Common.QUADCOPTER, Common.HTCONEM7);
             botInfo[1] = new BotInfoSelector("green", Common.QUADCOPTER, Common.HTCONEM7);
-            //botInfo[2] = new BotInfoSelector("blue", Common.QUADCOPTER, Common.HTCONEM7);
+            botInfo[2] = new BotInfoSelector("blue", Common.QUADCOPTER, Common.HTCONEM7);
             //botInfo[2] = new BotInfoSelector("blue", Common.ARDRONE2, Common.NEXUS7);
             // botInfo[3] = new BotInfoSelector("white", Common.IROBOT, Common.NEXUS7);
 

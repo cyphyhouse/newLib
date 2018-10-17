@@ -150,7 +150,7 @@ public class FollowApp extends LogicThread {
         }
 
         while (true) {
-            System.out.println(stage+" "+name);
+            //System.out.println(stage+" "+name);
             switch (stage) {
                 case PICK:
                     if (robotIndex == 0) {
