@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.0015298317185109638" branch-rate="0.0" lines-covered="9" lines-valid="5883" branches-covered="0" branches-valid="2099" complexity="2.460390355912744" version="2.1.1" timestamp="1539813575780">
+<coverage line-rate="0.0015298317185109638" branch-rate="0.0" lines-covered="9" lines-valid="5883" branches-covered="0" branches-valid="2099" complexity="2.460390355912744" version="2.1.1" timestamp="1539813827451">
 	<sources>
 		<source>/home/mim/newLib/src/main/java</source>
 		<source>/home/mim/newLib/target/generated-sources/annotations</source>
