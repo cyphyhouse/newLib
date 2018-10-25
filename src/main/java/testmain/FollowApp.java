@@ -145,11 +145,15 @@ public class FollowApp extends LogicThread {
 
         //System.out.println(name + " " +obs.size());
 
-        if (robotIndex == 0) {
-            updatedests("tasks.txt", DEST_MSG, name, lineno);
-        }
 
         while (true) {
+            System.out.println("ASSIGNED SIZE IS: " + asgndsize);
+
+            lineno = 0;
+            if (robotIndex == 0) {
+                updatedests("tasks.txt", DEST_MSG, name, lineno);
+            }
+
             //System.out.println(stage+" "+name);
             switch (stage) {
                 case PICK:
