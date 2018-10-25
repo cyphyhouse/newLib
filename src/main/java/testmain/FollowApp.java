@@ -77,7 +77,7 @@ public class FollowApp extends LogicThread {
     private enum Stage {
         PICK, GO, DONE, WAIT
     }
-    private int asgndsize;
+    private int asgndsize = 0;
     private int asgnIndex;
     private int msgId = 0;
     private boolean hasMutex = false;
@@ -105,9 +105,9 @@ public class FollowApp extends LogicThread {
 
         obs = new Vector<>();
         assigned = new Vector<>();
-        for (int i=0; i<5; i++){
+        /*for (int i=0; i<5; i++){
             assigned.add(0);
-        }
+        }*/
 
         String intValue = name.replaceAll("[^0-9]", "");
         robotIndex = Integer.parseInt(intValue);
@@ -197,7 +197,7 @@ public class FollowApp extends LogicThread {
                                 break;
                             }
                             if (hasMutex) {
-                                asgndsize = 5;//assigned.size();
+                                //asgndsize = 5;//assigned.size();
                                 Random r = new Random();
                                 asgnIndex = r.nextInt(asgndsize);
                                 boolean foundpath = false;
@@ -472,6 +472,8 @@ public class FollowApp extends LogicThread {
             ItemPosition p = msgtoipos(iposmsg, i, 100);
             destinations.put(p.getName(), p);
             taskLocations.put(p.getName(), new Task(p, i));
+            assigned.add(0);
+            asgndsize++;
             //assigned.add(assigned.size(), 0);
 
         }
