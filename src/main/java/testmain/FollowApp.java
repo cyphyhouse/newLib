@@ -20,6 +20,8 @@ import edu.illinois.mitra.cyphyhouse.objects.ItemPosition;
 import edu.illinois.mitra.cyphyhouse.objects.Point3d;
 import edu.illinois.mitra.cyphyhouse.objects.PositionList;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -583,15 +585,23 @@ public class FollowApp extends LogicThread {
 
     private void updatedests(String filename, int msgtype, String robotname, int lineno) {
 
-        for(lineno=0; lineno<4; lineno++) {
-            try (Stream<String> lines = Files.lines(Paths.get(filename))) {
-                String line = lines.skip(lineno).findFirst().get();
-                RobotMessage inform = new RobotMessage("ALL", robotname, msgtype, line);
-                gvh.comms.addOutgoingMessage(inform);
-            } catch (IOException e) {
-            } catch (NoSuchElementException e) {
-            } catch (IllegalArgumentException e) {
+        try(BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            int numlines = 0;
+            while (reader.readLine() != null) numlines++;
+            reader.close();
+
+            for (lineno = 0; lineno < numlines; lineno++) {
+                try (Stream<String> lines = Files.lines(Paths.get(filename))) {
+                    String line = lines.skip(lineno).findFirst().get();
+                    RobotMessage inform = new RobotMessage("ALL", robotname, msgtype, line);
+                    gvh.comms.addOutgoingMessage(inform);
+                } catch (IOException e) {
+                } catch (NoSuchElementException e) {
+                } catch (IllegalArgumentException e) {
+                }
             }
+        }
+        catch(Exception e){
         }
     }
 
