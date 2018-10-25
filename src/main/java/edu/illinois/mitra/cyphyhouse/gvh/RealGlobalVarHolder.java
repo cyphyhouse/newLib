@@ -31,9 +31,8 @@ public class RealGlobalVarHolder extends GlobalVarHolder {
 	 * @param robotMac the MAC address of this agent's iRobot Create chassis
 	 */
 
-	public String position_data_topic;
 
-	public RealGlobalVarHolder(String name, Map<String,String> participants, TrackedRobot initpos, String robotMac) {
+	public RealGlobalVarHolder(String name, Map<String,String> participants, TrackedRobot initpos, String robotMac, String position_data_topic) {
 		super(name, participants);
 
 		super.log = new JavaLogging();

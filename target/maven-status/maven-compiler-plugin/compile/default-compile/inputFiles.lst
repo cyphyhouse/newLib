@@ -40,7 +40,6 @@
 /home/peter/newLib/src/main/java/testmain/SimplePP.java
 /home/peter/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/ros/msgs/geometry_msgs/Twist.java
 /home/peter/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/Handler/IPCHandler.java
-/home/peter/newLib/src/main/java/testmain2/BotInfoSelector.java
 /home/peter/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/comms/LossyMessageSender.java
 /home/peter/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/models/Model_iRobot.java
 /home/peter/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/objects/ItemPosition.java
@@ -56,7 +55,6 @@
 /home/peter/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/motion/PIDController.java
 /home/peter/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/comms/SmartUdpComThread.java
 /home/peter/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/gvh/SimGlobalVarHolder.java
-/home/peter/newLib/src/main/java/testmain2/TestMain2.java
 /home/peter/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/comms/UdpMessage.java
 /home/peter/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/interfaces/TrackedRobot.java
 /home/peter/newLib/src/main/java/testmain/Task.java
@@ -64,11 +62,9 @@
 /home/peter/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/objects/Obstacles.java
 /home/peter/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/interfaces/LogicThread.java
 /home/peter/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/comms/SmartCommsHandler.java
-/home/peter/newLib/src/main/java/testmain2/FollowApp.java
 /home/peter/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/interfaces/AcceptsPointInput.java
 /home/peter/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/harness/DecoupledDelayQueue.java
 /home/peter/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/Handler/IPCMsgQueue.java
-/home/peter/newLib/src/main/java/testmain2/Initiator.java
 /home/peter/newLib/src/main/java/testmain/TestMain.java
 /home/peter/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/ros/msgs/sensor_msgs/LaserScan.java
 /home/peter/newLib/src/main/java/edu/illinois/mitra/cyphyhouse/objects/Point.java

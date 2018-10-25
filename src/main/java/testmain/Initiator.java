@@ -60,7 +60,7 @@ public class Initiator implements MessageListener{
         for(int i = 0; i < participants[0].length; i++) {
             hm_participants.put(participants[0][i], participants[2][i]);
         }
-        this.gvh = new RealGlobalVarHolder(participants[0][selectedRobot], hm_participants, botInfo[selectedRobot].type, participants[1][selectedRobot]);
+        this.gvh = new RealGlobalVarHolder(participants[0][selectedRobot], hm_participants, botInfo[selectedRobot].type, participants[1][selectedRobot], "null_topic");
     }
 
     public void connect(){

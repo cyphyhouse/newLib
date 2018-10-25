@@ -19,7 +19,6 @@ edu/illinois/mitra/cyphyhouse/harness/IdealSimGpsProvider.class
 edu/illinois/mitra/cyphyhouse/harness/SimSmartComThread.class
 edu/illinois/mitra/cyphyhouse/gvh/Id.class
 edu/illinois/mitra/cyphyhouse/motion/ReachAvoid$STAGE_R.class
-testmain2/FollowApp.class
 edu/illinois/mitra/cyphyhouse/harness/SimGpsReceiver.class
 edu/illinois/mitra/cyphyhouse/motion/MotionAutomaton_Car.class
 edu/illinois/mitra/cyphyhouse/functions/BarrierSynchronizer.class
@@ -34,7 +33,6 @@ edu/illinois/mitra/cyphyhouse/interfaces/TrackedRobot.class
 edu/illinois/mitra/cyphyhouse/motion/MotionAutomation_ARDrone2.class
 edu/illinois/mitra/cyphyhouse/Handler/IPCMessage.class
 edu/illinois/mitra/cyphyhouse/motion/MotionParameters.class
-testmain2/FollowApp$Stage.class
 edu/illinois/mitra/cyphyhouse/Handler/LooperThread.class
 edu/illinois/mitra/cyphyhouse/gvh/JavaLogging.class
 ros/tools/PeriodicPublisher$PublisherTimerTask.class
@@ -79,7 +77,6 @@ edu/illinois/mitra/cyphyhouse/motion/MotionParameters$1.class
 edu/illinois/mitra/cyphyhouse/interfaces/SmartComThread.class
 edu/illinois/mitra/cyphyhouse/motion/MotionAutomaton_Quadcopter$STAGE.class
 edu/illinois/mitra/cyphyhouse/motion/MotionAutomaton_iRobot.class
-testmain2/Initiator.class
 edu/illinois/mitra/cyphyhouse/functions/RandomLeaderElection$Stage.class
 edu/illinois/mitra/cyphyhouse/gvh/Gps.class
 edu/illinois/mitra/cyphyhouse/harness/IdealSimGpsProvider$1.class
@@ -115,7 +112,6 @@ edu/illinois/mitra/cyphyhouse/interfaces/RobotEventListener$Event.class
 edu/illinois/mitra/cyphyhouse/comms/UdpGpsReceiver.class
 ros/tools/PeriodicPublisher.class
 testmain/SimplePP.class
-testmain2/FollowApp$1.class
 edu/illinois/mitra/cyphyhouse/Handler/IPCMsgQueue.class
 edu/illinois/mitra/cyphyhouse/objects/Point.class
 edu/illinois/mitra/cyphyhouse/comms/RosDecaWaveReceiver.class
@@ -130,13 +126,11 @@ edu/illinois/mitra/cyphyhouse/comms/SmartUdpComThread.class
 edu/illinois/mitra/cyphyhouse/interfaces/SimComChannel.class
 edu/illinois/mitra/cyphyhouse/comms/LossyMessageSender.class
 edu/illinois/mitra/cyphyhouse/motion/MotionAutomaton_iRobot$COLSTAGE0.class
-testmain2/TestMain2.class
 edu/illinois/mitra/cyphyhouse/functions/PickedLeaderElection.class
 edu/illinois/mitra/cyphyhouse/models/Model_Quadcopter.class
 testmain/Initiator.class
 edu/illinois/mitra/cyphyhouse/harness/DecoupledDelayQueue.class
 edu/illinois/mitra/cyphyhouse/comms/MessageResult$1.class
-testmain2/BotInfoSelector.class
 edu/illinois/mitra/cyphyhouse/interfaces/DSM.class
 edu/illinois/mitra/cyphyhouse/objects/PositionList.class
 edu/illinois/mitra/cyphyhouse/gvh/Comms.class

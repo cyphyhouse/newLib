@@ -20,7 +20,7 @@ public class TestMain {
         private static BotInfoSelector[] botInfo;
         private static int selectedRobot = 1;
         volatile private static GlobalVarHolder gvh;
-        private static LogicThread appToRun = null;git
+        private static LogicThread appToRun = null;
 
         public static void main(String args[]) {
 
@@ -56,8 +56,8 @@ public class TestMain {
                 hm_participants.put(participants[0][i], participants[2][i]);
             }
 	
-            gvh = new RealGlobalVarHolder(participants[0][selectedRobot], hm_participants, botInfo[selectedRobot].type, participants[1][selectedRobot]);
-            ((RealGlobalVarHolder)gvh).position_data_topic = botInfo[selectedRobot].vrpn;
+            gvh = new RealGlobalVarHolder(participants[0][selectedRobot], hm_participants, botInfo[selectedRobot].type, participants[1][selectedRobot], botInfo[selectedRobot].vrpn);
+            //((RealGlobalVarHolder)gvh).position_data_topic = botInfo[selectedRobot].vrpn;
             /*JavaRosWrapper wrapper;
             wrapper = new JavaRosWrapper("ws://localhost:9090", botInfo[selectedRobot].name, gvh, "Quadcopter");
             wrapper.subscribe_to_ROS(botInfo[selectedRobot].vrpn, "Position");*/
