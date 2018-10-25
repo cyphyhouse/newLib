@@ -127,7 +127,7 @@ public class FollowApp extends LogicThread {
             Stack<ItemPosition> o = new Stack<ItemPosition>();
             if (i != robotIndex)
                 o.push(ipos[i]);
-            obs.add(o);
+                obs.add(o);
         }
         /*
         pos = gvh.gps.get_robot_Positions();
@@ -174,7 +174,6 @@ public class FollowApp extends LogicThread {
                     updatePath = false;
 
                     if (destinations.isEmpty()) {
-                        System.out.println("empty destinations");
                         ItemPosition mypos = gvh.gps.getMyPosition();
                         if (mypos == null) {
                             break;
@@ -189,8 +188,6 @@ public class FollowApp extends LogicThread {
                     } else {
 
                         try {
-                            System.out.println("trying to get mutex");
-
                             if (!wait0) {
                                 String mutexreqmsg = String.valueOf(robotIndex)+" "+ String.valueOf(msgId) + " REQUEST";
                                 RobotMessage mutexrequestmsg = new RobotMessage("ALL", name, MUTEX_REQUEST_MSG,mutexreqmsg );
@@ -272,7 +269,6 @@ public class FollowApp extends LogicThread {
                         }
 
                         gvh.plat.moat.goTo(currentDestination);
-                        System.out.println("going to "+ currentDestination);
                         stage = Stage.GO;
 
                     }
@@ -280,13 +276,11 @@ public class FollowApp extends LogicThread {
                     break;
                 case GO:
                     if (gvh.plat.moat.inMotion) {
-                            System.out.println("trying to go still "+gvh.plat.moat.done);
                             stage = Stage.GO;
                         } else {
                             ItemPosition ip = path.pop();
 
                             if (path.empty()) {
-                                System.out.println("GOING BACK TO PICK " + name);
                                 if(!assigned.contains(0))
                                     stage = Stage.DONE;
                                 else {
