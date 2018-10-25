@@ -7,8 +7,11 @@ import edu.illinois.mitra.cyphyhouse.models.Model_iRobot;
 import edu.illinois.mitra.cyphyhouse.models.Model_Quadcopter;
 import edu.illinois.mitra.cyphyhouse.models.Model_Car;
 import edu.illinois.mitra.cyphyhouse.objects.Common;
+import edu.illinois.mitra.cyphyhouse.ros.JavaRosWrapper;
 
-/**
+/**JavaRosWrapper wrapper;
+
+
  * Created by VerivitalLab on 3/9/2016.
  * This class contains all info for specific hardware addresses
  * Each tablet/phone and robot is assigned a color
@@ -18,14 +21,18 @@ import edu.illinois.mitra.cyphyhouse.objects.Common;
 public class BotInfoSelector {
 
     public String name;
+    public String vrpn;
     public String ip;
     public String bluetooth;
     public TrackedRobot type;
 
 
     public BotInfoSelector(String color, int type, int deviceType) {
+
+
         if(color.equals("red")) {
             name = "bot0"; // assign name: bot0 is always red
+            vrpn = "";
             if(deviceType == Common.HTCONEM7) {
                 ip = "192.168.1.45"; // reserved IP address of red Nexus7 tablet
             }
@@ -54,6 +61,7 @@ public class BotInfoSelector {
 
         if(color.equals("green")) {
             name = "bot1";
+            vrpn = "vrpn_client_node/cyphyhousecopter/pose";
             if(deviceType == Common.HTCONEM7) {
                 ip = "192.168.1.31";
             }
@@ -76,6 +84,7 @@ public class BotInfoSelector {
 
         if(color.equals("blue")) {
             name = "bot2";
+            vrpn = "vrpn_client_node/cyphyhousecopter1/pose";
             ip = "192.168.1.18";
             if(type == Common.IROBOT) {
                 bluetooth = "5C:F3:70:76:CE:B4";
@@ -93,6 +102,7 @@ public class BotInfoSelector {
 
         if(color.equals("white")) {
             name = "bot3";
+            vrpn = "";
             ip = "192.168.1.113";
             if(type == Common.IROBOT) {
                 bluetooth = "5C:F3:70:76:C9:D4";

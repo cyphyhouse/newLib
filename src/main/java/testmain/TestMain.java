@@ -4,6 +4,7 @@ import edu.illinois.mitra.cyphyhouse.gvh.GlobalVarHolder;
 import edu.illinois.mitra.cyphyhouse.gvh.RealGlobalVarHolder;
 import edu.illinois.mitra.cyphyhouse.interfaces.LogicThread;
 import edu.illinois.mitra.cyphyhouse.objects.Common;
+import edu.illinois.mitra.cyphyhouse.ros.JavaRosWrapper;
 
 import java.util.HashMap;
 
@@ -22,6 +23,7 @@ public class TestMain {
         private static LogicThread appToRun = null;
 
         public static void main(String args[]) {
+
             // Load the participants
             //participants = IdentityLoader.loadIdentities(IDENTITY_FILE_URL);
             // Put number of robots being used here
@@ -31,6 +33,8 @@ public class TestMain {
             botInfo[0] = new BotInfoSelector("red", Common.QUADCOPTER, Common.HTCONEM7);
             botInfo[1] = new BotInfoSelector("green", Common.QUADCOPTER, Common.HTCONEM7);
             botInfo[2] = new BotInfoSelector("blue", Common.QUADCOPTER, Common.HTCONEM7);
+
+
             //botInfo[2] = new BotInfoSelector("blue", Common.ARDRONE2, Common.NEXUS7);
             // botInfo[3] = new BotInfoSelector("white", Common.IROBOT, Common.NEXUS7);
 
@@ -53,7 +57,11 @@ public class TestMain {
             }
 	
             gvh = new RealGlobalVarHolder(participants[0][selectedRobot], hm_participants, botInfo[selectedRobot].type, participants[1][selectedRobot]);
-	
+            JavaRosWrapper wrapper;
+            wrapper = new JavaRosWrapper("ws://localhost:9090", botInfo[selectedRobot].name, gvh, "Quadcopter");
+            wrapper.subscribe_to_ROS(botInfo[selectedRobot].vrpn, "Position");
+
+
             Initiator init = new Initiator(gvh, participants, botInfo, selectedRobot);
 
 
