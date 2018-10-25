@@ -30,6 +30,9 @@ public class RealGlobalVarHolder extends GlobalVarHolder {
 	 * @param participants contains (name,IP) pairs for each participating agent
 	 * @param robotMac the MAC address of this agent's iRobot Create chassis
 	 */
+
+	public String position_data_topic;
+
 	public RealGlobalVarHolder(String name, Map<String,String> participants, TrackedRobot initpos, String robotMac) {
 		super(name, participants);
 
@@ -39,7 +42,7 @@ public class RealGlobalVarHolder extends GlobalVarHolder {
 		super.comms = new Comms(this, new SmartUdpComThread(this));
 
 
-		super.gps = new Gps(this, new RosDecaWaveReceiver(this,"DecaWave",new PositionList(),new PositionList(), new ObstacleList(), new Vector<ObstacleList>(3,2) ));
+		super.gps = new Gps(this, new RosDecaWaveReceiver(this, position_data_topic, new PositionList(),new PositionList(), new ObstacleList(), new Vector<ObstacleList>(3,2) ));
 		plat.model = initpos;
 		plat.reachAvoid = new ReachAvoid(this);
 		plat.moat = new MotionAutomaton_Quadcopter(this);

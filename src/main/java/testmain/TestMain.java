@@ -57,9 +57,10 @@ public class TestMain {
             }
 	
             gvh = new RealGlobalVarHolder(participants[0][selectedRobot], hm_participants, botInfo[selectedRobot].type, participants[1][selectedRobot]);
-            JavaRosWrapper wrapper;
+            ((RealGlobalVarHolder)gvh).position_data_topic = botInfo[selectedRobot].vrpn;
+            /*JavaRosWrapper wrapper;
             wrapper = new JavaRosWrapper("ws://localhost:9090", botInfo[selectedRobot].name, gvh, "Quadcopter");
-            wrapper.subscribe_to_ROS(botInfo[selectedRobot].vrpn, "Position");
+            wrapper.subscribe_to_ROS(botInfo[selectedRobot].vrpn, "Position");*/
 
 
             Initiator init = new Initiator(gvh, participants, botInfo, selectedRobot);

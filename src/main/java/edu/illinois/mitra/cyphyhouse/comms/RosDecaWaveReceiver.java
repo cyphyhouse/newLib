@@ -62,19 +62,18 @@ public class RosDecaWaveReceiver extends Thread implements GpsReceiver {
 		this.viewsOfWorld = viewsOfWorld;
 	
 		//wrapper = new JavaRosWrapper("ws://localhost:9090", "NA", this.gvh, "Car");
-		//wrapper.subscribe_to_ROS("position", "Waypoint");
+		//wrapper.subscribe_to_ROS("position", "Waypogit int");
 	
 		//Subscribe to get position data
-		/*
-		System.out.println("SUBSCRIBING TO POSITION DATA FROM VRPN");
+		System.out.println("SUBSCRIBING TO POSITION DATA ON TOPIC: " + TopicName);
 		JavaRosWrapper wrapper;
 		wrapper = new JavaRosWrapper("ws://localhost:9090", name, this.gvh, "Quadcopter");
-		wrapper.subscribe_to_ROS("vrpn_client_node/cyphyhousecopter1/pose", "Position");
+		wrapper.subscribe_to_ROS(TopicName, "Position");
 
 
 		gvh.log.i(TAG, "Subscribing to ROS TOPIC " + TopicName);
 		gvh.trace.traceEvent(TAG, "Created", gvh.time());
-*/
+
 		WaypointHelper();
 	}
 
