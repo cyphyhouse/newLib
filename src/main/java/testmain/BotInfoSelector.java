@@ -86,7 +86,7 @@ public class BotInfoSelector {
         if(color.equals("blue")) {
             name = "bot2";
             vrpn = "vrpn_client_node/cyphyhousecopter1/pose";
-            ip = "192.168.1.34";
+            ip = "192.168.1.38";
             //ip = "192.168.1.18";
             if(type == Common.IROBOT) {
                 bluetooth = "5C:F3:70:76:CE:B4";
