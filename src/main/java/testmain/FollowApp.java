@@ -147,14 +147,14 @@ public class FollowApp extends LogicThread {
 
         //System.out.println(name + " " +obs.size());
 
+        lineno = 0;
+        if (robotIndex == 0) {
+            updatedests("tasks.txt", DEST_MSG, name, lineno);
+        }
 
         while (true) {
             System.out.println("ASSIGNED SIZE IS: " + asgndsize);
 
-            lineno = 0;
-            if (robotIndex == 0) {
-                updatedests("tasks.txt", DEST_MSG, name, lineno);
-            }
 
             //System.out.println(stage+" "+name);
             switch (stage) {
@@ -174,6 +174,7 @@ public class FollowApp extends LogicThread {
                             RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path) + "###mypos");
                             gvh.comms.addOutgoingMessage(pathmsg);
                             stage = Stage.GO;
+                            System.out.println(name + " SENT TAKEOFF");
                             break;
                         }
                     }
@@ -203,6 +204,7 @@ public class FollowApp extends LogicThread {
                                 break;
                             }
                             if (hasMutex) {
+                                System.out.println(name + " HAS MUTEX");
                                 //asgndsize = 5;//assigned.size();
                                 Random r = new Random();
                                 asgnIndex = r.nextInt(asgndsize);
@@ -321,6 +323,7 @@ public class FollowApp extends LogicThread {
             }
             Random ran = new Random();
             if (inMutex0) {
+                System.out.println(name + " RELEASING MUTEX");
                 hasMutex = false;
                 String releaseMutex = String.valueOf(robotIndex) + " "+ String.valueOf(msgId);
                 RobotMessage mutexreleasemsg = new RobotMessage("ALL", name, MUTEX_RELEASE_MSG,releaseMutex);
