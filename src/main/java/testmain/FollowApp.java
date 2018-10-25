@@ -291,7 +291,7 @@ public class FollowApp extends LogicThread {
 
                             if (path.empty()) {
                                 if(!assigned.contains(0))
-                                    stage = Stage.DONE;
+                                    stage = Stage.PICK;
                                 else {
                                     if (ip.z  == 0) {
                                         stage = Stage.DONE;
