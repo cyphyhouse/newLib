@@ -280,11 +280,17 @@ public class FollowApp extends LogicThread {
                         } else {
                             ItemPosition ip = path.pop();
 
+
                             if (path.empty()) {
                                 if(!assigned.contains(0))
                                     stage = Stage.DONE;
                                 else {
-                                    stage = Stage.PICK;
+                                    if (ip.z  == 0) {
+                                        stage = Stage.DONE;
+                                    }
+                                    else {
+                                        stage = Stage.PICK;
+                                    }
                                     //System.out.println(name + "Done a point " + ip);
                                 }
                             } else {
@@ -301,6 +307,9 @@ public class FollowApp extends LogicThread {
                     break;
 
                 case DONE:
+                    ItemPosition mypos = gvh.gps.getMyPosition();
+                    RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, mypos.toString() + "###mypos");
+                    gvh.comms.addOutgoingMessage(pathmsg);
                     break;
 
             }
