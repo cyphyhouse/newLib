@@ -150,7 +150,7 @@ public class FollowApp extends LogicThread {
 
         while (true) {
             System.out.println("ASSIGNED SIZE IS: " + asgndsize);
-
+            System.out.println("ASSIGNED ARRAY IS: " + assigned);
             lineno = 0;
             if (robotIndex == 0) {
                 updatedests("tasks.txt", DEST_MSG, name, lineno);
@@ -233,6 +233,11 @@ public class FollowApp extends LogicThread {
                                     if(!skip_land_command) {
                                         if (assigned.get(asgnIndex) == 0) {
                                             currentDestination = getDestination(destinations, asgnIndex);
+
+                                            if(currentDestination.z == 0 && currentDestination != null){
+                                                foundpath = true;
+                                                break;
+                                            }
 
                                             if (currentDestination != null) {
                                                 ItemPosition mypos = gvh.gps.getMyPosition();
