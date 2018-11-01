@@ -72,7 +72,7 @@ public class SimplePP {
         ItemPosition i = this.start;
         while (pl >= 1) {
             i = getPointAtDistance(i,xincrement,yincrement,zincrement);
-            if (zincrement > 0) {
+            if (zincrement > 10) {
                 temp.push(i);
             }
             pl = pl - 1;
