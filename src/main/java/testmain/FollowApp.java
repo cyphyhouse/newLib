@@ -206,8 +206,8 @@ public class FollowApp extends LogicThread {
                             if (hasMutex) {
                                 System.out.println(name + " HAS MUTEX");
                                 //asgndsize = 5;//assigned.size();
-                                Random r = new Random();
-                                asgnIndex = r.nextInt(asgndsize);
+                                //Random r = new Random();
+                                //asgnIndex = r.nextInt(asgndsize);
                                 boolean foundpath = false;
 
 
@@ -277,6 +277,7 @@ public class FollowApp extends LogicThread {
 
                                 //If a path is found, use the stored IDX to get the closest waypoint and set to currentDestination
                                 if(foundpath){
+                                    System.out.println("FOUND PATH AND OUT OF FOR LOOP");
                                     currentDestination = getDestination(destinations, current_shortest_idx);
                                 }
 
