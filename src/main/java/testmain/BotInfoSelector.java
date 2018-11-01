@@ -63,8 +63,8 @@ public class BotInfoSelector {
             name = "bot1";
             vrpn = "vrpn_client_node/cyphyhousecopter/pose";
             if(deviceType == Common.HTCONEM7) {
-                ip = "192.168.1.38";
-                //ip = "192.168.1.31";
+                //ip = "192.168.1.38";
+                ip = "192.168.1.31";
             }
             else if(deviceType == Common.MOTOE) {
                 ip = "192.168.1.115";
