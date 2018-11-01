@@ -209,6 +209,11 @@ public class FollowApp extends LogicThread {
                                 Random r = new Random();
                                 asgnIndex = r.nextInt(asgndsize);
                                 boolean foundpath = false;
+
+
+                                int current_shortest_idx=0;
+                                double current_shortest_distance = Double.MAX_VALUE;
+
                                 for (asgnIndex=0; asgnIndex < asgndsize; asgnIndex++) {
 
                                     boolean skip_land_command = false;
@@ -254,14 +259,27 @@ public class FollowApp extends LogicThread {
                                                     }
                                                 }
                                                 if (!breakpath) {
+                                                    //Calculate distance and check if it is the shortest
+                                                    //If it is, store this points IDX so we can get it again later
+                                                    double distance = Math.sqrt(Math.pow(mypos.x-currentDestination.x,2)+Math.pow(mypos.y-currentDestination.y,2)+Math.pow(mypos.z-currentDestination.z,2));
+                                                    if(distance < current_shortest_distance){
+                                                        current_shortest_distance = distance;
+                                                        current_shortest_idx = asgnIndex;
+                                                    }
                                                     foundpath = true;
-                                                    break;
+                                                    //break;
                                                 }
                                             } else
                                                 break;
                                         }
                                     }
                                 }
+
+                                //If a path is found, use the stored IDX to get the closest waypoint and set to currentDestination
+                                if(foundpath){
+                                    currentDestination = getDestination(destinations, current_shortest_idx);
+                                }
+
                                 //System.out.println("FOR LOOP DONE");
                                 if (!foundpath) {
                                     inMutex0 = true;
