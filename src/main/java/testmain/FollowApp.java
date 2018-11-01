@@ -121,8 +121,8 @@ public class FollowApp extends LogicThread {
     public List<Object> callStarL() {
         dsm.createMW("testindex", 0);
         ItemPosition[] ipos = new ItemPosition[3];
-        ipos[0] = new ItemPosition("quadcopter0",50,50,80);
-        ipos[1] = new ItemPosition("quadcopter1",20,20,0);
+        ipos[0] = new ItemPosition("quadcopter0",1000,1000,80);
+        ipos[1] = new ItemPosition("quadcopter1",1000,1000,0);
         ipos[2] = new ItemPosition("quadcopter2",-20,-20,0);
 
         for (int i = 0 ; i < 3 ; i ++) {
