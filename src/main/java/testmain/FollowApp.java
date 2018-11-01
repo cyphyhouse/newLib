@@ -210,30 +210,51 @@ public class FollowApp extends LogicThread {
                                 asgnIndex = r.nextInt(asgndsize);
                                 boolean foundpath = false;
                                 for (asgnIndex=0; asgnIndex < asgndsize; asgnIndex++) {
-                                    //System.out.println(name + " " + asgnIndex);
-                                    if (assigned.get(asgnIndex) == 0) {
-                                        currentDestination = getDestination(destinations, asgnIndex);
-                                        if (currentDestination != null) {
-                                            ItemPosition mypos = gvh.gps.getMyPosition();
-                                            SimplePP newp = new SimplePP(mypos, currentDestination, 1);
-                                            path = newp.getPath();
-                                            sleep(100);
-                                            boolean breakpath = false;
 
-                                            for (int i = 0; i < obs.size(); i++) {
-                                                if (isClose(path, obs.get(i), 60)) {
-                                                    breakpath = true;
-                                                    break;
-                                                } else {
+                                    boolean skip_land_command = false;
+
+                                    if(assigned.get(asgnIndex) == 0){
+                                        currentDestination = getDestination(destinations, asgnIndex);
+                                        if(currentDestination.z == 0){
+                                            //check if there are any non land commands to do
+                                            for(int i=0; i < asgndsize; i++){
+                                                if(assigned.get(i) == 0) {
+                                                    ItemPosition checkDestination = getDestination(destinations, i);
+                                                    if(checkDestination.z != 0){
+                                                        skip_land_command = true;
+                                                        break;
+                                                    }
                                                 }
                                             }
-                                            if (!breakpath) {
-                                                foundpath = true;
-                                                break;
-                                            }
                                         }
-                                        else
-                                            break;
+                                    }
+
+
+                                    if(!skip_land_command) {
+                                        if (assigned.get(asgnIndex) == 0) {
+                                            currentDestination = getDestination(destinations, asgnIndex);
+
+                                            if (currentDestination != null) {
+                                                ItemPosition mypos = gvh.gps.getMyPosition();
+                                                SimplePP newp = new SimplePP(mypos, currentDestination, 1);
+                                                path = newp.getPath();
+                                                sleep(100);
+                                                boolean breakpath = false;
+
+                                                for (int i = 0; i < obs.size(); i++) {
+                                                    if (isClose(path, obs.get(i), 60)) {
+                                                        breakpath = true;
+                                                        break;
+                                                    } else {
+                                                    }
+                                                }
+                                                if (!breakpath) {
+                                                    foundpath = true;
+                                                    break;
+                                                }
+                                            } else
+                                                break;
+                                        }
                                     }
                                 }
                                 //System.out.println("FOR LOOP DONE");
