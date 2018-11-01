@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.0" branch-rate="0.0" lines-covered="0" lines-valid="5708" branches-covered="0" branches-valid="2024" complexity="2.4317386231038505" version="2.1.1" timestamp="1541102186394">
+<coverage line-rate="0.0" branch-rate="0.0" lines-covered="0" lines-valid="5709" branches-covered="0" branches-valid="2026" complexity="2.4329054842473745" version="2.1.1" timestamp="1541102323990">
 	<sources>
 		<source>/home/peter/newLib/target/generated-sources/annotations</source>
 		<source>/home/peter/newLib/src/main/java</source>
@@ -21112,7 +21112,7 @@
 				</class>
 			</classes>
 		</package>
-		<package name="testmain" line-rate="0.0" branch-rate="0.0" complexity="5.545454545454546">
+		<package name="testmain" line-rate="0.0" branch-rate="0.0" complexity="5.575757575757576">
 			<classes>
 				<class name="testmain.BotInfoSelector" filename="testmain/BotInfoSelector.java" line-rate="0.0" branch-rate="0.0" complexity="22.0">
 					<methods>
@@ -23264,7 +23264,7 @@
 						<line number="135" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="testmain.SimplePP" filename="testmain/SimplePP.java" line-rate="0.0" branch-rate="0.0" complexity="2.6666666666666665">
+				<class name="testmain.SimplePP" filename="testmain/SimplePP.java" line-rate="0.0" branch-rate="0.0" complexity="3.0">
 					<methods>
 						<method name="&lt;init&gt;" signature="(Ledu/illinois/mitra/cyphyhouse/objects/ItemPosition;Ledu/illinois/mitra/cyphyhouse/objects/ItemPosition;I)V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
@@ -23294,16 +23294,21 @@
 									</conditions>
 								</line>
 								<line number="74" hits="0" branch="false"/>
-								<line number="75" hits="0" branch="false"/>
-								<line number="76" hits="0" branch="false"/>
-								<line number="79" hits="0" branch="false"/>
-								<line number="80" hits="0" branch="true" condition-coverage="0% (0/2)">
+								<line number="75" hits="0" branch="true" condition-coverage="0% (0/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
 									</conditions>
 								</line>
+								<line number="76" hits="0" branch="false"/>
+								<line number="78" hits="0" branch="false"/>
 								<line number="81" hits="0" branch="false"/>
+								<line number="82" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
 								<line number="83" hits="0" branch="false"/>
+								<line number="85" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="getPointAtDistance" signature="(Ledu/illinois/mitra/cyphyhouse/objects/ItemPosition;III)Ledu/illinois/mitra/cyphyhouse/objects/ItemPosition;" line-rate="0.0" branch-rate="0.0" complexity="0">
@@ -23386,16 +23391,21 @@
 							</conditions>
 						</line>
 						<line number="74" hits="0" branch="false"/>
-						<line number="75" hits="0" branch="false"/>
-						<line number="76" hits="0" branch="false"/>
-						<line number="79" hits="0" branch="false"/>
-						<line number="80" hits="0" branch="true" condition-coverage="0% (0/2)">
+						<line number="75" hits="0" branch="true" condition-coverage="0% (0/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>
 							</conditions>
 						</line>
+						<line number="76" hits="0" branch="false"/>
+						<line number="78" hits="0" branch="false"/>
 						<line number="81" hits="0" branch="false"/>
+						<line number="82" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
 						<line number="83" hits="0" branch="false"/>
+						<line number="85" hits="0" branch="false"/>
 					</lines>
 				</class>
 				<class name="testmain.Task" filename="testmain/Task.java" line-rate="0.0" branch-rate="0.0" complexity="1.6">
