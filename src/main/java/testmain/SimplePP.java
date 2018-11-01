@@ -68,11 +68,13 @@ public class SimplePP {
         int yincrement = 0;
         int zincrement = zdist/pathLength;
         //System.out.println("xinc: " + xincrement + " yinc: " + yincrement + " zinc: " + zincrement);
-
+        
         ItemPosition i = this.start;
         while (pl >= 1) {
             i = getPointAtDistance(i,xincrement,yincrement,zincrement);
-            temp.push(i);
+            if (zincrement > 10) {
+                temp.push(i);
+            }
             pl = pl - 1;
         }
 
