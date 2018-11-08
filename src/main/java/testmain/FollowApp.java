@@ -151,6 +151,12 @@ public class FollowApp extends LogicThread {
         while (true) {
             System.out.println("ASSIGNED SIZE IS: " + asgndsize);
             System.out.println("ASSIGNED ARRAY IS: " + assigned);
+            System.out.println("BEGIN DESTINATIONS ARRAY PRINTOUT:");
+            for(int i=0; i<assigned.size(); i++){
+                System.out.println(getDestination(destinations, i) + "\n");
+            }
+            System.out.println("END DESTINATIONS ARRAY PRINTOUT\n");
+
             lineno = 0;
             if (robotIndex == 0) {
                 updatedests("tasks.txt", DEST_MSG, name, lineno);
