@@ -241,6 +241,7 @@ public class FollowApp extends LogicThread {
 
                                             if(currentDestination.z == 0 && currentDestination != null){
                                                 foundpath = true;
+                                                current_shortest_idx = asgnIndex;
                                                 break;
                                             }
 
