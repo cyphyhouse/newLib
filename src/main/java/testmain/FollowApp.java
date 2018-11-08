@@ -607,10 +607,12 @@ public class FollowApp extends LogicThread {
         int x = (int) (Float.parseFloat(parts[0]) * scale);
         int y = (int) (Float.parseFloat(parts[1]) * scale);
         int z = (int) (Float.parseFloat(parts[2]) * scale);
-        String name = Integer.toString(i) + "-A";
+        int idx = (int) (Float.parseFloat(parts[3]));
+        String name = Integer.toString(idx) + "-A";
         ItemPosition p = new ItemPosition(name, x, y, z);
         return p;
     }
+
 
     private Stack<ItemPosition> msgtopathstack(String pathmsg, int j, int scale) {
         pathmsg = pathmsg.replace(".", ",").replace(" ", "");
@@ -658,6 +660,7 @@ public class FollowApp extends LogicThread {
             for (lineno = 0; lineno < numlines; lineno++) {
                 try (Stream<String> lines = Files.lines(Paths.get(filename))) {
                     String line = lines.skip(lineno).findFirst().get();
+                    line = line + " " + lineno;
                     RobotMessage inform = new RobotMessage("ALL", robotname, msgtype, line);
                     gvh.comms.addOutgoingMessage(inform);
                 } catch (IOException e) {
