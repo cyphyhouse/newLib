@@ -280,7 +280,7 @@ public class FollowApp extends LogicThread {
                                     System.out.println("FOUND PATH AND OUT OF FOR LOOP");
                                     currentDestination = getDestination(destinations, current_shortest_idx);
                                     System.out.println(currentDestination);
-                                    System.out.println("DONE GETTING DESTINGATIONS");
+                                    System.out.println("DONE GETTING DESTINATION");
                                 }
 
                                 //System.out.println("FOR LOOP DONE");
