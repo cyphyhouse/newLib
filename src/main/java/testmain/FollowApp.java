@@ -281,6 +281,9 @@ public class FollowApp extends LogicThread {
                                 if(foundpath){
                                     System.out.println("FOUND PATH AND OUT OF FOR LOOP");
                                     currentDestination = getDestination(destinations, current_shortest_idx);
+                                    ItemPosition mypos = gvh.gps.getMyPosition();
+                                    SimplePP newp = new SimplePP(mypos, currentDestination, 1);
+                                    path = newp.getPath();
                                     System.out.println(currentDestination);
                                     System.out.println("DONE GETTING DESTINATION");
                                 }
