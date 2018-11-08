@@ -151,11 +151,11 @@ public class FollowApp extends LogicThread {
         while (true) {
             System.out.println("ASSIGNED SIZE IS: " + asgndsize);
             System.out.println("ASSIGNED ARRAY IS: " + assigned);
-            System.out.println("BEGIN DESTINATIONS ARRAY PRINTOUT:");
+            /*System.out.println("BEGIN DESTINATIONS ARRAY PRINTOUT:");
             for(int i=0; i<assigned.size(); i++){
                 System.out.println(getDestination(destinations, i) + "\n");
             }
-            System.out.println("END DESTINATIONS ARRAY PRINTOUT\n");
+            System.out.println("END DESTINATIONS ARRAY PRINTOUT\n");*/
 
             lineno = 0;
             if (robotIndex == 0) {
@@ -259,7 +259,7 @@ public class FollowApp extends LogicThread {
                                                 boolean breakpath = false;
 
                                                 for (int i = 0; i < obs.size(); i++) {
-                                                    if (isClose(path, obs.get(i), 100)) {
+                                                    if (isClose(path, obs.get(i), 200)) {
                                                         breakpath = true;
                                                         break;
                                                     } else {

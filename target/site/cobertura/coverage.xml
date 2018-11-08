@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.0" branch-rate="0.0" lines-covered="0" lines-valid="5735" branches-covered="0" branches-valid="2036" complexity="2.4387397899649943" version="2.1.1" timestamp="1541713370947">
+<coverage line-rate="0.0" branch-rate="0.0" lines-covered="0" lines-valid="5731" branches-covered="0" branches-valid="2034" complexity="2.4375729288214703" version="2.1.1" timestamp="1541714624309">
 	<sources>
 		<source>/home/peter/newLib/target/generated-sources/annotations</source>
 		<source>/home/peter/newLib/src/main/java</source>
@@ -21112,7 +21112,7 @@
 				</class>
 			</classes>
 		</package>
-		<package name="testmain" line-rate="0.0" branch-rate="0.0" complexity="5.7272727272727275">
+		<package name="testmain" line-rate="0.0" branch-rate="0.0" complexity="5.696969696969697">
 			<classes>
 				<class name="testmain.BotInfoSelector" filename="testmain/BotInfoSelector.java" line-rate="0.0" branch-rate="0.0" complexity="22.0">
 					<methods>
@@ -21408,7 +21408,7 @@
 						<line number="118" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="testmain.FollowApp" filename="testmain/FollowApp.java" line-rate="0.0" branch-rate="0.0" complexity="8.666666666666666">
+				<class name="testmain.FollowApp" filename="testmain/FollowApp.java" line-rate="0.0" branch-rate="0.0" complexity="8.6">
 					<methods>
 						<method name="&lt;init&gt;" signature="(Ledu/illinois/mitra/cyphyhouse/gvh/GlobalVarHolder;)V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
@@ -21474,14 +21474,6 @@
 								<line number="132" hits="0" branch="false"/>
 								<line number="152" hits="0" branch="false"/>
 								<line number="153" hits="0" branch="false"/>
-								<line number="154" hits="0" branch="false"/>
-								<line number="155" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="156" hits="0" branch="false"/>
-								<line number="158" hits="0" branch="false"/>
 								<line number="160" hits="0" branch="false"/>
 								<line number="161" hits="0" branch="true" condition-coverage="0% (0/2)">
 									<conditions>
@@ -22352,14 +22344,6 @@
 						<line number="132" hits="0" branch="false"/>
 						<line number="152" hits="0" branch="false"/>
 						<line number="153" hits="0" branch="false"/>
-						<line number="154" hits="0" branch="false"/>
-						<line number="155" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="156" hits="0" branch="false"/>
-						<line number="158" hits="0" branch="false"/>
 						<line number="160" hits="0" branch="false"/>
 						<line number="161" hits="0" branch="true" condition-coverage="0% (0/2)">
 							<conditions>
@@ -23118,7 +23102,7 @@
 						<line number="853" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="testmain.FollowApp$1" filename="testmain/FollowApp.java" line-rate="0.0" branch-rate="1.0" complexity="8.666666666666666">
+				<class name="testmain.FollowApp$1" filename="testmain/FollowApp.java" line-rate="0.0" branch-rate="1.0" complexity="8.6">
 					<methods>
 						<method name="&lt;clinit&gt;" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
@@ -23130,7 +23114,7 @@
 						<line number="166" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="testmain.FollowApp$Stage" filename="testmain/FollowApp.java" line-rate="0.0" branch-rate="1.0" complexity="8.666666666666666">
+				<class name="testmain.FollowApp$Stage" filename="testmain/FollowApp.java" line-rate="0.0" branch-rate="1.0" complexity="8.6">
 					<methods>
 						<method name="&lt;clinit&gt;" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
