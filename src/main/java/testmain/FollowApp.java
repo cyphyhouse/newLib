@@ -276,6 +276,7 @@ public class FollowApp extends LogicThread {
                                     }
                                 }
 
+                                System.out.println("ASSIGN INDEX IS: " + asgnIndex);
                                 asgnIndex = current_shortest_idx;
 
                                 //If a path is found, use the stored IDX to get the closest waypoint and set to currentDestination
