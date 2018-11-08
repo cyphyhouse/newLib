@@ -275,6 +275,8 @@ public class FollowApp extends LogicThread {
                                     }
                                 }
 
+                                asgnIndex = current_shortest_idx;
+
                                 //If a path is found, use the stored IDX to get the closest waypoint and set to currentDestination
                                 if(foundpath){
                                     System.out.println("FOUND PATH AND OUT OF FOR LOOP");
@@ -289,6 +291,7 @@ public class FollowApp extends LogicThread {
                                     wait0 = false;
                                     break;
                                 }
+                                System.out.println("THE PATH IS: " + path);
                                 path.pop();
                                 currentDestination = path.peek();
                                 RobotMessage asgnmsg = new RobotMessage("ALL", name, ASGN_MSG, String.valueOf(asgnIndex));
@@ -323,6 +326,7 @@ public class FollowApp extends LogicThread {
                             break;
                         }
 
+                        System.out.println("CALLING GOTO. DESTINATION IS: " + currentDestination);
                         gvh.plat.moat.goTo(currentDestination);
                         stage = Stage.GO;
 
