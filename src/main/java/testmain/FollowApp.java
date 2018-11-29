@@ -259,7 +259,7 @@ public class FollowApp extends LogicThread {
                                                 boolean breakpath = false;
 
                                                 for (int i = 0; i < obs.size(); i++) {
-                                                    if (isClose(path, obs.get(i), 200)) {
+                                                    if (isClose(path, obs.get(i), 150)) {
                                                         breakpath = true;
                                                         break;
                                                     } else {
