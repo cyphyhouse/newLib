@@ -149,7 +149,6 @@ public class FollowApp extends LogicThread {
 
 
         while (true) {
-            System.out.println("ASSIGNED SIZE IS: " + asgndsize);
             System.out.println("ASSIGNED ARRAY IS: " + assigned);
             /*System.out.println("BEGIN DESTINATIONS ARRAY PRINTOUT:");
             for(int i=0; i<assigned.size(); i++){
@@ -837,8 +836,10 @@ public class FollowApp extends LogicThread {
                 System.out.println(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ");*/
                 //System.out.println(distance);
                 //System.out.println(name + " path point distance " + distance);
-                if (distance <= mindist)
+                if (distance <= mindist) {
+                    System.out.println("DIST IS: " + distance);
                     return true;
+                }
             } else {
                 for (int p = 1; p < k; p++) {
                     //System.out.println("checking for cross paths");
@@ -846,8 +847,10 @@ public class FollowApp extends LogicThread {
                     ItemPosition next_stack = obstack.get(p);
                     int distance = closestDist(start, next, start_stack, next_stack);
                     //System.out.println(name + " path stack distance " + distance);
-                    if (distance <= mindist)
+                    if (distance <= mindist) {
+                        System.out.println("DIST IS: " + distance);
                         return true;
+                    }
                 }
             }
         }
