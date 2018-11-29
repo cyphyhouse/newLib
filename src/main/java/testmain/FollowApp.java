@@ -149,7 +149,7 @@ public class FollowApp extends LogicThread {
 
 
         while (true) {
-            System.out.println("ASSIGNED ARRAY IS: " + assigned);
+            //System.out.println("ASSIGNED ARRAY IS: " + assigned);
             /*System.out.println("BEGIN DESTINATIONS ARRAY PRINTOUT:");
             for(int i=0; i<assigned.size(); i++){
                 System.out.println(getDestination(destinations, i) + "\n");
@@ -179,7 +179,7 @@ public class FollowApp extends LogicThread {
                             RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path) + "###mypos");
                             gvh.comms.addOutgoingMessage(pathmsg);
                             stage = Stage.GO;
-                            System.out.println(name + " SENT TAKEOFF");
+                            //System.out.println(name + " SENT TAKEOFF");
                             break;
                         }
                     }
@@ -191,7 +191,7 @@ public class FollowApp extends LogicThread {
                             break;
                         }
                         else {
-                            System.out.println(mypos.toString());
+                            //System.out.println(mypos.toString());
                         }
                         RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, mypos.toString() + "###mypos");
                         gvh.comms.addOutgoingMessage(pathmsg);
@@ -209,7 +209,7 @@ public class FollowApp extends LogicThread {
                                 break;
                             }
                             if (hasMutex) {
-                                System.out.println(name + " HAS MUTEX");
+                               // System.out.println(name + " HAS MUTEX");
                                 //asgndsize = 5;//assigned.size();
                                 //Random r = new Random();
                                 //asgnIndex = r.nextInt(asgndsize);
@@ -281,28 +281,28 @@ public class FollowApp extends LogicThread {
                                     }
                                 }
 
-                                System.out.println("ASSIGN INDEX IS: " + asgnIndex);
+                               // System.out.println("ASSIGN INDEX IS: " + asgnIndex);
                                 asgnIndex = current_shortest_idx;
 
                                 //If a path is found, use the stored IDX to get the closest waypoint and set to currentDestination
                                 if(foundpath){
-                                    System.out.println("FOUND PATH AND OUT OF FOR LOOP");
+                                   // System.out.println("FOUND PATH AND OUT OF FOR LOOP");
                                     currentDestination = getDestination(destinations, current_shortest_idx);
                                     ItemPosition mypos = gvh.gps.getMyPosition();
                                     SimplePP newp = new SimplePP(mypos, currentDestination, 1);
                                     path = newp.getPath();
-                                    System.out.println(currentDestination);
-                                    System.out.println("DONE GETTING DESTINATION");
+                                    //System.out.println(currentDestination);
+                                   // System.out.println("DONE GETTING DESTINATION");
                                 }
 
                                 //System.out.println("FOR LOOP DONE");
                                 if (!foundpath) {
-                                    System.out.println("COULD NOT FIND A PATH");
+                                   // System.out.println("COULD NOT FIND A PATH");
                                     inMutex0 = true;
                                     wait0 = false;
                                     break;
                                 }
-                                System.out.println("THE PATH IS: " + path);
+                               // System.out.println("THE PATH IS: " + path);
                                 path.pop();
                                 currentDestination = path.peek();
                                 RobotMessage asgnmsg = new RobotMessage("ALL", name, ASGN_MSG, String.valueOf(asgnIndex));
@@ -337,7 +337,7 @@ public class FollowApp extends LogicThread {
                             break;
                         }
 
-                        System.out.println("CALLING GOTO. DESTINATION IS: " + currentDestination);
+                     //   System.out.println("CALLING GOTO. DESTINATION IS: " + currentDestination);
                         gvh.plat.moat.goTo(currentDestination);
                         stage = Stage.GO;
 
@@ -385,7 +385,7 @@ public class FollowApp extends LogicThread {
             }
             Random ran = new Random();
             if (inMutex0) {
-                System.out.println(name + " RELEASING MUTEX");
+              //  System.out.println(name + " RELEASING MUTEX");
                 hasMutex = false;
                 String releaseMutex = String.valueOf(robotIndex) + " "+ String.valueOf(msgId);
                 RobotMessage mutexreleasemsg = new RobotMessage("ALL", name, MUTEX_RELEASE_MSG,releaseMutex);
@@ -837,7 +837,7 @@ public class FollowApp extends LogicThread {
                 //System.out.println(distance);
                 //System.out.println(name + " path point distance " + distance);
                 if (distance <= mindist) {
-                    System.out.println("DIST IS: " + distance);
+                    //System.out.println("DIST IS: " + distance);
                     return true;
                 }
             } else {
@@ -848,7 +848,7 @@ public class FollowApp extends LogicThread {
                     int distance = closestDist(start, next, start_stack, next_stack);
                     //System.out.println(name + " path stack distance " + distance);
                     if (distance <= mindist) {
-                        System.out.println("DIST IS: " + distance);
+                        //System.out.println("DIST IS: " + distance);
                         return true;
                     }
                 }
