@@ -34,7 +34,7 @@ public class BotInfoSelector {
             name = "bot0"; // assign name: bot0 is always red
             vrpn = "";
             if(deviceType == Common.HTCONEM7) {
-                ip = "192.168.1.35"; // reserved IP address of red Nexus7 tablet
+                ip = "192.168.1.17"; // reserved IP address of red Nexus7 tablet
             }
             else if(deviceType == Common.MOTOE) {
                 ip = "192.168.1.114"; // reserved IP address of red MotoE phone
@@ -64,7 +64,7 @@ public class BotInfoSelector {
             vrpn = "vrpn_client_node/cyphyhousecopter/pose";
             if(deviceType == Common.HTCONEM7) {
                 //ip = "192.168.1.38";
-                ip = "192.168.1.31";
+                ip = "192.168.1.19";
             }
             else if(deviceType == Common.MOTOE) {
                 ip = "192.168.1.115";
@@ -87,7 +87,7 @@ public class BotInfoSelector {
             name = "bot2";
             vrpn = "vrpn_client_node/cyphyhousecopter1/pose";
             //ip = "192.168.1.38";
-            ip = "192.168.1.18";
+            ip = "192.168.1.14";
             if(type == Common.IROBOT) {
                 bluetooth = "5C:F3:70:76:CE:B4";
                 this.type = new Model_iRobot(name, 0,0);
