@@ -298,6 +298,7 @@ public class FollowApp extends LogicThread {
 
                                 //System.out.println("FOR LOOP DONE");
                                 if (!foundpath) {
+                                    System.out.println("COULD NOT FIND A PATH");
                                     inMutex0 = true;
                                     wait0 = false;
                                     break;
