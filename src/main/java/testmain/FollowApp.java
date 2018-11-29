@@ -348,6 +348,7 @@ public class FollowApp extends LogicThread {
                     if (gvh.plat.moat.inMotion) {
                             stage = Stage.GO;
                         } else {
+                            sleep(800);
                             ItemPosition ip = path.pop();
 
 
