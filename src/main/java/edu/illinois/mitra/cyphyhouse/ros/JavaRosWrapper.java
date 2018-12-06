@@ -240,6 +240,8 @@ public class JavaRosWrapper {
 										motion = (MotionAutomaton_Quadcopter) gvh.plat.moat;
 										motion.reached = true;
 										break;
+									case "Car":
+										((MotionAutomaton_Car)gvh.plat.moat).reached = true;
 								}
 								break;
 							case "FALSE":
@@ -249,6 +251,8 @@ public class JavaRosWrapper {
 										motion = (MotionAutomaton_Quadcopter) gvh.plat.moat;
 										motion.reached = false;
 										break;
+									case "Car":
+										((MotionAutomaton_Car)gvh.plat.moat).reached = false;
 								}
 								break;
 						}

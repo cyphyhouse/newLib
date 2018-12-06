@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.0" branch-rate="0.0" lines-covered="0" lines-valid="5740" branches-covered="0" branches-valid="2042" complexity="2.432213209733488" version="2.1.1" timestamp="1544128792381">
+<coverage line-rate="0.0" branch-rate="0.0" lines-covered="0" lines-valid="5744" branches-covered="0" branches-valid="2050" complexity="2.4345307068366164" version="2.1.1" timestamp="1544129571712">
 	<sources>
 		<source>/home/peter/newLib/target/generated-sources/annotations</source>
 		<source>/home/peter/newLib/src/main/java</source>
@@ -18794,9 +18794,9 @@
 				</class>
 			</classes>
 		</package>
-		<package name="edu.illinois.mitra.cyphyhouse.ros" line-rate="0.0" branch-rate="0.0" complexity="4.0">
+		<package name="edu.illinois.mitra.cyphyhouse.ros" line-rate="0.0" branch-rate="0.0" complexity="4.2">
 			<classes>
-				<class name="edu.illinois.mitra.cyphyhouse.ros.JavaRosWrapper" filename="edu/illinois/mitra/cyphyhouse/ros/JavaRosWrapper.java" line-rate="0.0" branch-rate="0.0" complexity="4.0">
+				<class name="edu.illinois.mitra.cyphyhouse.ros.JavaRosWrapper" filename="edu/illinois/mitra/cyphyhouse/ros/JavaRosWrapper.java" line-rate="0.0" branch-rate="0.0" complexity="4.2">
 					<methods>
 						<method name="&lt;init&gt;" signature="(Ljava/lang/String;Ljava/lang/String;Ledu/illinois/mitra/cyphyhouse/gvh/GlobalVarHolder;Ljava/lang/String;)V" line-rate="0.0" branch-rate="0.0" complexity="0">
 							<lines>
@@ -18966,7 +18966,7 @@
 								<line number="226" hits="0" branch="false"/>
 								<line number="227" hits="0" branch="false"/>
 								<line number="228" hits="0" branch="false"/>
-								<line number="262" hits="0" branch="false"/>
+								<line number="266" hits="0" branch="false"/>
 							</lines>
 						</method>
 					</methods>
@@ -19117,10 +19117,10 @@
 						<line number="226" hits="0" branch="false"/>
 						<line number="227" hits="0" branch="false"/>
 						<line number="228" hits="0" branch="false"/>
-						<line number="262" hits="0" branch="false"/>
+						<line number="266" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="edu.illinois.mitra.cyphyhouse.ros.JavaRosWrapper$1" filename="edu/illinois/mitra/cyphyhouse/ros/JavaRosWrapper.java" line-rate="0.0" branch-rate="1.0" complexity="4.0">
+				<class name="edu.illinois.mitra.cyphyhouse.ros.JavaRosWrapper$1" filename="edu/illinois/mitra/cyphyhouse/ros/JavaRosWrapper.java" line-rate="0.0" branch-rate="1.0" complexity="4.2">
 					<methods>
 						<method name="&lt;init&gt;" signature="(Ledu/illinois/mitra/cyphyhouse/ros/JavaRosWrapper;)V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
@@ -19142,7 +19142,7 @@
 						<line number="161" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="edu.illinois.mitra.cyphyhouse.ros.JavaRosWrapper$2" filename="edu/illinois/mitra/cyphyhouse/ros/JavaRosWrapper.java" line-rate="0.0" branch-rate="1.0" complexity="4.0">
+				<class name="edu.illinois.mitra.cyphyhouse.ros.JavaRosWrapper$2" filename="edu/illinois/mitra/cyphyhouse/ros/JavaRosWrapper.java" line-rate="0.0" branch-rate="1.0" complexity="4.2">
 					<methods>
 						<method name="&lt;init&gt;" signature="(Ledu/illinois/mitra/cyphyhouse/ros/JavaRosWrapper;)V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
@@ -19168,7 +19168,7 @@
 						<line number="186" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="edu.illinois.mitra.cyphyhouse.ros.JavaRosWrapper$3" filename="edu/illinois/mitra/cyphyhouse/ros/JavaRosWrapper.java" line-rate="0.0" branch-rate="1.0" complexity="4.0">
+				<class name="edu.illinois.mitra.cyphyhouse.ros.JavaRosWrapper$3" filename="edu/illinois/mitra/cyphyhouse/ros/JavaRosWrapper.java" line-rate="0.0" branch-rate="1.0" complexity="4.2">
 					<methods>
 						<method name="&lt;init&gt;" signature="(Ledu/illinois/mitra/cyphyhouse/ros/JavaRosWrapper;)V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
@@ -19198,7 +19198,7 @@
 						<line number="218" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="edu.illinois.mitra.cyphyhouse.ros.JavaRosWrapper$4" filename="edu/illinois/mitra/cyphyhouse/ros/JavaRosWrapper.java" line-rate="0.0" branch-rate="0.0" complexity="4.0">
+				<class name="edu.illinois.mitra.cyphyhouse.ros.JavaRosWrapper$4" filename="edu/illinois/mitra/cyphyhouse/ros/JavaRosWrapper.java" line-rate="0.0" branch-rate="0.0" complexity="4.2">
 					<methods>
 						<method name="&lt;init&gt;" signature="(Ledu/illinois/mitra/cyphyhouse/ros/JavaRosWrapper;)V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
@@ -19217,26 +19217,32 @@
 										<condition number="1" type="switch" coverage="0%"/>
 									</conditions>
 								</line>
-								<line number="237" hits="0" branch="true" condition-coverage="0% (0/6)">
+								<line number="237" hits="0" branch="true" condition-coverage="0% (0/10)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
+										<condition number="1" type="jump" coverage="0%"/>
 										<condition number="0" type="switch" coverage="0%"/>
 										<condition number="1" type="switch" coverage="0%"/>
 									</conditions>
 								</line>
 								<line number="240" hits="0" branch="false"/>
 								<line number="241" hits="0" branch="false"/>
+								<line number="242" hits="0" branch="false"/>
 								<line number="244" hits="0" branch="false"/>
-								<line number="246" hits="0" branch="true" condition-coverage="0% (0/6)">
+								<line number="246" hits="0" branch="false"/>
+								<line number="248" hits="0" branch="true" condition-coverage="0% (0/10)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
+										<condition number="1" type="jump" coverage="0%"/>
 										<condition number="0" type="switch" coverage="0%"/>
 										<condition number="1" type="switch" coverage="0%"/>
 									</conditions>
 								</line>
-								<line number="249" hits="0" branch="false"/>
-								<line number="250" hits="0" branch="false"/>
+								<line number="251" hits="0" branch="false"/>
+								<line number="252" hits="0" branch="false"/>
+								<line number="253" hits="0" branch="false"/>
 								<line number="255" hits="0" branch="false"/>
+								<line number="259" hits="0" branch="false"/>
 							</lines>
 						</method>
 					</methods>
@@ -19252,26 +19258,32 @@
 								<condition number="1" type="switch" coverage="0%"/>
 							</conditions>
 						</line>
-						<line number="237" hits="0" branch="true" condition-coverage="0% (0/6)">
+						<line number="237" hits="0" branch="true" condition-coverage="0% (0/10)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>
+								<condition number="1" type="jump" coverage="0%"/>
 								<condition number="0" type="switch" coverage="0%"/>
 								<condition number="1" type="switch" coverage="0%"/>
 							</conditions>
 						</line>
 						<line number="240" hits="0" branch="false"/>
 						<line number="241" hits="0" branch="false"/>
+						<line number="242" hits="0" branch="false"/>
 						<line number="244" hits="0" branch="false"/>
-						<line number="246" hits="0" branch="true" condition-coverage="0% (0/6)">
+						<line number="246" hits="0" branch="false"/>
+						<line number="248" hits="0" branch="true" condition-coverage="0% (0/10)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>
+								<condition number="1" type="jump" coverage="0%"/>
 								<condition number="0" type="switch" coverage="0%"/>
 								<condition number="1" type="switch" coverage="0%"/>
 							</conditions>
 						</line>
-						<line number="249" hits="0" branch="false"/>
-						<line number="250" hits="0" branch="false"/>
+						<line number="251" hits="0" branch="false"/>
+						<line number="252" hits="0" branch="false"/>
+						<line number="253" hits="0" branch="false"/>
 						<line number="255" hits="0" branch="false"/>
+						<line number="259" hits="0" branch="false"/>
 					</lines>
 				</class>
 			</classes>
