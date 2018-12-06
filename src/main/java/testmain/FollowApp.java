@@ -288,7 +288,7 @@ public class FollowApp extends LogicThread {
 
                                 //If a path is found, use the stored IDX to get the closest waypoint and set to currentDestination
                                 if(foundpath){
-                                   // System.out.println("FOUND PATH AND OUT OF FOR LOOP");
+                                    System.out.println("FOUND PATH AND OUT OF FOR LOOP");
                                     currentDestination = getDestination(destinations, current_shortest_idx);
                                     ItemPosition mypos = gvh.gps.getMyPosition();
                                     SimplePP newp = new SimplePP(mypos, currentDestination, 1);
@@ -299,7 +299,7 @@ public class FollowApp extends LogicThread {
 
                                 //System.out.println("FOR LOOP DONE");
                                 if (!foundpath) {
-                                   // System.out.println("COULD NOT FIND A PATH");
+                                    System.out.println("COULD NOT FIND A PATH");
                                     inMutex0 = true;
                                     wait0 = false;
                                     break;
