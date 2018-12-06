@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.0" branch-rate="0.0" lines-covered="0" lines-valid="5735" branches-covered="0" branches-valid="2036" complexity="2.428736964078795" version="2.1.1" timestamp="1544128089688">
+<coverage line-rate="0.0" branch-rate="0.0" lines-covered="0" lines-valid="5740" branches-covered="0" branches-valid="2042" complexity="2.432213209733488" version="2.1.1" timestamp="1544128792381">
 	<sources>
 		<source>/home/peter/newLib/target/generated-sources/annotations</source>
 		<source>/home/peter/newLib/src/main/java</source>
@@ -6198,7 +6198,7 @@
 				</class>
 			</classes>
 		</package>
-		<package name="edu.illinois.mitra.cyphyhouse.gvh" line-rate="0.0" branch-rate="0.0" complexity="1.5526315789473684">
+		<package name="edu.illinois.mitra.cyphyhouse.gvh" line-rate="0.0" branch-rate="0.0" complexity="1.5789473684210527">
 			<classes>
 				<class name="edu.illinois.mitra.cyphyhouse.gvh.AndroidPlatform" filename="edu/illinois/mitra/cyphyhouse/gvh/AndroidPlatform.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
 					<methods>
@@ -6712,66 +6712,88 @@
 						<line number="15" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="edu.illinois.mitra.cyphyhouse.gvh.RealGlobalVarHolder" filename="edu/illinois/mitra/cyphyhouse/gvh/RealGlobalVarHolder.java" line-rate="0.0" branch-rate="1.0" complexity="1.2">
+				<class name="edu.illinois.mitra.cyphyhouse.gvh.RealGlobalVarHolder" filename="edu/illinois/mitra/cyphyhouse/gvh/RealGlobalVarHolder.java" line-rate="0.0" branch-rate="0.0" complexity="1.6">
 					<methods>
-						<method name="&lt;init&gt;" signature="(Ljava/lang/String;Ljava/util/Map;Ledu/illinois/mitra/cyphyhouse/interfaces/TrackedRobot;Ljava/lang/String;Ljava/lang/String;)V" line-rate="0.0" branch-rate="1.0" complexity="0">
+						<method name="&lt;init&gt;" signature="(Ljava/lang/String;Ljava/util/Map;Ledu/illinois/mitra/cyphyhouse/interfaces/TrackedRobot;Ljava/lang/String;Ljava/lang/String;)V" line-rate="0.0" branch-rate="0.0" complexity="0">
 							<lines>
-								<line number="36" hits="0" branch="false"/>
 								<line number="38" hits="0" branch="false"/>
-								<line number="39" hits="0" branch="false"/>
 								<line number="40" hits="0" branch="false"/>
 								<line number="41" hits="0" branch="false"/>
-								<line number="44" hits="0" branch="false"/>
-								<line number="45" hits="0" branch="false"/>
+								<line number="42" hits="0" branch="false"/>
+								<line number="43" hits="0" branch="false"/>
 								<line number="46" hits="0" branch="false"/>
 								<line number="47" hits="0" branch="false"/>
 								<line number="48" hits="0" branch="false"/>
-								<line number="49" hits="0" branch="false"/>
+								<line number="49" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="50" hits="0" branch="false"/>
+								<line number="51" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="52" hits="0" branch="false"/>
+								<line number="53" hits="0" branch="false"/>
+								<line number="54" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="sleep" signature="(J)V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="54" hits="0" branch="false"/>
-								<line number="55" hits="0" branch="false"/>
-								<line number="56" hits="0" branch="false"/>
-								<line number="57" hits="0" branch="false"/>
+								<line number="59" hits="0" branch="false"/>
+								<line number="60" hits="0" branch="false"/>
+								<line number="61" hits="0" branch="false"/>
+								<line number="62" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="threadCreated" signature="(Ljava/lang/Thread;)V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="67" hits="0" branch="false"/>
+								<line number="72" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="threadDestroyed" signature="(Ljava/lang/Thread;)V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="72" hits="0" branch="false"/>
+								<line number="77" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="time" signature="()J" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="61" hits="0" branch="false"/>
+								<line number="66" hits="0" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="36" hits="0" branch="false"/>
 						<line number="38" hits="0" branch="false"/>
-						<line number="39" hits="0" branch="false"/>
 						<line number="40" hits="0" branch="false"/>
 						<line number="41" hits="0" branch="false"/>
-						<line number="44" hits="0" branch="false"/>
-						<line number="45" hits="0" branch="false"/>
+						<line number="42" hits="0" branch="false"/>
+						<line number="43" hits="0" branch="false"/>
 						<line number="46" hits="0" branch="false"/>
 						<line number="47" hits="0" branch="false"/>
 						<line number="48" hits="0" branch="false"/>
-						<line number="49" hits="0" branch="false"/>
+						<line number="49" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="50" hits="0" branch="false"/>
+						<line number="51" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="52" hits="0" branch="false"/>
+						<line number="53" hits="0" branch="false"/>
 						<line number="54" hits="0" branch="false"/>
-						<line number="55" hits="0" branch="false"/>
-						<line number="56" hits="0" branch="false"/>
-						<line number="57" hits="0" branch="false"/>
+						<line number="59" hits="0" branch="false"/>
+						<line number="60" hits="0" branch="false"/>
 						<line number="61" hits="0" branch="false"/>
-						<line number="67" hits="0" branch="false"/>
+						<line number="62" hits="0" branch="false"/>
+						<line number="66" hits="0" branch="false"/>
 						<line number="72" hits="0" branch="false"/>
+						<line number="77" hits="0" branch="false"/>
 					</lines>
 				</class>
 				<class name="edu.illinois.mitra.cyphyhouse.gvh.SimGlobalVarHolder" filename="edu/illinois/mitra/cyphyhouse/gvh/SimGlobalVarHolder.java" line-rate="0.0" branch-rate="0.0" complexity="4.285714285714286">
@@ -21166,9 +21188,9 @@
 				</class>
 			</classes>
 		</package>
-		<package name="testmain" line-rate="0.0" branch-rate="0.0" complexity="5.7272727272727275">
+		<package name="testmain" line-rate="0.0" branch-rate="0.0" complexity="5.757575757575758">
 			<classes>
-				<class name="testmain.BotInfoSelector" filename="testmain/BotInfoSelector.java" line-rate="0.0" branch-rate="0.0" complexity="23.0">
+				<class name="testmain.BotInfoSelector" filename="testmain/BotInfoSelector.java" line-rate="0.0" branch-rate="0.0" complexity="24.0">
 					<methods>
 						<method name="&lt;init&gt;" signature="(Ljava/lang/String;II)V" line-rate="0.0" branch-rate="0.0" complexity="0">
 							<lines>
@@ -21299,14 +21321,12 @@
 								</line>
 								<line number="103" hits="0" branch="false"/>
 								<line number="104" hits="0" branch="false"/>
-								<line number="108" hits="0" branch="true" condition-coverage="0% (0/2)">
+								<line number="106" hits="0" branch="true" condition-coverage="0% (0/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
 									</conditions>
 								</line>
-								<line number="109" hits="0" branch="false"/>
-								<line number="110" hits="0" branch="false"/>
-								<line number="111" hits="0" branch="false"/>
+								<line number="107" hits="0" branch="false"/>
 								<line number="112" hits="0" branch="true" condition-coverage="0% (0/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
@@ -21314,12 +21334,20 @@
 								</line>
 								<line number="113" hits="0" branch="false"/>
 								<line number="114" hits="0" branch="false"/>
+								<line number="115" hits="0" branch="false"/>
 								<line number="116" hits="0" branch="true" condition-coverage="0% (0/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
 									</conditions>
 								</line>
-								<line number="121" hits="0" branch="false"/>
+								<line number="117" hits="0" branch="false"/>
+								<line number="118" hits="0" branch="false"/>
+								<line number="120" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="125" hits="0" branch="false"/>
 							</lines>
 						</method>
 					</methods>
@@ -21451,14 +21479,12 @@
 						</line>
 						<line number="103" hits="0" branch="false"/>
 						<line number="104" hits="0" branch="false"/>
-						<line number="108" hits="0" branch="true" condition-coverage="0% (0/2)">
+						<line number="106" hits="0" branch="true" condition-coverage="0% (0/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>
 							</conditions>
 						</line>
-						<line number="109" hits="0" branch="false"/>
-						<line number="110" hits="0" branch="false"/>
-						<line number="111" hits="0" branch="false"/>
+						<line number="107" hits="0" branch="false"/>
 						<line number="112" hits="0" branch="true" condition-coverage="0% (0/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>
@@ -21466,12 +21492,20 @@
 						</line>
 						<line number="113" hits="0" branch="false"/>
 						<line number="114" hits="0" branch="false"/>
+						<line number="115" hits="0" branch="false"/>
 						<line number="116" hits="0" branch="true" condition-coverage="0% (0/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>
 							</conditions>
 						</line>
-						<line number="121" hits="0" branch="false"/>
+						<line number="117" hits="0" branch="false"/>
+						<line number="118" hits="0" branch="false"/>
+						<line number="120" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="125" hits="0" branch="false"/>
 					</lines>
 				</class>
 				<class name="testmain.FollowApp" filename="testmain/FollowApp.java" line-rate="0.0" branch-rate="0.0" complexity="8.6">

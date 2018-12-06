@@ -103,7 +103,11 @@ public class BotInfoSelector {
                 this.type = new ModelARDrone2(name, 0,0,0);
                 this.ip = "10.195.182.197";
             }
+            else if(type == Common.CAR){
+                this.type = new Model_Car(name, 0,0);
+            }
         }
+
 
         if(color.equals("white")) {
             name = "bot3";
