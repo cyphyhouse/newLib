@@ -9,6 +9,8 @@ import edu.illinois.mitra.cyphyhouse.objects.Common;
 import edu.illinois.mitra.cyphyhouse.objects.ItemPosition;
 import edu.illinois.mitra.cyphyhouse.objects.ObstacleList;
 
+import java.util.Stack;
+
 public class IdealSimMotionAutomaton extends RobotMotion implements RobotEventListener {
 	private static final String TAG = "MotionAutomaton";
 	private IdealSimGpsProvider gpspro;
@@ -39,6 +41,13 @@ public class IdealSimMotionAutomaton extends RobotMotion implements RobotEventLi
 		
 		inMotion = true;
 	}
+
+	@Override
+	public Stack<ItemPosition> initMotion(){
+		Stack<ItemPosition> path = new Stack<ItemPosition>();
+		return path;
+	}
+
 	@Override
 	public void goTo(ItemPosition dest) {
 		ObstacleList obsList = gvh.gps.getObspointPositions();

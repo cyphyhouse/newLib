@@ -4,6 +4,11 @@ import edu.illinois.mitra.cyphyhouse.interfaces.Cancellable;
 import edu.illinois.mitra.cyphyhouse.objects.ItemPosition;
 import edu.illinois.mitra.cyphyhouse.objects.ObstacleList;
 
+import java.util.Arrays;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.io.*;
+
 /**
  * Abstract class describing methods which all robot motion controllers should implement
  * @author Adam Zimmerman
@@ -28,6 +33,8 @@ public abstract class RobotMotion extends Thread implements Cancellable {
 	public abstract void goTo(ItemPosition dest, ObstacleList obsList);
 	
 	public abstract void goTo(ItemPosition dest);
+
+	public abstract Stack<ItemPosition> initMotion();
 	
 	/**
 	 * Turn to face a destination using the default motion parameters

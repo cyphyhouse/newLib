@@ -175,6 +175,11 @@ public class MotionAutomaton_iRobot extends RobotMotion {
 		
 	}
 
+	public Stack<ItemPosition> initMotion(){
+		Stack<ItemPosition> path = new Stack<ItemPosition>();
+		return path;
+	}
+
 	public void goTo(ItemPosition dest, ObstacleList obsList) {
 		if((inMotion && !this.destination.equals(dest)) || !inMotion) {
 			this.destination = new ItemPosition(dest.name,dest.x,dest.y,0);

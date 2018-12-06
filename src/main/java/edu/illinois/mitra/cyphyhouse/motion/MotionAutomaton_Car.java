@@ -95,6 +95,14 @@ public class MotionAutomaton_Car extends RobotMotion {
 
 
 	}
+
+	public Stack<ItemPosition> initMotion(){
+		Stack<ItemPosition> path = new Stack<ItemPosition>();
+		ItemPosition mypos = this.gvh.gps.getMyPosition();
+		path.push(mypos);
+		goTo(mypos);
+		return path;
+	}
 	
 	public void goTo(ItemPosition dest) {
 

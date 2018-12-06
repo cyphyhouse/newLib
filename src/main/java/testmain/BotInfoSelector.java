@@ -34,7 +34,7 @@ public class BotInfoSelector {
             name = "bot0"; // assign name: bot0 is always red
             vrpn = "";
             if(deviceType == Common.HTCONEM7) {
-                ip = "192.168.1.17"; // reserved IP address of red Nexus7 tablet
+                ip = "192.168.1.20"; // reserved IP address of red Nexus7 tablet
             }
             else if(deviceType == Common.MOTOE) {
                 ip = "192.168.1.114"; // reserved IP address of red MotoE phone
@@ -61,10 +61,10 @@ public class BotInfoSelector {
 
         if(color.equals("green")) {
             name = "bot1";
-            vrpn = "vrpn_client_node/cyphyhousecopter/pose";
+            vrpn = "vrpn_client_node/hotdec_car/pose";
             if(deviceType == Common.HTCONEM7) {
-                //ip = "192.168.1.38";
-                ip = "192.168.1.19";
+                //ip = "192.168.1.13";
+                ip = "192.168.1.13";
             }
             else if(deviceType == Common.MOTOE) {
                 ip = "192.168.1.115";
@@ -80,6 +80,9 @@ public class BotInfoSelector {
             else if(type == Common.ARDRONE2) {
                 this.type = new ModelARDrone2(name, 0,0,0);
                 this.ip = "10.195.69.206";
+            }
+            else if(type == Common.CAR){
+                this.type = new Model_Car(name, 0,0);
             }
         }
 

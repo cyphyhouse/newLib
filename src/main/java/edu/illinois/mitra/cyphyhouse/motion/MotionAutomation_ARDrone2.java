@@ -3,6 +3,7 @@ package edu.illinois.mitra.cyphyhouse.motion;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.util.Stack;
 
 import de.yadrone.base.ARDrone;
 import de.yadrone.base.IARDrone;
@@ -171,6 +172,11 @@ public class MotionAutomation_ARDrone2 extends RobotMotion {
         stage = STAGE.LAND;
         next = STAGE.LAND;
         inMotion = false;
+    }
+
+    public Stack<ItemPosition> initMotion(){
+        Stack<ItemPosition> path = new Stack<ItemPosition>();
+        return path;
     }
 
     @Override

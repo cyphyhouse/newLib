@@ -85,6 +85,16 @@ public class MotionAutomaton_Quadcopter extends RobotMotion {
         
     }
 
+    public Stack<ItemPosition> initMotion(){
+        Stack<ItemPosition> path = new Stack<ItemPosition>();
+        ItemPosition mypos = this.gvh.gps.getMyPosition();
+        ItemPosition takeoffpoint = new ItemPosition("takeoff",mypos.x,mypos.y,mypos.z+100);
+        path.push(takeoffpoint);
+        goTo(takeoffpoint);
+
+        return path;
+    }
+
     public void goTo(ItemPosition dest, ObstacleList obsList) {
         if((inMotion && !this.destination.equals(dest)) || !inMotion) {
             this.destination = new ItemPosition(dest.name,dest.x,dest.y,0);
