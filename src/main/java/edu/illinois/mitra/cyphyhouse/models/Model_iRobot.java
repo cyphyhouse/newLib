@@ -29,7 +29,7 @@ import edu.illinois.mitra.cyphyhouse.objects.PositionList;
 public class Model_iRobot extends ItemPosition implements TrackedRobot{
 	// for default values, see initial_helper()
 	public double angle;
-	public int radius;
+	public double radius;
 	public int type;
 	public double velocity;
 	
@@ -40,8 +40,8 @@ public class Model_iRobot extends ItemPosition implements TrackedRobot{
 	public double vFwd;
 	public double vRad;
 	public Random rand;
-	public int x_p;
-	public int y_p;
+	public double x_p;
+	public double y_p;
 	public double angle_p;
 
 	public double TESTX;
@@ -68,18 +68,18 @@ public class Model_iRobot extends ItemPosition implements TrackedRobot{
 
 	}
 	
-	public Model_iRobot(String name, int x, int y) {
+	public Model_iRobot(String name, double x, double y) {
 		super(name, x, y);
 		initial_helper();
 	}
 	
-	public Model_iRobot(String name, int x, int y, double angle) {
+	public Model_iRobot(String name, double x, double y, double angle) {
 		super(name, x, y);
 		initial_helper();
 		this.angle = angle;
 	}
 	
-	public Model_iRobot(String name, int x, int y, double angle, int radius) {
+	public Model_iRobot(String name, double x, double y, double angle, double radius) {
 		super(name, x, y);
 		initial_helper();
 		this.angle = angle;
@@ -160,19 +160,19 @@ public class Model_iRobot extends ItemPosition implements TrackedRobot{
 	 * @param other The ItemPosition to measure against
 	 * @return Number of degrees this position must rotate to face position other
 	 */
-	public <T extends Point3d> int angleTo(T other) {
+	public <T extends Point3d> double angleTo(T other) {
 		if(other == null) {
 			return 0;
 		}
 		
-		int delta_x = other.x - this.x;
-		int delta_y = other.y - this.y;
+		double delta_x = other.x - this.x;
+		double delta_y = other.y - this.y;
 		double angle = this.angle;
-		int otherAngle = (int) Math.toDegrees(Math.atan2(delta_y,delta_x));
+		double otherAngle = Math.toDegrees(Math.atan2(delta_y,delta_x));
 		if(angle > 180) {
 			angle -= 360;
 		}
-		int retAngle = Common.min_magitude((int)(otherAngle - angle),(int)(angle - otherAngle));
+		double retAngle = Common.min_magnitude((otherAngle - angle),(angle - otherAngle));
 		retAngle = retAngle%360;
 		if(retAngle > 180) {
 			retAngle = retAngle-360;
@@ -183,10 +183,10 @@ public class Model_iRobot extends ItemPosition implements TrackedRobot{
 		if(retAngle > 180 || retAngle< -180){
 			System.out.println(retAngle);
 		}
-		return  Math.round(retAngle);
+		return  retAngle;
 	}
 	
-	public void setPos(int x, int y, int angle) {
+	public void setPos(double x, double y, double angle) {
 		this.x = x;
 		this.y = y;
 		this.angle = angle;
@@ -223,12 +223,12 @@ public class Model_iRobot extends ItemPosition implements TrackedRobot{
 		double yNoise = (rand.nextDouble()*2*noises[1]) - noises[1];
 		double aNoise = (rand.nextDouble()*2*noises[2]) - noises[2];
 		
-		int dX = 0, dY = 0;
+		double dX = 0, dY = 0;
 		double dA = 0;
 		// Arcing motion
 		dA = aNoise + (vRad*timeSinceUpdate);
-		dX = (int) (xNoise + Math.cos(Math.toRadians(angle))*(vFwd*timeSinceUpdate));
-		dY = (int) (yNoise + Math.sin(Math.toRadians(angle))*(vFwd*timeSinceUpdate));
+		dX = (xNoise + Math.cos(Math.toRadians(angle))*(vFwd*timeSinceUpdate));
+		dY = (yNoise + Math.sin(Math.toRadians(angle))*(vFwd*timeSinceUpdate));
 		x_p = x+dX;
 		y_p = y+dY;
 		angle_p = angle+dA;

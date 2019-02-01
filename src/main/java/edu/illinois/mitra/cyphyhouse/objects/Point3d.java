@@ -16,9 +16,9 @@ public class Point3d implements Traceable {
 //	private static final String TAG = "Point3d";
 //	private static final String ERR = "Critical Error";
 
-	public int x;
-	public int y;
-	public int z;
+	public double x;
+	public double y;
+	public double z;
 	
 	public Point3d(){
 		x = 0;
@@ -28,13 +28,12 @@ public class Point3d implements Traceable {
 	
 	/**
 	 * Construct an Point3d from a name, X, and Y positions, With Z= 0 as default
-	 * 
-	 * @param name The name of the new position
+	 *
 	 * @param x X position
 	 * @param y Y position
 	 */
 	
-	public Point3d(int x, int y) {
+	public Point3d(double x, double y) {
 		//constructor for calculation temp point
 		this.x = x;
 		this.y = y;
@@ -43,14 +42,13 @@ public class Point3d implements Traceable {
 	
 	/**
 	 * Construct an Point3d from a name, X, Y and Z positions
-	 * 
-	 * @param name The name of the new position
+	 *
 	 * @param x X position
 	 * @param y Y position
 	 * @param z Z position
 	 */
 	 
-	public Point3d(int x, int y, int z) {
+	public Point3d(double x, double y, double z) {
 		//constructor for calculation temp point
 		this.x = x;
 		this.y = y;
@@ -73,7 +71,7 @@ public class Point3d implements Traceable {
 		return "Point3d" + ": " + x + ", " + y + ", " + z;
 	}
 
-	public void setPos(int x, int y, int z) {
+	public void setPos(double x, double y, double z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -89,11 +87,11 @@ public class Point3d implements Traceable {
 	 * @param other The Point3d to measure against
 	 * @return Euclidean distance to Point3d other
 	 */
-	public int distanceTo(Point3d other) {
+	public double distanceTo(Point3d other) {
 		if(other == null) {
 			return 0;
 		}
-		return (int) Math.sqrt(Math.pow(x - other.x, 2) + Math.pow(this.y - other.y, 2) + Math.pow(this.z - other.z, 2));
+		return Math.sqrt(Math.pow(x - other.x, 2) + Math.pow(this.y - other.y, 2) + Math.pow(this.z - other.z, 2));
 	}
 	
 	@Override
@@ -145,14 +143,14 @@ public class Point3d implements Traceable {
 		return result;
 	}
 	
-	public int getX(){
+	public double getX(){
 		return x;
 	}
 	
-	public int getY(){
+	public double getY(){
 		return y;
 	}
-	public int getZ(){
+	public double getZ(){
 		return z;
 	}
 

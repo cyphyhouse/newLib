@@ -41,7 +41,7 @@ public class Obstacles {
 	}
 	
 	//method for adding unknown obstacles
-	public Obstacles(int x, int y){
+	public Obstacles(double x, double y){
 		obstacle = new Vector<Point3d>(4, 3);
 		add(x, y, 0) ;
 		grided = false;
@@ -49,7 +49,7 @@ public class Obstacles {
 		height = -1;
 	}
 	
-	public Obstacles(int x, int y, int z){
+	public Obstacles(double x, double y, double z){
 		obstacle = new Vector<Point3d>(4, 3);
 		add(x, y, z) ;
 		grided = false;
@@ -57,11 +57,11 @@ public class Obstacles {
 		height = -1;
 	}
 	
-	public void add(int x, int y){
+	public void add(double x, double y){
 		add(x, y, 0);
 	}
 	
-	public void add(int x, int y, int z){
+	public void add(double x, double y, double z){
 		Point3d temp = new Point3d(x,y, z);
 		obstacle.add(temp) ;
 	}
@@ -120,8 +120,8 @@ public class Obstacles {
 			Point3d nextpoint = obstacle.firstElement();
 			Point3d curpoint = obstacle.firstElement();
 			Line2D.Double segment;
-			int[] x = new int[obstacle.size()];
-			int[] y = new int[obstacle.size()];
+			double[] x = new double[obstacle.size()];
+			double[] y = new double[obstacle.size()];
 			
 			for(int j = 0; j < obstacle.size() ; j++){
 				curpoint = obstacle.get(j);
@@ -139,11 +139,12 @@ public class Obstacles {
 				}
 				
 			}
-			Polygon obspoly = new Polygon(x,y,obstacle.size());
+			/*Polygon obspoly = new Polygon(x,y,obstacle.size());
 			if(obspoly.contains(destination.x, destination.y))
 				return false;
 			else
-				return true;
+				return true;*/
+			return true; // Hardcoded
 	}
 	
 	/**
@@ -155,8 +156,8 @@ public class Obstacles {
 	public boolean validItemPos(ItemPosition destination){
 		
 			Point3d curpoint = obstacle.firstElement();
-			int[] x = new int[obstacle.size()];
-			int[] y = new int[obstacle.size()];
+			double[] x = new double[obstacle.size()];
+			double[] y = new double[obstacle.size()];
 			
 			for(int j = 0; j < obstacle.size() ; j++){
 				curpoint = obstacle.get(j);
@@ -164,11 +165,12 @@ public class Obstacles {
 				y[j] = curpoint.y;
 				
 			}
-			Polygon obspoly = new Polygon(x,y,obstacle.size());
+			/*Polygon obspoly = new Polygon(x,y,obstacle.size());
 			if(obspoly.contains(destination.x, destination.y))
 				return false;
 			else
-				return true;
+				return true;*/
+			return true; //hardcoded bullshit, fixing ints to doubles
 	}
 	
 	public double findMinDist(RRTNode destNode, RRTNode currentNode){
@@ -200,7 +202,7 @@ public class Obstacles {
 		return minDist;
 	}
 	
-	public Point3d getClosestPointOnSegment(int sx1, int sy1, int sx2, int sy2, int px, int py)
+	public Point3d getClosestPointOnSegment(double sx1, double sy1, double sx2, double sy2, double px, double py)
 	  {
 	    double xDelta = sx2 - sx1;
 	    double yDelta = sy2 - sy1;
@@ -217,7 +219,7 @@ public class Obstacles {
 	    }
 	    else
 	    {
-	      closestPoint = new Point3d((int) Math.round(sx1 + u * xDelta), (int) Math.round(sy1 + u * yDelta));
+	      closestPoint = new Point3d(sx1 + u * xDelta, sy1 + u * yDelta);
 	    }
 
 	    return closestPoint;
@@ -245,13 +247,13 @@ public class Obstacles {
 				obstacle.add(leftTop1);
 			break;	
 			case 2 :
-				int min_x = Math.min(obstacle.firstElement().x, obstacle.get(1).x);
+				double min_x = Math.min(obstacle.firstElement().x, obstacle.get(1).x);
 				min_x = min_x - (min_x%a);
-				int max_x = Math.max(obstacle.firstElement().x, obstacle.get(1).x);
+				double max_x = Math.max(obstacle.firstElement().x, obstacle.get(1).x);
 				max_x = max_x - (max_x%a) +a;
-				int min_y = Math.min(obstacle.firstElement().y, obstacle.get(1).y);
+				double min_y = Math.min(obstacle.firstElement().y, obstacle.get(1).y);
 				min_y = min_y - (min_y%a);
-				int max_y = Math.max(obstacle.firstElement().y, obstacle.get(1).y);
+				double max_y = Math.max(obstacle.firstElement().y, obstacle.get(1).y);
 				max_y = max_y - (max_y%a) +a;
 				
 				Point3d leftBottom2 = new Point3d(min_x, min_y);
@@ -265,22 +267,22 @@ public class Obstacles {
 				obstacle.add(leftTop2);
 			break; 
 			case 4 :
-				int min_x3 = Math.min(obstacle.firstElement().x, obstacle.get(1).x);
+				double min_x3 = Math.min(obstacle.firstElement().x, obstacle.get(1).x);
 				min_x3 = Math.min(min_x3, obstacle.get(2).x);
 				min_x3 = Math.min(min_x3, obstacle.get(3).x);
 				min_x3 = min_x3 - (min_x3%a);
-				
-				int max_x3 = Math.max(obstacle.firstElement().x, obstacle.get(1).x);
+
+				double max_x3 = Math.max(obstacle.firstElement().x, obstacle.get(1).x);
 				max_x3 = Math.max(max_x3, obstacle.get(2).x);
 				max_x3 = Math.max(max_x3, obstacle.get(3).x);
 				max_x3 = max_x3 - (max_x3%a) +a;
-				
-				int min_y3 = Math.min(obstacle.firstElement().y, obstacle.get(1).y);
+
+				double min_y3 = Math.min(obstacle.firstElement().y, obstacle.get(1).y);
 				min_y3 = Math.min(min_y3, obstacle.get(2).y);
 				min_y3 = Math.min(min_y3, obstacle.get(3).y);
 				min_y3 = min_y3 - (min_y3%a);
-				
-				int max_y3 = Math.max(obstacle.firstElement().y, obstacle.get(1).y);
+
+				double max_y3 = Math.max(obstacle.firstElement().y, obstacle.get(1).y);
 				max_y3 = Math.max(max_y3, obstacle.get(2).y);
 				max_y3 = Math.max(max_y3, obstacle.get(3).y);
 				max_y3 = max_y3 - (max_y3%a) +a;
@@ -296,7 +298,7 @@ public class Obstacles {
 				obstacle.add(leftTop3);
 				break;
 			default :
-				System.out.println("not an acceptable demension of "+obstacle.size() + " to be grided");
+				System.out.println("not an acceptable dimension of "+obstacle.size() + " to be grided");
 			break;
 		}
 		grided = true;

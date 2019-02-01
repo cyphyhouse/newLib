@@ -207,8 +207,8 @@ public class IdealSimGpsProvider extends Observable implements SimGpsProvider  {
 				}
 				else
 				{
-					int deltaX = dest.x-start.x;
-					int deltaY = dest.y-start.y;
+					double deltaX = dest.x-start.x;
+					double deltaY = dest.y-start.y;
 					motAngle = Math.atan2(deltaY, deltaX);
 					
 					vX = (Math.cos(motAngle) * velocity);

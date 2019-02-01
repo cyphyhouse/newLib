@@ -30,17 +30,17 @@ public class ItemPosition extends Point3d implements Comparable<ItemPosition>{
 		setname("");
 	}
 	
-	public ItemPosition(String name, int x, int y) {
+	public ItemPosition(String name, double x, double y) {
 		super(x, y);
 		setname(name);
 	}
 	
-	public ItemPosition(String name, int x, int y, int z) {
+	public ItemPosition(String name, double x, double y, double z) {
 		super(x, y, z);
 		setname(name);
 	}
 	
-	public ItemPosition(String name, int x, int y, int z, int index) {
+	public ItemPosition(String name, double x, double y, double z, int index) {
 		super(x, y, z);
 		setname(name);
 		this.index = index;

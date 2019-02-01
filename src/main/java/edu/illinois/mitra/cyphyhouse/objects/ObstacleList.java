@@ -124,7 +124,7 @@ public class ObstacleList {
 	 * @return
 	 */
 
-	public boolean validPath(RRTNode destinationNode, RRTNode currentNode,  int Radius){
+	public boolean validPath(RRTNode destinationNode, RRTNode currentNode, double Radius){
 		if(destinationNode == null){
 			return false;
 		}

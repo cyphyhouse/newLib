@@ -1,8 +1,8 @@
 package edu.illinois.mitra.cyphyhouse.motion;
 
-import java.awt.Point;
 import java.util.Stack;
 
+import edu.illinois.mitra.cyphyhouse.objects.Point;
 import edu.illinois.mitra.cyphyhouse.objects.ItemPosition;
 import edu.illinois.mitra.cyphyhouse.objects.ObstacleList;
 import edu.wlu.cs.levy.CG.KDTree;
@@ -16,7 +16,7 @@ import edu.wlu.cs.levy.CG.KeySizeException;
  */
 
 public class RRTNode {
-	public Point position = new Point();
+	public Point position;
 	public RRTNode parent;
 	public RRTNode stopNode;
 	public KDTree<RRTNode> kd;
@@ -33,7 +33,7 @@ public class RRTNode {
 		parent = null;
 	}
 
-	public RRTNode(int x, int y){
+	public RRTNode(double x, double y){
 		position.x = x;
 		position.y = y;
 		parent = null;
@@ -63,7 +63,7 @@ public class RRTNode {
 	 * @return
 	 */
 
-	public Stack<ItemPosition> findRoute(ItemPosition destination, int K, ObstacleList obsList, int xLower, int xUpper, int yLower, int yUpper, ItemPosition RobotPos, int radius) {
+	public Stack<ItemPosition> findRoute(ItemPosition destination, int K, ObstacleList obsList, double xLower, double xUpper, double yLower, double yUpper, ItemPosition RobotPos, double radius) {
 		//TODO: add Steer here
 		//initialize a kd tree;
 		//obsList.remove(RobotPos, 0.9*Radius);
@@ -186,15 +186,15 @@ public class RRTNode {
 	 * @param radius
 	 * @return
 	 */
-	private RRTNode toggle(RRTNode currentNode, RRTNode sampledNode, ObstacleList obsList, int radius) {
+	private RRTNode toggle(RRTNode currentNode, RRTNode sampledNode, ObstacleList obsList, double radius) {
 		RRTNode toggleNode = new RRTNode(sampledNode);
 		int tries = 0;
 		// try 20 times, which will shorten it to 0.00317 times the original path length
 		// smaller tries might make integer casting loop forever
 		while((!obsList.validPath(toggleNode, currentNode, radius)) && (tries < 20)){
 			//move 1/4 toward current
-			toggleNode.position.x = (int) ((toggleNode.position.x + currentNode.position.x)/(1.5));
-			toggleNode.position.y = (int) ((toggleNode.position.y + currentNode.position.y)/(1.5));
+			toggleNode.position.x = ((toggleNode.position.x + currentNode.position.x)/(1.5));
+			toggleNode.position.y = ((toggleNode.position.y + currentNode.position.y)/(1.5));
 			tries ++;
 		}
 		//return currentNode if toggle failed

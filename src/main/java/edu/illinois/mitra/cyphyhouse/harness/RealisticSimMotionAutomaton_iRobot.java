@@ -28,18 +28,18 @@ public class RealisticSimMotionAutomaton_iRobot extends MotionAutomaton_iRobot {
 	}
 
 	@Override
-	protected void curve(int velocity, int radius) {
+	protected void curve(double velocity, double radius) {
 		if(running) {
 			sendMotionEvent(Common.MOT_ARCING, velocity, radius);
 			// TODO: Determine if angular velocity formula works! 
 //			gpsp.setVelocity(name, velocity, (int) Math.round((velocity*360.0)/(2*Math.PI*radius)));
 			myHandler.obtaintMsg(MotionHandlerConfig.CMD_IROBOT_CURVE, name,
-					velocity, (int) Math.round((velocity*360.0)/(2*Math.PI*radius))).sendToHandler();
+					velocity, Math.round((velocity*360.0)/(2*Math.PI*radius))).sendToHandler();
 		}
 	}
 
 	@Override
-	protected void straight(int velocity) {
+	protected void straight(double velocity) {
 		gvh.log.i(TAG, "Straight at velocity " + velocity);
 		if(running) {
 			if(velocity != 0) {
@@ -54,12 +54,12 @@ public class RealisticSimMotionAutomaton_iRobot extends MotionAutomaton_iRobot {
 	}
 
 	@Override
-	protected void turn(int velocity, int angle) {
+	protected void turn(double velocity, double angle) {
 		if(running) {
 			sendMotionEvent(Common.MOT_TURNING, velocity, angle);
 //			gpsp.setVelocity(name, 0, (int) Math.copySign(velocity, -angle));
             myHandler.obtaintMsg(MotionHandlerConfig.CMD_IROBOT_TURN, name,
-					0, (int)Math.copySign(velocity, -angle)).sendToHandler();
+					0, Math.copySign(velocity, -angle)).sendToHandler();
 		}
 	}	
 	

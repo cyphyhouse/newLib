@@ -17,7 +17,7 @@ public class ReachAvoid extends Thread implements Cancellable {
 	 * default 5 retries using different parameters, can be set to other values 
 	 */
 	public int tries = 5;
-	public int radius;
+	public double radius;
 	protected enum STAGE_R {
 		IDLE, PLAN, PICK, MOVE
 	}
@@ -32,7 +32,7 @@ public class ReachAvoid extends Thread implements Cancellable {
 	STAGE_R stage;
 	public Stack<ItemPosition> pathStack;
 	int counter;
-	int xLower, xUpper, yLower, yUpper;
+	double xLower, xUpper, yLower, yUpper;
 	
 	
 	public ReachAvoid(GlobalVarHolder gvh){
@@ -95,8 +95,8 @@ public class ReachAvoid extends Thread implements Cancellable {
 				//do nothing
 				break;
 			case PLAN:
-				int xRange = Math.abs(start.x - dest.x);
-				int yRange = Math.abs(start.y - dest.y);
+				double xRange = Math.abs(start.x - dest.x);
+				double yRange = Math.abs(start.y - dest.y);
 				xLower = Math.min(start.x, dest.x) - (xRange+radius)*(counter+1)/2;
 				xUpper = Math.max(start.x, dest.x) + (xRange+radius)*(counter+1)/2;
 				yLower = Math.min(start.y, dest.y) - (yRange+radius)*(counter+1)/2;

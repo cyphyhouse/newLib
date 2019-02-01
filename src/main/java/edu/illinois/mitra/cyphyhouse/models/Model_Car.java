@@ -65,13 +65,13 @@ public class Model_Car extends ItemPosition implements TrackedRobot{
 
 	}
 	
-	public Model_Car(String name, int x, int y) {
+	public Model_Car(String name, double x, double y) {
 		super(name, x, y);
 		initial_helper();
 	}
 	
 	
-	public Model_Car(String name, int x, int y, double turn_radius) {
+	public Model_Car(String name, double x, double y, double turn_radius) {
 		super(name, x, y);
 		initial_helper();
 		this.turn_radius = turn_radius;

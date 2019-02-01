@@ -258,9 +258,9 @@ public class MotionAutomaton_iRobot extends RobotMotion {
 			
 
                 mypos = (Model_iRobot)gvh.gps.getMyPosition();
-				int distance = mypos.distanceTo(destination);
-				int angle = mypos.angleTo(destination);
-				int absangle = Math.abs(angle);
+				double distance = mypos.distanceTo(destination);
+				double angle = mypos.angleTo(destination);
+				double absangle = Math.abs(angle);
 				switch(param.COLAVOID_MODE) {
 				case BUMPERCARS:
 					colliding = false;
@@ -349,7 +349,7 @@ public class MotionAutomaton_iRobot extends RobotMotion {
 						break;
 					case SMALLTURN:
 						if(stage != prev) {
-							int radius = curveRadius() / 2;
+							double radius = curveRadius() / 2;
 							curve(LinSpeed(distance), radius);
 						} else {
 							if(absangle <= param.SMALLTURN_ANGLE)
@@ -681,10 +681,10 @@ public class MotionAutomaton_iRobot extends RobotMotion {
 
 	// Calculates the radius of curvature to meet a target
 	private int curveRadius() {
-		int x0 = mypos.x;
-		int y0 = mypos.y;
-		int x1 = destination.x;
-		int y1 = destination.y;
+		double x0 = mypos.x;
+		double y0 = mypos.y;
+		double x1 = destination.x;
+		double y1 = destination.y;
 		int theta = (int)mypos.angle;
 		double alpha = -180 + Math.toDegrees(Math.atan2((y1 - y0), (x1 - x0)));
 		double rad = -(Math.sqrt(Math.pow(x1 - x0, 2) + Math.pow(y1 - y0, 2)) / (2 * Math.sin(Math.toRadians(alpha - theta))));
@@ -697,23 +697,23 @@ public class MotionAutomaton_iRobot extends RobotMotion {
 		inMotion = true;
 	}
 
-	protected void sendMotionEvent(int motiontype, int... argument) {
+	protected void sendMotionEvent(int motiontype, double... argument) {
 		// TODO: This might not be necessary
 		gvh.trace.traceEvent(TAG, "Motion", Arrays.toString(argument), gvh.time());
 		gvh.sendRobotEvent(RobotEventListener.Event.MOTION, motiontype);
 	}
 
-	protected void curve(int velocity, int radius) {
+	protected void curve(double velocity, double radius) {
 		if(running) {
 			sendMotionEvent(Common.MOT_ARCING, velocity, radius);
 			// TODO: Determine if angular velocity formula works!
 //			gpsp.setVelocity(name, velocity, (int) Math.round((velocity*360.0)/(2*Math.PI*radius)));
 			myHandler.obtaintMsg(MotionHandlerConfig.CMD_IROBOT_CURVE, name,
-					velocity, (int) Math.round((velocity*360.0)/(2*Math.PI*radius))).sendToHandler();
+					velocity, Math.round((velocity*360.0)/(2*Math.PI*radius))).sendToHandler();
 		}
 	}
 
-	protected void straight(int velocity) {
+	protected void straight(double velocity) {
 		gvh.log.i(TAG, "Straight at velocity " + velocity);
 		if(running) {
 			if(velocity != 0) {
@@ -727,21 +727,21 @@ public class MotionAutomaton_iRobot extends RobotMotion {
 		}
 	}
 
-	protected void turn(int velocity, int angle) {
+	protected void turn(double velocity, double angle) {
 		if(running) {
 			sendMotionEvent(Common.MOT_TURNING, velocity, angle);
 //			gpsp.setVelocity(name, 0, (int) Math.copySign(velocity, -angle));
 			myHandler.obtaintMsg(MotionHandlerConfig.CMD_IROBOT_TURN, name,
-					0, (int)Math.copySign(velocity, -angle)).sendToHandler();
+					0, Math.copySign(velocity, -angle)).sendToHandler();
 		}
 	}
 
 	// Ramp linearly from min at param.SMALLTURN_ANGLE to max at param.SLOWTURN_ANGLE
-	public int TurnSpeed(int angle) {
+	public double TurnSpeed(double angle) {
 		if(angle > param.SLOWTURN_ANGLE) {
 			return param.TURNSPEED_MAX;
 		} else if(angle > param.SMALLTURN_ANGLE && angle <= param.SLOWTURN_ANGLE) {
-			return param.TURNSPEED_MIN + (int) ((angle - param.SMALLTURN_ANGLE) * turnspeed);
+			return param.TURNSPEED_MIN + ((angle - param.SMALLTURN_ANGLE) * turnspeed);
 		} else {
 			return param.TURNSPEED_MIN;
 		}
@@ -753,11 +753,11 @@ public class MotionAutomaton_iRobot extends RobotMotion {
 	 * @param distance
 	 * @return
 	 */
-	private int LinSpeed(int distance) {
+	private double LinSpeed(double distance) {
 		if(distance > param.SLOWFWD_RADIUS)
 			return param.LINSPEED_MAX;
 		if(distance > param.GOAL_RADIUS && distance <= param.SLOWFWD_RADIUS) {
-			return param.LINSPEED_MIN + (int) ((distance - param.GOAL_RADIUS) * linspeed);
+			return param.LINSPEED_MIN + ((distance - param.GOAL_RADIUS) * linspeed);
 		}
 		return param.LINSPEED_MIN;
 	}

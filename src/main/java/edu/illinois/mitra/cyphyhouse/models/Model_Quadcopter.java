@@ -17,7 +17,7 @@ import edu.illinois.mitra.cyphyhouse.objects.PositionList;
 public class Model_Quadcopter extends ItemPosition implements TrackedRobot{
 	// for default values, see initial_helper()
 
-	public int radius;
+	public double radius;
 	
 	public Random rand;
 
@@ -48,7 +48,7 @@ public class Model_Quadcopter extends ItemPosition implements TrackedRobot{
 
 	}
 	
-	public Model_Quadcopter(String name, int x, int y) {
+	public Model_Quadcopter(String name, double x, double y) {
 		super(name, x, y);
 		initial_helper();
 	}
@@ -60,7 +60,7 @@ public class Model_Quadcopter extends ItemPosition implements TrackedRobot{
 		this.radius = radius;
 	}*/
 
-	public Model_Quadcopter(String name, int x, int y, int z) {
+	public Model_Quadcopter(String name, double x, double y, double z) {
 		super(name, x, y, z);
 		initial_helper();
 	} 

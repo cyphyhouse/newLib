@@ -45,7 +45,7 @@ public class ModelARDrone2 extends ItemPosition implements TrackedRobot{
     }
 
 
-    public ModelARDrone2(String name, int x, int y){
+    public ModelARDrone2(String name, double x, double y){
         super(name, x, y, 0);
         this.currYaw = 0;
         this.currPitch = 0;
@@ -53,7 +53,7 @@ public class ModelARDrone2 extends ItemPosition implements TrackedRobot{
         initHelper();
     }
 
-    public ModelARDrone2(String name, int x, int y, int z){
+    public ModelARDrone2(String name, double x, double y, double z){
         super(name, x, y, z);
         this.currYaw = 40;
         this.currPitch = 0;

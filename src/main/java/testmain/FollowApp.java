@@ -813,7 +813,7 @@ public class FollowApp extends LogicThread {
 
     }
 
-    private float dot(Point3d a, Point3d b) {
+    private double dot(Point3d a, Point3d b) {
         return a.x * b.x + a.y * b.y + a.z * b.z;
     }
 

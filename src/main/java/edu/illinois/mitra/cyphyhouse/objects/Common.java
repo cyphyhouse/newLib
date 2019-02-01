@@ -107,7 +107,15 @@ public final class Common {
 	 * @param a2
 	 * @return The input parameter with the smallest magnitude
 	 */
-	public static int min_magitude(int a1, int a2) {
+	public static int min_magnitude(int a1, int a2) {
+		if(Math.abs(a1) < Math.abs(a2)) {
+			return a1;
+		} else {
+			return a2;
+		}
+	}
+
+	public static double min_magnitude(double a1, double a2) {
 		if(Math.abs(a1) < Math.abs(a2)) {
 			return a1;
 		} else {
@@ -145,8 +153,8 @@ public final class Common {
 	 * @param max maximum acceptable value
 	 * @return true if val is between min and max, false otherwise
 	 */
-	public static <T extends Comparable<T>> boolean inRange(T val, T min, T max) {
-		if(val.compareTo(min) >= 0 && val.compareTo(max) <= 0) return true;
+	public static boolean inRange(double val, double min, double max) {
+		if(val >= min && val <= max) return true;
 		return false;
 	}
 

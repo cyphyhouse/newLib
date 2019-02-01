@@ -226,7 +226,7 @@ public class RealisticSimGpsProvider extends Observable implements SimGpsProvide
 		
 		public boolean checkCollision(Point3d bot) {
 			//double min_distance = Double.MAX_VALUE;
-			int myRadius = 0;
+			double myRadius = 0;
 			if(cur instanceof Model_iRobot){
 				myRadius = ((Model_iRobot) cur).radius;
 			}

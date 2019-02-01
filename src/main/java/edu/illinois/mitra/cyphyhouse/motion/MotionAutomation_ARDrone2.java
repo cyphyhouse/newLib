@@ -199,22 +199,7 @@ public class MotionAutomation_ARDrone2 extends RobotMotion {
         }
     }
 
-    long dura;
-    private void transBackUDP(){
-        String transData = mypos.name + "|" + Integer.toString(mypos.x) + "|" + Integer.toString(mypos.y) + "|"
-                + Integer.toString((int)mypos.currYaw) + "|" + Integer.toString(dest.x) + "|"
-                + Integer.toString(dest.y) + "|(" + (float)rollOut +", " + (float)pitchOut + ", "
-                + (float)vertVOut + ", " + (float)spinVOut + ")|";
-        byte[] buf = transData.getBytes();
-        DatagramPacket packet = new DatagramPacket(buf, buf.length,
-                transBackAddr, SERVERPORT);
-//        System.out.println("Client: Sending ‘" +  new String(buf) + "’\n");
-        try {
-            transBackSocket.send(packet);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+
 
     //=======================private helpers=============================
     private double getDistance(){
