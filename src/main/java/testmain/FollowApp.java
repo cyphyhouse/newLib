@@ -17,8 +17,11 @@ import edu.illinois.mitra.cyphyhouse.interfaces.MutualExclusion;
 import edu.illinois.mitra.cyphyhouse.motion.MotionParameters;
 import edu.illinois.mitra.cyphyhouse.motion.MotionParameters.COLAVOID_MODE_TYPE;
 import edu.illinois.mitra.cyphyhouse.objects.ItemPosition;
+import edu.illinois.mitra.cyphyhouse.objects.ObstacleList;
 import edu.illinois.mitra.cyphyhouse.objects.Point3d;
 import edu.illinois.mitra.cyphyhouse.objects.PositionList;
+import edu.illinois.mitra.cyphyhouse.motion.RRTNode;
+
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -119,6 +122,36 @@ public class FollowApp extends LogicThread {
 
     @Override
     public List<Object> callStarL() {
+
+        ////////////////////////////////////////////////////////////////////////////
+        /* RRT TEST */
+
+
+        boolean test = false;
+        while(true) {
+            if(test == true){
+                break;
+            }
+            System.out.println("HERE");
+            RRTNode testnode = new RRTNode();
+            ItemPosition carpos = new ItemPosition("car", 5, 6, 0);
+            ItemPosition dest = new ItemPosition("dest", 20, 21, 0);
+            ObstacleList empty = new ObstacleList();
+            Stack<ItemPosition> testpath = testnode.findRoute(dest, 100000, empty, 0, 25, 0,25, carpos, 5 );
+
+            System.out.println(testpath);
+            sleep(100000);
+
+        }
+
+
+
+        ////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
         dsm.createMW("testindex", 0);
         ItemPosition[] ipos = new ItemPosition[3];
         ipos[0] = new ItemPosition("quadcopter0",1000,1000,80);
@@ -149,7 +182,7 @@ public class FollowApp extends LogicThread {
 
 
         while (true) {
-            //System.out.println("ASSIGNED ARRAY IS: " + assigned);
+            System.out.println("ASSIGNED ARRAY IS: " + assigned);
             /*System.out.println("BEGIN DESTINATIONS ARRAY PRINTOUT:");
             for(int i=0; i<assigned.size(); i++){
                 System.out.println(getDestination(destinations, i) + "\n");

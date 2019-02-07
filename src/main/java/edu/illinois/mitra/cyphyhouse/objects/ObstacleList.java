@@ -125,6 +125,14 @@ public class ObstacleList {
 	 */
 
 	public boolean validPath(RRTNode destinationNode, RRTNode currentNode,  int Radius){
+		double dist_btwn_points = Math.sqrt((destinationNode.position.x-currentNode.position.x)*(destinationNode.position.x-currentNode.position.x) + (destinationNode.position.y-currentNode.position.y)*(destinationNode.position.y-currentNode.position.y));
+		//System.out.println("curnode: " + currentNode.position.x+" "+ currentNode.position.y);
+		//System.out.println("destnode: " + destinationNode.position.x+" "+ destinationNode.position.y);
+		//System.out.println("dist btwn points: "+dist_btwn_points);
+		if(dist_btwn_points >= Radius)
+			return false;
+
+
 		if(destinationNode == null){
 			return false;
 		}
@@ -152,6 +160,67 @@ public class ObstacleList {
 			
 		}
 	}
+
+
+
+
+	public boolean validFinalPath(RRTNode destinationNode, RRTNode currentNode,  int Radius){
+		double dist_btwn_points = Math.sqrt((destinationNode.position.x-currentNode.position.x)^2 + (destinationNode.position.y-currentNode.position.y));
+		if(dist_btwn_points >= Radius)
+			return false;
+
+
+		if(destinationNode == null){
+			return false;
+		}
+		if(ObList == null){
+			return true;
+		}
+		if(badPath(destinationNode, currentNode)){
+			return false;
+		}
+		else{
+			boolean check = true;
+			for(int i=0; i< ObList.size(); i++){
+				if(ObList.elementAt(i) != null){
+					double minDist = ObList.elementAt(i).findMinDist(destinationNode, currentNode);
+					check = check && (minDist> Radius);
+					if(!check){
+						break;
+					}
+				}
+				else{
+					break;
+				}
+			}
+			return check;
+
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 	
 	/**
