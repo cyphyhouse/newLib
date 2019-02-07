@@ -72,8 +72,10 @@ public class RRTNode {
 			return null;
 		}
 		kd = new KDTree<RRTNode>(2);
-		double [] root = {position.x,position.y};
-		final RRTNode rootNode = new RRTNode(position.x,position.y);
+		//double [] root = {position.x,position.y};
+		//final RRTNode rootNode = new RRTNode(position.x,position.y);
+		double [] root = {RobotPos.x,RobotPos.y};
+		final RRTNode rootNode = new RRTNode(RobotPos.x,RobotPos.y);
 		final RRTNode destNode = new RRTNode(destination.x, destination.y);
 
 		try{
@@ -88,7 +90,9 @@ public class RRTNode {
 		//for(i< k)  keep finding	
 		for(int i = 0; i<K; i++){
 			//if can go from current to destination, meaning path found, add destinationNode to final, stop looping.
-			if(obsList.validPath(addedNode, destNode, radius)){
+			System.out.println("i is: " + i + " root: " + rootNode.getValue()[0] + " dest: " + destNode.getValue()[0]);
+
+			if(obsList.validPath(destNode, addedNode, radius)){
 				destNode.parent = addedNode;
 				stopNode = destNode;
 				try{	
@@ -97,7 +101,7 @@ public class RRTNode {
 				catch (Exception e) {
 					System.err.println(e);
 				}
-				//System.out.println("Path found!");
+				System.out.println("Path found!");
 				break;
 			}
 			//not find yet, keep exploring
@@ -111,12 +115,14 @@ public class RRTNode {
 				yRandom = (int) Math.round((Math.random() * ((yUpper - yLower))));
 				sampledPos.x = xRandom + xLower;
 				sampledPos.y = yRandom + yLower;
+				//System.out.println(sampledPos.x + " " + sampledPos.y);
 				validRandom = ((sampledPos.x >= xLower && sampledPos.x <= xUpper) && (sampledPos.y >= yLower && sampledPos.y <= yUpper));
 				validRandom = validRandom && obsList.validstarts(sampledPos, radius);
 				if(validRandom){
 					// added a check to see if sampledPos is already in tree
 					boolean notInTree = true;
 					RRTNode possibleNode = new RRTNode(sampledPos.x, sampledPos.y);
+					//System.out.println(sampledPos.x + " " + sampledPos.y);
 					try {
 						if(kd.search(possibleNode.getValue()) != null) {
 							notInTree = false;
@@ -126,6 +132,7 @@ public class RRTNode {
 					}
 					validRandom = (validRandom && notInTree);
 				}
+				//System.out.println(validRandom);
 			}
 			RRTNode sampledNode = new RRTNode(sampledPos.x, sampledPos.y);
 			// with a valid random sampled point, we find it's nearest neighbor in the tree, set it as current Node
@@ -204,6 +211,7 @@ public class RRTNode {
 		else
 			return toggleNode;
 	}
+
 
 
 }
