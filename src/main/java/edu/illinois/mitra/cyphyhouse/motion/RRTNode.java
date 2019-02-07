@@ -205,6 +205,31 @@ public class RRTNode {
 			return toggleNode;
 	}
 
+	private double[] car_sample(double[] root)  {
+		double vUpper = 3.0;
+		double vLower = 0.1;
+		double thetaUpper = 0.3; //radians, about 20 degrees
+		double thetaLower =-0.3; //radians
+
+		double vRandom = (Math.random() * ((vUpper - vLower)));
+		double thetaRandom = (Math.random() * ((thetaUpper - thetaLower)));
+
+		double d = 0.3; // length of the car
+		double dt = 0.1;
+		double[] x = {root[0], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		double[] y = {root[1], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		double[] phi = {root[2], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+		for(int i = 0; i<10; i++){
+			phi[i+1] = phi[i] = dt*vRandom*Math.tan(thetaRandom)/d;
+			x[i+1] = x[i] + dt*vRandom*Math.cos((phi[i+1]+phi[i])/2.0);
+			y[i+1] = y[i] + dt*vRandom*Math.sin((phi[i+1]+phi[i])/2.0);
+		}
+
+		double[] out = {x[10], y[10], phi[10]};
+		return out;
+	}
+
 
 }
 
