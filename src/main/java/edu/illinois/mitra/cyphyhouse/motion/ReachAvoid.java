@@ -103,7 +103,7 @@ public class ReachAvoid extends Thread implements Cancellable {
 				yUpper = Math.max(start.y, dest.y) + (yRange+radius)*(counter+1)/2;
 				
 				RRTNode path = new RRTNode(start.x, start.y);
-				pathStack = path.findRoute(dest, 1000, planObs, xLower, xUpper, yLower,yUpper, start, radius);
+				pathStack = path.findRoute(0, dest, 1000, planObs, xLower, xUpper, yLower,yUpper, start, radius);
 				if(pathStack == null){
 					counter ++ ; 
 					if(counter > tries){

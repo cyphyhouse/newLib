@@ -17,6 +17,7 @@ import edu.wlu.cs.levy.CG.KeySizeException;
 
 public class RRTNode {
 	public Point position = new Point();
+	public double heading;
 	public RRTNode parent;
 	public RRTNode stopNode;
 	public KDTree<RRTNode> kd;
@@ -31,18 +32,25 @@ public class RRTNode {
 		position.x = 0;
 		position.y = 0;
 		parent = null;
+		heading = 0;
 	}
 
 	public RRTNode(int x, int y){
 		position.x = x;
 		position.y = y;
 		parent = null;
+		heading = 0;
 	}
 
 	public RRTNode(RRTNode copy){
 		position.x = copy.position.x;
 		position.y = copy.position.y;
 		parent = copy.parent;
+		heading = copy.heading;
+	}
+
+	public void setHeading(double heading){
+		this.heading = heading;
 	}
 
 	/**
@@ -63,7 +71,7 @@ public class RRTNode {
 	 * @return
 	 */
 
-	public Stack<ItemPosition> findRoute(ItemPosition destination, int K, ObstacleList obsList, int xLower, int xUpper, int yLower, int yUpper, ItemPosition RobotPos, int radius) {
+	public Stack<ItemPosition> findRoute(double InitHeading, ItemPosition destination, int K, ObstacleList obsList, int xLower, int xUpper, int yLower, int yUpper, ItemPosition RobotPos, int radius) {
 		//TODO: add Steer here
 		//initialize a kd tree;
 		//obsList.remove(RobotPos, 0.9*Radius);
@@ -76,6 +84,7 @@ public class RRTNode {
 		//final RRTNode rootNode = new RRTNode(position.x,position.y);
 		double [] root = {RobotPos.x,RobotPos.y};
 		final RRTNode rootNode = new RRTNode(RobotPos.x,RobotPos.y);
+		rootNode.setHeading(InitHeading);
 		final RRTNode destNode = new RRTNode(destination.x, destination.y);
 
 		try{
@@ -87,6 +96,7 @@ public class RRTNode {
 
 		RRTNode currentNode = new RRTNode(rootNode);
 		RRTNode addedNode = new RRTNode(rootNode);
+
 		//for(i< k)  keep finding	
 		for(int i = 0; i<K; i++){
 			//if can go from current to destination, meaning path found, add destinationNode to final, stop looping.
@@ -99,6 +109,7 @@ public class RRTNode {
 					kd.insert(destNode.getValue(), destNode);
 				}
 				catch (Exception e) {
+
 					System.err.println(e);
 				}
 				System.out.println("Path found!");
@@ -110,15 +121,45 @@ public class RRTNode {
 			int xRandom = 0;
 			int yRandom = 0;
 			ItemPosition sampledPos = new ItemPosition("rand",xRandom, yRandom, 0);
+
+			double [] cur_node_data = {addedNode.getValue()[0], addedNode.getValue()[1], addedNode.heading};
+			double [] sampled_point = {};
+
+			int counter = 0;
 			while(!validRandom){
-				xRandom = (int) Math.round((Math.random() * ((xUpper - xLower))));
+				if(counter > 10000){
+
+					addedNode = addedNode.parent.parent;
+
+					cur_node_data[0] = addedNode.getValue()[0];
+
+					cur_node_data[1] = addedNode.getValue()[1];
+
+					cur_node_data[2] = addedNode.heading;
+
+					counter = 0;
+
+				}
+
+				/*xRandom = (int) Math.round((Math.random() * ((xUpper - xLower))));
 				yRandom = (int) Math.round((Math.random() * ((yUpper - yLower))));
 				sampledPos.x = xRandom + xLower;
 				sampledPos.y = yRandom + yLower;
 				//System.out.println(sampledPos.x + " " + sampledPos.y);
+				validRandom = ((sampledPos.x >= xLower && sampledPos.x <= xUpper) && (sampledPos.y >= yLower && sampledPos.y <= yUpper));*/
+
+				// Sample from car model to get a new point
+				sampled_point = car_sample(cur_node_data);
+
+				sampledPos.x = (int)sampled_point[0];
+				sampledPos.y = (int)sampled_point[1];
+
 				validRandom = ((sampledPos.x >= xLower && sampledPos.x <= xUpper) && (sampledPos.y >= yLower && sampledPos.y <= yUpper));
+				//validRandom = ((sampled_point[0] >= xLower && sampled_point[0] <= xUpper) && (sampled_point[1] >= yLower && sampled_point[1] <= yUpper));
+
 				validRandom = validRandom && obsList.validstarts(sampledPos, radius);
 				if(validRandom){
+
 					// added a check to see if sampledPos is already in tree
 					boolean notInTree = true;
 					RRTNode possibleNode = new RRTNode(sampledPos.x, sampledPos.y);
@@ -128,21 +169,31 @@ public class RRTNode {
 							notInTree = false;
 						}
 					} catch (KeySizeException e) {
+
 						e.printStackTrace();
 					}
 					validRandom = (validRandom && notInTree);
 				}
 				//System.out.println(validRandom);
+				counter++;
 			}
+
 			RRTNode sampledNode = new RRTNode(sampledPos.x, sampledPos.y);
+
+			sampledNode.setHeading(sampled_point[2]);
+
 			// with a valid random sampled point, we find it's nearest neighbor in the tree, set it as current Node
 			try{
 				currentNode = kd.nearest(sampledNode.getValue());
 			}
 			catch (Exception e) {
+
 				System.err.println(e);
 			}
+
+
 			sampledNode = toggle(currentNode, sampledNode, obsList, radius);
+
 			//check if toggle failed
 			//if not failed, insert the new node to the tree
 			if(sampledNode != null){
@@ -151,10 +202,12 @@ public class RRTNode {
 					kd.insert(sampledNode.getValue(), sampledNode);
 				}
 				catch (Exception e) {
+
 					System.err.println(e);
 				}
 				//set currentNode as newest node added, so we can check if we can reach the destination
 				addedNode = sampledNode;
+
 				//
 			}
 		}

@@ -137,7 +137,7 @@ public class FollowApp extends LogicThread {
             ItemPosition carpos = new ItemPosition("car", 5, 6, 0);
             ItemPosition dest = new ItemPosition("dest", 20, 21, 0);
             ObstacleList empty = new ObstacleList();
-            Stack<ItemPosition> testpath = testnode.findRoute(dest, 100000, empty, 0, 25, 0,25, carpos, 5 );
+            Stack<ItemPosition> testpath = testnode.findRoute(0, dest, 100000, empty, 0, 25, 0,25, carpos, 5 );
 
             System.out.println(testpath);
             sleep(100000);
