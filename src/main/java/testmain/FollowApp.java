@@ -17,8 +17,11 @@ import edu.illinois.mitra.cyphyhouse.interfaces.MutualExclusion;
 import edu.illinois.mitra.cyphyhouse.motion.MotionParameters;
 import edu.illinois.mitra.cyphyhouse.motion.MotionParameters.COLAVOID_MODE_TYPE;
 import edu.illinois.mitra.cyphyhouse.objects.ItemPosition;
+import edu.illinois.mitra.cyphyhouse.objects.ObstacleList;
 import edu.illinois.mitra.cyphyhouse.objects.Point3d;
 import edu.illinois.mitra.cyphyhouse.objects.PositionList;
+import edu.illinois.mitra.cyphyhouse.motion.RRTNode;
+
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -155,6 +158,52 @@ public class FollowApp extends LogicThread {
                 System.out.println(getDestination(destinations, i) + "\n");
             }
             System.out.println("END DESTINATIONS ARRAY PRINTOUT\n");*/
+
+
+
+
+
+
+
+            ////////////////////////////////////////////////////////////////////////////
+            /* RRT TEST */
+
+
+            boolean test = false;
+            while(true) {
+                if(test == true){
+                    break;
+                }
+                System.out.println("HERE");
+                RRTNode testnode = new RRTNode();
+                ItemPosition carpos = new ItemPosition("car", 5, 6, 0);
+                ItemPosition dest = new ItemPosition("dest", 20, 21, 0);
+                ObstacleList empty = new ObstacleList();
+                Stack<ItemPosition> testpath = testnode.findRoute(0, dest, 100000, empty, 0, 25, 0,25, carpos, 1.5 );
+
+                System.out.println(testpath);
+                while(testpath.empty() != true){
+                    System.out.println(testpath.pop());
+                }
+                sleep(100000);
+
+            }
+
+
+
+            ////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
 
             lineno = 0;
             if (robotIndex == 0) {
