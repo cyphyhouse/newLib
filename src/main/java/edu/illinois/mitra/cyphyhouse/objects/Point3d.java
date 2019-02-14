@@ -19,11 +19,13 @@ public class Point3d implements Traceable {
 	public double x;
 	public double y;
 	public double z;
+	public double heading;
 	
 	public Point3d(){
 		x = 0;
 		y = 0;
 		z = 0;
+		heading = 0;
 	}
 	
 	/**
@@ -54,7 +56,15 @@ public class Point3d implements Traceable {
 		this.y = y;
 		this.z = z;
 	}
-	
+
+	public Point3d(double x, double y, double z, double heading) {
+		//constructor for calculation temp point
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		this.heading = heading;
+	}
+
 	/**
 	 * Construct an Point3d by cloning another
 	 * Do not use this method to clone robots, it will only clone name, position and heading

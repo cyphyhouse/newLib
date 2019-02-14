@@ -13,7 +13,7 @@ import edu.illinois.mitra.cyphyhouse.exceptions.ItemFormattingException;
 public class ItemPosition extends Point3d implements Comparable<ItemPosition>{
 //	private static final String TAG = "itemPosition";
 //	private static final String ERR = "Critical Error";
-	
+
 	public String name;
 	public int index;
 	public long receivedTime;
@@ -45,7 +45,14 @@ public class ItemPosition extends Point3d implements Comparable<ItemPosition>{
 		setname(name);
 		this.index = index;
 	}
-	
+
+	public ItemPosition(String name, double x, double y, double z, int index, double heading) {
+		super(x, y, z, heading);
+		setname(name);
+		this.index = index;
+	}
+
+
 	/**
 	 * Construct an ItemPosition by cloning another
 	 * Do not use this method to clone robots, it will only clone name, position and heading

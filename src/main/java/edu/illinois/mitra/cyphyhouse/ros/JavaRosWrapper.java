@@ -178,7 +178,17 @@ public class JavaRosWrapper {
 						//System.out.println("GOT POSITION");
 						//System.out.println(msg.z);
 
-						ItemPosition p = new ItemPosition(gvh.id.getName(), (int)(msg.pose.position.x*100), (int)(msg.pose.position.y*100), (int)(msg.pose.position.z*100));
+
+						double w, x, y, z;
+						w = msg.pose.orientation.w;
+						x = msg.pose.orientation.x;
+						y = msg.pose.orientation.y;
+						z = msg.pose.orientation.z;
+						double heading = Math.atan2(2.0*(x*y + w*z), w*w + x*x - y*y - z*z);
+
+						ItemPosition p = new ItemPosition(gvh.id.getName(), msg.pose.position.x, msg.pose.position.y, msg.pose.position.z, 0, heading);
+						//System.out.println("X is: " + msg.pose.position.y);
+
 						gvh.gps.setPosition(p);
 						//System.out.println("POSITION IS " + p);
 						//System.out.println("ADDING POSITION " + msg.pose.position.x + " " + msg.pose.position.y);
