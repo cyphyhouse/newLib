@@ -105,7 +105,7 @@ public class RRTNode {
 
 			System.out.println("curnode: " + currentNode.position.x+" "+ currentNode.position.y);
 			System.out.println("destnode: " + destNode.position.x+" "+ destNode.position.y);
-
+			System.out.println("RADIUS: " + radius);
 			if(obsList.validPath(destNode, addedNode, radius)){
 				System.out.println("HERE2");
 				destNode.parent = addedNode;
