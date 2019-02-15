@@ -103,7 +103,7 @@ public class RRTNode {
 			//if can go from current to destination, meaning path found, add destinationNode to final, stop looping.
 			System.out.println("i is: " + i );
 
-			System.out.println("curnode: " + currentNode.position.x+" "+ currentNode.position.y);
+			System.out.println("curnode: " + addedNode.position.x+" "+ addedNode.position.y);
 			System.out.println("destnode: " + destNode.position.x+" "+ destNode.position.y);
 			System.out.println("RADIUS: " + radius);
 			if(obsList.validPath(destNode, addedNode, radius)){
