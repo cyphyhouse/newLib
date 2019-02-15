@@ -18,6 +18,7 @@ import edu.illinois.mitra.cyphyhouse.motion.MotionParameters;
 import edu.illinois.mitra.cyphyhouse.motion.MotionParameters.COLAVOID_MODE_TYPE;
 import edu.illinois.mitra.cyphyhouse.motion.RRTNode;
 import edu.illinois.mitra.cyphyhouse.objects.ItemPosition;
+import edu.illinois.mitra.cyphyhouse.objects.ObstacleList;
 import edu.illinois.mitra.cyphyhouse.objects.Point3d;
 import edu.illinois.mitra.cyphyhouse.objects.PositionList;
 
@@ -233,12 +234,11 @@ public class FollowApp extends LogicThread {
                                             ItemPosition mypos = gvh.gps.getMyPosition();
                                             System.out.println("MYPOS IS: " + mypos);
                                             RRTNode newRRT = new RRTNode();
-                                            ItemPosition testpos = new ItemPosition("fuckthishist",-1,0,0);
-                                            ItemPosition testpos2 = new ItemPosition("fuckthishist",3,0,0);
+                                            ItemPosition testpos = new ItemPosition("fuckthishist",1,2,3);
                                             System.out.println("TEST ITEM: "+testpos.x);
                                             System.out.println("MY POS X: " + mypos.x);
-                                            //path = newRRT.findRoute(mypos.heading, currentDestination, 100000,null,-4,4,-3,3, mypos, 1);
-                                            path = newRRT.findRoute(0, testpos, 100000,null,-4,4,-3,3, testpos2, 1);
+                                            ObstacleList empty_list = new ObstacleList();
+                                            path = newRRT.findRoute(mypos.heading, currentDestination, 100000,empty_list,-4,4,-3,3, mypos, 1);
                                             System.out.println("PATH IS: ");
                                             sleep(100);
                                             boolean breakpath = false;
