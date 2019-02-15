@@ -233,10 +233,12 @@ public class FollowApp extends LogicThread {
                                             ItemPosition mypos = gvh.gps.getMyPosition();
                                             System.out.println("MYPOS IS: " + mypos);
                                             RRTNode newRRT = new RRTNode();
-                                            ItemPosition testpos = new ItemPosition("fuckthishist",1,2,3);
+                                            ItemPosition testpos = new ItemPosition("fuckthishist",-1,0,0);
+                                            ItemPosition testpos2 = new ItemPosition("fuckthishist",3,0,0);
                                             System.out.println("TEST ITEM: "+testpos.x);
                                             System.out.println("MY POS X: " + mypos.x);
-                                            path = newRRT.findRoute(mypos.heading, currentDestination, 100000,null,-4,4,-3,3, mypos, 1);
+                                            //path = newRRT.findRoute(mypos.heading, currentDestination, 100000,null,-4,4,-3,3, mypos, 1);
+                                            path = newRRT.findRoute(0, testpos, 100000,null,-4,4,-3,3, testpos2, 1);
                                             System.out.println("PATH IS: ");
                                             sleep(100);
                                             boolean breakpath = false;
