@@ -229,9 +229,11 @@ public class FollowApp extends LogicThread {
                                         currentDestination = getDestination(destinations, asgnIndex);
 
                                         if (currentDestination != null) {
+                                            System.out.println("COMPUTING PATH, DEST IS: " + currentDestination);
                                             ItemPosition mypos = gvh.gps.getMyPosition();
                                             RRTNode newRRT = new RRTNode();
                                             path = newRRT.findRoute(mypos.heading, currentDestination, 100000,null,-3,3,-3,3, mypos, 1);
+                                            System.out.println("PATH IS: " + path);
                                             sleep(100);
                                             boolean breakpath = false;
 
@@ -243,6 +245,7 @@ public class FollowApp extends LogicThread {
                                                 }
                                             }
                                             if (!breakpath) {
+                                                System.out.println("FOUND A PATH");
                                                 //Calculate distance and check if it is the shortest
                                                 //If it is, store this points IDX so we can get it again later
                                                 double distance = Math.sqrt(Math.pow(mypos.x-currentDestination.x,2)+Math.pow(mypos.y-currentDestination.y,2)+Math.pow(mypos.z-currentDestination.z,2));
