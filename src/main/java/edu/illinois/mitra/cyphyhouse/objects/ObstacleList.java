@@ -125,6 +125,9 @@ public class ObstacleList {
 	 */
 
 	public boolean validPath(RRTNode destinationNode, RRTNode currentNode, double Radius){
+		System.out.println("HERE1");
+		System.out.println("curnode: " + currentNode.position.x+" "+ currentNode.position.y);
+		System.out.println("destnode: " + destinationNode.position.x+" "+ destinationNode.position.y);
 		double dist_btwn_points = Math.sqrt((destinationNode.position.x-currentNode.position.x)*(destinationNode.position.x-currentNode.position.x) + (destinationNode.position.y-currentNode.position.y)*(destinationNode.position.y-currentNode.position.y));
 		System.out.println("curnode: " + currentNode.position.x+" "+ currentNode.position.y);
 		System.out.println("destnode: " + destinationNode.position.x+" "+ destinationNode.position.y);
