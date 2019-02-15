@@ -121,8 +121,9 @@ public class RRTNode {
 			//Generate a random sample from the current space
 			//No obstacles at the moment so just generate the destination as our "randomly" sampled point
 			boolean validRandom = false;
+			System.out.println("HERE beginning of fuck this");
 			ItemPosition sampledPos = random_sampler(destination.x, destination.y, destination.z);
-			System.out.println("HERE1");
+			System.out.println("HEREfuck this");
 			//Next, find the node in the tree that is closest to the sampledPos
 			RRTNode sampledNode = new RRTNode(sampledPos.x, sampledPos.y);
 			try{
