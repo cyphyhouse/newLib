@@ -140,10 +140,10 @@ public class RRTNode {
 			for(int j=0; j<10; j++) {
 				double [] car_sampler_input = {currentNode.position.x, currentNode.position.y, currentNode.heading};
 				double [] car_sampler_point = car_sample(car_sampler_input);
-				if(car_sampler_point[0] > xUpper || car_sampler_point[0] < xLower || car_sampler_point[1] > yUpper || car_sampler_point[1] < yLower){
+				/*if(car_sampler_point[0] > xUpper || car_sampler_point[0] < xLower || car_sampler_point[1] > yUpper || car_sampler_point[1] < yLower){
 					j--;
 					continue;
-				}
+				}*/
 				double dist_to_dest = Math.sqrt(Math.pow(car_sampler_point[0]-destination.x, 2) + Math.pow(car_sampler_point[1]-destination.y, 2));
 				if(dist_to_dest < closest_dist) {
 					best_sampled_point = car_sampler_point;
