@@ -86,9 +86,9 @@ public class ItemPosition extends Point3d implements Comparable<ItemPosition>{
 	
 	@Override 
 	public String toString() {
-		return name + ": " + x + ", " + y + ", " + z + ". index " + index;
+		return name + ": " + x + ", " + y + ", " + z + ". index " + index + ", heading " + heading;
 	}
-	
+
 	// Hashing and equals checks are done only against the position's name. Position names are unique!
 	
 	@Override

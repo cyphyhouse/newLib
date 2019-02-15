@@ -64,7 +64,7 @@ public class BotInfoSelector {
             vrpn = "vrpn_client_node/hotdec_car/pose";
             if(deviceType == Common.HTCONEM7) {
                 //ip = "192.168.1.13";
-                ip = "192.168.1.13";
+                ip = "192.168.1.25";
             }
             else if(deviceType == Common.MOTOE) {
                 ip = "192.168.1.115";

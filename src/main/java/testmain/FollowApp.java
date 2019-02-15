@@ -121,6 +121,7 @@ public class FollowApp extends LogicThread {
     @Override
     public List<Object> callStarL() {
         dsm.createMW("testindex", 0);
+        /*
         ItemPosition[] ipos = new ItemPosition[3];
         ipos[0] = new ItemPosition("quadcopter0",1000,1000,80);
         ipos[1] = new ItemPosition("quadcopter1",1000,1000,0);
@@ -131,7 +132,8 @@ public class FollowApp extends LogicThread {
             if (i != robotIndex)
                 o.push(ipos[i]);
             obs.add(o);
-        }
+        }*/
+
         /*
         pos = gvh.gps.get_robot_Positions();
         Iterator it = pos.iterator();
@@ -150,13 +152,6 @@ public class FollowApp extends LogicThread {
 
 
         while (true) {
-
-            boolean fuck_java = true;
-            while(fuck_java){
-                ItemPosition mypos = gvh.gps.getMyPosition();
-                double value = mypos.x;
-                System.out.println(mypos);
-            }
 
             System.out.println("ASSIGNED ARRAY IS: " + assigned);
             /*System.out.println("BEGIN DESTINATIONS ARRAY PRINTOUT:");
@@ -236,7 +231,7 @@ public class FollowApp extends LogicThread {
                                         if (currentDestination != null) {
                                             ItemPosition mypos = gvh.gps.getMyPosition();
                                             RRTNode newRRT = new RRTNode();
-                                            path = newRRT.findRoute(0, currentDestination, 100000,null,0,0,0,0, mypos, 1.5);
+                                            path = newRRT.findRoute(mypos.heading, currentDestination, 100000,null,-3,3,-3,3, mypos, 1);
                                             sleep(100);
                                             boolean breakpath = false;
 
