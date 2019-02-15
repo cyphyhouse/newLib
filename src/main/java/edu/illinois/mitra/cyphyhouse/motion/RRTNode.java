@@ -102,9 +102,8 @@ public class RRTNode {
 		for(int i = 0; i<K; i++){
 			//if can go from current to destination, meaning path found, add destinationNode to final, stop looping.
 			System.out.println("i is: " + i );
-			System.out.println("HERE1");
 
-			/*
+
 			if(obsList.validPath(destNode, addedNode, radius)){
 				System.out.println("HERE2");
 				destNode.parent = addedNode;
@@ -118,16 +117,15 @@ public class RRTNode {
 				}
 				System.out.println("Path found!");
 				break;
-			}*/
+			}
 
 			//Path not found yet, keep exploring
 
 			//Generate a random sample from the current space
 			//No obstacles at the moment so just generate the destination as our "randomly" sampled point
 			boolean validRandom = false;
-			System.out.println("HERE beginning of fuck this");
 			ItemPosition sampledPos = random_sampler(destination.x, destination.y, destination.z);
-			System.out.println("HEREfuck this");
+
 			//Next, find the node in the tree that is closest to the sampledPos
 			RRTNode sampledNode = new RRTNode(sampledPos.x, sampledPos.y);
 			try{
@@ -137,15 +135,15 @@ public class RRTNode {
 
 				System.err.println(e);
 			}
-			System.out.println("HERE2");
+
 
 			//From the current node, generate a new node to add to the tree by using the car_sampler
 			//We sample 5 times and take the point that is closest to the destination
 			double closest_dist = Double.MAX_VALUE;
-			System.out.println("HERE3");
+
 			double [] best_sampled_point = {};
 			for(int j=0; j<10; j++) {
-				System.out.println("HERE4");
+
 				double [] car_sampler_input = {currentNode.position.x, currentNode.position.y, currentNode.heading};
 				double [] car_sampler_point = car_sample(car_sampler_input);
 				/*if(car_sampler_point[0] > xUpper || car_sampler_point[0] < xLower || car_sampler_point[1] > yUpper || car_sampler_point[1] < yLower){
@@ -161,9 +159,9 @@ public class RRTNode {
 
 			//Finally, we add this newly generated node to the RRT
 			RRTNode newNode = new RRTNode(best_sampled_point[0], best_sampled_point[1]);
-			System.out.println("HERE5");
+
 			newNode.setHeading(best_sampled_point[2]);
-			System.out.println("HERE6");
+
 			newNode.parent = currentNode;
 			try{
 				kd.insert(newNode.getValue(), newNode);
@@ -194,7 +192,7 @@ public class RRTNode {
 		}
 		else{
 			stopNode = destNode;
-			System.out.println("HERE10");
+
 			return pathStack;
 		}
 	}
