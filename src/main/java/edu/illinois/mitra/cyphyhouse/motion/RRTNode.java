@@ -102,9 +102,12 @@ public class RRTNode {
 		for(int i = 0; i<K; i++){
 			//if can go from current to destination, meaning path found, add destinationNode to final, stop looping.
 			System.out.println("i is: " + i );
+			System.out.println("HERE1");
 
 			if(obsList.validPath(destNode, addedNode, radius)){
+				System.out.println("HERE2");
 				destNode.parent = addedNode;
+				System.out.println("HERE3");
 				stopNode = destNode;
 				try{
 					kd.insert(destNode.getValue(), destNode);
