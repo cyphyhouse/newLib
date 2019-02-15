@@ -163,6 +163,7 @@ public class Point3d implements Traceable {
 	public double getZ(){
 		return z;
 	}
+	public double getHeading() { return heading; }
 
 }
 

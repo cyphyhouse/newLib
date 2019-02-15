@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.0" branch-rate="0.0" lines-covered="0" lines-valid="5779" branches-covered="0" branches-valid="2016" complexity="2.4078341013824884" version="2.1.1" timestamp="1550259916480">
+<coverage line-rate="0.0" branch-rate="0.0" lines-covered="0" lines-valid="5780" branches-covered="0" branches-valid="2016" complexity="2.4062140391254316" version="2.1.1" timestamp="1550260099749">
 	<sources>
 		<source>/home/peter/newLib/target/generated-sources/annotations</source>
 		<source>/home/peter/newLib/src/main/java</source>
@@ -16130,7 +16130,7 @@
 				</class>
 			</classes>
 		</package>
-		<package name="edu.illinois.mitra.cyphyhouse.objects" line-rate="0.0" branch-rate="0.0" complexity="2.4954954954954953">
+		<package name="edu.illinois.mitra.cyphyhouse.objects" line-rate="0.0" branch-rate="0.0" complexity="2.482142857142857">
 			<classes>
 				<class name="edu.illinois.mitra.cyphyhouse.objects.AttrValue" filename="edu/illinois/mitra/cyphyhouse/objects/AttrValue.java" line-rate="0.0" branch-rate="0.0" complexity="1.75">
 					<methods>
@@ -18194,7 +18194,7 @@
 						<line number="22" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="edu.illinois.mitra.cyphyhouse.objects.Point3d" filename="edu/illinois/mitra/cyphyhouse/objects/Point3d.java" line-rate="0.0" branch-rate="0.0" complexity="1.5294117647058822">
+				<class name="edu.illinois.mitra.cyphyhouse.objects.Point3d" filename="edu/illinois/mitra/cyphyhouse/objects/Point3d.java" line-rate="0.0" branch-rate="0.0" complexity="1.5">
 					<methods>
 						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
@@ -18278,6 +18278,11 @@
 								</line>
 								<line number="114" hits="0" branch="false"/>
 								<line number="115" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="getHeading" signature="()D" line-rate="0.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="166" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="getX" signature="()D" line-rate="0.0" branch-rate="1.0" complexity="0">
@@ -18416,6 +18421,7 @@
 						<line number="157" hits="0" branch="false"/>
 						<line number="161" hits="0" branch="false"/>
 						<line number="164" hits="0" branch="false"/>
+						<line number="166" hits="0" branch="false"/>
 					</lines>
 				</class>
 				<class name="edu.illinois.mitra.cyphyhouse.objects.PositionList" filename="edu/illinois/mitra/cyphyhouse/objects/PositionList.java" line-rate="0.0" branch-rate="0.0" complexity="1.5">
