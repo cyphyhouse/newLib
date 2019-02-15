@@ -104,7 +104,7 @@ public class JavaRosWrapper {
 		int i = 0;
 		while (i < publishers.size()){
 			if (publishers.get(i).getTopic().matches("Waypoint_" + robot_name)){
-                Point p = new Point((double)dest.x/100., (double)dest.y/100., (double)dest.z/100.);
+                Point p = new Point((double)dest.x, (double)dest.y, (double)dest.z);
                 Time t = new Time(0,0);
                 Header h = new Header(0,t, type);
                 
@@ -119,7 +119,7 @@ public class JavaRosWrapper {
 		int i = 0;
 		while (i < publishers.size()){
 			if (publishers.get(i).getTopic().matches("Waypoint_" + robot_name)){
-                Point p = new Point((double)dest.x/100., (double)dest.y/100., (double)dest.z/100.);
+                Point p = new Point((double)dest.x, (double)dest.y, (double)dest.z);
                 Time t = new Time(0,0);
                 Header h = new Header(0,t, "3");
                 

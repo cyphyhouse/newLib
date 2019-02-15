@@ -175,7 +175,7 @@ public class FollowApp extends LogicThread {
                         ItemPosition mypos = gvh.gps.getMyPosition();
                         if (mypos == null) break;
                         else {
-                            ItemPosition takeoffpoint = new ItemPosition("takeoff",mypos.x,mypos.y,mypos.z+100);
+                            ItemPosition takeoffpoint = new ItemPosition("takeoff",mypos.x,mypos.y,mypos.z+1);
                             path = new Stack<ItemPosition>();
                             path.push(takeoffpoint);
                             gvh.plat.moat.goTo(takeoffpoint);
@@ -521,7 +521,7 @@ public class FollowApp extends LogicThread {
             gvh.log.d(TAG, "received destination message from " + m.getFrom());
 
             String iposmsg = m.getContents().toString();
-            ItemPosition p = msgtoipos(iposmsg, i, 100);
+            ItemPosition p = msgtoipos(iposmsg, i, 1);
             destinations.put(p.getName(), p);
             taskLocations.put(p.getName(), new Task(p, i));
             assigned.add(0);
