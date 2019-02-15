@@ -104,6 +104,7 @@ public class RRTNode {
 			System.out.println("i is: " + i );
 			System.out.println("HERE1");
 
+			/*
 			if(obsList.validPath(destNode, addedNode, radius)){
 				System.out.println("HERE2");
 				destNode.parent = addedNode;
@@ -117,7 +118,7 @@ public class RRTNode {
 				}
 				System.out.println("Path found!");
 				break;
-			}
+			}*/
 
 			//Path not found yet, keep exploring
 
