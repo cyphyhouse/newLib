@@ -119,6 +119,7 @@ public class FollowApp extends LogicThread {
 
     @Override
     public List<Object> callStarL() {
+        sleep(1000);
         dsm.createMW("testindex", 0);
 
         pos = gvh.gps.get_robot_Positions();
