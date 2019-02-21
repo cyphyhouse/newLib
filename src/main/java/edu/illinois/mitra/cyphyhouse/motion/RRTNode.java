@@ -101,18 +101,18 @@ public class RRTNode {
 		//for(i< k)  keep finding
 		for(int i = 0; i<K; i++){
 			//if can go from current to destination, meaning path found, add destinationNode to final, stop looping.
-			System.out.println("i is: " + i );
+			//System.out.println("i is: " + i );
 
-			System.out.println("curnode: " + addedNode.position.x+" "+ addedNode.position.y);
-			System.out.println("destnode: " + destNode.position.x+" "+ destNode.position.y);
-			System.out.println("RADIUS: " + radius);
+			//System.out.println("curnode: " + addedNode.position.x+" "+ addedNode.position.y);
+			//System.out.println("destnode: " + destNode.position.x+" "+ destNode.position.y);
+			//System.out.println("RADIUS: " + radius);
 
 			boolean validpath = false;
 			try{
 				validpath = obsList.validPath(destNode, addedNode, radius);
 			}
 			catch(Exception e){
-				System.out.println("VALID PATH FUNCTION FAILED");
+				//System.out.println("VALID PATH FUNCTION FAILED");
 
 			}
 
@@ -125,7 +125,7 @@ public class RRTNode {
 				catch (Exception e) {
 					System.err.println(e);
 				}
-				System.out.println("Path found!");
+				//System.out.println("Path found!");
 				break;
 			}
 
@@ -197,7 +197,7 @@ public class RRTNode {
 		}
 
 		if(destNode.parent == null){
-			System.out.println("Path Not found! Tree size: " + kd.size());
+			//System.out.println("Path Not found! Tree size: " + kd.size());
 			return(null);
 		}
 		else{

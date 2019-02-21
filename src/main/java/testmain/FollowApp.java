@@ -224,6 +224,8 @@ public class FollowApp extends LogicThread {
                                 int current_shortest_idx=0;
                                 double current_shortest_distance = Double.MAX_VALUE;
 
+                                Map<Integer, Stack<ItemPosition>> path_map = new HashMap<Integer, Stack<ItemPosition>>();
+
                                 for (asgnIndex=0; asgnIndex < asgndsize; asgnIndex++) {
 
                                     if (assigned.get(asgnIndex) == 0) {
@@ -241,13 +243,15 @@ public class FollowApp extends LogicThread {
                                             boolean breakpath = false;
 
                                             for (int i = 0; i < obs.size(); i++) {
-                                                if (isClose(path, obs.get(i), 150)) {
+                                                System.out.print("THIS SHOULDNT HAPPEN");
+                                                if (isClose(path, obs.get(i), 1.5)) {
                                                     breakpath = true;
                                                     break;
                                                 } else {
                                                 }
                                             }
                                             if (!breakpath) {
+                                                path_map.put(asgnIndex, path);
                                                 System.out.println("FOUND A PATH");
                                                 //Calculate distance and check if it is the shortest
                                                 //If it is, store this points IDX so we can get it again later
@@ -268,8 +272,8 @@ public class FollowApp extends LogicThread {
                                 System.out.println("ASSIGN INDEX IS: " + asgnIndex);
                                 asgnIndex = current_shortest_idx;
 
-                                //If a path is found, use the stored IDX to get the closest waypoint and set to currentDestination
-                                /*if(foundpath){
+                                /*//If a path is found, use the stored IDX to get the closest waypoint and set to currentDestination
+                                if(foundpath){
                                     System.out.println("FOUND PATH AND OUT OF FOR LOOP");
                                     currentDestination = getDestination(destinations, current_shortest_idx);
                                     ItemPosition mypos = gvh.gps.getMyPosition();
@@ -278,6 +282,8 @@ public class FollowApp extends LogicThread {
                                     System.out.println(currentDestination);
                                     System.out.println("DONE GETTING DESTINATION");
                                 }*/
+
+                                path = path_map.get(asgnIndex);
 
                                 //System.out.println("FOR LOOP DONE");
                                 if (!foundpath) {
