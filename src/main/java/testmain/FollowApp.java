@@ -259,14 +259,14 @@ public class FollowApp extends LogicThread {
                                             System.out.println("MYPOS IS: " + mypos);
                                             RRTNode newRRT = new RRTNode();
                                             ObstacleList empty_list = new ObstacleList();
-                                            path = newRRT.findRoute(mypos.heading, currentDestination, 100000,empty_list,-4,4,-3,3, mypos, 0.1);
+                                            path = newRRT.findRoute(mypos.heading, currentDestination, 100000,empty_list,-4,4,-3,3, mypos, 0.5);
                                             System.out.println("PATH IS: "+path);
                                             sleep(100);
                                             boolean breakpath = false;
 
                                             for (int i = 0; i < obs.size(); i++) {
-                                                System.out.print("THIS SHOULDNT HAPPEN");
                                                 if (isClose(path, obs.get(i), 1.5)) {
+                                                    System.out.println("PATH IS CROSSING ANOTHER ROBOT");
                                                     breakpath = true;
                                                     break;
                                                 } else {
