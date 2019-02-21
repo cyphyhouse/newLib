@@ -173,6 +173,7 @@ public class FollowApp extends LogicThread {
 
         int car_or_drone = 1; /************* 0 FOR CAR, 1 FOR DRONE ***********/
         while (true) {
+            System.out.println("INSIDE THE WHILE LOOP");
             if(car_or_drone==0)
                 {
                     System.out.println("ASSIGNED ARRAY IS: " + assigned);
@@ -426,7 +427,7 @@ public class FollowApp extends LogicThread {
                 }
 
         else if(car_or_drone == 1){
-
+            System.out.println("DOING DRONE SHIT");
             //System.out.println("ASSIGNED ARRAY IS: " + assigned);
             /*System.out.println("BEGIN DESTINATIONS ARRAY PRINTOUT:");
             for(int i=0; i<assigned.size(); i++){
@@ -449,7 +450,7 @@ public class FollowApp extends LogicThread {
                         ItemPosition mypos = gvh.gps.getMyPosition();
                         if (mypos == null) break;
                         else {
-                            ItemPosition takeoffpoint = new ItemPosition("takeoff",mypos.x,mypos.y,mypos.z+100);
+                            ItemPosition takeoffpoint = new ItemPosition("takeoff",mypos.x,mypos.y,mypos.z+1);
                             path = new Stack<ItemPosition>();
                             path.push(takeoffpoint);
                             gvh.plat.moat.goTo(takeoffpoint);
@@ -457,7 +458,7 @@ public class FollowApp extends LogicThread {
                             RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path) + "###mypos");
                             gvh.comms.addOutgoingMessage(pathmsg);
                             stage = Stage.GO;
-                            //System.out.println(name + " SENT TAKEOFF");
+                            System.out.println(name + " SENT TAKEOFF");
                             break;
                         }
                     }

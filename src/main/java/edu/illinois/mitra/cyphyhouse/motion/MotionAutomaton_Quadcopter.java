@@ -122,7 +122,8 @@ public class MotionAutomaton_Quadcopter extends RobotMotion {
         }
         wrapper.sendMsg(dest, type);  
         waypoint_count++;
-	System.out.println("On quad goto fcn\n");
+	    System.out.println("On quad goto fcn\n");
+	    System.out.println("GOING TO " + dest);
         startMotion();
     
     return;
