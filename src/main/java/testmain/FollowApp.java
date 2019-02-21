@@ -122,18 +122,36 @@ public class FollowApp extends LogicThread {
     @Override
     public List<Object> callStarL() {
         dsm.createMW("testindex", 0);
-        /*
-        ItemPosition[] ipos = new ItemPosition[3];
-        ipos[0] = new ItemPosition("quadcopter0",1000,1000,80);
-        ipos[1] = new ItemPosition("quadcopter1",1000,1000,0);
-        ipos[2] = new ItemPosition("quadcopter2",-20,-20,0);
 
-        for (int i = 0 ; i < 3 ; i ++) {
+        /*******************************************/
+        /*******************************************?
+         * /*******************************************?/*******************************************?
+         * /*******************************************?/*******************************************?
+         * /*******************************************?
+         *
+         *  EACH TIME WE CHANGE NUMBER OF ROBOTS, THIS SHIT NEEDS TO CHANGE TO BE MAKE SENSE.
+         *
+         * /*******************************************?*/
+
+        ItemPosition[] ipos = new ItemPosition[3];
+        ipos[0] = new ItemPosition("base_computer",1000,1000,80);
+        ipos[1] = new ItemPosition("car",1000,1000,0);
+        int number_of_stuff = 2;  /*********<<<<<<<<<<------------------- MAKE SURE TO CHANGE THIS ********/
+
+        for (int i = 0 ; i < number_of_stuff ; i ++) {
             Stack<ItemPosition> o = new Stack<ItemPosition>();
             if (i != robotIndex)
                 o.push(ipos[i]);
             obs.add(o);
-        }*/
+        }
+
+
+          /*******************************************?
+         * /*******************************************?
+         * /*******************************************?
+         * /*******************************************?/*******************************************?
+         *
+         **/
 
         /*
         pos = gvh.gps.get_robot_Positions();
@@ -241,7 +259,7 @@ public class FollowApp extends LogicThread {
                                             System.out.println("MYPOS IS: " + mypos);
                                             RRTNode newRRT = new RRTNode();
                                             ObstacleList empty_list = new ObstacleList();
-                                            path = newRRT.findRoute(mypos.heading, currentDestination, 100000,empty_list,-4,4,-3,3, mypos, 1.5);
+                                            path = newRRT.findRoute(mypos.heading, currentDestination, 100000,empty_list,-4,4,-3,3, mypos, 0.1);
                                             System.out.println("PATH IS: "+path);
                                             sleep(100);
                                             boolean breakpath = false;
@@ -482,6 +500,7 @@ public class FollowApp extends LogicThread {
             //System.out.println(name + " got release msg " + alreadyReceived);
         }
         if (m.getMID() == MUTEX_RELEASE_MSG && robotIndex == 0 && !alreadyReceived) {
+            System.out.println("MUTEX RELEASE FROM BOT "+m.getFrom());
             mutexReleaseMsgs.add(m);
             gvh.log.d(TAG, "received release message from " + m.getFrom());
             String releasemsg = m.getContents().toString().replace("`","");
@@ -588,13 +607,23 @@ public class FollowApp extends LogicThread {
             } else {
                 Stack<ItemPosition> path = msgtopathstack(contents, j, 1);
                 if (sentIndex > robotIndex) {
-                    obs.set(sentIndex - 1, path);
+                    try {
+                        obs.set(sentIndex - 1, path);
+                    }
+                    catch(Exception e){
+                        System.out.println("IGNORE THIS SHIT FOR NOW followapp line 596");
+                    }
 
                     //System.out.println((sentIndex-1)+" "+sentIndex+" "+robotIndex+ " \n");
 
                     //System.out.println(obs.get(sentIndex-1)+" "+sentIndex+" "+robotIndex);
                 } else {
-                    obs.set(sentIndex, path);
+                    try {
+                        obs.set(sentIndex, path);
+                    }
+                    catch(Exception e){
+                        System.out.println("IGNORE THIS SHIT FOR NOW followapp line 607");
+                    }
 
                     //System.out.println((sentIndex)+" "+sentIndex+" "+robotIndex+ " \n");
 
