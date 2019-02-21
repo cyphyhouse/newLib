@@ -191,6 +191,7 @@ public class FollowApp extends LogicThread {
                     updatePath = false;
 
                     if (destinations.isEmpty()) {
+                        System.out.println("DESTINATIONS IS EMPTY");
                         ItemPosition mypos = gvh.gps.getMyPosition();
                         if (mypos == null) {
                             break;
@@ -206,6 +207,7 @@ public class FollowApp extends LogicThread {
 
                         try {
                             if (!wait0) {
+                                System.out.println("TRYING TO GET MUTEX");
                                 String mutexreqmsg = String.valueOf(robotIndex)+" "+ String.valueOf(msgId) + " REQUEST";
                                 RobotMessage mutexrequestmsg = new RobotMessage("ALL", name, MUTEX_REQUEST_MSG,mutexreqmsg );
                                 gvh.comms.addOutgoingMessage(mutexrequestmsg);
