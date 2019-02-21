@@ -213,7 +213,7 @@ public class FollowApp extends LogicThread {
                                 Random ran = new Random();
                                 break;
                             }
-                            if (true) {
+                            if (hasMutex) {
                                 System.out.println(name + " HAS MUTEX");
                                 //asgndsize = 5;//assigned.size();
                                 //Random r = new Random();
@@ -269,7 +269,7 @@ public class FollowApp extends LogicThread {
                                 asgnIndex = current_shortest_idx;
 
                                 //If a path is found, use the stored IDX to get the closest waypoint and set to currentDestination
-                                if(foundpath){
+                                /*if(foundpath){
                                     System.out.println("FOUND PATH AND OUT OF FOR LOOP");
                                     currentDestination = getDestination(destinations, current_shortest_idx);
                                     ItemPosition mypos = gvh.gps.getMyPosition();
@@ -277,7 +277,7 @@ public class FollowApp extends LogicThread {
                                     path = newp.getPath();
                                     System.out.println(currentDestination);
                                     System.out.println("DONE GETTING DESTINATION");
-                                }
+                                }*/
 
                                 //System.out.println("FOR LOOP DONE");
                                 if (!foundpath) {
@@ -286,9 +286,8 @@ public class FollowApp extends LogicThread {
                                     wait0 = false;
                                     break;
                                 }
-                                System.out.println("THE PATH IS: " + path);
                                 path.pop();
-                                currentDestination = path.peek();
+                                System.out.println("SENDING CAR PATH: " + path);
                                 RobotMessage asgnmsg = new RobotMessage("ALL", name, ASGN_MSG, String.valueOf(asgnIndex));
                                 RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path) + "###path");
                                 gvh.comms.addOutgoingMessage(pathmsg);
