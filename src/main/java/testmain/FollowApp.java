@@ -174,6 +174,7 @@ public class FollowApp extends LogicThread {
                         break;
                     }
                     if (!takeoff) {
+                        System.out.println("HERE IN TAKEOFF");
                         ItemPosition mypos = gvh.gps.getMyPosition();
                         if (mypos == null) break;
                         else {
@@ -309,6 +310,7 @@ public class FollowApp extends LogicThread {
                                 wait0 = false;
 
                             } else {
+                                System.out.println("NO MUTEX; BREAKING");
                                 if (updatePath) {
 
                                 } else {
