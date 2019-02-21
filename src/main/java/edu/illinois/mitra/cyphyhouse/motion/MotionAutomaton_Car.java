@@ -106,6 +106,7 @@ public class MotionAutomaton_Car extends RobotMotion {
 	
 	public void goTo(ItemPosition dest) {
 
+		System.out.println("ON CAR GOTO: DEST IS "+dest);
 		wrapper.createTopic("Waypoint");
 		wrapper.sendMsg(dest);	
 

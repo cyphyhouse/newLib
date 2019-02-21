@@ -322,7 +322,11 @@ public class FollowApp extends LogicThread {
                         }
 
                         System.out.println("CALLING GOTO. DESTINATION IS: " + currentDestination);
-                        gvh.plat.moat.goTo(currentDestination);
+                        //Send all points in path to car in one go
+                        while(!path.empty()){
+                            currentDestination=path.pop();
+                            gvh.plat.moat.goTo(currentDestination);
+                        }
                         stage = Stage.GO;
 
                     }
@@ -332,6 +336,9 @@ public class FollowApp extends LogicThread {
                     if (gvh.plat.moat.inMotion) {
                         stage = Stage.GO;
                     } else {
+                        stage = Stage.PICK;
+
+                        /*
                         ItemPosition ip = path.pop();
 
 
@@ -351,7 +358,7 @@ public class FollowApp extends LogicThread {
                             currentDestination = path.peek();
                             gvh.plat.moat.goTo(currentDestination);
                         }
-                        break;
+                        break;*/
                     }
 
                     break;
