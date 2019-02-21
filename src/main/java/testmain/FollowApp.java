@@ -323,7 +323,14 @@ public class FollowApp extends LogicThread {
                         System.out.println("CALLING GOTO. DESTINATION IS: " + currentDestination);
                         //Send all points in path to car in one go
                         while(!path.empty()){
+                            int frameID = 0;
+                            if(path.size() == 1){
+                                frameID = 1;
+                            }
                             currentDestination=path.pop();
+                            currentDestination.z=frameID;    //Since Java doesnt want me to create a new goto function without,
+                                                            //we just gonna pass the frameID through the Z coord since its not being used
+                                                            //and I want this to run $#%#$@.
                             gvh.plat.moat.goTo(currentDestination);
                         }
                         stage = Stage.GO;

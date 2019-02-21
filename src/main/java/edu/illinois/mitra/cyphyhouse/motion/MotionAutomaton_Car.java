@@ -108,9 +108,16 @@ public class MotionAutomaton_Car extends RobotMotion {
 
 		System.out.println("ON CAR GOTO: DEST IS "+dest);
 		wrapper.createTopic("Waypoint");
-		wrapper.sendMsg(dest);	
+		String frameID;
+		if(dest.z==1){
+			frameID = "1";
+		}
+		else
+			frameID = "0";
+		wrapper.sendMsg(dest, frameID);
 
 		startMotion();
+
 	
 	return;
 	//goTo(dest, obsList);
