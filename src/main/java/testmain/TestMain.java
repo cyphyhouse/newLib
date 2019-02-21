@@ -18,7 +18,7 @@ public class TestMain {
         private static String[][] participants;
         private static int numRobots;
         private static BotInfoSelector[] botInfo;
-        private static int selectedRobot = 2;
+        private static int selectedRobot = 1;
         volatile private static GlobalVarHolder gvh;
         private static LogicThread appToRun = null;
 
