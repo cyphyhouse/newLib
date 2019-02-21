@@ -488,12 +488,12 @@ public class FollowApp extends LogicThread {
 
                                     if(assigned.get(asgnIndex) == 0){
                                         currentDestination = getDestination(destinations, asgnIndex);
-                                        if(currentDestination.z == 0){
+                                        if(currentDestination.z < 0){
                                             //check if there are any non land commands to do
                                             for(int i=0; i < asgndsize; i++){
                                                 if(assigned.get(i) == 0) {
                                                     ItemPosition checkDestination = getDestination(destinations, i);
-                                                    if(checkDestination.z != 0){
+                                                    if(checkDestination.z >= 0){
                                                         skip_land_command = true;
                                                         break;
                                                     }
@@ -507,13 +507,13 @@ public class FollowApp extends LogicThread {
                                         if (assigned.get(asgnIndex) == 0) {
                                             currentDestination = getDestination(destinations, asgnIndex);
 
-                                            if(currentDestination.z == 0 && currentDestination != null){
+                                            if(currentDestination.z < 0 && currentDestination != null){
                                                 foundpath = true;
                                                 current_shortest_idx = asgnIndex;
                                                 break;
                                             }
 
-                                            if (currentDestination != null) {
+                                            if (currentDestination != null && currentDestination.z>0) {
                                                 ItemPosition mypos = gvh.gps.getMyPosition();
                                                 SimplePP newp = new SimplePP(mypos, currentDestination, 1);
                                                 path = newp.getPath();
