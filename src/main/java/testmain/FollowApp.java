@@ -235,7 +235,7 @@ public class FollowApp extends LogicThread {
                                             System.out.println("MYPOS IS: " + mypos);
                                             RRTNode newRRT = new RRTNode();
                                             ObstacleList empty_list = new ObstacleList();
-                                            path = newRRT.findRoute(mypos.heading, currentDestination, 100000,empty_list,-4,4,-3,3, mypos, 1);
+                                            path = newRRT.findRoute(mypos.heading, currentDestination, 100000,empty_list,-4,4,-3,3, mypos, 1.5);
                                             System.out.println("PATH IS: "+path);
                                             sleep(100);
                                             boolean breakpath = false;
@@ -339,6 +339,7 @@ public class FollowApp extends LogicThread {
 
                     break;
                 case GO:
+                    System.out.println("IN GO STAGE");
                     if (gvh.plat.moat.inMotion) {
                         stage = Stage.GO;
                     } else {

@@ -247,7 +247,7 @@ public class RRTNode {
 
 	private double[] car_sample(double[] root)  {
 		double vUpper = 2.0;
-		double vLower = 0.5;
+		double vLower = 1;
 		double thetaUpper = 0.30; //radians, about 20 degrees
 		double thetaLower =-0.30; //radians
 
