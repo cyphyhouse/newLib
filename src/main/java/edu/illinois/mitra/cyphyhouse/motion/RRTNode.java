@@ -111,7 +111,7 @@ public class RRTNode {
 			try{
 				validpath = obsList.validPath(destNode, addedNode, radius);
 			}
-			catch{
+			catch(Exception e){
 				System.out.println("VALID PATH FUNCTION FAILED");
 
 			}
