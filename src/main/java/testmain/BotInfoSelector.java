@@ -61,10 +61,10 @@ public class BotInfoSelector {
 
         if(color.equals("green")) {
             name = "bot1";
-            vrpn = "vrpn_client_node/hotdec_car/pose";
+            vrpn = "vrpn_client_node/cyphyhousecopter/pose";
             if(deviceType == Common.HTCONEM7) {
                 //ip = "192.168.1.13";
-                ip = "192.168.1.25";
+                ip = "192.168.1.26";
             }
             else if(deviceType == Common.MOTOE) {
                 ip = "192.168.1.115";
