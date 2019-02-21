@@ -18,7 +18,7 @@ public class TestMain {
         private static String[][] participants;
         private static int numRobots;
         private static BotInfoSelector[] botInfo;
-        private static int selectedRobot = 2;
+        private static int selectedRobot = 1;
         volatile private static GlobalVarHolder gvh;
         private static LogicThread appToRun = null;
 
@@ -27,12 +27,12 @@ public class TestMain {
             // Load the participants
             //participants = IdentityLoader.loadIdentities(IDENTITY_FILE_URL);
             // Put number of robots being used here
-            numRobots = 3;
+            numRobots = 2;
             botInfo = new BotInfoSelector[numRobots];
             // add color, robot type, and device type for each robot here
             botInfo[0] = new BotInfoSelector("red", Common.QUADCOPTER, Common.HTCONEM7);
             botInfo[1] = new BotInfoSelector("green", Common.CAR, Common.HTCONEM7);
-            botInfo[2] = new BotInfoSelector("blue", Common.CAR, Common.HTCONEM7);
+            //botInfo[2] = new BotInfoSelector("blue", Common.CAR, Common.HTCONEM7);
 
 
             //botInfo[2] = new BotInfoSelector("blue", Common.ARDRONE2, Common.NEXUS7);
