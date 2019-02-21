@@ -246,11 +246,13 @@ public class JavaRosWrapper {
 							case "TRUE":
 								switch(platform){
                                     case "Quadcopter":
+                                    	System.out.println("Quadcopter REACHED");
                                         MotionAutomaton_Quadcopter motion;
 										motion = (MotionAutomaton_Quadcopter) gvh.plat.moat;
 										motion.reached = true;
 										break;
 									case "Car":
+										System.out.println("CAR REACHED");
 										((MotionAutomaton_Car)gvh.plat.moat).reached = true;
 								}
 								break;

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.0015589814654425776" branch-rate="0.0" lines-covered="9" lines-valid="5773" branches-covered="0" branches-valid="2014" complexity="2.4062140391254316" version="2.1.1" timestamp="1550780345083">
+<coverage line-rate="0.0015600624024961" branch-rate="0.0" lines-covered="9" lines-valid="5769" branches-covered="0" branches-valid="2014" complexity="2.4062140391254316" version="2.1.1" timestamp="1550780756687">
 	<sources>
 		<source>/home/peter/newLib/target/generated-sources/annotations</source>
 		<source>/home/peter/newLib/src/main/java</source>
@@ -17262,13 +17262,7 @@
 						</method>
 						<method name="validPath" signature="(Ledu/illinois/mitra/cyphyhouse/motion/RRTNode;Ledu/illinois/mitra/cyphyhouse/motion/RRTNode;D)Z" line-rate="0.0" branch-rate="0.0" complexity="0">
 							<lines>
-								<line number="128" hits="0" branch="false"/>
-								<line number="129" hits="0" branch="false"/>
-								<line number="130" hits="0" branch="false"/>
 								<line number="131" hits="0" branch="false"/>
-								<line number="132" hits="0" branch="false"/>
-								<line number="133" hits="0" branch="false"/>
-								<line number="134" hits="0" branch="false"/>
 								<line number="135" hits="0" branch="true" condition-coverage="0% (0/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
@@ -17441,13 +17435,7 @@
 							</conditions>
 						</line>
 						<line number="114" hits="0" branch="false"/>
-						<line number="128" hits="0" branch="false"/>
-						<line number="129" hits="0" branch="false"/>
-						<line number="130" hits="0" branch="false"/>
 						<line number="131" hits="0" branch="false"/>
-						<line number="132" hits="0" branch="false"/>
-						<line number="133" hits="0" branch="false"/>
-						<line number="134" hits="0" branch="false"/>
 						<line number="135" hits="0" branch="true" condition-coverage="0% (0/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>
@@ -19036,7 +19024,7 @@
 								<line number="236" hits="0" branch="false"/>
 								<line number="237" hits="0" branch="false"/>
 								<line number="238" hits="0" branch="false"/>
-								<line number="276" hits="0" branch="false"/>
+								<line number="278" hits="0" branch="false"/>
 							</lines>
 						</method>
 					</methods>
@@ -19187,7 +19175,7 @@
 						<line number="236" hits="0" branch="false"/>
 						<line number="237" hits="0" branch="false"/>
 						<line number="238" hits="0" branch="false"/>
-						<line number="276" hits="0" branch="false"/>
+						<line number="278" hits="0" branch="false"/>
 					</lines>
 				</class>
 				<class name="edu.illinois.mitra.cyphyhouse.ros.JavaRosWrapper$1" filename="edu/illinois/mitra/cyphyhouse/ros/JavaRosWrapper.java" line-rate="0.0" branch-rate="1.0" complexity="4.2">
@@ -19305,12 +19293,14 @@
 										<condition number="1" type="switch" coverage="0%"/>
 									</conditions>
 								</line>
-								<line number="250" hits="0" branch="false"/>
+								<line number="249" hits="0" branch="false"/>
 								<line number="251" hits="0" branch="false"/>
 								<line number="252" hits="0" branch="false"/>
-								<line number="254" hits="0" branch="false"/>
+								<line number="253" hits="0" branch="false"/>
+								<line number="255" hits="0" branch="false"/>
 								<line number="256" hits="0" branch="false"/>
-								<line number="258" hits="0" branch="true" condition-coverage="0% (0/10)">
+								<line number="258" hits="0" branch="false"/>
+								<line number="260" hits="0" branch="true" condition-coverage="0% (0/10)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
 										<condition number="1" type="jump" coverage="0%"/>
@@ -19318,11 +19308,11 @@
 										<condition number="1" type="switch" coverage="0%"/>
 									</conditions>
 								</line>
-								<line number="261" hits="0" branch="false"/>
-								<line number="262" hits="0" branch="false"/>
 								<line number="263" hits="0" branch="false"/>
+								<line number="264" hits="0" branch="false"/>
 								<line number="265" hits="0" branch="false"/>
-								<line number="269" hits="0" branch="false"/>
+								<line number="267" hits="0" branch="false"/>
+								<line number="271" hits="0" branch="false"/>
 							</lines>
 						</method>
 					</methods>
@@ -19346,12 +19336,14 @@
 								<condition number="1" type="switch" coverage="0%"/>
 							</conditions>
 						</line>
-						<line number="250" hits="0" branch="false"/>
+						<line number="249" hits="0" branch="false"/>
 						<line number="251" hits="0" branch="false"/>
 						<line number="252" hits="0" branch="false"/>
-						<line number="254" hits="0" branch="false"/>
+						<line number="253" hits="0" branch="false"/>
+						<line number="255" hits="0" branch="false"/>
 						<line number="256" hits="0" branch="false"/>
-						<line number="258" hits="0" branch="true" condition-coverage="0% (0/10)">
+						<line number="258" hits="0" branch="false"/>
+						<line number="260" hits="0" branch="true" condition-coverage="0% (0/10)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>
 								<condition number="1" type="jump" coverage="0%"/>
@@ -19359,11 +19351,11 @@
 								<condition number="1" type="switch" coverage="0%"/>
 							</conditions>
 						</line>
-						<line number="261" hits="0" branch="false"/>
-						<line number="262" hits="0" branch="false"/>
 						<line number="263" hits="0" branch="false"/>
+						<line number="264" hits="0" branch="false"/>
 						<line number="265" hits="0" branch="false"/>
-						<line number="269" hits="0" branch="false"/>
+						<line number="267" hits="0" branch="false"/>
+						<line number="271" hits="0" branch="false"/>
 					</lines>
 				</class>
 			</classes>
