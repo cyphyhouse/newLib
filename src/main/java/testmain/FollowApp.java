@@ -213,7 +213,7 @@ public class FollowApp extends LogicThread {
                                 Random ran = new Random();
                                 break;
                             }
-                            if (hasMutex) {
+                            if (true) {
                                 System.out.println(name + " HAS MUTEX");
                                 //asgndsize = 5;//assigned.size();
                                 //Random r = new Random();

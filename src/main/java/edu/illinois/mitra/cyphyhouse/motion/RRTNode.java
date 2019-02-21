@@ -106,10 +106,18 @@ public class RRTNode {
 			System.out.println("curnode: " + addedNode.position.x+" "+ addedNode.position.y);
 			System.out.println("destnode: " + destNode.position.x+" "+ destNode.position.y);
 			System.out.println("RADIUS: " + radius);
-			if(obsList.validPath(destNode, addedNode, radius)){
-				System.out.println("HERE2");
+
+			boolean validpath = false;
+			try{
+				validpath = obsList.validPath(destNode, addedNode, radius);
+			}
+			catch{
+				System.out.println("VALID PATH FUNCTION FAILED");
+
+			}
+
+			if(validpath){
 				destNode.parent = addedNode;
-				System.out.println("HERE3");
 				stopNode = destNode;
 				try{
 					kd.insert(destNode.getValue(), destNode);
