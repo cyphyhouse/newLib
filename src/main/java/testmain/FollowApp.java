@@ -166,6 +166,7 @@ public class FollowApp extends LogicThread {
                 updatedests("tasks.txt", DEST_MSG, name, lineno);
             }
 
+            System.out.println(stage);
             //System.out.println(stage+" "+name);
             switch (stage) {
                 case PICK:
