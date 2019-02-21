@@ -53,7 +53,7 @@ public class FollowApp extends LogicThread {
 
 
     private boolean isLocked = false;
-    private boolean takeoff = true;
+    private boolean takeoff = false;
 
     private Queue<Integer> requests = new LinkedList();
     private Queue<Integer> requestIDXs = new LinkedList();
@@ -195,23 +195,7 @@ public class FollowApp extends LogicThread {
                             if (robotIndex == 0) {
                                 break;
                             }
-                            if (!takeoff) {
-                                System.out.println("HERE IN TAKEOFF");
-                                ItemPosition mypos = gvh.gps.getMyPosition();
-                                if (mypos == null) break;
-                                else {
-                                    ItemPosition takeoffpoint = new ItemPosition("takeoff", mypos.x, mypos.y, mypos.z + 1);
-                                    path = new Stack<ItemPosition>();
-                                    path.push(takeoffpoint);
-                                    gvh.plat.moat.goTo(takeoffpoint);
-                                    takeoff = true;
-                                    RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path) + "###mypos");
-                                    gvh.comms.addOutgoingMessage(pathmsg);
-                                    stage = Stage.GO;
-                                    System.out.println(name + " SENT TAKEOFF");
-                                    break;
-                                }
-                            }
+
                             updatePath = false;
 
                             if (destinations.isEmpty()) {
