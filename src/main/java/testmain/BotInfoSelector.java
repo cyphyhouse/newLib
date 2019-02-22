@@ -7,7 +7,9 @@ import edu.illinois.mitra.cyphyhouse.models.Model_iRobot;
 import edu.illinois.mitra.cyphyhouse.models.Model_Quadcopter;
 import edu.illinois.mitra.cyphyhouse.models.Model_Car;
 import edu.illinois.mitra.cyphyhouse.objects.Common;
-import edu.illinois.mitra.cyphyhouse.ros.JavaRosWrapper;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 /**JavaRosWrapper wrapper;
 
@@ -25,6 +27,32 @@ public class BotInfoSelector {
     public String ip;
     public String bluetooth;
     public TrackedRobot type;
+
+    public BotInfoSelector(String[] robotstr, int num) {
+
+        for(int i = 0; i<3; i++) {
+            String str_split[] = robotstr[i].split(": ");
+
+            switch (str_split[0]) {
+                case "vrpn":
+                    vrpn = str_split[1];
+                    break;
+                case "type":
+                    if (str_split[1].equals("Quadcopter")) {
+                        type = new Model_Quadcopter(name, 0, 0);
+                    } else if (str_split[1].equals("Car")) {
+                        type = new Model_Car(name, 0, 0);
+                    }
+                    break;
+                case "ip":
+                    ip = str_split[1];
+                    break;
+            }
+        }
+        name = "bot"+num;
+        System.out.println("name:"+ name + ", vrpn:"+ vrpn + ", ip:"+ ip);
+
+    }
 
 
     public BotInfoSelector(String color, int type, int deviceType) {

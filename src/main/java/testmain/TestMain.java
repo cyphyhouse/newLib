@@ -3,10 +3,12 @@ package testmain;
 import edu.illinois.mitra.cyphyhouse.gvh.GlobalVarHolder;
 import edu.illinois.mitra.cyphyhouse.gvh.RealGlobalVarHolder;
 import edu.illinois.mitra.cyphyhouse.interfaces.LogicThread;
-import edu.illinois.mitra.cyphyhouse.objects.Common;
-import edu.illinois.mitra.cyphyhouse.ros.JavaRosWrapper;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.HashMap;
+
+
 
 /**
  * Created by SC on 11/14/16.
@@ -18,7 +20,7 @@ public class TestMain {
         private static String[][] participants;
         private static int numRobots;
         private static BotInfoSelector[] botInfo;
-        private static int selectedRobot = 1;
+        private static int selectedRobot;
         volatile private static GlobalVarHolder gvh;
         private static LogicThread appToRun = null;
 
@@ -27,12 +29,8 @@ public class TestMain {
             // Load the participants
             //participants = IdentityLoader.loadIdentities(IDENTITY_FILE_URL);
             // Put number of robots being used here
-            numRobots = 2;
-            botInfo = new BotInfoSelector[numRobots];
-            // add color, robot type, and device type for each robot here
-            botInfo[0] = new BotInfoSelector("red", Common.QUADCOPTER, Common.HTCONEM7);
-            botInfo[1] = new BotInfoSelector("green", Common.QUADCOPTER, Common.HTCONEM7);
-            //botInfo[2] = new BotInfoSelector("blue", Common.CAR, Common.HTCONEM7);
+            readConfigFile("testmain_config.txt");
+            System.out.println("numRobots:"+numRobots+", selectedRobot"+selectedRobot);
 
 
             //botInfo[2] = new BotInfoSelector("blue", Common.ARDRONE2, Common.NEXUS7);
@@ -78,9 +76,44 @@ public class TestMain {
 
             init.launch(6, 10);
 
+        }
 
+        private static void readConfigFile(String filename) {
+            try(BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+                String st;
+                String[] robot_st = new String[3];
 
-			
+                while ((st = reader.readLine()) != null) {
+                    String st_split[] = st.split(": ");
+
+                    switch(st_split[0])
+                    {
+                        case "numRobots":
+                            numRobots = Integer.parseInt(st_split[1]);
+                            botInfo = new BotInfoSelector[numRobots];
+                            break;
+                        case "selectedRobot":
+                            selectedRobot = Integer.parseInt(st_split[1]);
+                            break;
+                        case "Robot":
+                            int robot_num = Integer.parseInt(st_split[1]);
+
+                            if (robot_num < numRobots) {
+                                for (int i = 0; i < 3; i++) {
+                                    robot_st[i] = reader.readLine();
+                                }
+
+                                //For this to work, need to initialize after numRobots
+                                botInfo[robot_num] = new BotInfoSelector(robot_st, robot_num);
+                            }
+                            break;
+                    }
+                }
+            }
+            catch(Exception e){
+                System.out.println("Failed to read config file");
+                e.printStackTrace();
+            }
         }
 
 }
