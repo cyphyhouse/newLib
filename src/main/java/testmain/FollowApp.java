@@ -724,9 +724,9 @@ public class FollowApp extends LogicThread {
         iposmsg = iposmsg.split(":")[1];
         iposmsg = iposmsg.split(";")[0];
         String[] parts = iposmsg.split(",");
-        int x = (int) (Float.parseFloat(parts[0]) * scale);
-        int y = (int) (Float.parseFloat(parts[1]) * scale);
-        int z = (int) (Float.parseFloat(parts[2]) * scale);
+        double x = (Float.parseFloat(parts[0]) * scale);
+        double y = (Float.parseFloat(parts[1]) * scale);
+        double z = (Float.parseFloat(parts[2]) * scale);
         String name = Integer.toString(j) + "-A";
         ItemPosition p = new ItemPosition(name, x, y, z);
         path.push(p);
