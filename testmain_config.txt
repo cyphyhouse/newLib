@@ -1,13 +1,13 @@
-numRobots: 2
+numRobots: 3
 selectedRobot: 0
 Robot: 0
 ip: 192.168.1.20
 type: Quadcopter
 vrpn: none
 Robot: 1
-ip: 192.168.1.26
-type: Quadcopter
-vrpn: cyphyhousecopter
+ip: 192.168.1.25
+type: Car
+vrpn: hotdec_car
 Robot: 2
 ip: 192.168.1.18
 type: Car
