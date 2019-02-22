@@ -264,7 +264,7 @@ public class FollowApp extends LogicThread {
                                                     boolean breakpath = false;
 
                                                     for (int i = 0; i < obs.size(); i++) {
-                                                        if (isClose(path, obs.get(i), 1.5)) {
+                                                        if (isClose(path, obs.get(i), 0.5)) {
                                                             System.out.println("PATH IS CROSSING ANOTHER ROBOT");
                                                             breakpath = true;
                                                             break;
@@ -533,7 +533,7 @@ public class FollowApp extends LogicThread {
                                                 boolean breakpath = false;
 
                                                 for (int i = 0; i < obs.size(); i++) {
-                                                    if (isClose(path, obs.get(i), 1.5)) {
+                                                    if (isClose(path, obs.get(i), 0.5)) {
                                                         breakpath = true;
                                                         break;
                                                     } else {
