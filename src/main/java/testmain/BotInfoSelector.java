@@ -35,7 +35,7 @@ public class BotInfoSelector {
 
             switch (str_split[0]) {
                 case "vrpn":
-                    vrpn = str_split[1];
+                    vrpn = "vrpn_client_node/"+str_split[1]+"/pose";
                     break;
                 case "type":
                     if (str_split[1].equals("Quadcopter")) {
