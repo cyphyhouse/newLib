@@ -171,7 +171,7 @@ public class FollowApp extends LogicThread {
         //System.out.println(name + " " +obs.size());
 
 
-        int car_or_drone = 1; /************* 0 FOR CAR, 1 FOR DRONE ***********/
+        int car_or_drone = 0; /************* 0 FOR CAR, 1 FOR DRONE ***********/
         while (true) {
             System.out.println("INSIDE THE WHILE LOOP");
             if(car_or_drone==0)
