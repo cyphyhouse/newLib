@@ -252,7 +252,7 @@ public class FollowApp extends LogicThread {
                                             if (assigned.get(asgnIndex) == 0) {
                                                 currentDestination = getDestination(destinations, asgnIndex);
 
-                                                if (currentDestination != null) {
+                                                if (currentDestination != null && currentDestination.z==0) {
                                                     System.out.println("COMPUTING PATH, DEST IS: " + currentDestination);
                                                     ItemPosition mypos = gvh.gps.getMyPosition();
                                                     System.out.println("MYPOS IS: " + mypos);
