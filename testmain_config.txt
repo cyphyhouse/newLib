@@ -1,7 +1,7 @@
-numRobots: 2
-selectedRobot: 1
+numRobots: 3
+selectedRobot: 0
 Robot: 0
-ip: 192.168.1.25
+ip: 192.168.1.20
 type: Computer
 vrpn: none
 Robot: 1
