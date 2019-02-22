@@ -23,7 +23,6 @@ public abstract class GlobalVarHolder {
 	public Logging log;
 	public Trace trace;
 	public GeneralJavaPlatform plat;
-	public int num_robots;
 	
 	/**
 	 * @param name The unique identifier of this agent

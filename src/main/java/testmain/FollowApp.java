@@ -135,14 +135,14 @@ public class FollowApp extends LogicThread {
          *
          * /*******************************************?*/
 
-        ItemPosition[] ipos = new ItemPosition[gvh.num_robots-1];
+        ItemPosition[] ipos = new ItemPosition[4];
         ipos[0] = new ItemPosition("base_computer",1000,1000,80);
         ipos[1] = new ItemPosition("car1",1000,1000,0);
         ipos[2] = new ItemPosition("car2",-1000,-1000,0);
         ipos[3] = new ItemPosition("car2",1000,-1000,0);
         ipos[4] = new ItemPosition("car2",-1000,-1000,0);
         ipos[5] = new ItemPosition("car2",-1000,-1000,0);
-        int number_of_stuff = gvh.num_robots-1;  /*********<<<<<<<<<<------------------- MAKE SURE TO CHANGE THIS ********/
+        int number_of_stuff = 4;  /*********<<<<<<<<<<------------------- MAKE SURE TO CHANGE THIS ********/
 
         for (int i = 0 ; i < number_of_stuff ; i ++) {
             Stack<ItemPosition> o = new Stack<ItemPosition>();
