@@ -419,7 +419,7 @@ public class FollowApp extends LogicThread {
                         msgId = msgId + 1;
                         inMutex0 = false;
                     }
-                    sleep(200);
+                    sleep(600);
                 }
 
         else if(car_or_drone == 1){
@@ -623,7 +623,7 @@ public class FollowApp extends LogicThread {
                     if (gvh.plat.moat.inMotion) {
                         stage = Stage.GO;
                     } else {
-                        sleep(500);
+                        sleep(800);
                         ItemPosition ip = path.pop();
 
 
@@ -669,7 +669,7 @@ public class FollowApp extends LogicThread {
                 msgId = msgId+1;
                 inMutex0 = false;
             }
-            sleep(200);
+            sleep(600);
 
 
 
