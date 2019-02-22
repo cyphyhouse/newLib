@@ -8,10 +8,14 @@ package testmain;
  */
 
 import edu.illinois.mitra.cyphyhouse.comms.RobotMessage;
+import edu.illinois.mitra.cyphyhouse.functions.DSMMultipleAttr;
 import edu.illinois.mitra.cyphyhouse.functions.GroupSetMutex;
 import edu.illinois.mitra.cyphyhouse.gvh.GlobalVarHolder;
+import edu.illinois.mitra.cyphyhouse.interfaces.DSM;
 import edu.illinois.mitra.cyphyhouse.interfaces.LogicThread;
 import edu.illinois.mitra.cyphyhouse.interfaces.MutualExclusion;
+import edu.illinois.mitra.cyphyhouse.models.Model_Quadcopter;
+import edu.illinois.mitra.cyphyhouse.models.Model_Car;
 import edu.illinois.mitra.cyphyhouse.motion.MotionParameters;
 import edu.illinois.mitra.cyphyhouse.motion.MotionParameters.COLAVOID_MODE_TYPE;
 import edu.illinois.mitra.cyphyhouse.motion.RRTNode;
@@ -35,6 +39,7 @@ public class FollowApp extends LogicThread {
     private int robotIndex;
 
     //Dsm initializations
+    private DSM dsm;
     private boolean wait0 = false;
     private boolean inMutex0 = false;
     private boolean updatePath = false;
@@ -112,11 +117,13 @@ public class FollowApp extends LogicThread {
 
         String intValue = name.replaceAll("[^0-9]", "");
         robotIndex = Integer.parseInt(intValue);
+        dsm = new DSMMultipleAttr(gvh);
         this.gvh = gvh;
     }
 
     @Override
     public List<Object> callStarL() {
+        dsm.createMW("testindex", 0);
 
         /*******************************************/
         /*******************************************?
@@ -128,13 +135,11 @@ public class FollowApp extends LogicThread {
          *
          * /*******************************************?*/
 
-        ItemPosition[] ipos = new ItemPosition[3]; //read from app specific config file.
+        ItemPosition[] ipos = new ItemPosition[3];
         ipos[0] = new ItemPosition("base_computer",1000,1000,80);
         ipos[1] = new ItemPosition("car1",1000,1000,0);
-        ipos[2] = new ItemPosition("car2",-1000,-1000,0);
-        ipos[3] = new ItemPosition("quadcopter1",-1000,1000,800);
-        ipos[4] = new ItemPosition("quadcopter2",1000,1000,800);
-        int number_of_stuff = 5;  /*********<<<<<<<<<<------------------- MAKE SURE TO CHANGE THIS ********/
+        //ipos[2] = new ItemPosition("car2",-1000,-1000,0);
+        int number_of_stuff = 2;  /*********<<<<<<<<<<------------------- MAKE SURE TO CHANGE THIS ********/
 
         for (int i = 0 ; i < number_of_stuff ; i ++) {
             Stack<ItemPosition> o = new Stack<ItemPosition>();
@@ -151,22 +156,290 @@ public class FollowApp extends LogicThread {
          *
          **/
 
-        int car_or_drone = 0; /************* 0 FOR CAR, 1 FOR DRONE ***********/
+        /*
+        pos = gvh.gps.get_robot_Positions();
+        Iterator it = pos.iterator();
+        while (it.hasNext()) {
+
+            ItemPosition ipos = (ItemPosition) it.next();
+            if (ipos.getName().equals(name)) {
+                continue;
+            }
+            Stack<ItemPosition> o = new Stack<ItemPosition>();
+            o.push(ipos);
+            obs.add(o);
+        }*/
+
+        //System.out.println(name + " " +obs.size());
+
+
+        int car_or_drone=-1; /************* 0 FOR CAR, 1 FOR DRONE ***********/
+        if(gvh.plat.model instanceof Model_Quadcopter){
+            car_or_drone = 1;
+        }
+        else if(gvh.plat.model instanceof Model_Car){
+            car_or_drone = 0;
+        }
 
         while (true) {
             System.out.println("INSIDE THE WHILE LOOP");
+            if(car_or_drone==0)
+                {
+                    System.out.println("ASSIGNED ARRAY IS: " + assigned);
+                /*System.out.println("BEGIN DESTINATIONS ARRAY PRINTOUT:");
+                for(int i=0; i<assigned.size(); i++){
+                    System.out.println(getDestination(destinations, i) + "\n");
+                }
+                System.out.println("END DESTINATIONS ARRAY PRINTOUT\n");*/
+
+                    lineno = 0;
+                    if (robotIndex == 0) {
+                        updatedests("tasks.txt", DEST_MSG, name, lineno);
+                    }
+
+                    System.out.println(stage);
+                    //System.out.println(stage+" "+name);
+                    switch (stage) {
+                        case PICK:
+                            if (robotIndex == 0) {
+                                break;
+                            }
+
+                            updatePath = false;
+
+                            if (destinations.isEmpty()) {
+                                System.out.println("DESTINATIONS IS EMPTY");
+                                ItemPosition mypos = gvh.gps.getMyPosition();
+                                if (mypos == null) {
+                                    break;
+                                } else {
+                                    System.out.println(mypos.toString());
+                                }
+                                RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, mypos.toString() + "###mypos");
+                                gvh.comms.addOutgoingMessage(pathmsg);
+                                stage = Stage.WAIT;
+                                break;
+                            } else {
+
+                                try {
+                                    if (!wait0) {
+                                        System.out.println("TRYING TO GET MUTEX");
+                                        String mutexreqmsg = String.valueOf(robotIndex) + " " + String.valueOf(msgId) + " REQUEST";
+                                        RobotMessage mutexrequestmsg = new RobotMessage("ALL", name, MUTEX_REQUEST_MSG, mutexreqmsg);
+                                        gvh.comms.addOutgoingMessage(mutexrequestmsg);
+                                        wait0 = true;
+                                        Random ran = new Random();
+                                        break;
+                                    }
+                                    if (hasMutex) {
+                                        System.out.println(name + " HAS MUTEX");
+                                        //asgndsize = 5;//assigned.size();
+                                        //Random r = new Random();
+                                        //asgnIndex = r.nextInt(asgndsize);
+                                        boolean foundpath = false;
+
+
+                                        int current_shortest_idx = 0;
+                                        double current_shortest_distance = Double.MAX_VALUE;
+
+                                        Map<Integer, Stack<ItemPosition>> path_map = new HashMap<Integer, Stack<ItemPosition>>();
+
+                                        for (asgnIndex = 0; asgnIndex < asgndsize; asgnIndex++) {
+
+                                            if (assigned.get(asgnIndex) == 0) {
+                                                currentDestination = getDestination(destinations, asgnIndex);
+
+                                                if (currentDestination != null) {
+                                                    System.out.println("COMPUTING PATH, DEST IS: " + currentDestination);
+                                                    ItemPosition mypos = gvh.gps.getMyPosition();
+                                                    System.out.println("MYPOS IS: " + mypos);
+                                                    RRTNode newRRT = new RRTNode();
+                                                    ObstacleList empty_list = new ObstacleList();
+                                                    path = newRRT.findRoute(mypos.heading, currentDestination, 100000, empty_list, -4, 4, -3, 3, mypos, 0.5);
+                                                    System.out.println("PATH IS: " + path);
+                                                    sleep(100);
+                                                    boolean breakpath = false;
+
+                                                    for (int i = 0; i < obs.size(); i++) {
+                                                        if (isClose(path, obs.get(i), 1.5)) {
+                                                            System.out.println("PATH IS CROSSING ANOTHER ROBOT");
+                                                            breakpath = true;
+                                                            break;
+                                                        } else {
+                                                        }
+                                                    }
+                                                    if (!breakpath) {
+                                                        path_map.put(asgnIndex, path);
+                                                        System.out.println("FOUND A PATH");
+                                                        //Calculate distance and check if it is the shortest
+                                                        //If it is, store this points IDX so we can get it again later
+                                                        double distance = Math.sqrt(Math.pow(mypos.x - currentDestination.x, 2) + Math.pow(mypos.y - currentDestination.y, 2) + Math.pow(mypos.z - currentDestination.z, 2));
+                                                        if (distance < current_shortest_distance) {
+                                                            current_shortest_distance = distance;
+                                                            current_shortest_idx = asgnIndex;
+                                                        }
+                                                        foundpath = true;
+                                                        //break;
+                                                    }
+                                                } else
+                                                    break;
+                                            }
+
+                                        }
+
+                                        System.out.println("ASSIGN INDEX IS: " + asgnIndex);
+                                        asgnIndex = current_shortest_idx;
+
+                                    /*//If a path is found, use the stored IDX to get the closest waypoint and set to currentDestination
+                                    if(foundpath){
+                                        System.out.println("FOUND PATH AND OUT OF FOR LOOP");
+                                        currentDestination = getDestination(destinations, current_shortest_idx);
+                                        ItemPosition mypos = gvh.gps.getMyPosition();
+                                        SimplePP newp = new SimplePP(mypos, currentDestination, 1);
+                                        path = newp.getPath();
+                                        System.out.println(currentDestination);
+                                        System.out.println("DONE GETTING DESTINATION");
+                                    }*/
+
+                                        path = path_map.get(asgnIndex);
+
+                                        //System.out.println("FOR LOOP DONE");
+                                        if (!foundpath) {
+                                            System.out.println("COULD NOT FIND A PATH");
+                                            inMutex0 = true;
+                                            wait0 = false;
+                                            break;
+                                        }
+                                        path.pop();
+                                        System.out.println("SENDING CAR PATH: " + path);
+                                        RobotMessage asgnmsg = new RobotMessage("ALL", name, ASGN_MSG, String.valueOf(asgnIndex));
+                                        RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path) + "###path");
+                                        gvh.comms.addOutgoingMessage(pathmsg);
+                                        gvh.comms.addOutgoingMessage(asgnmsg);
+                                        //sleep(800);
+                                        assigned.set(asgnIndex, 1);
+
+                                        updatePath = true;
+                                        inMutex0 = true;
+                                        wait0 = false;
+
+                                    } else {
+                                        System.out.println("NO MUTEX; BREAKING");
+                                        if (updatePath) {
+
+                                        } else {
+                                            RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, gvh.gps.getMyPosition().toString() + "###mypos");
+                                            gvh.comms.addOutgoingMessage(pathmsg);
+                                            updatePath = false;
+
+                                        }
+                                        break;
+                                    }
+                                } catch (NullPointerException e) {
+                                    stage = Stage.WAIT;
+                                    //lineno = lineno - 1;
+                                    break;
+                                }
+                                if (currentDestination == null) {
+                                    stage = Stage.WAIT;
+                                    break;
+                                }
+
+                                System.out.println("CALLING GOTO. DESTINATION IS: " + currentDestination);
+                                //Send all points in path to car in one go
+                                while (!path.empty()) {
+                                    int frameID = 0;
+                                    if (path.size() == 1) {
+                                        frameID = 1;
+                                    }
+                                    currentDestination = path.pop();
+                                    currentDestination.z = frameID;    //Since Java doesnt want me to create a new goto function without,
+                                    //we just gonna pass the frameID through the Z coord since its not being used
+                                    //and I want this to run $#%#$@.
+                                    gvh.plat.moat.goTo(currentDestination);
+                                }
+                                stage = Stage.GO;
+
+                            }
+
+                            break;
+                        case GO:
+                            System.out.println("IN GO STAGE");
+                            if (gvh.plat.moat.inMotion) {
+                                stage = Stage.GO;
+                            } else {
+                                stage = Stage.PICK;
+
+                            /*
+                            ItemPosition ip = path.pop();
+
+
+                            if (path.empty()) {
+                                if(!assigned.contains(0))
+                                    stage = Stage.PICK;
+                                else {
+                                    if (ip.z  == 0) {
+                                        stage = Stage.DONE;
+                                    }
+                                    else {
+                                        stage = Stage.PICK;
+                                    }
+                                    //System.out.println(name + "Done a point " + ip);
+                                }
+                            } else {
+                                currentDestination = path.peek();
+                                gvh.plat.moat.goTo(currentDestination);
+                            }
+                            break;*/
+                            }
+
+                            break;
+                        case WAIT:
+                            //System.out.println("in wait");
+                            stage = Stage.PICK;
+                            break;
+
+                        case DONE:
+                            ItemPosition mypos = gvh.gps.getMyPosition();
+                            RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, mypos.toString() + "###mypos");
+                            gvh.comms.addOutgoingMessage(pathmsg);
+                            break;
+
+                    }
+                    Random ran = new Random();
+                    if (inMutex0) {
+                        System.out.println(name + " RELEASING MUTEX");
+                        hasMutex = false;
+                        String releaseMutex = String.valueOf(robotIndex) + " " + String.valueOf(msgId);
+                        RobotMessage mutexreleasemsg = new RobotMessage("ALL", name, MUTEX_RELEASE_MSG, releaseMutex);
+                        gvh.comms.addOutgoingMessage(mutexreleasemsg);
+                        msgId = msgId + 1;
+                        inMutex0 = false;
+                    }
+                    sleep(600);
+                }
+
+        else if(car_or_drone == 1){
+            System.out.println("DOING DRONE SHIT");
+            //System.out.println("ASSIGNED ARRAY IS: " + assigned);
+            /*System.out.println("BEGIN DESTINATIONS ARRAY PRINTOUT:");
+            for(int i=0; i<assigned.size(); i++){
+                System.out.println(getDestination(destinations, i) + "\n");
+            }
+            System.out.println("END DESTINATIONS ARRAY PRINTOUT\n");*/
+
             lineno = 0;
             if (robotIndex == 0) {
                 updatedests("tasks.txt", DEST_MSG, name, lineno);
             }
 
+            //System.out.println(stage+" "+name);
             switch (stage) {
                 case PICK:
                     if (robotIndex == 0) {
                         break;
                     }
-                    else if (car_or_drone == 1) {
-                        if (!takeoff) {
+                    if (!takeoff) {
                         ItemPosition mypos = gvh.gps.getMyPosition();
                         if (mypos == null) break;
                         else {
@@ -182,7 +455,6 @@ public class FollowApp extends LogicThread {
                             break;
                         }
                     }
-                    }
                     updatePath = false;
 
                     if (destinations.isEmpty()) {
@@ -190,7 +462,9 @@ public class FollowApp extends LogicThread {
                         if (mypos == null) {
                             break;
                         }
-
+                        else {
+                            //System.out.println(mypos.toString());
+                        }
                         RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, mypos.toString() + "###mypos");
                         gvh.comms.addOutgoingMessage(pathmsg);
                         stage = Stage.WAIT;
@@ -207,186 +481,113 @@ public class FollowApp extends LogicThread {
                                 break;
                             }
                             if (hasMutex) {
-                                if (car_or_drone == 1) {
-                                    boolean foundpath = false;
+                                // System.out.println(name + " HAS MUTEX");
+                                //asgndsize = 5;//assigned.size();
+                                //Random r = new Random();
+                                //asgnIndex = r.nextInt(asgndsize);
+                                boolean foundpath = false;
 
 
-                                    int current_shortest_idx = 0;
-                                    double current_shortest_distance = Double.MAX_VALUE;
+                                int current_shortest_idx=0;
+                                double current_shortest_distance = Double.MAX_VALUE;
 
-                                    for (asgnIndex = 0; asgnIndex < asgndsize; asgnIndex++) {
+                                for (asgnIndex=0; asgnIndex < asgndsize; asgnIndex++) {
 
-                                        boolean skip_land_command = false;
+                                    boolean skip_land_command = false;
 
-                                        if (assigned.get(asgnIndex) == 0) {
-                                            currentDestination = getDestination(destinations, asgnIndex);
-                                            if (currentDestination.z < 0) {
-                                                //check if there are any non land commands to do
-                                                for (int i = 0; i < asgndsize; i++) {
-                                                    if (assigned.get(i) == 0) {
-                                                        ItemPosition checkDestination = getDestination(destinations, i);
-                                                        if (checkDestination.z >= 0) {
-                                                            skip_land_command = true;
-                                                            break;
-                                                        }
+                                    if(assigned.get(asgnIndex) == 0){
+                                        currentDestination = getDestination(destinations, asgnIndex);
+                                        if(currentDestination.z < 0){
+                                            //check if there are any non land commands to do
+                                            for(int i=0; i < asgndsize; i++){
+                                                if(assigned.get(i) == 0) {
+                                                    ItemPosition checkDestination = getDestination(destinations, i);
+                                                    if(checkDestination.z >= 0){
+                                                        skip_land_command = true;
+                                                        break;
                                                     }
                                                 }
                                             }
                                         }
-
-
-                                        if (!skip_land_command) {
-                                            if (assigned.get(asgnIndex) == 0) {
-                                                currentDestination = getDestination(destinations, asgnIndex);
-
-                                                if (currentDestination.z < 0 && currentDestination != null) {
-                                                    foundpath = true;
-                                                    current_shortest_idx = asgnIndex;
-                                                    break;
-                                                }
-
-                                                if (currentDestination != null && currentDestination.z > 0) {
-                                                    ItemPosition mypos = gvh.gps.getMyPosition();
-                                                    SimplePP newp = new SimplePP(mypos, currentDestination, 1);
-                                                    path = newp.getPath();
-                                                    sleep(100);
-                                                    boolean breakpath = false;
-
-                                                    for (int i = 0; i < obs.size(); i++) {
-                                                        if (isClose(path, obs.get(i), 1.5)) {
-                                                            breakpath = true;
-                                                            break;
-                                                        } else {
-                                                        }
-                                                    }
-                                                    if (!breakpath) {
-                                                        //Calculate distance and check if it is the shortest
-                                                        //If it is, store this points IDX so we can get it again later
-                                                        double distance = Math.sqrt(Math.pow(mypos.x - currentDestination.x, 2) + Math.pow(mypos.y - currentDestination.y, 2) + Math.pow(mypos.z - currentDestination.z, 2));
-                                                        if (distance < current_shortest_distance) {
-                                                            current_shortest_distance = distance;
-                                                            current_shortest_idx = asgnIndex;
-                                                        }
-                                                        foundpath = true;
-                                                        //break;
-                                                    }
-                                                } else
-                                                    break;
-                                            }
-                                        }
                                     }
 
-                                    asgnIndex = current_shortest_idx;
 
-                                    //If a path is found, use the stored IDX to get the closest waypoint and set to currentDestination
-                                    if (foundpath) {
-                                        // System.out.println("FOUND PATH AND OUT OF FOR LOOP");
-                                        currentDestination = getDestination(destinations, current_shortest_idx);
-                                        ItemPosition mypos = gvh.gps.getMyPosition();
-                                        SimplePP newp = new SimplePP(mypos, currentDestination, 1);
-                                        path = newp.getPath();
-                                    }
-
-                                    if (!foundpath) {
-                                        inMutex0 = true;
-                                        wait0 = false;
-                                        break;
-                                    }
-
-                                    path.pop();
-                                    currentDestination = path.peek();
-                                    RobotMessage asgnmsg = new RobotMessage("ALL", name, ASGN_MSG, String.valueOf(asgnIndex));
-                                    RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path) + "###path");
-                                    gvh.comms.addOutgoingMessage(pathmsg);
-                                    gvh.comms.addOutgoingMessage(asgnmsg);
-                                    assigned.set(asgnIndex, 1);
-
-                                    updatePath = true;
-                                    inMutex0 = true;
-                                    wait0 = false;
-                                }
-                                else if (car_or_drone == 0) {
-                                    System.out.println(name + " HAS MUTEX");
-                                    //asgndsize = 5;//assigned.size();
-                                    //Random r = new Random();
-                                    //asgnIndex = r.nextInt(asgndsize);
-                                    boolean foundpath = false;
-
-
-                                    int current_shortest_idx = 0;
-                                    double current_shortest_distance = Double.MAX_VALUE;
-
-                                    Map<Integer, Stack<ItemPosition>> path_map = new HashMap<Integer, Stack<ItemPosition>>();
-
-                                    for (asgnIndex = 0; asgnIndex < asgndsize; asgnIndex++) {
-
+                                    if(!skip_land_command) {
                                         if (assigned.get(asgnIndex) == 0) {
                                             currentDestination = getDestination(destinations, asgnIndex);
 
-                                            if (currentDestination != null) {
-                                                System.out.println("COMPUTING PATH, DEST IS: " + currentDestination);
+                                            if(currentDestination.z < 0 && currentDestination != null){
+                                                foundpath = true;
+                                                current_shortest_idx = asgnIndex;
+                                                break;
+                                            }
+
+                                            if (currentDestination != null && currentDestination.z>0) {
                                                 ItemPosition mypos = gvh.gps.getMyPosition();
-                                                System.out.println("MYPOS IS: " + mypos);
-                                                RRTNode newRRT = new RRTNode();
-                                                ObstacleList empty_list = new ObstacleList();
-                                                path = newRRT.findRoute(mypos.heading, currentDestination, 100000, empty_list, -4, 4, -3, 3, mypos, 0.5);
-                                                System.out.println("PATH IS: " + path);
+                                                SimplePP newp = new SimplePP(mypos, currentDestination, 1);
+                                                path = newp.getPath();
                                                 sleep(100);
                                                 boolean breakpath = false;
 
                                                 for (int i = 0; i < obs.size(); i++) {
                                                     if (isClose(path, obs.get(i), 1.5)) {
-                                                        System.out.println("PATH IS CROSSING ANOTHER ROBOT");
                                                         breakpath = true;
                                                         break;
                                                     } else {
                                                     }
                                                 }
                                                 if (!breakpath) {
-                                                    path_map.put(asgnIndex, path);
-                                                    System.out.println("FOUND A PATH");
                                                     //Calculate distance and check if it is the shortest
                                                     //If it is, store this points IDX so we can get it again later
-                                                    double distance = Math.sqrt(Math.pow(mypos.x - currentDestination.x, 2) + Math.pow(mypos.y - currentDestination.y, 2) + Math.pow(mypos.z - currentDestination.z, 2));
-                                                    if (distance < current_shortest_distance) {
+                                                    double distance = Math.sqrt(Math.pow(mypos.x-currentDestination.x,2)+Math.pow(mypos.y-currentDestination.y,2)+Math.pow(mypos.z-currentDestination.z,2));
+                                                    if(distance < current_shortest_distance){
                                                         current_shortest_distance = distance;
                                                         current_shortest_idx = asgnIndex;
                                                     }
                                                     foundpath = true;
+                                                    //break;
                                                 }
                                             } else
                                                 break;
                                         }
-
                                     }
+                                }
 
-                                    System.out.println("ASSIGN INDEX IS: " + asgnIndex);
-                                    asgnIndex = current_shortest_idx;
+                                // System.out.println("ASSIGN INDEX IS: " + asgnIndex);
+                                asgnIndex = current_shortest_idx;
 
+                                //If a path is found, use the stored IDX to get the closest waypoint and set to currentDestination
+                                if(foundpath){
+                                    // System.out.println("FOUND PATH AND OUT OF FOR LOOP");
+                                    currentDestination = getDestination(destinations, current_shortest_idx);
+                                    ItemPosition mypos = gvh.gps.getMyPosition();
+                                    SimplePP newp = new SimplePP(mypos, currentDestination, 1);
+                                    path = newp.getPath();
+                                    //System.out.println(currentDestination);
+                                    // System.out.println("DONE GETTING DESTINATION");
+                                }
 
-                                    path = path_map.get(asgnIndex);
-
-                                    if (!foundpath) {
-                                        System.out.println("COULD NOT FIND A PATH");
-                                        inMutex0 = true;
-                                        wait0 = false;
-                                        break;
-                                    }
-
-
-                                    path.pop();
-                                    System.out.println("SENDING CAR PATH: " + path);
-
-                                    RobotMessage asgnmsg = new RobotMessage("ALL", name, ASGN_MSG, String.valueOf(asgnIndex));
-                                    RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path) + "###path");
-                                    gvh.comms.addOutgoingMessage(pathmsg);
-                                    gvh.comms.addOutgoingMessage(asgnmsg);
-                                    assigned.set(asgnIndex, 1);
-
-                                    updatePath = true;
+                                //System.out.println("FOR LOOP DONE");
+                                if (!foundpath) {
+                                    // System.out.println("COULD NOT FIND A PATH");
                                     inMutex0 = true;
                                     wait0 = false;
+                                    break;
                                 }
+                                // System.out.println("THE PATH IS: " + path);
+                                path.pop();
+                                currentDestination = path.peek();
+                                RobotMessage asgnmsg = new RobotMessage("ALL", name, ASGN_MSG, String.valueOf(asgnIndex));
+                                RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path) + "###path");
+                                gvh.comms.addOutgoingMessage(pathmsg);
+                                gvh.comms.addOutgoingMessage(asgnmsg);
+                                //sleep(800);
+                                assigned.set(asgnIndex,1);
+
+                                updatePath = true;
+                                inMutex0 = true;
+                                wait0 = false;
+
                             } else {
                                 if (updatePath) {
 
@@ -400,28 +601,16 @@ public class FollowApp extends LogicThread {
                             }
                         } catch (NullPointerException e) {
                             stage = Stage.WAIT;
+                            //lineno = lineno - 1;
                             break;
                         }
                         if (currentDestination == null) {
                             stage = Stage.WAIT;
                             break;
                         }
-                        if (car_or_drone == 0) {
-                            while (!path.empty()) {
-                                int frameID = 0;
-                                if (path.size() == 1) {
-                                    frameID = 1;
-                                }
-                                currentDestination = path.pop();
-                                currentDestination.z = frameID;    //Since Java doesnt want me to create a new goto function without,
-                                //we just gonna pass the frameID through the Z coord since its not being used
-                                //and I want this to run $#%#$@.
-                                gvh.plat.moat.goTo(currentDestination);
-                            }
-                        }
-                        else if (car_or_drone == 1) {
-                            gvh.plat.moat.goTo(currentDestination);
-                        }
+
+                        //   System.out.println("CALLING GOTO. DESTINATION IS: " + currentDestination);
+                        gvh.plat.moat.goTo(currentDestination);
                         stage = Stage.GO;
 
                     }
@@ -431,35 +620,32 @@ public class FollowApp extends LogicThread {
                     if (gvh.plat.moat.inMotion) {
                         stage = Stage.GO;
                     } else {
-                        if (car_or_drone == 0){
-                            stage = Stage.PICK;
-                            break;
-                        }
-                        else if(car_or_drone == 1) {
-                            sleep(800);
-                            ItemPosition ip = path.pop();
+                        sleep(800);
+                        ItemPosition ip = path.pop();
 
 
-                            if (path.empty()) {
-                                if (!assigned.contains(0))
-                                    stage = Stage.PICK;
-                                else {
-                                    if (ip.z == 0) {
-                                        stage = Stage.DONE;
-                                    } else {
-                                        stage = Stage.PICK;
-                                    }
+                        if (path.empty()) {
+                            if(!assigned.contains(0))
+                                stage = Stage.PICK;
+                            else {
+                                if (ip.z  == 0) {
+                                    stage = Stage.DONE;
                                 }
-                            } else {
-                                currentDestination = path.peek();
-                                gvh.plat.moat.goTo(currentDestination);
+                                else {
+                                    stage = Stage.PICK;
+                                }
+                                //System.out.println(name + "Done a point " + ip);
                             }
-                            break;
+                        } else {
+                            currentDestination = path.peek();
+                            gvh.plat.moat.goTo(currentDestination);
                         }
+                        break;
                     }
 
                     break;
                 case WAIT:
+                    //System.out.println("in wait");
                     stage = Stage.PICK;
                     break;
 
@@ -470,9 +656,9 @@ public class FollowApp extends LogicThread {
                     break;
 
             }
-
             Random ran = new Random();
             if (inMutex0) {
+                //  System.out.println(name + " RELEASING MUTEX");
                 hasMutex = false;
                 String releaseMutex = String.valueOf(robotIndex) + " "+ String.valueOf(msgId);
                 RobotMessage mutexreleasemsg = new RobotMessage("ALL", name, MUTEX_RELEASE_MSG,releaseMutex);
@@ -493,6 +679,7 @@ public class FollowApp extends LogicThread {
 
 
 
+            }
         }
     }
 
@@ -569,6 +756,7 @@ public class FollowApp extends LogicThread {
         }
 
         if (m.getMID() == MUTEX_RELEASE_MSG){
+            //System.out.println(name + " got release msg " + alreadyReceived);
         }
         if (m.getMID() == MUTEX_RELEASE_MSG && robotIndex == 0 && !alreadyReceived) {
             System.out.println("MUTEX RELEASE FROM BOT "+m.getFrom());
@@ -576,6 +764,8 @@ public class FollowApp extends LogicThread {
             gvh.log.d(TAG, "received release message from " + m.getFrom());
             String releasemsg = m.getContents().toString().replace("`","");
 
+            //System.out.println(name + " " + releasemsg);
+            //System.out.println("the queue is: " + requests);
 
             int releaseid = Integer.parseInt(releasemsg.split(" ")[0]);
             int msgid = Integer.parseInt(releasemsg.split(" ")[1]);
@@ -591,6 +781,7 @@ public class FollowApp extends LogicThread {
                     msgid = requestIDXs.peek();
                     String grantmsgstr = String.valueOf(requestid)+" "+String.valueOf(msgid);
                     RobotMessage grantmsg = new RobotMessage("ALL", name, MUTEX_GRANT_MSG, grantmsgstr  );
+                    //System.out.println(grantmsgstr);
                     gvh.comms.addOutgoingMessage(grantmsg);
                     isLocked = true;
 
@@ -604,9 +795,11 @@ public class FollowApp extends LogicThread {
             mutexGrantMsgs.add(m);
             gvh.log.d(TAG, "received grant message from " + m.getFrom());
             String grantmsg = m.getContents().toString().replace("`","");
+            //System.out.println(name + " " + grantmsg);
             int grantrobotid = Integer.parseInt(grantmsg.split(" ")[0]);
             int grantmsgid = Integer.parseInt(grantmsg.split(" ")[1]);
 
+            //System.out.println(name + " " + grantmsg + " " + msgId);
             if (grantrobotid == robotIndex && grantmsgid == msgId) {
                 hasMutex = true;
             }
@@ -619,9 +812,14 @@ public class FollowApp extends LogicThread {
             assignedMsgs.add(m);
             gvh.log.d(TAG, "received assignment message from " + m.getFrom());
 
+            //System.out.println(name + " beginning asgnmsg set");
             String asgnmsg = m.getContents().toString().replace("`", "");
             int vectorid = Integer.parseInt(asgnmsg);
+            //System.out.println("reached here on "+ name);
+            //System.out.println("assigned size " + assigned.size());
+            //System.out.println("assigned size " + assigned.size());
             assigned.set(vectorid, 1);
+            //System.out.println(name + " done asgnmsg set");
         }
 
         if (m.getMID() == DEST_MSG && !m.getFrom().equals(name) && !alreadyReceived) {
@@ -634,6 +832,7 @@ public class FollowApp extends LogicThread {
             taskLocations.put(p.getName(), new Task(p, i));
             assigned.add(0);
             asgndsize++;
+            //assigned.add(assigned.size(), 0);
 
         }
 
@@ -646,13 +845,20 @@ public class FollowApp extends LogicThread {
             int sentIndex = Integer.parseInt(m.getFrom().replaceAll("[^0-9]", ""));
             if (type.equalsIgnoreCase("mypos")) {
                 Stack<ItemPosition> path = msgtoiposstack(contents, j, 1);
+                //System.out.println(path+" "+name);
                 if (sentIndex > robotIndex) {
 
                     obs.set(sentIndex - 1, path);
 
+                    //System.out.println((sentIndex-1)+" "+sentIndex+" "+robotIndex+ " \n");
+
+                    //System.out.println(obs.get(sentIndex-1)+" "+sentIndex+" "+robotIndex);
                 } else {
                     obs.set(sentIndex, path);
 
+                    //System.out.println((sentIndex)+" "+sentIndex+" "+robotIndex+ " \n");
+
+                    //System.out.println(obs.get(sentIndex)+" "+sentIndex+" "+robotIndex);
 
                 }
 
@@ -667,6 +873,9 @@ public class FollowApp extends LogicThread {
                         System.out.println("IGNORE THIS SHIT FOR NOW followapp line 596");
                     }
 
+                    //System.out.println((sentIndex-1)+" "+sentIndex+" "+robotIndex+ " \n");
+
+                    //System.out.println(obs.get(sentIndex-1)+" "+sentIndex+" "+robotIndex);
                 } else {
                     try {
                         obs.set(sentIndex, path);
@@ -675,8 +884,12 @@ public class FollowApp extends LogicThread {
                         System.out.println("IGNORE THIS SHIT FOR NOW followapp line 607");
                     }
 
+                    //System.out.println((sentIndex)+" "+sentIndex+" "+robotIndex+ " \n");
+
+                    //System.out.println(obs.get(sentIndex)+" "+sentIndex+" "+robotIndex);
 
                 }
+                //String[] pathelements = contents.split("@@@");
             }
 
         }
@@ -724,9 +937,9 @@ public class FollowApp extends LogicThread {
         iposmsg = iposmsg.split(":")[1];
         iposmsg = iposmsg.split(";")[0];
         String[] parts = iposmsg.split(",");
-        double x = (Float.parseFloat(parts[0]) * scale);
-        double y = (Float.parseFloat(parts[1]) * scale);
-        double z = (Float.parseFloat(parts[2]) * scale);
+        int x = (int) (Float.parseFloat(parts[0]) * scale);
+        int y = (int) (Float.parseFloat(parts[1]) * scale);
+        int z = (int) (Float.parseFloat(parts[2]) * scale);
         String name = Integer.toString(j) + "-A";
         ItemPosition p = new ItemPosition(name, x, y, z);
         path.push(p);
@@ -763,6 +976,21 @@ public class FollowApp extends LogicThread {
         return map.get(key);
     }
 
+    private <X, T> T getTask(Map<X, T> map, int index) {
+        String key = Integer.toString(index) + "-A";
+        return map.get(key);
+    }
+
+    private <X, T> void getUnassignedTask(Map<X, T> map) {
+        Iterator it = map.values().iterator();
+        while (it.hasNext()) {
+            //System.out.println("here " + it.next().toString());
+
+
+        }
+
+
+    }
 
     private boolean isclosetobots(Stack<ItemPosition> pathstack, Vector<Stack<ItemPosition>> robotStack, double mindist) {
         int i = robotStack.size();
@@ -870,6 +1098,7 @@ public class FollowApp extends LogicThread {
         double Dp_x = w.x + u_x - v_x;
         double Dp_y = w.y + u_y - v_y;
         double Dp_z = w.z + u_z - v_z;
+        //Point3d Dp = new Point3d(w.x + u.x - v.x, w.y + u.y - v.y, w.z + u.z - v.z);
 
         double distance = Math.sqrt(Dp_x * Dp_x + Dp_y * Dp_y + Dp_z * Dp_z);
 
@@ -885,22 +1114,36 @@ public class FollowApp extends LogicThread {
     private boolean isClose(Stack<ItemPosition> pathstack, Stack<ItemPosition> obstack, double mindist) {
         int i = pathstack.size();
         int k = obstack.size();
+        //System.out.println("obstack size is " + k);
 
         for (int j = 1; j < i; j++) {
             ItemPosition start = pathstack.get(j - 1);
             ItemPosition next = pathstack.get(j);
             if (k == 1) {
+                /*System.out.println(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ");
+                System.out.println(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ");
+                System.out.println(pathstack);
+                System.out.println(next);
+                System.out.println(start);
+                System.out.println(obstack.peek());*/
 
                 int distance = closestDist(start, next, obstack.peek(), obstack.peek());
+                /*System.out.println(distance);
+                System.out.println(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ");
+                System.out.println(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ");*/
+                //System.out.println(distance);
+                //System.out.println(name + " path point distance " + distance);
                 if (distance <= mindist) {
                     System.out.println("DIST IS: " + distance);
                     return true;
                 }
             } else {
                 for (int p = 1; p < k; p++) {
+                    //System.out.println("checking for cross paths");
                     ItemPosition start_stack = obstack.get(p - 1);
                     ItemPosition next_stack = obstack.get(p);
                     int distance = closestDist(start, next, start_stack, next_stack);
+                    //System.out.println(name + " path stack distance " + distance);
                     if (distance <= mindist) {
                         System.out.println("DIST IS: " + distance);
                         return true;
