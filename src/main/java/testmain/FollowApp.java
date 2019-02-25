@@ -340,7 +340,7 @@ public class FollowApp extends LogicThread {
                                         wait0 = false;
 
                                     } else {
-                                        System.out.println("NO MUTEX; BREAKING");
+                                        //System.out.println("NO MUTEX; BREAKING");
                                         if (updatePath) {
 
                                         } else {
@@ -436,7 +436,7 @@ public class FollowApp extends LogicThread {
                 }
 
         else if(car_or_drone == 1){
-            System.out.println("DOING DRONE SHIT");
+            //System.out.println("DOING DRONE SHIT");
             //System.out.println("ASSIGNED ARRAY IS: " + assigned);
             /*System.out.println("BEGIN DESTINATIONS ARRAY PRINTOUT:");
             for(int i=0; i<assigned.size(); i++){
