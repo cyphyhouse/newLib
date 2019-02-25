@@ -187,10 +187,10 @@ public class FollowApp extends LogicThread {
         }
 
         while (true) {
-            System.out.println("INSIDE THE WHILE LOOP");
+            //System.out.println("INSIDE THE WHILE LOOP");
             if(car_or_drone==0)
                 {
-                    System.out.println("ASSIGNED ARRAY IS: " + assigned);
+                    //System.out.println("ASSIGNED ARRAY IS: " + assigned);
                 /*System.out.println("BEGIN DESTINATIONS ARRAY PRINTOUT:");
                 for(int i=0; i<assigned.size(); i++){
                     System.out.println(getDestination(destinations, i) + "\n");
@@ -202,7 +202,7 @@ public class FollowApp extends LogicThread {
                         updatedests("tasks.txt", DEST_MSG, name, lineno);
                     }
 
-                    System.out.println(stage);
+                    //System.out.println(stage);
                     //System.out.println(stage+" "+name);
                     switch (stage) {
                         case PICK:
@@ -213,12 +213,12 @@ public class FollowApp extends LogicThread {
                             updatePath = false;
 
                             if (destinations.isEmpty()) {
-                                System.out.println("DESTINATIONS IS EMPTY");
+                                //System.out.println("DESTINATIONS IS EMPTY");
                                 ItemPosition mypos = gvh.gps.getMyPosition();
                                 if (mypos == null) {
                                     break;
                                 } else {
-                                    System.out.println(mypos.toString());
+                                    //System.out.println(mypos.toString());
                                 }
                                 RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, mypos.toString() + "###mypos");
                                 gvh.comms.addOutgoingMessage(pathmsg);
@@ -228,7 +228,7 @@ public class FollowApp extends LogicThread {
 
                                 try {
                                     if (!wait0) {
-                                        System.out.println("TRYING TO GET MUTEX");
+                                        //System.out.println("TRYING TO GET MUTEX");
                                         String mutexreqmsg = String.valueOf(robotIndex) + " " + String.valueOf(msgId) + " REQUEST";
                                         RobotMessage mutexrequestmsg = new RobotMessage("ALL", name, MUTEX_REQUEST_MSG, mutexreqmsg);
                                         gvh.comms.addOutgoingMessage(mutexrequestmsg);
@@ -237,7 +237,7 @@ public class FollowApp extends LogicThread {
                                         break;
                                     }
                                     if (hasMutex) {
-                                        System.out.println(name + " HAS MUTEX");
+                                        //System.out.println(name + " HAS MUTEX");
                                         //asgndsize = 5;//assigned.size();
                                         //Random r = new Random();
                                         //asgnIndex = r.nextInt(asgndsize);
@@ -257,7 +257,7 @@ public class FollowApp extends LogicThread {
                                                 if (currentDestination != null && currentDestination.z==0) {
                                                     System.out.println("COMPUTING PATH, DEST IS: " + currentDestination);
                                                     ItemPosition mypos = gvh.gps.getMyPosition();
-                                                    System.out.println("MYPOS IS: " + mypos);
+                                                    //System.out.println("MYPOS IS: " + mypos);
                                                     RRTNode newRRT = new RRTNode();
                                                     ObstacleList empty_list = new ObstacleList();
                                                     try {
@@ -292,6 +292,8 @@ public class FollowApp extends LogicThread {
                                                     catch (Exception e) {
                                                         System.out.println("something got fucked up");
                                                         foundpath = false;
+                                                        e.printStackTrace();
+
                                                     }
                                                 } else {
                                                     asgnIndex++;
@@ -301,7 +303,7 @@ public class FollowApp extends LogicThread {
 
                                         }
 
-                                        System.out.println("ASSIGN INDEX IS: " + asgnIndex);
+                                        //System.out.println("ASSIGN INDEX IS: " + asgnIndex);
                                         asgnIndex = current_shortest_idx;
 
                                     /*//If a path is found, use the stored IDX to get the closest waypoint and set to currentDestination
