@@ -248,8 +248,8 @@ public class FollowApp extends LogicThread {
                                         double current_shortest_distance = Double.MAX_VALUE;
 
                                         Map<Integer, Stack<ItemPosition>> path_map = new HashMap<Integer, Stack<ItemPosition>>();
-
-                                        for (asgnIndex = 0; asgnIndex < asgndsize; asgnIndex++) {
+                                        asgnIndex = 0;
+                                        while (asgnIndex < asgndsize) {
 
                                             if (assigned.get(asgnIndex) == 0) {
                                                 currentDestination = getDestination(destinations, asgnIndex);
@@ -286,8 +286,11 @@ public class FollowApp extends LogicThread {
                                                         foundpath = true;
                                                         //break;
                                                     }
-                                                } else
+                                                    asgnIndex++;
+                                                } else {
+                                                    asgnIndex++;
                                                     break;
+                                                }
                                             }
 
                                         }
