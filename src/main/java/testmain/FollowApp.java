@@ -146,8 +146,10 @@ public class FollowApp extends LogicThread {
 
         for (int i = 0 ; i < number_of_stuff ; i ++) {
             Stack<ItemPosition> o = new Stack<ItemPosition>();
-            if (i != robotIndex)
-                o.push(ipos[i]);
+            if (i == 2) 
+		o.push(ipos[3]);
+            if (i == 3) 
+		o.push(ipos[2]);
             obs.add(o);
         }
 
