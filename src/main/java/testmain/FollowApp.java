@@ -260,9 +260,9 @@ public class FollowApp extends LogicThread {
                                                     System.out.println("MYPOS IS: " + mypos);
                                                     RRTNode newRRT = new RRTNode();
                                                     ObstacleList empty_list = new ObstacleList();
-                                                    path = newRRT.findRoute(mypos.heading, currentDestination, 100000, empty_list, -4, 4, -3, 3, mypos, 0.5);
+                                                    path = newRRT.findRoute(mypos.heading, currentDestination, 100000, empty_list, -4, 4, -3, 3, mypos, 0.25);
                                                     System.out.println("PATH IS: " + path);
-                                                    sleep(100);
+                                                    sleep(10);
                                                     boolean breakpath = false;
 
                                                     for (int i = 0; i < obs.size(); i++) {
@@ -421,7 +421,7 @@ public class FollowApp extends LogicThread {
                         msgId = msgId + 1;
                         inMutex0 = false;
                     }
-                    sleep(600);
+                    sleep(10);
                 }
 
         else if(car_or_drone == 1){
@@ -531,7 +531,7 @@ public class FollowApp extends LogicThread {
                                                 ItemPosition mypos = gvh.gps.getMyPosition();
                                                 SimplePP newp = new SimplePP(mypos, currentDestination, 1);
                                                 path = newp.getPath();
-                                                sleep(100);
+                                                sleep(10);
                                                 boolean breakpath = false;
 
                                                 for (int i = 0; i < obs.size(); i++) {
@@ -625,7 +625,7 @@ public class FollowApp extends LogicThread {
                     if (gvh.plat.moat.inMotion) {
                         stage = Stage.GO;
                     } else {
-                        sleep(800);
+                        sleep(10);
                         ItemPosition ip = path.pop();
 
 
@@ -671,7 +671,7 @@ public class FollowApp extends LogicThread {
                 msgId = msgId+1;
                 inMutex0 = false;
             }
-            sleep(600);
+            sleep(10);
 
 
 
