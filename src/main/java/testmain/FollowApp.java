@@ -260,33 +260,39 @@ public class FollowApp extends LogicThread {
                                                     System.out.println("MYPOS IS: " + mypos);
                                                     RRTNode newRRT = new RRTNode();
                                                     ObstacleList empty_list = new ObstacleList();
-                                                    path = newRRT.findRoute(mypos.heading, currentDestination, 100000, empty_list, -4, 4, -3, 3, mypos, 0.5);
-                                                    System.out.println("PATH IS: " + path);
-                                                    sleep(10);
-                                                    boolean breakpath = false;
+                                                    try {
+                                                        path = newRRT.findRoute(mypos.heading, currentDestination, 10000, empty_list, -4, 4, -3, 3, mypos, 0.5);
 
-                                                    for (int i = 0; i < obs.size(); i++) {
-                                                        if (isClose(path, obs.get(i), 0.5)) {
-                                                            System.out.println("PATH IS CROSSING ANOTHER ROBOT");
-                                                            breakpath = true;
-                                                            break;
-                                                        } else {
+                                                        System.out.println("PATH IS: " + path);
+                                                        sleep(10);
+                                                        boolean breakpath = false;
+
+                                                        for (int i = 0; i < obs.size(); i++) {
+                                                            if (isClose(path, obs.get(i), 0.5)) {
+                                                                System.out.println("PATH IS CROSSING ANOTHER ROBOT");
+                                                                breakpath = true;
+                                                                break;
+                                                            }
                                                         }
-                                                    }
-                                                    if (!breakpath) {
-                                                        path_map.put(asgnIndex, path);
-                                                        System.out.println("FOUND A PATH");
-                                                        //Calculate distance and check if it is the shortest
-                                                        //If it is, store this points IDX so we can get it again later
-                                                        double distance = Math.sqrt(Math.pow(mypos.x - currentDestination.x, 2) + Math.pow(mypos.y - currentDestination.y, 2) + Math.pow(mypos.z - currentDestination.z, 2));
-                                                        if (distance < current_shortest_distance) {
-                                                            current_shortest_distance = distance;
-                                                            current_shortest_idx = asgnIndex;
+                                                        if (!breakpath) {
+                                                            path_map.put(asgnIndex, path);
+                                                            System.out.println("FOUND A PATH");
+                                                            //Calculate distance and check if it is the shortest
+                                                            //If it is, store this points IDX so we can get it again later
+                                                            double distance = Math.sqrt(Math.pow(mypos.x - currentDestination.x, 2) + Math.pow(mypos.y - currentDestination.y, 2) + Math.pow(mypos.z - currentDestination.z, 2));
+                                                            if (distance < current_shortest_distance) {
+                                                                current_shortest_distance = distance;
+                                                                current_shortest_idx = asgnIndex;
+                                                            }
+                                                            foundpath = true;
+                                                            //break;
                                                         }
-                                                        foundpath = true;
-                                                        //break;
+                                                        asgnIndex++;
                                                     }
-                                                    asgnIndex++;
+                                                    catch (Exception e) {
+                                                        System.out.println("something got fucked up");
+                                                        foundpath = false;
+                                                    }
                                                 } else {
                                                     asgnIndex++;
                                                     break;

@@ -202,7 +202,6 @@ public class RRTNode {
 		}
 		else{
 			stopNode = destNode;
-
 			return pathStack;
 		}
 	}
