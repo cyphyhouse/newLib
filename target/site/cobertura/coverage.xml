@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.0" branch-rate="0.0" lines-covered="0" lines-valid="5963" branches-covered="0" branches-valid="2143" complexity="2.4730195177956373" version="2.1.1" timestamp="1551139428475">
+<coverage line-rate="0.0" branch-rate="0.0" lines-covered="0" lines-valid="5964" branches-covered="0" branches-valid="2143" complexity="2.4730195177956373" version="2.1.1" timestamp="1551139716911">
 	<sources>
 		<source>/home/mim/newLib/src/main/java</source>
 		<source>/home/mim/newLib/target/generated-sources/annotations</source>
@@ -21906,6 +21906,7 @@
 								<line number="346" hits="0" branch="false"/>
 								<line number="347" hits="0" branch="false"/>
 								<line number="349" hits="0" branch="false"/>
+								<line number="350" hits="0" branch="false"/>
 								<line number="351" hits="0" branch="true" condition-coverage="0% (0/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
@@ -23024,6 +23025,7 @@
 						<line number="346" hits="0" branch="false"/>
 						<line number="347" hits="0" branch="false"/>
 						<line number="349" hits="0" branch="false"/>
+						<line number="350" hits="0" branch="false"/>
 						<line number="351" hits="0" branch="true" condition-coverage="0% (0/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>

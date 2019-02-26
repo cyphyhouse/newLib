@@ -347,7 +347,7 @@ public class FollowApp extends LogicThread {
                                         wait0 = false;
 
                                     } else {
-                                        //System.out.println("NO MUTEX; BREAKING");
+                                        System.out.println("NO MUTEX; BREAKING");
                                         if (updatePath) {
 
                                         } else {
