@@ -311,6 +311,7 @@ public class FollowApp extends LogicThread {
                                         if (updatePath) {
 
                                         } else {
+                                            System.out.println("SENDING SINGLE POSITION AS OBS: " + gvh.gps.getMyPosition().toString());
                                             RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, gvh.gps.getMyPosition().toString() + "###mypos");
                                             gvh.comms.addOutgoingMessage(pathmsg);
                                             updatePath = false;
@@ -823,18 +824,18 @@ public class FollowApp extends LogicThread {
         if (m.getMID() == PATH_MSG && !m.getFrom().equals(name) && !alreadyReceived) {
             pathMsgs.add(m);
             gvh.log.d(TAG, "received path message from " + m.getFrom());
-            System.out.println("received path message from " + m);
+            //System.out.println("received path message from " + m);
             String mc = m.getContents().toString().replace("`", "");
             String type = mc.split("###")[1];
             String contents = mc.split("###")[0];
             int sentIndex = Integer.parseInt(m.getFrom().replaceAll("[^0-9]", ""));
             if (type.equalsIgnoreCase("mypos")) {
                 Stack<ItemPosition> path = msgtoiposstack(contents, j, 1);
-                System.out.println("OBS THAT WAS ADDED IS: "+path);
+                //System.out.println("OBS THAT WAS ADDED IS: "+path);
                 if (sentIndex > robotIndex) {
 
                     obs.set(sentIndex - 1, path);
-                    System.out.println("OBS LIST IS: "+ obs);
+                    //System.out.println("OBS LIST IS: "+ obs);
                     //System.out.println((sentIndex-1)+" "+sentIndex+" "+robotIndex+ " \n");
 
                     //System.out.println(obs.get(sentIndex-1)+" "+sentIndex+" "+robotIndex);
@@ -850,11 +851,11 @@ public class FollowApp extends LogicThread {
 
             } else {
                 Stack<ItemPosition> path = msgtopathstack(contents, j, 1);
-                System.out.println("OBS THAT WAS ADDED IS: "+path);
+                //System.out.println("OBS THAT WAS ADDED IS: "+path);
                 if (sentIndex > robotIndex) {
                     try {
                         obs.set(sentIndex - 1, path);
-                        System.out.println("OBS LIST IS: "+ obs);
+                        //System.out.println("OBS LIST IS: "+ obs);
                     }
                     catch(Exception e){
                         System.out.println("IGNORE THIS SHIT FOR NOW followapp line 596");
@@ -866,7 +867,7 @@ public class FollowApp extends LogicThread {
                 } else {
                     try {
                         obs.set(sentIndex, path);
-                        System.out.println("OBS LIST IS: "+ obs);
+                        //System.out.println("OBS LIST IS: "+ obs);
                     }
                     catch(Exception e){
                         System.out.println("IGNORE THIS SHIT FOR NOW followapp line 607");
@@ -927,7 +928,7 @@ public class FollowApp extends LogicThread {
         iposmsg = iposmsg.split(":")[1];
         iposmsg = iposmsg.split(";")[0];
         String[] parts = iposmsg.split(",");
-        System.out.println("MSGTOIPOS FUNCTION PARTS: "+ parts[0] +" "+ parts[1] +" "+ parts[2]);
+        //System.out.println("MSGTOIPOS FUNCTION PARTS: "+ parts[0] +" "+ parts[1] +" "+ parts[2]);
         double x = (Double.parseDouble(parts[0]) * scale);
         double y = (Double.parseDouble(parts[1]) * scale);
         double z = (Double.parseDouble(parts[2]) * scale);
