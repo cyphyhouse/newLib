@@ -822,6 +822,7 @@ public class FollowApp extends LogicThread {
         if (m.getMID() == PATH_MSG && !m.getFrom().equals(name) && !alreadyReceived) {
             pathMsgs.add(m);
             gvh.log.d(TAG, "received path message from " + m.getFrom());
+            System.out.println("received path message from " + m.getFrom());
             String mc = m.getContents().toString().replace("`", "");
             String type = mc.split("###")[1];
             String contents = mc.split("###")[0];
