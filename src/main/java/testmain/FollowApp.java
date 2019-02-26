@@ -208,6 +208,7 @@ public class FollowApp extends LogicThread {
                                 } else {
                                     //System.out.println(mypos.toString());
                                 }
+                                System.out.println("MY POS IS: " + mypos);
                                 RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, mypos.toString() + "###mypos");
                                 gvh.comms.addOutgoingMessage(pathmsg);
                                 stage = Stage.WAIT;
@@ -883,10 +884,10 @@ public class FollowApp extends LogicThread {
     private ItemPosition msgtoipos(String iposmsg, int i, int scale) {
         iposmsg = iposmsg.replace(" ", ",").replace("`", "");
         String[] parts = iposmsg.split(",");
-        double x =  (Float.parseFloat(parts[0]) * scale);
-        double y =  (Float.parseFloat(parts[1]) * scale);
-        double z =  (Float.parseFloat(parts[2]) * scale);
-        int idx =  (int)(Float.parseFloat(parts[3]));
+        double x =  (Double.parseDouble(parts[0]) * scale);
+        double y =  (Double.parseDouble(parts[1]) * scale);
+        double z =  (Double.parseDouble(parts[2]) * scale);
+        int idx =  (int)(Double.parseDouble(parts[3]));
         String name = Integer.toString(idx) + "-A";
         ItemPosition p = new ItemPosition(name, x, y, z);
         System.out.println("IPOS CHECK: "+p);
@@ -903,9 +904,9 @@ public class FollowApp extends LogicThread {
             pathpoints[k] = pathpoints[k].split(":")[1];
             pathpoints[k] = pathpoints[k].split(";")[0];
             String[] parts = pathpoints[k].split(",");
-            double x =  (Float.parseFloat(parts[0]) * scale);
-            double y =  (Float.parseFloat(parts[1]) * scale);
-            double z =  (Float.parseFloat(parts[2]) * scale);
+            double x =  (Double.parseDouble(parts[0]) * scale);
+            double y =  (Double.parseDouble(parts[1]) * scale);
+            double z =  (Double.parseDouble(parts[2]) * scale);
             String name = Integer.toString(j) + "-A";
             ItemPosition p = new ItemPosition(name, x, y, z);
             path.push(p);
@@ -920,9 +921,9 @@ public class FollowApp extends LogicThread {
         iposmsg = iposmsg.split(":")[1];
         iposmsg = iposmsg.split(";")[0];
         String[] parts = iposmsg.split(",");
-        double x = (Float.parseFloat(parts[0]) * scale);
-        double y = (Float.parseFloat(parts[1]) * scale);
-        double z = (Float.parseFloat(parts[2]) * scale);
+        double x = (Double.parseDouble(parts[0]) * scale);
+        double y = (Double.parseDouble(parts[1]) * scale);
+        double z = (Double.parseDouble(parts[2]) * scale);
         String name = Integer.toString(j) + "-A";
         ItemPosition p = new ItemPosition(name, x, y, z);
         path.push(p);
