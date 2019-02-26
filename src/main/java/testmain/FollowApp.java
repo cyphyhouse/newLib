@@ -220,7 +220,7 @@ public class FollowApp extends LogicThread {
 
                                 try {
                                     if (!wait0) {
-                                        //System.out.println("TRYING TO GET MUTEX");
+                                        System.out.println("TRYING TO GET MUTEX");
                                         String mutexreqmsg = String.valueOf(robotIndex) + " " + String.valueOf(msgId) + " REQUEST";
                                         RobotMessage mutexrequestmsg = new RobotMessage("ALL", name, MUTEX_REQUEST_MSG, mutexreqmsg);
                                         gvh.comms.addOutgoingMessage(mutexrequestmsg);
