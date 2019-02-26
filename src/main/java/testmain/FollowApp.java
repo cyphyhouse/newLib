@@ -830,11 +830,11 @@ public class FollowApp extends LogicThread {
             int sentIndex = Integer.parseInt(m.getFrom().replaceAll("[^0-9]", ""));
             if (type.equalsIgnoreCase("mypos")) {
                 Stack<ItemPosition> path = msgtoiposstack(contents, j, 1);
-                //System.out.println(path+" "+name);
+                System.out.println("OBS THAT WAS ADDED IS: "+path);
                 if (sentIndex > robotIndex) {
 
                     obs.set(sentIndex - 1, path);
-
+                    System.out.println("OBS LIST IS: "+ obs);
                     //System.out.println((sentIndex-1)+" "+sentIndex+" "+robotIndex+ " \n");
 
                     //System.out.println(obs.get(sentIndex-1)+" "+sentIndex+" "+robotIndex);
@@ -850,9 +850,11 @@ public class FollowApp extends LogicThread {
 
             } else {
                 Stack<ItemPosition> path = msgtopathstack(contents, j, 1);
+                System.out.println("OBS THAT WAS ADDED IS: "+path);
                 if (sentIndex > robotIndex) {
                     try {
                         obs.set(sentIndex - 1, path);
+                        System.out.println("OBS LIST IS: "+ obs);
                     }
                     catch(Exception e){
                         System.out.println("IGNORE THIS SHIT FOR NOW followapp line 596");
@@ -864,6 +866,7 @@ public class FollowApp extends LogicThread {
                 } else {
                     try {
                         obs.set(sentIndex, path);
+                        System.out.println("OBS LIST IS: "+ obs);
                     }
                     catch(Exception e){
                         System.out.println("IGNORE THIS SHIT FOR NOW followapp line 607");
