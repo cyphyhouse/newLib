@@ -152,7 +152,7 @@ public class RRTNode {
 			double closest_dist = Double.MAX_VALUE;
 
 			double [] best_sampled_point = {};
-			for(int j=0; j<10; j++) {
+			for(int j=0; j<20; j++) {
 
 				double [] car_sampler_input = {currentNode.position.x, currentNode.position.y, currentNode.heading};
 				double [] car_sampler_point = car_sample(car_sampler_input);
