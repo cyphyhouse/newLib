@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.0" branch-rate="0.0" lines-covered="0" lines-valid="5958" branches-covered="0" branches-valid="2137" complexity="2.4684270952927667" version="2.1.1" timestamp="1551220253018">
+<coverage line-rate="0.0" branch-rate="0.0" lines-covered="0" lines-valid="5951" branches-covered="0" branches-valid="2137" complexity="2.4684270952927667" version="2.1.1" timestamp="1551220498677">
 	<sources>
 		<source>/home/peter/newLib/target/generated-sources/annotations</source>
 		<source>/home/peter/newLib/src/main/java</source>
@@ -22374,52 +22374,45 @@
 								<line number="1098" hits="0" branch="false"/>
 								<line number="1099" hits="0" branch="false"/>
 								<line number="1100" hits="0" branch="false"/>
-								<line number="1102" hits="0" branch="true" condition-coverage="0% (0/2)">
+								<line number="1101" hits="0" branch="false"/>
+								<line number="1103" hits="0" branch="true" condition-coverage="0% (0/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
 									</conditions>
 								</line>
-								<line number="1103" hits="0" branch="false"/>
 								<line number="1104" hits="0" branch="false"/>
-								<line number="1105" hits="0" branch="true" condition-coverage="0% (0/2)">
+								<line number="1105" hits="0" branch="false"/>
+								<line number="1106" hits="0" branch="true" condition-coverage="0% (0/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
 									</conditions>
 								</line>
-								<line number="1106" hits="0" branch="false"/>
-								<line number="1107" hits="0" branch="false"/>
-								<line number="1108" hits="0" branch="false"/>
-								<line number="1109" hits="0" branch="false"/>
-								<line number="1110" hits="0" branch="false"/>
-								<line number="1111" hits="0" branch="false"/>
-								<line number="1113" hits="0" branch="false"/>
 								<line number="1114" hits="0" branch="false"/>
-								<line number="1115" hits="0" branch="false"/>
-								<line number="1116" hits="0" branch="false"/>
-								<line number="1119" hits="0" branch="true" condition-coverage="0% (0/2)">
+								<line number="1118" hits="0" branch="false"/>
+								<line number="1120" hits="0" branch="true" condition-coverage="0% (0/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
 									</conditions>
 								</line>
-								<line number="1120" hits="0" branch="false"/>
 								<line number="1121" hits="0" branch="false"/>
-								<line number="1123" hits="0" branch="false"/>
-								<line number="1124" hits="0" branch="true" condition-coverage="0% (0/2)">
+								<line number="1122" hits="0" branch="false"/>
+								<line number="1124" hits="0" branch="false"/>
+								<line number="1125" hits="0" branch="true" condition-coverage="0% (0/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
 									</conditions>
 								</line>
-								<line number="1126" hits="0" branch="false"/>
 								<line number="1127" hits="0" branch="false"/>
 								<line number="1128" hits="0" branch="false"/>
-								<line number="1130" hits="0" branch="true" condition-coverage="0% (0/2)">
+								<line number="1129" hits="0" branch="false"/>
+								<line number="1131" hits="0" branch="true" condition-coverage="0% (0/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
 									</conditions>
 								</line>
-								<line number="1131" hits="0" branch="false"/>
 								<line number="1132" hits="0" branch="false"/>
-								<line number="1137" hits="0" branch="false"/>
+								<line number="1133" hits="0" branch="false"/>
+								<line number="1138" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="isclosetobots" signature="(Ljava/util/Stack;Ljava/util/Vector;D)Z" line-rate="0.0" branch-rate="0.0" complexity="0">
@@ -23774,52 +23767,45 @@
 						<line number="1098" hits="0" branch="false"/>
 						<line number="1099" hits="0" branch="false"/>
 						<line number="1100" hits="0" branch="false"/>
-						<line number="1102" hits="0" branch="true" condition-coverage="0% (0/2)">
+						<line number="1101" hits="0" branch="false"/>
+						<line number="1103" hits="0" branch="true" condition-coverage="0% (0/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>
 							</conditions>
 						</line>
-						<line number="1103" hits="0" branch="false"/>
 						<line number="1104" hits="0" branch="false"/>
-						<line number="1105" hits="0" branch="true" condition-coverage="0% (0/2)">
+						<line number="1105" hits="0" branch="false"/>
+						<line number="1106" hits="0" branch="true" condition-coverage="0% (0/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>
 							</conditions>
 						</line>
-						<line number="1106" hits="0" branch="false"/>
-						<line number="1107" hits="0" branch="false"/>
-						<line number="1108" hits="0" branch="false"/>
-						<line number="1109" hits="0" branch="false"/>
-						<line number="1110" hits="0" branch="false"/>
-						<line number="1111" hits="0" branch="false"/>
-						<line number="1113" hits="0" branch="false"/>
 						<line number="1114" hits="0" branch="false"/>
-						<line number="1115" hits="0" branch="false"/>
-						<line number="1116" hits="0" branch="false"/>
-						<line number="1119" hits="0" branch="true" condition-coverage="0% (0/2)">
+						<line number="1118" hits="0" branch="false"/>
+						<line number="1120" hits="0" branch="true" condition-coverage="0% (0/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>
 							</conditions>
 						</line>
-						<line number="1120" hits="0" branch="false"/>
 						<line number="1121" hits="0" branch="false"/>
-						<line number="1123" hits="0" branch="false"/>
-						<line number="1124" hits="0" branch="true" condition-coverage="0% (0/2)">
+						<line number="1122" hits="0" branch="false"/>
+						<line number="1124" hits="0" branch="false"/>
+						<line number="1125" hits="0" branch="true" condition-coverage="0% (0/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>
 							</conditions>
 						</line>
-						<line number="1126" hits="0" branch="false"/>
 						<line number="1127" hits="0" branch="false"/>
 						<line number="1128" hits="0" branch="false"/>
-						<line number="1130" hits="0" branch="true" condition-coverage="0% (0/2)">
+						<line number="1129" hits="0" branch="false"/>
+						<line number="1131" hits="0" branch="true" condition-coverage="0% (0/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>
 							</conditions>
 						</line>
-						<line number="1131" hits="0" branch="false"/>
 						<line number="1132" hits="0" branch="false"/>
-						<line number="1137" hits="0" branch="false"/>
+						<line number="1133" hits="0" branch="false"/>
+						<line number="1138" hits="0" branch="false"/>
 					</lines>
 				</class>
 				<class name="testmain.FollowApp$1" filename="testmain/FollowApp.java" line-rate="0.0" branch-rate="1.0" complexity="10.733333333333333">

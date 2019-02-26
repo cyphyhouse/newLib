@@ -1098,23 +1098,24 @@ public class FollowApp extends LogicThread {
         int i = pathstack.size();
         int k = obstack.size();
         System.out.println("obstack size is " + k);
+        System.out.println("OBSTACK IS: " + obstack);
 
         for (int j = 1; j < i; j++) {
             ItemPosition start = pathstack.get(j - 1);
             ItemPosition next = pathstack.get(j);
             if (k == 1) {
-                System.out.println(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ");
+                /*System.out.println(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ");
                 System.out.println(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ");
                 System.out.println(pathstack);
                 System.out.println(next);
                 System.out.println(start);
-                System.out.println(obstack.peek());
+                System.out.println(obstack.peek());*/
 
                 double distance = closestDist(start, next, obstack.peek(), obstack.peek());
-                System.out.println(distance);
+                /*System.out.println(distance);
                 System.out.println(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ");
-                System.out.println(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ");
-                //System.out.println(distance);
+                System.out.println(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ");*/
+                System.out.println("IS CLOSE DISTANCE: " + distance);
                 //System.out.println(name + " path point distance " + distance);
                 if (distance <= mindist) {
                     System.out.println("DIST IS: " + distance);
