@@ -205,7 +205,7 @@ public class FollowApp extends LogicThread {
                             updatePath = false;
 
                             if (destinations.isEmpty()) {
-                                System.out.println("DESTINATIONS IS EMPTY");
+                                //System.out.println("DESTINATIONS IS EMPTY");
                                 ItemPosition mypos = gvh.gps.getMyPosition();
                                 if (mypos == null) {
                                     break;
@@ -267,7 +267,6 @@ public class FollowApp extends LogicThread {
                                                                 }
                                                             }
                                                             else{
-
                                                                 breakpath = true;
                                                                 break;
                                                             }
@@ -289,7 +288,6 @@ public class FollowApp extends LogicThread {
 
                                                 } else {
                                                     asgnIndex++;
-                                                    break;
                                                 }
                                             }
 
