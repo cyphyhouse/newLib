@@ -200,9 +200,7 @@ public class FollowApp extends LogicThread {
                                 break;
                             }
 
-                            System.out.println("SENDING SINGLE POSITION AS OBS: " + gvh.gps.getMyPosition().toString());
-                            RobotMessage single_position_obs_msg = new RobotMessage("ALL", name, PATH_MSG, gvh.gps.getMyPosition().toString() + "###mypos");
-                            gvh.comms.addOutgoingMessage(single_position_obs_msg);
+
                             updatePath = false;
 
                             if (destinations.isEmpty()) {
@@ -358,6 +356,9 @@ public class FollowApp extends LogicThread {
                             if (gvh.plat.moat.inMotion) {
                                 stage = Stage.GO;
                             } else {
+                                System.out.println("SENDING SINGLE POSITION AS OBS: " + gvh.gps.getMyPosition().toString());
+                                RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, gvh.gps.getMyPosition().toString() + "###mypos");
+                                gvh.comms.addOutgoingMessage(pathmsg);
                                 stage = Stage.PICK;
 
                             /*
