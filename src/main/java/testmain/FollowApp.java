@@ -333,7 +333,7 @@ public class FollowApp extends LogicThread {
                                         }
                                         break;
                                     }
-                                } catch (NullPointerException e) {
+                                } catch (Exception e) {
                                     stage = Stage.WAIT;
                                     e.printStackTrace();
                                     //lineno = lineno - 1;
