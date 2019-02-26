@@ -893,6 +893,7 @@ public class FollowApp extends LogicThread {
         int idx =  (int)(Float.parseFloat(parts[3]));
         String name = Integer.toString(idx) + "-A";
         ItemPosition p = new ItemPosition(name, x, y, z);
+        System.out.println("IPOS CHECK: "+p);
         return p;
     }
 
