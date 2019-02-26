@@ -229,10 +229,6 @@ public class FollowApp extends LogicThread {
                                         break;
                                     }
                                     if (hasMutex) {
-                                        //System.out.println(name + " HAS MUTEX");
-                                        //asgndsize = 5;//assigned.size();
-                                        //Random r = new Random();
-                                        //asgnIndex = r.nextInt(asgndsize);
                                         boolean foundpath = false;
 
 
@@ -240,8 +236,7 @@ public class FollowApp extends LogicThread {
                                         double current_shortest_distance = Double.MAX_VALUE;
 
                                         Map<Integer, Stack<ItemPosition>> path_map = new HashMap<Integer, Stack<ItemPosition>>();
-                                        asgnIndex = 0;
-                                        while (asgnIndex < asgndsize) {
+                                        for (asgnIndex=0; asgnIndex < asgndsize; asgnIndex++) {
 
                                             if (assigned.get(asgnIndex) == 0) {
                                                 currentDestination = getDestination(destinations, asgnIndex);
@@ -255,7 +250,7 @@ public class FollowApp extends LogicThread {
                                                     path = newRRT.findRoute(mypos.heading, currentDestination, 10000, empty_list, -4, 4, -3, 3, mypos, 0.5);
 
                                                         System.out.println("PATH IS: " + path);
-                                                        sleep(10);
+                                                        sleep(100);
                                                         boolean breakpath = false;
 
                                                         for (int i = 0; i < obs.size(); i++) {
@@ -284,10 +279,7 @@ public class FollowApp extends LogicThread {
                                                             foundpath = true;
                                                             //break;
                                                         }
-                                                        asgnIndex++;
 
-                                                } else {
-                                                    asgnIndex++;
                                                 }
                                             }
 
@@ -413,7 +405,7 @@ public class FollowApp extends LogicThread {
                         msgId = msgId + 1;
                         inMutex0 = false;
                     }
-                    sleep(10);
+                    sleep(600);
                 }
 
         else if(car_or_drone == 1){
@@ -523,7 +515,7 @@ public class FollowApp extends LogicThread {
                                                 ItemPosition mypos = gvh.gps.getMyPosition();
                                                 SimplePP newp = new SimplePP(mypos, currentDestination, 1);
                                                 path = newp.getPath();
-                                                sleep(10);
+                                                sleep(100);
                                                 boolean breakpath = false;
 
                                                 for (int i = 0; i < obs.size(); i++) {
@@ -617,7 +609,7 @@ public class FollowApp extends LogicThread {
                     if (gvh.plat.moat.inMotion) {
                         stage = Stage.GO;
                     } else {
-                        sleep(10);
+                        sleep(800);
                         ItemPosition ip = path.pop();
 
 
@@ -663,7 +655,7 @@ public class FollowApp extends LogicThread {
                 msgId = msgId+1;
                 inMutex0 = false;
             }
-            sleep(100);
+            sleep(600);
 
 
 
