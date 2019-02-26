@@ -142,14 +142,10 @@ public class FollowApp extends LogicThread {
         ipos[3] = new ItemPosition("car3",1000,-1000,0);
         ipos[4] = new ItemPosition("car4",-1000,-10000,0);
         ipos[5] = new ItemPosition("car5",-1000,-100000,0);
-        int number_of_stuff = 4;  /*********<<<<<<<<<<------------------- MAKE SURE TO CHANGE THIS ********/
+        int number_of_stuff = 3;  /*********<<<<<<<<<<------------------- MAKE SURE TO CHANGE THIS ********/
 
         for (int i = 0 ; i < number_of_stuff ; i ++) {
             Stack<ItemPosition> o = new Stack<ItemPosition>();
-            if (i == 2) 
-		o.push(ipos[1]);
-            if (i == 1) 
-		o.push(ipos[2]);
             obs.add(o);
         }
 
