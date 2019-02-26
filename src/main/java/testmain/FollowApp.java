@@ -901,7 +901,7 @@ public class FollowApp extends LogicThread {
 
 
     private Stack<ItemPosition> msgtopathstack(String pathmsg, int j, int scale) {
-        pathmsg = pathmsg.replace(".", ",").replace(" ", "");
+        pathmsg = pathmsg.replace(" ", "");
         String[] pathpoints = pathmsg.split("@@@");
         Stack<ItemPosition> path = new Stack<ItemPosition>();
         int i = pathpoints.length;
@@ -920,7 +920,8 @@ public class FollowApp extends LogicThread {
     }
 
     private Stack<ItemPosition> msgtoiposstack(String iposmsg, int j, int scale) {
-        iposmsg = iposmsg.replace(".", ",").replace(" ", "");
+        //iposmsg = iposmsg.replace(".", ",").replace(" ", "");
+        iposmsg = iposmsg.replace(" ", "");
         Stack<ItemPosition> path = new Stack<ItemPosition>();
 
         iposmsg = iposmsg.split(":")[1];
