@@ -186,7 +186,9 @@ public class FollowApp extends LogicThread {
             //System.out.println("INSIDE THE WHILE LOOP");
             if(car_or_drone==0)
                 {
-
+                    System.out.println("OBS LIST IS: "+ obs);
+                    System.out.println(" ");
+                    System.out.println(" ");
                     lineno = 0;
                     if (robotIndex == 0) {
                         updatedests("tasks.txt", DEST_MSG, name, lineno);
@@ -208,7 +210,7 @@ public class FollowApp extends LogicThread {
                                 } else {
                                     //System.out.println(mypos.toString());
                                 }
-                                System.out.println("MY POS IS: " + mypos);
+                                //System.out.println("MY POS IS: " + mypos);
 
                                 RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, mypos.toString() + "###mypos");
                                 gvh.comms.addOutgoingMessage(pathmsg);
@@ -218,7 +220,7 @@ public class FollowApp extends LogicThread {
 
                                 try {
                                     if (!wait0) {
-                                        System.out.println("TRYING TO GET MUTEX");
+                                        //System.out.println("TRYING TO GET MUTEX");
                                         String mutexreqmsg = String.valueOf(robotIndex) + " " + String.valueOf(msgId) + " REQUEST";
                                         RobotMessage mutexrequestmsg = new RobotMessage("ALL", name, MUTEX_REQUEST_MSG, mutexreqmsg);
                                         gvh.comms.addOutgoingMessage(mutexrequestmsg);
@@ -240,21 +242,21 @@ public class FollowApp extends LogicThread {
                                                 currentDestination = getDestination(destinations, asgnIndex);
 
                                                 if (currentDestination != null && currentDestination.z==0) {
-                                                    System.out.println("COMPUTING PATH, DEST IS: " + currentDestination);
+                                                    //System.out.println("COMPUTING PATH, DEST IS: " + currentDestination);
                                                     ItemPosition mypos = gvh.gps.getMyPosition();
                                                     //System.out.println("MYPOS IS: " + mypos);
                                                     RRTNode newRRT = new RRTNode();
                                                     ObstacleList empty_list = new ObstacleList();
                                                     path = newRRT.findRoute(mypos.heading, currentDestination, 100000, empty_list, -4, 4, -3, 3, mypos, 1);
 
-                                                        System.out.println("PATH IS: " + path);
+                                                        //System.out.println("PATH IS: " + path);
                                                         sleep(100);
                                                         boolean breakpath = false;
 
                                                         for (int i = 0; i < obs.size(); i++) {
                                                             if (path != null) {
                                                                 if (isClose(path, obs.get(i), 0.5)) {
-                                                                    System.out.println("PATH IS CROSSING ANOTHER ROBOT");
+                                                                    //System.out.println("PATH IS CROSSING ANOTHER ROBOT");
                                                                     breakpath = true;
                                                                     break;
                                                                 }
@@ -288,13 +290,13 @@ public class FollowApp extends LogicThread {
 
                                         //System.out.println("FOR LOOP DONE");
                                         if (!foundpath) {
-                                            System.out.println("COULD NOT FIND A PATH");
+                                            //System.out.println("COULD NOT FIND A PATH");
                                             inMutex0 = true;
                                             wait0 = false;
                                             break;
                                         }
                                         path.pop();
-                                        System.out.println("SENDING CAR PATH: " + path);
+                                        //System.out.println("SENDING CAR PATH: " + path);
                                         RobotMessage asgnmsg = new RobotMessage("ALL", name, ASGN_MSG, String.valueOf(asgnIndex));
                                         RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path) + "###path");
                                         gvh.comms.addOutgoingMessage(pathmsg);
@@ -307,11 +309,11 @@ public class FollowApp extends LogicThread {
                                         wait0 = false;
 
                                     } else {
-                                        System.out.println("NO MUTEX; BREAKING");
+                                        //System.out.println("NO MUTEX; BREAKING");
                                         if (updatePath) {
 
                                         } else {
-                                            System.out.println("SENDING SINGLE POSITION AS OBS: " + gvh.gps.getMyPosition().toString());
+                                            //System.out.println("SENDING SINGLE POSITION AS OBS: " + gvh.gps.getMyPosition().toString());
                                             RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, gvh.gps.getMyPosition().toString() + "###mypos");
                                             gvh.comms.addOutgoingMessage(pathmsg);
                                             updatePath = false;
@@ -330,7 +332,7 @@ public class FollowApp extends LogicThread {
                                     break;
                                 }
 
-                                System.out.println("CALLING GOTO. DESTINATION IS: " + currentDestination);
+                                //System.out.println("CALLING GOTO. DESTINATION IS: " + currentDestination);
                                 //Send all points in path to car in one go
                                 while (!path.empty()) {
                                     int frameID = 0;
@@ -393,7 +395,7 @@ public class FollowApp extends LogicThread {
                     }
                     Random ran = new Random();
                     if (inMutex0) {
-                        System.out.println(name + " RELEASING MUTEX");
+                        //System.out.println(name + " RELEASING MUTEX");
                         hasMutex = false;
                         String releaseMutex = String.valueOf(robotIndex) + " " + String.valueOf(msgId);
                         RobotMessage mutexreleasemsg = new RobotMessage("ALL", name, MUTEX_RELEASE_MSG, releaseMutex);
@@ -436,7 +438,7 @@ public class FollowApp extends LogicThread {
                             RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path) + "###mypos");
                             gvh.comms.addOutgoingMessage(pathmsg);
                             stage = Stage.GO;
-                            System.out.println(name + " SENT TAKEOFF");
+                            //System.out.println(name + " SENT TAKEOFF");
                             break;
                         }
                     }
@@ -744,7 +746,7 @@ public class FollowApp extends LogicThread {
             //System.out.println(name + " got release msg " + alreadyReceived);
         }
         if (m.getMID() == MUTEX_RELEASE_MSG && robotIndex == 0 && !alreadyReceived) {
-            System.out.println("MUTEX RELEASE FROM BOT "+m.getFrom());
+            //System.out.println("MUTEX RELEASE FROM BOT "+m.getFrom());
             mutexReleaseMsgs.add(m);
             gvh.log.d(TAG, "received release message from " + m.getFrom());
             String releasemsg = m.getContents().toString().replace("`","");
@@ -896,7 +898,7 @@ public class FollowApp extends LogicThread {
         int idx =  (int)(Double.parseDouble(parts[3]));
         String name = Integer.toString(idx) + "-A";
         ItemPosition p = new ItemPosition(name, x, y, z);
-        System.out.println("IPOS CHECK: "+p);
+        //System.out.println("IPOS CHECK: "+p);
         return p;
     }
 
@@ -934,7 +936,7 @@ public class FollowApp extends LogicThread {
         double z = (Double.parseDouble(parts[2]) * scale);
         String name = Integer.toString(j) + "-A";
         ItemPosition p = new ItemPosition(name, x, y, z);
-        System.out.println("MSGTOIPOS FUNCTION: "+ p);
+        //System.out.println("MSGTOIPOS FUNCTION: "+ p);
         path.push(p);
 
         return path;
@@ -1107,8 +1109,8 @@ public class FollowApp extends LogicThread {
     private boolean isClose(Stack<ItemPosition> pathstack, Stack<ItemPosition> obstack, double mindist) {
         int i = pathstack.size();
         int k = obstack.size();
-        System.out.println("obstack size is " + k);
-        System.out.println("OBSTACK IS: " + obstack);
+        //System.out.println("obstack size is " + k);
+        //System.out.println("OBSTACK IS: " + obstack);
 
         for (int j = 1; j < i; j++) {
             ItemPosition start = pathstack.get(j - 1);
@@ -1125,7 +1127,7 @@ public class FollowApp extends LogicThread {
                 /*System.out.println(distance);
                 System.out.println(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ");
                 System.out.println(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ");*/
-                System.out.println("IS CLOSE DISTANCE: " + distance);
+                //System.out.println("IS CLOSE DISTANCE: " + distance);
                 //System.out.println(name + " path point distance " + distance);
                 if (distance <= mindist) {
                     System.out.println("DIST IS: " + distance);
