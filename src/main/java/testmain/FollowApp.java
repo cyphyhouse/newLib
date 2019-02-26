@@ -209,6 +209,7 @@ public class FollowApp extends LogicThread {
                                     //System.out.println(mypos.toString());
                                 }
                                 System.out.println("MY POS IS: " + mypos);
+
                                 RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, mypos.toString() + "###mypos");
                                 gvh.comms.addOutgoingMessage(pathmsg);
                                 stage = Stage.WAIT;
@@ -822,7 +823,7 @@ public class FollowApp extends LogicThread {
         if (m.getMID() == PATH_MSG && !m.getFrom().equals(name) && !alreadyReceived) {
             pathMsgs.add(m);
             gvh.log.d(TAG, "received path message from " + m.getFrom());
-            System.out.println("received path message from " + m.getFrom());
+            System.out.println("received path message from " + m);
             String mc = m.getContents().toString().replace("`", "");
             String type = mc.split("###")[1];
             String contents = mc.split("###")[0];
