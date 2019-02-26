@@ -268,8 +268,15 @@ public class FollowApp extends LogicThread {
                                                         boolean breakpath = false;
 
                                                         for (int i = 0; i < obs.size(); i++) {
-                                                            if (isClose(path, obs.get(i), 0.5)) {
-                                                                System.out.println("PATH IS CROSSING ANOTHER ROBOT");
+                                                            if (path != null) {
+                                                                if (isClose(path, obs.get(i), 0.5)) {
+                                                                    System.out.println("PATH IS CROSSING ANOTHER ROBOT");
+                                                                    breakpath = true;
+                                                                    break;
+                                                                }
+                                                            }
+                                                            else{
+
                                                                 breakpath = true;
                                                                 break;
                                                             }
@@ -380,7 +387,7 @@ public class FollowApp extends LogicThread {
 
                             break;
                         case GO:
-                            System.out.println("IN GO STAGE");
+                            //System.out.println("IN GO STAGE");
                             if (gvh.plat.moat.inMotion) {
                                 stage = Stage.GO;
                             } else {
