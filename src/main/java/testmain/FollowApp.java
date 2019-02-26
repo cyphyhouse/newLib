@@ -665,7 +665,7 @@ public class FollowApp extends LogicThread {
                 msgId = msgId+1;
                 inMutex0 = false;
             }
-            sleep(10);
+            sleep(100);
 
 
 
