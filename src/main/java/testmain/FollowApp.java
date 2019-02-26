@@ -268,25 +268,22 @@ public class FollowApp extends LogicThread {
                                                         }
                                                         if (!breakpath) {
                                                             path_map.put(asgnIndex, path);
-                                                            System.out.println("FOUND A PATH");
+                                                            /*System.out.println("FOUND A PATH");
                                                             //Calculate distance and check if it is the shortest
                                                             //If it is, store this points IDX so we can get it again later
                                                             double distance = Math.sqrt(Math.pow(mypos.x - currentDestination.x, 2) + Math.pow(mypos.y - currentDestination.y, 2) + Math.pow(mypos.z - currentDestination.z, 2));
                                                             if (distance < current_shortest_distance) {
                                                                 current_shortest_distance = distance;
                                                                 current_shortest_idx = asgnIndex;
-                                                            }
+                                                            }*/
                                                             foundpath = true;
-                                                            //break;
+                                                            break;
                                                         }
 
                                                 }
                                             }
 
                                         }
-
-                                        //System.out.println("ASSIGN INDEX IS: " + asgnIndex);
-                                        asgnIndex = current_shortest_idx;
 
 
                                         path = path_map.get(asgnIndex);

@@ -1,4 +1,4 @@
-numRobots: 4
+numRobots: 3
 selectedRobot: 0
 Robot: 0
 ip: 192.168.1.20
