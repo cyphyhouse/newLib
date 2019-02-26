@@ -190,20 +190,12 @@ public class FollowApp extends LogicThread {
             //System.out.println("INSIDE THE WHILE LOOP");
             if(car_or_drone==0)
                 {
-                    //System.out.println("ASSIGNED ARRAY IS: " + assigned);
-                /*System.out.println("BEGIN DESTINATIONS ARRAY PRINTOUT:");
-                for(int i=0; i<assigned.size(); i++){
-                    System.out.println(getDestination(destinations, i) + "\n");
-                }
-                System.out.println("END DESTINATIONS ARRAY PRINTOUT\n");*/
 
                     lineno = 0;
                     if (robotIndex == 0) {
                         updatedests("tasks.txt", DEST_MSG, name, lineno);
                     }
 
-                    //System.out.println(stage);
-                    //System.out.println(stage+" "+name);
                     switch (stage) {
                         case PICK:
                             if (robotIndex == 0) {
@@ -260,8 +252,7 @@ public class FollowApp extends LogicThread {
                                                     //System.out.println("MYPOS IS: " + mypos);
                                                     RRTNode newRRT = new RRTNode();
                                                     ObstacleList empty_list = new ObstacleList();
-                                                    try {
-                                                        path = newRRT.findRoute(mypos.heading, currentDestination, 10000, empty_list, -4, 4, -3, 3, mypos, 0.5);
+                                                    path = newRRT.findRoute(mypos.heading, currentDestination, 10000, empty_list, -4, 4, -3, 3, mypos, 0.5);
 
                                                         System.out.println("PATH IS: " + path);
                                                         sleep(10);
@@ -295,13 +286,7 @@ public class FollowApp extends LogicThread {
                                                             //break;
                                                         }
                                                         asgnIndex++;
-                                                    }
-                                                    catch (Exception e) {
-                                                        System.out.println("something got fucked up");
-                                                        foundpath = false;
-                                                        e.printStackTrace();
 
-                                                    }
                                                 } else {
                                                     asgnIndex++;
                                                     break;
@@ -313,16 +298,6 @@ public class FollowApp extends LogicThread {
                                         //System.out.println("ASSIGN INDEX IS: " + asgnIndex);
                                         asgnIndex = current_shortest_idx;
 
-                                    /*//If a path is found, use the stored IDX to get the closest waypoint and set to currentDestination
-                                    if(foundpath){
-                                        System.out.println("FOUND PATH AND OUT OF FOR LOOP");
-                                        currentDestination = getDestination(destinations, current_shortest_idx);
-                                        ItemPosition mypos = gvh.gps.getMyPosition();
-                                        SimplePP newp = new SimplePP(mypos, currentDestination, 1);
-                                        path = newp.getPath();
-                                        System.out.println(currentDestination);
-                                        System.out.println("DONE GETTING DESTINATION");
-                                    }*/
 
                                         path = path_map.get(asgnIndex);
 
@@ -360,6 +335,7 @@ public class FollowApp extends LogicThread {
                                     }
                                 } catch (NullPointerException e) {
                                     stage = Stage.WAIT;
+                                    e.printStackTrace();
                                     //lineno = lineno - 1;
                                     break;
                                 }
