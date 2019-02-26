@@ -247,7 +247,7 @@ public class FollowApp extends LogicThread {
                                                     //System.out.println("MYPOS IS: " + mypos);
                                                     RRTNode newRRT = new RRTNode();
                                                     ObstacleList empty_list = new ObstacleList();
-                                                    path = newRRT.findRoute(mypos.heading, currentDestination, 10000, empty_list, -4, 4, -3, 3, mypos, 0.5);
+                                                    path = newRRT.findRoute(mypos.heading, currentDestination, 100000, empty_list, -4, 4, -3, 3, mypos, 1);
 
                                                         System.out.println("PATH IS: " + path);
                                                         sleep(100);
