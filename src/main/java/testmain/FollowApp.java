@@ -923,9 +923,9 @@ public class FollowApp extends LogicThread {
         iposmsg = iposmsg.split(":")[1];
         iposmsg = iposmsg.split(";")[0];
         String[] parts = iposmsg.split(",");
-        int x = (int) (Float.parseFloat(parts[0]) * scale);
-        int y = (int) (Float.parseFloat(parts[1]) * scale);
-        int z = (int) (Float.parseFloat(parts[2]) * scale);
+        double x = (Float.parseFloat(parts[0]) * scale);
+        double y = (Float.parseFloat(parts[1]) * scale);
+        double z = (Float.parseFloat(parts[2]) * scale);
         String name = Integer.toString(j) + "-A";
         ItemPosition p = new ItemPosition(name, x, y, z);
         path.push(p);
@@ -998,7 +998,7 @@ public class FollowApp extends LogicThread {
 
     }
 
-    private int closestDist(ItemPosition S1, ItemPosition E1, ItemPosition S2, ItemPosition E2) {
+    private double closestDist(ItemPosition S1, ItemPosition E1, ItemPosition S2, ItemPosition E2) {
         Point3d u = new Point3d(S1.x - E1.x, S1.y - E1.y, S1.z - E1.z);
         Point3d v = new Point3d(S2.x - E2.x, S2.y - E2.y, S2.z - E2.z);
         Point3d w = new Point3d(E1.x - E2.x, E1.y - E2.y, E1.z - E2.z);
@@ -1088,7 +1088,7 @@ public class FollowApp extends LogicThread {
 
         double distance = Math.sqrt(Dp_x * Dp_x + Dp_y * Dp_y + Dp_z * Dp_z);
 
-        return (int) distance;
+        return distance;
 
 
     }
@@ -1113,7 +1113,7 @@ public class FollowApp extends LogicThread {
                 System.out.println(start);
                 System.out.println(obstack.peek());
 
-                int distance = closestDist(start, next, obstack.peek(), obstack.peek());
+                double distance = closestDist(start, next, obstack.peek(), obstack.peek());
                 System.out.println(distance);
                 System.out.println(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ");
                 System.out.println(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ");
@@ -1128,7 +1128,7 @@ public class FollowApp extends LogicThread {
                     //System.out.println("checking for cross paths");
                     ItemPosition start_stack = obstack.get(p - 1);
                     ItemPosition next_stack = obstack.get(p);
-                    int distance = closestDist(start, next, start_stack, next_stack);
+                    double distance = closestDist(start, next, start_stack, next_stack);
                     //System.out.println(name + " path stack distance " + distance);
                     if (distance <= mindist) {
                         System.out.println("DIST IS: " + distance);
