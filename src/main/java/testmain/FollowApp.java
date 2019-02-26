@@ -926,11 +926,13 @@ public class FollowApp extends LogicThread {
         iposmsg = iposmsg.split(":")[1];
         iposmsg = iposmsg.split(";")[0];
         String[] parts = iposmsg.split(",");
+        System.out.println("MSGTOIPOS FUNCTION PARTS: "+ parts[0] +" "+ parts[1] +" "+ parts[2]);
         double x = (Double.parseDouble(parts[0]) * scale);
         double y = (Double.parseDouble(parts[1]) * scale);
         double z = (Double.parseDouble(parts[2]) * scale);
         String name = Integer.toString(j) + "-A";
         ItemPosition p = new ItemPosition(name, x, y, z);
+        System.out.println("MSGTOIPOS FUNCTION: "+ p);
         path.push(p);
 
         return path;
