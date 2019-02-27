@@ -25,8 +25,12 @@ public class FollowDrawer extends Drawer {
 		Stack<ItemPosition> path = app.path;
 		if(path != null) {
 			if(!path.empty()) {
-				g.setColor(Color.BLUE);
+				if(((FollowApp) lt).blocked_path == true)
+					g.setColor(Color.RED);
+				else
+					g.setColor(Color.BLUE);
 
+				g.setStroke(new BasicStroke(20));
 				//get point at the top of stack and draw a line from robot to it
 				g.drawLine(path.peek().x, path.peek().y, model.x, model.y);
 

@@ -265,8 +265,8 @@ public class SimSettings {
 		private int MSG_STDDEV_DELAY = 5;
 		private int MSG_LOSSES_PER_HUNDRED = 0;
 		private int MSG_RANDOM_SEED = 0;
-		private String IROBOT_NAME = "iRobot";
-		private String QUADCOPTER_NAME = "quadcopter";
+		private String IROBOT_NAME = "Car";
+		private String QUADCOPTER_NAME = "Quadcopter";
 		private int BOT_RADIUS = 165;
 		private String TRACE_OUT_DIR;
 		private boolean THREE_D = false;

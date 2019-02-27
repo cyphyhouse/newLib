@@ -1,8 +1,4 @@
-WAY,4500,2500,0,iRobot1
-WAY,4500,-2500,0,iRobot2
-WAY,-4500,2500,0,iRobot3
-WAY,-4500,-2500,0,iRobot4
-WAY,6000,3000,0,quadcopter5
-WAY,6000,-3000,0,quadcopter6
-WAY,-6000,3000,0,quadcopter7
-WAY,-6000,-3000,0,quadcopter8
+WAY,2500,1250,0,Car1
+WAY,2500,-1250,0,Car2
+WAY,-2500,1250,0,Quadcopter3
+WAY,-2500,-1250,0,Quadcopter4

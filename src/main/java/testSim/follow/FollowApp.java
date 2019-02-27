@@ -70,6 +70,7 @@ public class FollowApp extends LogicThread {
 
 
     public GlobalVarHolder gvh;
+    public boolean blocked_path = true;
     //motion module declaration
     ItemPosition currentDestination;
 
@@ -242,6 +243,7 @@ public class FollowApp extends LogicThread {
 
                     break;
                 case GO:
+                    blocked_path = false;
                     if (!gvh.plat.moat.inMotion) {
                         if (!gvh.plat.moat.done && currentDestination != null) {
                             stage = Stage.GO;
@@ -249,11 +251,14 @@ public class FollowApp extends LogicThread {
                             ItemPosition ip = path.pop();
                             if (path.empty()) {
                                 //System.out.println("GOING BACK TO PICK " + name);
-                                if(!assigned.contains(0))
+                                if(!assigned.contains(0)) {
                                     stage = Stage.DONE;
+                                    blocked_path = true;
+                                }
                                 else {
                                     stage = Stage.PICK;
                                     System.out.println(name + "Done a point " + ip);
+                                    blocked_path = true;
                                 }
                             } else {
                                 currentDestination = path.peek();
