@@ -186,9 +186,9 @@ public class FollowApp extends LogicThread {
             //System.out.println("INSIDE THE WHILE LOOP");
             if(car_or_drone==0)
                 {
-                    System.out.println("OBS LIST IS: "+ obs);
-                    System.out.println(" ");
-                    System.out.println(" ");
+                    //System.out.println("OBS LIST IS: "+ obs);
+                    //System.out.println(" ");
+                    //System.out.println(" ");
                     lineno = 0;
                     if (robotIndex == 0) {
                         updatedests("tasks.txt", DEST_MSG, name, lineno);
@@ -314,7 +314,7 @@ public class FollowApp extends LogicThread {
                                         if (updatePath) {
 
                                         } else {
-                                            System.out.println("SENDING SINGLE POSITION AS OBS: " + gvh.gps.getMyPosition().toString());
+                                            //System.out.println("SENDING SINGLE POSITION AS OBS: " + gvh.gps.getMyPosition().toString());
                                             RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, gvh.gps.getMyPosition().toString() + "###mypos");
                                             gvh.comms.addOutgoingMessage(pathmsg);
                                             updatePath = false;
@@ -333,7 +333,7 @@ public class FollowApp extends LogicThread {
                                     break;
                                 }
 
-                                //System.out.println("CALLING GOTO. DESTINATION IS: " + currentDestination);
+                                System.out.println("CALLING GOTO. DESTINATION IS: " + currentDestination);
                                 //Send all points in path to car in one go
                                 while (!path.empty()) {
                                     int frameID = 0;
@@ -356,7 +356,8 @@ public class FollowApp extends LogicThread {
                             if (gvh.plat.moat.inMotion) {
                                 stage = Stage.GO;
                             } else {
-                                System.out.println("SENDING SINGLE POSITION AS OBS: " + gvh.gps.getMyPosition().toString());
+                                //System.out.println("SENDING SINGLE POSITION AS OBS: " + gvh.gps.getMyPosition().toString());
+                                //System.out.println("REACHED");
                                 RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, gvh.gps.getMyPosition().toString() + "###mypos");
                                 gvh.comms.addOutgoingMessage(pathmsg);
                                 stage = Stage.PICK;
