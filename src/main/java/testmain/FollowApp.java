@@ -49,6 +49,7 @@ public class FollowApp extends LogicThread {
     private static final int DEST_MSG = 23;
     private static final int PATH_MSG = 24;
     private static final int ASGN_MSG = 25;
+    private static final int UNASGN_MSG = 32;
     private static final int MUTEX_REQUEST_MSG = 26;
     private static final int MUTEX_RELEASE_MSG = 27;
     private static final int MUTEX_GRANT_MSG = 28;
@@ -64,6 +65,7 @@ public class FollowApp extends LogicThread {
     private HashSet<RobotMessage> receivedMsgs = new HashSet<RobotMessage>();
     private HashSet<RobotMessage> pathMsgs = new HashSet<RobotMessage>();
     private HashSet<RobotMessage> assignedMsgs = new HashSet<RobotMessage>();
+    private HashSet<RobotMessage> unassignedMsgs = new HashSet<RobotMessage>();
     private HashSet<RobotMessage> mutexReleaseMsgs = new HashSet<RobotMessage>();
     private HashSet<RobotMessage> mutexRequestMsgs = new HashSet<RobotMessage>();
     private HashSet<RobotMessage> mutexGrantMsgs = new HashSet<RobotMessage>();
@@ -105,6 +107,7 @@ public class FollowApp extends LogicThread {
         gvh.comms.addMsgListener(this, DEST_MSG);
         gvh.comms.addMsgListener(this, PATH_MSG);
         gvh.comms.addMsgListener(this, ASGN_MSG);
+        gvh.comms.addMsgListener(this, UNASGN_MSG);
         gvh.comms.addMsgListener(this, MUTEX_GRANT_MSG);
         gvh.comms.addMsgListener(this, MUTEX_RELEASE_MSG);
         gvh.comms.addMsgListener(this, MUTEX_REQUEST_MSG);
@@ -134,7 +137,7 @@ public class FollowApp extends LogicThread {
          *  EACH TIME WE CHANGE NUMBER OF ROBOTS, THIS SHIT NEEDS TO CHANGE TO BE MAKE SENSE.
          *
          * /*******************************************?*/
-
+        int storeindex = -1;
         ItemPosition[] ipos = new ItemPosition[6];
         ipos[0] = new ItemPosition("base_computer",1000,1000,80);
         ipos[1] = new ItemPosition("car1",1000,1000,0);
@@ -173,7 +176,7 @@ public class FollowApp extends LogicThread {
 
         //System.out.println(name + " " +obs.size());
 
-
+        int updateIndex = -1;
         int car_or_drone=-1; /************* 0 FOR CAR, 1 FOR DRONE ***********/
         if(gvh.plat.model instanceof Model_Quadcopter){
             car_or_drone = 1;
@@ -299,9 +302,12 @@ public class FollowApp extends LogicThread {
                                         path.pop();
                                         //System.out.println("SENDING CAR PATH: " + path);
                                         RobotMessage asgnmsg = new RobotMessage("ALL", name, ASGN_MSG, String.valueOf(asgnIndex));
+                                        RobotMessage unasgnmsg = new RobotMessage("ALL", name, UNASGN_MSG, String.valueOf(updateIndex));
+                                        updateIndex = asgnIndex;
                                         RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path) + "###path");
                                         gvh.comms.addOutgoingMessage(pathmsg);
                                         gvh.comms.addOutgoingMessage(asgnmsg);
+                                        gvh.comms.addOutgoingMessage(unasgnmsg);
                                         //sleep(800);
                                         assigned.set(asgnIndex, 1);
 
@@ -514,8 +520,9 @@ public class FollowApp extends LogicThread {
                                                 break;
                                             }
 
-                                            if (currentDestination != null && currentDestination.z>0) {
+                                            if (currentDestination != null && currentDestination.z>=0) {
                                                 ItemPosition mypos = gvh.gps.getMyPosition();
+                                                currentDestination.z = 1.5;
                                                 SimplePP newp = new SimplePP(mypos, currentDestination, 1);
                                                 path = newp.getPath();
                                                 sleep(100);
@@ -531,11 +538,11 @@ public class FollowApp extends LogicThread {
                                                 if (!breakpath) {
                                                     //Calculate distance and check if it is the shortest
                                                     //If it is, store this points IDX so we can get it again later
-                                                    double distance = Math.sqrt(Math.pow(mypos.x-currentDestination.x,2)+Math.pow(mypos.y-currentDestination.y,2)+Math.pow(mypos.z-currentDestination.z,2));
-                                                    if(distance < current_shortest_distance){
+                                    //                double distance = Math.sqrt(Math.pow(mypos.x-currentDestination.x,2)+Math.pow(mypos.y-currentDestination.y,2)+Math.pow(mypos.z-currentDestination.z,2));
+                                      /*              if(distance < current_shortest_distance){
                                                         current_shortest_distance = distance;
                                                         current_shortest_idx = asgnIndex;
-                                                    }
+                                                    }*/
                                                     foundpath = true;
                                                     //break;
                                                 }
@@ -570,9 +577,12 @@ public class FollowApp extends LogicThread {
                                 path.pop();
                                 currentDestination = path.peek();
                                 RobotMessage asgnmsg = new RobotMessage("ALL", name, ASGN_MSG, String.valueOf(asgnIndex));
+                                RobotMessage unasgnmsg = new RobotMessage("ALL", name, UNASGN_MSG, String.valueOf(updateIndex));
+                                updateIndex = asgnIndex;
                                 RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path) + "###path");
                                 gvh.comms.addOutgoingMessage(pathmsg);
                                 gvh.comms.addOutgoingMessage(asgnmsg);
+                                gvh.comms.addOutgoingMessage(unasgnmsg);
                                 //sleep(800);
                                 assigned.set(asgnIndex,1);
 
@@ -686,6 +696,12 @@ public class FollowApp extends LogicThread {
                 break;
             }
         }
+        for (RobotMessage msg : unassignedMsgs) {
+            if (msg.getFrom().equals(m.getFrom()) && msg.getContents().equals(m.getContents())) {
+                alreadyReceived = true;
+                break;
+            }
+        }
 
         for (RobotMessage msg : mutexRequestMsgs) {
             if (msg.getFrom().equals(m.getFrom()) && msg.getContents().equals(m.getContents())) {
@@ -723,6 +739,7 @@ public class FollowApp extends LogicThread {
         int i = receivedMsgs.size();
         int j = pathMsgs.size();
         int k = assignedMsgs.size();
+        int uk = unassignedMsgs.size();
         int l = mutexRequestMsgs.size();
         int o = mutexReleaseMsgs.size();
         int n = mutexGrantMsgs.size();
@@ -798,7 +815,19 @@ public class FollowApp extends LogicThread {
         }
 
 
+        if (m.getMID() == UNASGN_MSG && !alreadyReceived && !(robotIndex == 0)) {
+            unassignedMsgs.add(m);
+            gvh.log.d(TAG, "received unassignment message from " + m.getFrom());
 
+            //System.out.println(name + " beginning asgnmsg set");
+            String asgnmsg = m.getContents().toString().replace("`", "");
+            int vectorid = Integer.parseInt(asgnmsg);
+            //System.out.println("reached here on "+ name);
+            //System.out.println("assigned size " + assigned.size());
+            //System.out.println("assigned size " + assigned.size());
+            assigned.set(vectorid, 0);
+            //System.out.println(name + " done asgnmsg set");
+	}
 
         if (m.getMID() == ASGN_MSG && !alreadyReceived && !(robotIndex == 0)) {
             assignedMsgs.add(m);
