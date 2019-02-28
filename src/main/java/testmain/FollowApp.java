@@ -409,7 +409,7 @@ public class FollowApp extends LogicThread {
                     }
                     Random ran = new Random();
                     if (inMutex0) {
-                        //System.out.println(name + " RELEASING MUTEX");
+                        System.out.println(name + " RELEASING MUTEX");
                         hasMutex = false;
                         String releaseMutex = String.valueOf(robotIndex) + " " + String.valueOf(msgId);
                         RobotMessage mutexreleasemsg = new RobotMessage("ALL", name, MUTEX_RELEASE_MSG, releaseMutex);
@@ -587,8 +587,8 @@ public class FollowApp extends LogicThread {
                                         assigned.set(updateIndex, 0);
                                 	gvh.comms.addOutgoingMessage(unasgnmsg);}
                                 updateIndex = asgnIndex;
-                                RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path) + "###path");
-                                gvh.comms.addOutgoingMessage(pathmsg);
+                                //RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path) + "###path");
+                                //gvh.comms.addOutgoingMessage(pathmsg);
                                 gvh.comms.addOutgoingMessage(asgnmsg);
                                 //sleep(800);
                                 assigned.set(asgnIndex,1);
@@ -667,7 +667,7 @@ public class FollowApp extends LogicThread {
             }
             Random ran = new Random();
             if (inMutex0) {
-                //  System.out.println(name + " RELEASING MUTEX");
+                System.out.println(name + " RELEASING MUTEX");
                 hasMutex = false;
                 String releaseMutex = String.valueOf(robotIndex) + " "+ String.valueOf(msgId);
                 RobotMessage mutexreleasemsg = new RobotMessage("ALL", name, MUTEX_RELEASE_MSG,releaseMutex);
