@@ -1,7 +1,7 @@
-numRobots: 3
-selectedRobot: 1
+numRobots: 4
+selectedRobot: 2
 Robot: 0
-ip: 192.168.1.27
+ip: 192.168.1.20
 type: Quadcopter
 vrpn: none
 Robot: 1
