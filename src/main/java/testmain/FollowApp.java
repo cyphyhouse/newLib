@@ -304,8 +304,9 @@ public class FollowApp extends LogicThread {
                                         //System.out.println("SENDING CAR PATH: " + path);
                                         RobotMessage asgnmsg = new RobotMessage("ALL", name, ASGN_MSG, String.valueOf(asgnIndex));
                                 	if (updateIndex >= 0) {
+                                            System.out.println("here"); 
                                 	    RobotMessage unasgnmsg = new RobotMessage("ALL", name, UNASGN_MSG, String.valueOf(updateIndex));
-                                        gvh.comms.addOutgoingMessage(unasgnmsg);}
+                                              gvh.comms.addOutgoingMessage(unasgnmsg);}
                                         updateIndex = asgnIndex;
                                         RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path) + "###path");
                                         gvh.comms.addOutgoingMessage(pathmsg);
