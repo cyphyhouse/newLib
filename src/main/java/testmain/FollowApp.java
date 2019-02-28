@@ -493,10 +493,10 @@ public class FollowApp extends LogicThread {
                                 double current_shortest_distance = Double.MAX_VALUE;
 */
                                 for (asgnIndex=0; asgnIndex < asgndsize; asgnIndex++) {
-
+                                    System.out.println("ASSIGNED IDX IS " + asgnIndex);
                                     boolean skip_land_command = false;
 
-                                    if(assigned.get(asgnIndex) == 0){
+                                    /*if(assigned.get(asgnIndex) == 0){
                                         currentDestination = getDestination(destinations, asgnIndex);
                                         if(currentDestination.z < 0){
                                             //check if there are any non land commands to do
@@ -510,10 +510,10 @@ public class FollowApp extends LogicThread {
                                                 }
                                             }
                                         }
-                                    }
+                                    }*/
 
 
-                                    if(!skip_land_command) {
+                                    if(true) {
                                         if (assigned.get(asgnIndex) == 0) {
                                             currentDestination = getDestination(destinations, asgnIndex);
 /*
@@ -627,9 +627,11 @@ public class FollowApp extends LogicThread {
                     break;
                 case GO:
                     if (gvh.plat.moat.inMotion) {
+                        sleep(500);
                         stage = Stage.GO;
                     } else {
-                        sleep(800);
+                        stage = Stage.PICK;
+                        /*sleep(800);
                         ItemPosition ip = path.pop();
 
 
@@ -649,7 +651,7 @@ public class FollowApp extends LogicThread {
                             currentDestination = path.peek();
                             gvh.plat.moat.goTo(currentDestination);
                         }
-                        break;
+                        break;*/
                     }
 
                     break;
