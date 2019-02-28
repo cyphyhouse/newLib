@@ -828,7 +828,8 @@ public class FollowApp extends LogicThread {
             //System.out.println("assigned size " + assigned.size());
             //System.out.println("assigned size " + assigned.size());
             assigned.set(vectorid, 0);
-            //System.out.println(name + " done asgnmsg set");
+          
+            System.out.println(name + " done unasgnmsg set");
 	}
 
         if (m.getMID() == ASGN_MSG && !alreadyReceived && !(robotIndex == 0)) {
