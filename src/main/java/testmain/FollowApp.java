@@ -692,7 +692,7 @@ public class FollowApp extends LogicThread {
     protected void receive(RobotMessage m) {
         boolean alreadyReceived = false;
 
-
+        /*
         for (RobotMessage msg : assignedMsgs) {
             if (msg.getFrom().equals(m.getFrom()) && msg.getContents().equals(m.getContents())) {
                 alreadyReceived = true;
@@ -705,7 +705,7 @@ public class FollowApp extends LogicThread {
                 break;
             }
         }
-
+*/
         for (RobotMessage msg : mutexRequestMsgs) {
             if (msg.getFrom().equals(m.getFrom()) && msg.getContents().equals(m.getContents())) {
                 alreadyReceived = true;
