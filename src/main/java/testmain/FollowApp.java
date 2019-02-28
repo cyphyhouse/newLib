@@ -306,6 +306,7 @@ public class FollowApp extends LogicThread {
                                 	if (updateIndex >= 0) {
                                             System.out.println("here"); 
                                 	    RobotMessage unasgnmsg = new RobotMessage("ALL", name, UNASGN_MSG, String.valueOf(updateIndex));
+                                        assigned.set(updateIndex, 0);
                                               gvh.comms.addOutgoingMessage(unasgnmsg);}
                                         updateIndex = asgnIndex;
                                         RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path) + "###path");
@@ -581,6 +582,7 @@ public class FollowApp extends LogicThread {
                                 RobotMessage asgnmsg = new RobotMessage("ALL", name, ASGN_MSG, String.valueOf(asgnIndex));
                                 if (updateIndex >= 0) {
                                     RobotMessage unasgnmsg = new RobotMessage("ALL", name, UNASGN_MSG, String.valueOf(updateIndex));
+                                        assigned.set(updateIndex, 0);
                                 	gvh.comms.addOutgoingMessage(unasgnmsg);}
                                 updateIndex = asgnIndex;
                                 RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path) + "###path");
