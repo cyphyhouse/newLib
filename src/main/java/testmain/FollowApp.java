@@ -486,12 +486,12 @@ public class FollowApp extends LogicThread {
                                 //asgndsize = 5;//assigned.size();
                                 //Random r = new Random();
                                 //asgnIndex = r.nextInt(asgndsize);
-                                boolean foundpath = false;
+                                /*boolean foundpath = false;
 
 
                                 int current_shortest_idx=0;
                                 double current_shortest_distance = Double.MAX_VALUE;
-
+*/
                                 for (asgnIndex=0; asgnIndex < asgndsize; asgnIndex++) {
 
                                     boolean skip_land_command = false;
@@ -516,24 +516,24 @@ public class FollowApp extends LogicThread {
                                     if(!skip_land_command) {
                                         if (assigned.get(asgnIndex) == 0) {
                                             currentDestination = getDestination(destinations, asgnIndex);
-
+/*
                                             if(currentDestination.z < 0 && currentDestination != null){
                                                 foundpath = true;
                                                 current_shortest_idx = asgnIndex;
                                                 break;
                                             }
-
+*/
                                             if (currentDestination != null && currentDestination.z>=0) {
                                                 ItemPosition mypos = gvh.gps.getMyPosition();
                                                 currentDestination.z = 1.5;
-                                                SimplePP newp = new SimplePP(mypos, currentDestination, 1);
-                                                path = newp.getPath();
-                                                sleep(100);
-                                                boolean breakpath = false;
-
+                                                //SimplePP newp = new SimplePP(mypos, currentDestination, 1);
+                                                //path = newp.getPath();
+                                                //sleep(100);
+                                                //boolean breakpath = false;
+/*
                                                 for (int i = 0; i < obs.size(); i++) {
                                                     if (isClose(path, obs.get(i), 0.5)) {
-                                                        breakpath = true;
+                                                        //breakpath = true;
                                                         break;
                                                     } else {
                                                     }
@@ -545,10 +545,10 @@ public class FollowApp extends LogicThread {
                                       /*              if(distance < current_shortest_distance){
                                                         current_shortest_distance = distance;
                                                         current_shortest_idx = asgnIndex;
-                                                    }*/
-                                                    foundpath = true;
+                                                    }
+                                                    foundpath = true;*/
                                                     //break;
-                                                }
+
                                             } else
                                                 break;
                                         }
@@ -556,30 +556,30 @@ public class FollowApp extends LogicThread {
                                 }
 
                                 // System.out.println("ASSIGN INDEX IS: " + asgnIndex);
-                                asgnIndex = current_shortest_idx;
+                                //asgnIndex = current_shortest_idx;
 
                                 //If a path is found, use the stored IDX to get the closest waypoint and set to currentDestination
-                                if(foundpath){
+                                //if(foundpath){
                                     // System.out.println("FOUND PATH AND OUT OF FOR LOOP");
-                                    currentDestination = getDestination(destinations, current_shortest_idx);
-                                    currentDestination.z = 1.5; 
-                                    ItemPosition mypos = gvh.gps.getMyPosition();
-                                    SimplePP newp = new SimplePP(mypos, currentDestination, 1);
-                                    path = newp.getPath();
+                                    //currentDestination = getDestination(destinations, current_shortest_idx);
+                                    //currentDestination.z = 1.5;
+                                    //ItemPosition mypos = gvh.gps.getMyPosition();
+                                    //SimplePP newp = new SimplePP(mypos, currentDestination, 1);
+  //                                  path = newp.getPath();
                                     //System.out.println(currentDestination);
                                     // System.out.println("DONE GETTING DESTINATION");
-                                }
+
 
                                 //System.out.println("FOR LOOP DONE");
-                                if (!foundpath) {
+    /*                            if (!foundpath) {
                                     // System.out.println("COULD NOT FIND A PATH");
                                     inMutex0 = true;
                                     wait0 = false;
                                     break;
-                                }
+                                }*/
                                 // System.out.println("THE PATH IS: " + path);
-                                path.pop();
-                                currentDestination = path.peek();
+//                                path.pop();
+ //                               currentDestination = path.peek();
                                 RobotMessage asgnmsg = new RobotMessage("ALL", name, ASGN_MSG, String.valueOf(asgnIndex));
                                 if (updateIndex >= 0) {
                                     RobotMessage unasgnmsg = new RobotMessage("ALL", name, UNASGN_MSG, String.valueOf(updateIndex));
