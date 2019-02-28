@@ -302,12 +302,13 @@ public class FollowApp extends LogicThread {
                                         path.pop();
                                         //System.out.println("SENDING CAR PATH: " + path);
                                         RobotMessage asgnmsg = new RobotMessage("ALL", name, ASGN_MSG, String.valueOf(asgnIndex));
-                                        RobotMessage unasgnmsg = new RobotMessage("ALL", name, UNASGN_MSG, String.valueOf(updateIndex));
+                                	if (updateIndex != 0) {
+                                	    RobotMessage unasgnmsg = new RobotMessage("ALL", name, UNASGN_MSG, String.valueOf(updateIndex));
+                                        gvh.comms.addOutgoingMessage(unasgnmsg);}
                                         updateIndex = asgnIndex;
                                         RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path) + "###path");
                                         gvh.comms.addOutgoingMessage(pathmsg);
                                         gvh.comms.addOutgoingMessage(asgnmsg);
-                                        gvh.comms.addOutgoingMessage(unasgnmsg);
                                         //sleep(800);
                                         assigned.set(asgnIndex, 1);
 
@@ -577,12 +578,13 @@ public class FollowApp extends LogicThread {
                                 path.pop();
                                 currentDestination = path.peek();
                                 RobotMessage asgnmsg = new RobotMessage("ALL", name, ASGN_MSG, String.valueOf(asgnIndex));
-                                RobotMessage unasgnmsg = new RobotMessage("ALL", name, UNASGN_MSG, String.valueOf(updateIndex));
+                                if (updateIndex != 0) {
+                                    RobotMessage unasgnmsg = new RobotMessage("ALL", name, UNASGN_MSG, String.valueOf(updateIndex));
+                                	gvh.comms.addOutgoingMessage(unasgnmsg);}
                                 updateIndex = asgnIndex;
                                 RobotMessage pathmsg = new RobotMessage("ALL", name, PATH_MSG, constPathMsg(path) + "###path");
                                 gvh.comms.addOutgoingMessage(pathmsg);
                                 gvh.comms.addOutgoingMessage(asgnmsg);
-                                gvh.comms.addOutgoingMessage(unasgnmsg);
                                 //sleep(800);
                                 assigned.set(asgnIndex,1);
 
