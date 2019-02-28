@@ -189,6 +189,7 @@ public class FollowApp extends LogicThread {
             //System.out.println("INSIDE THE WHILE LOOP");
             if(car_or_drone==0)
                 {
+                    System.out.println("ASSIGNED ARRAY IS: " + assigned);
                     //System.out.println("OBS LIST IS: "+ obs);
                     //System.out.println(" ");
                     //System.out.println(" ");
@@ -302,7 +303,7 @@ public class FollowApp extends LogicThread {
                                         path.pop();
                                         //System.out.println("SENDING CAR PATH: " + path);
                                         RobotMessage asgnmsg = new RobotMessage("ALL", name, ASGN_MSG, String.valueOf(asgnIndex));
-                                	if (updateIndex != 0) {
+                                	if (updateIndex >= 0) {
                                 	    RobotMessage unasgnmsg = new RobotMessage("ALL", name, UNASGN_MSG, String.valueOf(updateIndex));
                                         gvh.comms.addOutgoingMessage(unasgnmsg);}
                                         updateIndex = asgnIndex;
@@ -311,7 +312,6 @@ public class FollowApp extends LogicThread {
                                         gvh.comms.addOutgoingMessage(asgnmsg);
                                         //sleep(800);
                                         assigned.set(asgnIndex, 1);
-
                                         updatePath = true;
                                         inMutex0 = true;
                                         wait0 = false;
@@ -420,7 +420,7 @@ public class FollowApp extends LogicThread {
 
         else if(car_or_drone == 1){
             //System.out.println("DOING DRONE SHIT");
-            //System.out.println("ASSIGNED ARRAY IS: " + assigned);
+            System.out.println("ASSIGNED ARRAY IS: " + assigned);
             /*System.out.println("BEGIN DESTINATIONS ARRAY PRINTOUT:");
             for(int i=0; i<assigned.size(); i++){
                 System.out.println(getDestination(destinations, i) + "\n");
@@ -578,7 +578,7 @@ public class FollowApp extends LogicThread {
                                 path.pop();
                                 currentDestination = path.peek();
                                 RobotMessage asgnmsg = new RobotMessage("ALL", name, ASGN_MSG, String.valueOf(asgnIndex));
-                                if (updateIndex != 0) {
+                                if (updateIndex >= 0) {
                                     RobotMessage unasgnmsg = new RobotMessage("ALL", name, UNASGN_MSG, String.valueOf(updateIndex));
                                 	gvh.comms.addOutgoingMessage(unasgnmsg);}
                                 updateIndex = asgnIndex;
