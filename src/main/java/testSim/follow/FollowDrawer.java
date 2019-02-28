@@ -30,7 +30,7 @@ public class FollowDrawer extends Drawer {
 				else
 					g.setColor(Color.BLUE);
 
-				g.setStroke(new BasicStroke(20));
+				g.setStroke(new BasicStroke(50));
 				//get point at the top of stack and draw a line from robot to it
 				g.drawLine(path.peek().x, path.peek().y, model.x, model.y);
 
@@ -42,6 +42,17 @@ public class FollowDrawer extends Drawer {
 				}
 			}
 		}
+
+		Stack<ItemPosition> static_obs = app.static_obs;
+		Iterator<ItemPosition> iter;
+		if(static_obs != null) {
+			for (int i = static_obs.size() - 1; i > 0; i--) {
+				g.setColor(Color.BLACK);
+				g.setStroke(new BasicStroke(200));
+				g.drawLine(static_obs.get(i).x, static_obs.get(i).y, static_obs.get(i - 1).x, static_obs.get(i - 1).y);
+			}
+		}
+
 
 		g.setColor(Color.RED);
 		for(ItemPosition dest : app.destinations.values()) {

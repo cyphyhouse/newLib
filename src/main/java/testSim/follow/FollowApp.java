@@ -26,6 +26,10 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Stream;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 
 public class FollowApp extends LogicThread {
     private static final String TAG = "Follow App";
@@ -84,6 +88,7 @@ public class FollowApp extends LogicThread {
     private boolean hasMutex = false;
     private Vector<Stack<ItemPosition>> obs;
     public Stack<ItemPosition> path;
+    public Stack<ItemPosition> static_obs = new Stack<ItemPosition>();
     private Vector<Integer> assigned;
 
     PositionList pos;
@@ -107,7 +112,7 @@ public class FollowApp extends LogicThread {
 
         obs = new Vector<>();
         assigned = new Vector<>();
-        for (int i=0; i<35; i++){
+        for (int i=0; i<17; i++){
             assigned.add(0);
         }
 
@@ -136,11 +141,25 @@ public class FollowApp extends LogicThread {
             obs.add(o);
         }
 
+        /* Static Obstable */
+        //Stack<ItemPosition> static_obs = new Stack<ItemPosition>();
+        /*ItemPosition obs_pos_3 = new ItemPosition("obs_pos_3", 0, 4000, 0);
+        ItemPosition obs_pos_1 = new ItemPosition("obs_pos_1", 0,0,0);
+        ItemPosition obs_pos_2 = new ItemPosition("obs_pos_2", 2000, 0, 0);
+        static_obs.push(obs_pos_3);
+        static_obs.push(obs_pos_1);
+        static_obs.push(obs_pos_2);
+        obs.add(static_obs);*/
+
+
         //System.out.println(name + " " +obs.size());
 
         if (robotIndex == 0) {
             updatedests("tasks.txt", DEST_MSG, name, lineno);
         }
+
+        long startTime = System.nanoTime();
+        long endTime=0;
 
         while (true) {
 
@@ -165,7 +184,7 @@ public class FollowApp extends LogicThread {
                                 break;
                             }
                             if (hasMutex) {
-                                asgndsize = 35;//assigned.size();
+                                asgndsize = assigned.size();
                                 Random r = new Random();
                                 asgnIndex = r.nextInt(asgndsize);
                                 boolean foundpath = false;
@@ -175,7 +194,7 @@ public class FollowApp extends LogicThread {
                                         currentDestination = getDestination(destinations, asgnIndex);
                                         if (currentDestination != null) {
                                             ItemPosition mypos = gvh.gps.getMyPosition();
-                                            SimplePP newp = new SimplePP(mypos, currentDestination, 4);
+                                            SimplePP newp = new SimplePP(mypos, currentDestination, 10);
                                             path = newp.getPath();
                                             sleep(100);
                                             boolean breakpath = false;
@@ -253,11 +272,17 @@ public class FollowApp extends LogicThread {
                                 //System.out.println("GOING BACK TO PICK " + name);
                                 if(!assigned.contains(0)) {
                                     stage = Stage.DONE;
+                                    endTime = System.nanoTime();
+                                    long duration = (endTime - startTime);
+                                    System.out.println("THE TIME IS:" + duration/1000000000);
                                     blocked_path = true;
                                 }
                                 else {
                                     stage = Stage.PICK;
                                     System.out.println(name + "Done a point " + ip);
+                                    endTime = System.nanoTime();
+                                    long duration = (endTime - startTime);
+                                    System.out.println(duration/1000000000);
                                     blocked_path = true;
                                 }
                             } else {
