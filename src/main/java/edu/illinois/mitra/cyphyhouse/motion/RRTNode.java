@@ -152,7 +152,7 @@ public class RRTNode {
 			double closest_dist = Double.MAX_VALUE;
 
 			double [] best_sampled_point = {};
-			for(int j=0; j<20; j++) {
+			for(int j=0; j<50; j++) {
 
 				double [] car_sampler_input = {currentNode.position.x, currentNode.position.y, currentNode.heading};
 				double [] car_sampler_point = car_sample(car_sampler_input);
@@ -245,8 +245,8 @@ public class RRTNode {
 	}
 
 	private double[] car_sample(double[] root)  {
-		double vUpper = 2.0;
-		double vLower = 0.25;
+		double vUpper = 3.0;
+		double vLower = 0.1;
 		double thetaUpper = 0.30; //radians, about 20 degrees
 		double thetaLower =-0.30; //radians
 
