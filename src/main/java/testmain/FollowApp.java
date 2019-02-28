@@ -526,6 +526,7 @@ public class FollowApp extends LogicThread {
                                             if (currentDestination != null && currentDestination.z>=0) {
                                                 ItemPosition mypos = gvh.gps.getMyPosition();
                                                 currentDestination.z = 1.5;
+                                                break;
                                                 //SimplePP newp = new SimplePP(mypos, currentDestination, 1);
                                                 //path = newp.getPath();
                                                 //sleep(100);
@@ -549,8 +550,8 @@ public class FollowApp extends LogicThread {
                                                     foundpath = true;*/
                                                     //break;
 
-                                            } else
-                                                break;
+                                            }
+
                                         }
                                     }
                                 }
