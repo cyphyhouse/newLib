@@ -1,0 +1,17 @@
+using Motion:
+  sensors: ItemPosition position
+  actuators: ItemPosition target
+
+allread:
+  ItemPosition x 
+
+
+init:
+   x[pid] = Motion.position
+
+update:
+   pre (True);
+   eff: 
+      if (pid != 0 or pid != numBots):
+      	Motion.target = midpoint(getNeighbors(pid))
+     
