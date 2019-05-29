@@ -525,7 +525,7 @@ public class FollowApp extends LogicThread {
 */
                                             if (currentDestination != null && currentDestination.z>=0) {
                                                 ItemPosition mypos = gvh.gps.getMyPosition();
-                                                currentDestination.z = 1.5;
+                                                currentDestination.z = robotIndex ;
                                                 break;
                                                 //SimplePP newp = new SimplePP(mypos, currentDestination, 1);
                                                 //path = newp.getPath();
